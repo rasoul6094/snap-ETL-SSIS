@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="localhost.snapdb-source.sa"
+  DTS:DTSID="{BD36AF48-15A6-4F24-BBF4-2836F0F15B77}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=snapdb-source;Provider=SQLOLEDB.1;Persist Security Info=True;Application Name=SSIS-snap-ssis-{BD36AF48-15A6-4F24-BBF4-2836F0F15B77}localhost.snapdb-source.sa;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAACr1AhikPW0qIBs4KMs/wHgAAAAACAAAAAAAQZgAAAAEAACAAAAC0l74JkXFmbK/fO54CFZLA8LeaQmHKKSswQZJchMeXmAAAAAAOgAAAAAIAACAAAAAVAIhfioVdK8w0jgZb3fQEr7/n5O+lOYaBsilCviO253AAAACEqiHSW/NPbXi5ObD/+QOnN9hYQrN0ekfFeB+q5bW00isIcAX1rgOdfZRvlbRJePRRuEuM28EfSm8A1seSDBDNCXbzwzViTzPzMmcP/3lxcHlnxIfgOWq32EGc+nZR8lq0S1sMQ6lN2eFoZZAFLvtvQAAAAEWn75Z5KIFs9lkVGGrVI5Bq8m47+cozLvBJnR+PgvB6kj0UimRm0U+co5zfhSBZdooN4ldNL+kGtXJg49uulh8=</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

@@ -1,78 +1,141 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="6/3/2025 10:39:52 PM"
+  DTS:CreationDate="6/4/2025 4:04:08 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="DESKTOP-0S8CU17"
   DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
-  DTS:DTSID="{AF24B1B5-DA4A-4CA4-BCE1-48D0782D08F1}"
+  DTS:DTSID="{94C18F94-3549-4D9E-AD26-369B142AF658}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
-  DTS:ObjectName="Package"
+  DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{A7079912-69E7-456B-926F-5A357FA4D7F7}">
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{EBE84281-3A80-41C5-A0C3-9CE53A6B2E2F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
-  <DTS:ConnectionManagers>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[localhost.snap-dw.sa]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{8B56CBDD-A0AE-44D0-9078-AC0D46027334}"
-      DTS:ObjectName="localhost.snap-dw.sa">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectRetryCount="1"
-          DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=snap-dw;Provider=SQLOLEDB.1;Persist Security Info=True;Application Name=SSIS-Package-{8B56CBDD-A0AE-44D0-9078-AC0D46027334}localhost.snap-dw.sa;Auto Translate=False;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAZ7TTOThjW0KAS8+gF6w+OAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADExhFOlY9Aum36oULsFOhx0qL35tlPyhRFmeP4rv3iZgAAAAAOgAAAAAIAACAAAAC3kMi/O4bx1LEzffctm53fnTOE8WYOeOa6P3yqFk9UEhAAAADcOsPVyx4II9Hn4r7yvw7TQAAAAAulfoiWwRpS9HRdgX3aM/pL+arFUAIez6+npBC/0VIBHwdZBi37E8ScxAp/XJgb7yoTzLY2gRccz9KotmCxmLc</DTS:Password>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[localhost.snapdb-source.sa]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{06992110-99AA-4E70-BE05-E477D231C9FE}"
-      DTS:ObjectName="localhost.snapdb-source.sa">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectRetryCount="1"
-          DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=snapdb-source;Provider=SQLOLEDB.1;Persist Security Info=True;Application Name=SSIS-Package-{06992110-99AA-4E70-BE05-E477D231C9FE}localhost.snapdb-source.sa;Auto Translate=False;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAZ7TTOThjW0KAS8+gF6w+OAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABca4Mo0KEflt0wCGSwz25HlS8Q3pjTPOeDwE3Zfk6rggAAAAAOgAAAAAIAACAAAABOTUEvdUOV88hyIInW+HuBq15+Pg2AYMsBOlYZWyM2WRAAAAD6Ibf+9EaP5qF+DbhGiNKdQAAAAASr7tmUDSAnLEoD+4g6zQk2AjABJ+DGoFtg+D+jRtezzPmhI8anRqN2/yYINpfNu4GGVVGiv28w2OcYlRLDiQs</DTS:Password>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-  </DTS:ConnectionManagers>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{FDD37A2C-0E57-4B52-9917-012A38B213E7}"
+      DTS:DTSID="{7F137652-D6F3-478C-B7CB-7726D1975081}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
-      DTS:ObjectName="lastModifiedPassenger">
+      DTS:ObjectName="insertRowCountDimPassenger">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{56D0399D-9F46-45D4-AF99-83602F735C4C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastRunEndDimPassenger">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/1970</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7AAFA954-4FDC-4CA6-8F72-9C6952AEE3BB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="updateRowCountDimPassenger">
       <DTS:VariableValue
         DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
+      DTS:refId="Package\cleanup passenger tables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6ce617f7-49ff-4c73-9c54-c53c154b4cae}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="cleanup passenger tables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE Stage.Passenger;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ETL_MetaData Start"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0f03f5fe-0454-4d0d-adac-a702c62d5d53}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ETL_MetaData Start"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata&#xA;VALUES ('DimPassenger' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Passenger Source To Stage"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{E7E6A9E7-79FA-40D0-9D71-CE65AE6A481E}"
+      DTS:DTSID="{7654bf90-5591-4eab-8e36-c491658e5211}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="Passenger Source To Stage"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Passenger Source To Stage.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{4a46cd93-a3c8-4016-8b4c-3a68b752576a}"
+          DTS:EventID="0"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{5cb9e541-8c23-4ce5-a130-7c3138ddff8d}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Passenger Source To Stage.EventHandlers[OnError]\Update ETL_Metadata on error"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{cd525da0-b827-43fd-8975-f2815506184c}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Update ETL_Metadata on error"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnSourceToStage',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimPassenger'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="System::ErrorDescription"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -102,7 +165,9 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT * FROM
+Passenger
+WHERE ModifiedAt &gt; ?</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -119,17 +184,17 @@
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">0</property>
+                  typeConverter="AccessMode">2</property>
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
+                  name="ParameterMapping">"0:Input",{56D0399D-9F46-45D4-AF99-83602F735C4C};</property>
               </properties>
               <connections>
                 <connection
                   refId="Package\Passenger Source To Stage\Passenger Data Source.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost.snapdb-source.sa]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost.snapdb-source.sa]"
+                  connectionManagerID="{BD36AF48-15A6-4F24-BBF4-2836F0F15B77}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-source.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -452,8 +517,8 @@
               <connections>
                 <connection
                   refId="Package\Passenger Source To Stage\Passenger Stage.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost.snap-dw.sa]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -641,22 +706,69 @@
       DTS:refId="Package\Passenger Stage To Core"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{26C95D96-2A24-4C51-BF00-68B7B5DE5375}"
+      DTS:DTSID="{5c7e800e-51cc-4027-a16b-0ca15171e60e}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="Passenger Stage To Core"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Passenger Stage To Core.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{27424c7d-ddab-471c-8772-2d97b3b8e0a1}"
+          DTS:EventID="0"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{805c140c-2819-4fa0-a15f-d55254fe7d9f}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Passenger Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{ba3907d3-2cd6-4594-94a6-bfc3c3b5af06}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Update ETL_Metadata On error"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimPassenger'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="System::ErrorDescription"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
       <DTS:ObjectData>
         <pipeline
           version="1">
           <components>
             <component
-              refId="Package\Passenger Stage To Core\DImPassenger Core"
+              refId="Package\Passenger Stage To Core\insert new rows"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="DImPassenger Core"
+              name="insert new rows"
               usesDispositions="true"
               version="4">
               <properties>
@@ -709,130 +821,130 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Passenger Stage To Core\DImPassenger Core.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost.snap-dw.sa]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost.snap-dw.sa]"
+                  refId="Package\Passenger Stage To Core\insert new rows.Connections[OleDbConnection]"
+                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
               <inputs>
                 <input
-                  refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input]"
+                  refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[PassengerID]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].Columns[PassengerID]"
                       cachedDataType="i4"
                       cachedName="PassengerID"
-                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[PassengerId]"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[PassengerId]"
                       lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[PassengerID]" />
                     <inputColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[LastName]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].Columns[LastName]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="LastName"
-                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
                       lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[LastName]" />
                     <inputColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
-                      cachedDataType="wstr"
-                      cachedLength="12"
-                      cachedName="PhoneNumber"
-                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
-                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
-                    <inputColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[NationalCode]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="NationalCode"
-                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[NationalCode]"
-                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[NationalCode]" />
-                    <inputColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[Email]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="Email"
-                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
-                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[Email]" />
-                    <inputColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[Gender]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="Gender"
-                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
-                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[Gender]" />
-                    <inputColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[RegistrationDate]"
-                      cachedDataType="wstr"
-                      cachedLength="27"
-                      cachedName="RegistrationDate"
-                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[ReigisterationDate]"
-                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[RegistrationDate]" />
-                    <inputColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[FirstName]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="FirstName"
-                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[FristName]"
-                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[FirstName]" />
-                    <inputColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[BirthDate]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].Columns[BirthDate]"
                       cachedDataType="wstr"
                       cachedLength="10"
                       cachedName="BirthDate"
-                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
                       lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="PhoneNumber"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].Columns[NationalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="NationalCode"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[NationalCode]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[NationalCode]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].Columns[RegistrationDate]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="RegistrationDate"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[ReigisterationDate]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[RegistrationDate]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[FristName]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[FirstName]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[PassengerKey]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[PassengerKey]"
                       dataType="i4"
                       name="PassengerKey" />
                     <externalMetadataColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[PassengerId]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[PassengerId]"
                       dataType="i4"
                       name="PassengerId" />
                     <externalMetadataColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[ReigisterationDate]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[ReigisterationDate]"
                       dataType="wstr"
                       length="27"
                       name="ReigisterationDate" />
                     <externalMetadataColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[FristName]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[FristName]"
                       dataType="wstr"
                       length="100"
                       name="FristName" />
                     <externalMetadataColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
                       dataType="wstr"
                       length="100"
                       name="LastName" />
                     <externalMetadataColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
                       dataType="wstr"
                       length="10"
                       name="BirthDate" />
                     <externalMetadataColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
                       dataType="wstr"
                       length="12"
                       name="PhoneNumber" />
                     <externalMetadataColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[NationalCode]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[NationalCode]"
                       dataType="wstr"
                       length="10"
                       name="NationalCode" />
                     <externalMetadataColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
                       dataType="wstr"
                       length="100"
                       name="Email" />
                     <externalMetadataColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
                       dataType="wstr"
                       length="10"
                       name="Gender" />
@@ -841,22 +953,192 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Passenger Stage To Core\DImPassenger Core.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Passenger Stage To Core\insert new rows.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Passenger Stage To Core\DImPassenger Core.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Passenger Stage To Core\insert new rows.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Passenger Stage To Core\DImPassenger Core.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Passenger Stage To Core\insert new rows.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Passenger Stage To Core\DImPassenger Core.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Passenger Stage To Core\insert new rows.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Passenger Stage To Core\insert row count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="insert row count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::insertRowCountDimPassenger</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Passenger Stage To Core\insert row count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Passenger Stage To Core\insert row count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Passenger Stage To Core\insert row count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Passenger Stage To Core\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT PassengerId FROM Core.DimPassenger</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT PassengerId FROM Core.DimPassenger) [refTable]
+where [refTable].[PassengerId] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="PassengerId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[PassengerID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Passenger Stage To Core\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Passenger Stage To Core\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\Lookup.Inputs[Lookup Input].Columns[PassengerID]"
+                      cachedDataType="i4"
+                      cachedName="PassengerID"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[PassengerID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">PassengerId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Passenger Stage To Core\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Passenger Stage To Core\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Passenger Stage To Core\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Passenger Stage To Core\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Passenger Stage To Core\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Passenger Stage To Core\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Passenger Stage To Core\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Passenger Stage To Core\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -915,8 +1197,8 @@
               <connections>
                 <connection
                   refId="Package\Passenger Stage To Core\Passenger Stage Data.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost.snap-dw.sa]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1180,15 +1462,347 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Passenger Stage To Core\update existing rows"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="update existing rows"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE Core.DimPassenger
+SET FristName = ?, LastName= ? , BirthDate= ? , PhoneNumber= ? , NationalCode = ? , Email = ? , Gender = ?
+WHERE PassengerId= ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Passenger Stage To Core\update existing rows.Connections[OleDbConnection]"
+                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].Columns[BirthDate]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="BirthDate"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].Columns[PhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="PhoneNumber"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].Columns[NationalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="NationalCode"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[NationalCode]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].Columns[PassengerID]"
+                      cachedDataType="i4"
+                      cachedName="PassengerID"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_7]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[PassengerID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="wstr"
+                      length="100"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="wstr"
+                      length="100"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="wstr"
+                      length="10"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="wstr"
+                      length="12"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="wstr"
+                      length="10"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      dataType="wstr"
+                      length="100"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      dataType="wstr"
+                      length="10"
+                      name="Param_6">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_7]"
+                      dataType="i4"
+                      name="Param_7">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Passenger Stage To Core\update existing rows.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Passenger Stage To Core\update existing rows.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Passenger Stage To Core\update existing rows.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\update existing rows.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Passenger Stage To Core\update existing rows.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Passenger Stage To Core\update row count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="update row count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::updateRowCountDimPassenger</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Passenger Stage To Core\update row count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Passenger Stage To Core\update row count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Passenger Stage To Core\update row count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
             <path
+              refId="Package\Passenger Stage To Core.Paths[Lookup Match Output]"
+              endId="Package\Passenger Stage To Core\update row count.Inputs[Row Count Input 1]"
+              name="Lookup Match Output"
+              startId="Package\Passenger Stage To Core\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Passenger Stage To Core.Paths[Lookup No Match Output]"
+              endId="Package\Passenger Stage To Core\insert row count.Inputs[Row Count Input 1]"
+              name="Lookup No Match Output"
+              startId="Package\Passenger Stage To Core\Lookup.Outputs[Lookup No Match Output]" />
+            <path
               refId="Package\Passenger Stage To Core.Paths[OLE DB Source Output]"
-              endId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input]"
+              endId="Package\Passenger Stage To Core\Lookup.Inputs[Lookup Input]"
               name="OLE DB Source Output"
               startId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Passenger Stage To Core.Paths[Row Count Output 1]"
+              endId="Package\Passenger Stage To Core\insert new rows.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Passenger Stage To Core\insert row count.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Passenger Stage To Core.Paths[Row Count Output 11]"
+              endId="Package\Passenger Stage To Core\update existing rows.Inputs[OLE DB Command Input]"
+              name="Row Count Output 1"
+              startId="Package\Passenger Stage To Core\update row count.Outputs[Row Count Output 1]" />
           </paths>
         </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\set Last Etl Run Dim Passenger"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F8FD3DE6-B6FE-4398-8852-648A6B9C8097}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="set Last Etl Run Dim Passenger"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+          SQLTask:SqlStatementSource="SELECT CONVERT(DATETIME, MAX(LastRunEnd)) as MaxLastRunEnd&#xA;FROM ETL_Metadata&#xA;WHERE TableName = 'DimPassenger' &#xA;AND LastRunStatus = 'Success'&#xA;"
+          SQLTask:ResultType="ResultSetType_SingleRow"
+          SQLTask:TypeConversionMode="None" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="MaxLastRunEnd"
+            SQLTask:DtsVariableName="User::LastRunEndDimPassenger" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update ETL_Metadata onSuccess"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{82382562-0ff1-499e-8a23-83f725e1e4bb}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update ETL_Metadata onSuccess"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = ?&#xA;  WHERE TableName = 'DimPassenger'&#xA; AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::insertRowCountDimPassenger"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::updateRowCountDimPassenger"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -1196,11 +1810,43 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{11BEC386-97FC-4643-A8AA-84C7604B8B5B}"
+      DTS:DTSID="{7ea71111-cc37-4441-8cba-b5e7e19d04c2}"
       DTS:From="Package\Passenger Source To Stage"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\Passenger Stage To Core" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{3695d89a-ff10-4648-8009-4fdc5f85b22f}"
+      DTS:From="Package\cleanup passenger tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\ETL_MetaData Start" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{6982C638-139F-4C29-B951-C30758A2AC9F}"
+      DTS:From="Package\ETL_MetaData Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\set Last Etl Run Dim Passenger" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{20b32c30-7ef8-48be-9840-b54651ea59cd}"
+      DTS:From="Package\Passenger Stage To Core"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Update ETL_Metadata onSuccess" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{89AA39C1-650A-4243-B032-D77FBB2CFC00}"
+      DTS:From="Package\set Last Etl Run Dim Passenger"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Passenger Source To Stage" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -1213,29 +1859,133 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="197.6,41.6"
+          Id="Package\cleanup passenger tables"
+          TopLeft="197.857143150605,57.7058823549521" />
+        <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\ETL_MetaData Start"
+          TopLeft="207.142857456085,135.705882286582" />
         <NodeLayout
           Size="207.2,41.6"
           Id="Package\Passenger Source To Stage"
-          TopLeft="183.571428962204,118.52941166081" />
+          TopLeft="200.000000298023,296.294117439938" />
         <NodeLayout
           Size="196.8,41.6"
           Id="Package\Passenger Stage To Core"
-          TopLeft="187.142857541235,204.176470409267" />
+          TopLeft="204.285714592861,362.823529146329" />
+        <NodeLayout
+          Size="225.6,41.6"
+          Id="Package\set Last Etl Run Dim Passenger"
+          TopLeft="187.142857541235,222.235293947392" />
+        <NodeLayout
+          Size="234.4,41.6"
+          Id="Package\Update ETL_Metadata onSuccess"
+          TopLeft="189.28571456093,449.999999658149" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="286.35714325172,160.12941166081">
+          TopLeft="303.142857445442,337.894117439938">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,44.0470587484564"
+              EndConnector="0,24.9294117063907"
               Start="0,0"
-              End="0,36.5470587484564">
+              End="0,17.4294117063907">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36.5470587484564" />
+                    End="0,17.4294117063907" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="295.100000303345,99.3058823549521">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.3999999316299"
+              Start="0,0"
+              End="0,28.8999999316299">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.8999999316299" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="296.74285749866,177.305882286582">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.92941166081"
+              Start="0,0"
+              End="0,37.42941166081">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.42941166081" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="304.585714576895,404.423529146329">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.5764705118206"
+              Start="0,0"
+              End="0,38.0764705118206">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.0764705118206" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="301.771428919629,263.835293947392">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.458823492546"
+              Start="0,0"
+              End="0,24.958823492546">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.958823492546" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1255,25 +2005,25 @@
         <NodeLayout
           Size="187.2,41.6"
           Id="Package\Passenger Source To Stage\Passenger Data Source"
-          TopLeft="215.714286173485,58.1176470078812" />
+          TopLeft="219.285714752516,98.6470587370615" />
         <NodeLayout
           Size="156,41.6"
           Id="Package\Passenger Source To Stage\Passenger Stage"
-          TopLeft="232.857143352835,194.999999829075" />
+          TopLeft="234.285714784447,272.235293879022" />
         <EdgeLayout
           Id="Package\Passenger Source To Stage.Paths[OLE DB Source Output]"
-          TopLeft="310.08571476316,99.7176470078812">
+          TopLeft="312.585714768482,140.247058737061">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,95.2823528211938"
+              EndConnector="0,131.988235141961"
               Start="0,0"
-              End="0,87.7823528211938">
+              End="0,124.488235141961">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,87.7823528211938" />
+                    End="0,124.488235141961" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1285,8 +2035,28 @@
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\Passenger Source To Stage.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="224,41.6"
+          Id="Package\Passenger Source To Stage.EventHandlers[OnError]\Update ETL_Metadata on error"
+          TopLeft="372.999994441867,203.999996960163" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <PipelineComponentMetadata
     design-time-name="Package\Passenger Source To Stage\Passenger Data Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Passenger Source To Stage\Passenger Stage">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1302,29 +2072,161 @@
     design-time-name="Package\Passenger Stage To Core">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="181.6,41.6"
           Id="Package\Passenger Stage To Core\Passenger Stage Data"
-          TopLeft="290.666662335396,69.8333322927356" />
+          TopLeft="297.589739155311,41.8333327099685" />
         <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Passenger Stage To Core\DImPassenger Core"
-          TopLeft="298.33332888782,382.499994300306" />
+          Size="176,41.6"
+          Id="Package\Passenger Stage To Core\update existing rows"
+          TopLeft="174.615382013413,344.153841282313" />
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\Passenger Stage To Core\update row count"
+          TopLeft="180.115382013412,277.038457492223" />
+        <NodeLayout
+          Size="112.8,41.6"
+          Id="Package\Passenger Stage To Core\Lookup"
+          TopLeft="325.384610536007,139.076921426333" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Passenger Stage To Core\insert row count"
+          TopLeft="467.807685865806,272.423073392648" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Passenger Stage To Core\insert new rows"
+          TopLeft="474.615377543064,341.692304746463" />
         <EdgeLayout
-          Id="Package\Passenger Stage To Core.Paths[OLE DB Source Output]"
-          TopLeft="382.699995611608,111.433332292736">
+          Id="Package\Passenger Stage To Core.Paths[Lookup No Match Output]"
+          TopLeft="399.251277202673,180.676921426333">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,271.06666200757"
+              EndConnector="146.156408663132,91.746151966315"
               Start="0,0"
-              End="0,263.56666200757">
+              End="146.156408663132,84.246151966315">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,263.56666200757" />
+                    End="0,33.4683585652643" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.4683585652643"
+                    Point2="0,37.4683585652643"
+                    Point3="4,37.4683585652643" />
+                  <mssgle:LineSegment
+                    End="142.156408663132,37.4683585652643" />
+                  <mssgle:CubicBezierSegment
+                    Point1="142.156408663132,37.4683585652643"
+                    Point2="146.156408663132,37.4683585652643"
+                    Point3="146.156408663132,41.4683585652643" />
+                  <mssgle:LineSegment
+                    End="146.156408663132,84.246151966315" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="17.2718176128162,42.4683585652643,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Passenger Stage To Core.Paths[Lookup Match Output]"
+          TopLeft="364.31794386934,180.676921426333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-103.402561855928,96.3615360658903"
+              Start="0,0"
+              End="-103.402561855928,88.8615360658903">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.3532427010349" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.3532427010349"
+                    Point2="0,39.3532427010349"
+                    Point3="-4,39.3532427010349" />
+                  <mssgle:LineSegment
+                    End="-99.4025618559276,39.3532427010349" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-99.4025618559276,39.3532427010349"
+                    Point2="-103.402561855928,39.3532427010349"
+                    Point3="-103.402561855928,43.3532427010349" />
+                  <mssgle:LineSegment
+                    End="-103.402561855928,88.8615360658903" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-99.8926676467138,44.3532427010349,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Passenger Stage To Core.Paths[Row Count Output 11]"
+          TopLeft="261.765382013412,318.638457492223">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.5153837900893"
+              Start="0,0"
+              End="0,18.0153837900893">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.0153837900893" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Passenger Stage To Core.Paths[Row Count Output 1]"
+          TopLeft="548.211531704435,314.023073392648">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27.6692313538148"
+              Start="0,0"
+              End="0,20.1692313538148">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1692313538148" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Passenger Stage To Core.Paths[OLE DB Source Output]"
+          TopLeft="385.087174845659,83.4333327099685">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55.6435887163644"
+              Start="0,0"
+              End="0,48.1435887163644">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.1435887163644" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1336,19 +2238,18 @@
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Passenger Source To Stage\Passenger Stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
+  <DtsEventHandler
+    design-time-name="Package\Passenger Stage To Core.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="225.6,41.6"
+          Id="Package\Passenger Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
+          TopLeft="347.999994814396,192.333330467343" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <PipelineComponentMetadata
     design-time-name="Package\Passenger Stage To Core\Passenger Stage Data">
     <Properties>
@@ -1363,7 +2264,30 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Passenger Stage To Core\DImPassenger Core">
+    design-time-name="Package\Passenger Stage To Core\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Passenger Stage To Core\insert new rows">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

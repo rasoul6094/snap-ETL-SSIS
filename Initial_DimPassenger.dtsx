@@ -1,0 +1,1735 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/3/2025 10:39:52 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-0S8CU17"
+  DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
+  DTS:DTSID="{411CE766-3561-4226-86C8-65AC0A38DF32}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Initial_DimPassenger"
+  DTS:PackageType="5"
+  DTS:VersionBuild="38"
+  DTS:VersionGUID="{1CC8665C-1BF3-4374-A1E8-0F9CBD48D10E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.snap-dw.sa]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8B56CBDD-A0AE-44D0-9078-AC0D46027334}"
+      DTS:ObjectName="localhost.snap-dw.sa">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=snap-dw;Provider=SQLOLEDB.1;Persist Security Info=True;Application Name=SSIS-Package-{8B56CBDD-A0AE-44D0-9078-AC0D46027334}localhost.snap-dw.sa;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAACr1AhikPW0qIBs4KMs/wHgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABb1B/zEBPvQ4Djfk5uK8Bblsn7io0EacfzVXa/QDw4fgAAAAAOgAAAAAIAACAAAAD9IYWNXdktRXGLw7PBt+7LmrjOWk0tmLntYSslHyEVJhAAAAA4wZNpuDLgFxuCT4Kr4vTnQAAAAGsqMTj+STMIE+bO4xrAKn22xGbxmMMoStuOScbInYAuBNsEE6bDFjhZe+DrG0XmbE9Y+5/RmqtVb6eDL8RMjWs</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.snapdb-source.sa]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{06992110-99AA-4E70-BE05-E477D231C9FE}"
+      DTS:ObjectName="localhost.snapdb-source.sa">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=snapdb-source;Provider=SQLOLEDB.1;Persist Security Info=True;Application Name=SSIS-Package-{06992110-99AA-4E70-BE05-E477D231C9FE}localhost.snapdb-source.sa;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAACr1AhikPW0qIBs4KMs/wHgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAnD5ZH4nyfWhqxAjzm7LDFFdv1L0zTtns3w26rbUnkLAAAAAAOgAAAAAIAACAAAAB0sTVYFZXRFO2iPjamjXp3WF1Lj7Mzuk7Wzg46vK869xAAAACq67nm9z0fIvcK/QNO3v3EQAAAAPE/7rue7VHel5DEOJWukZVtv0V4Fv4kOyzT3JnC8OW35pJJ5bZqk6ye1gInaJdwvShNw1zu+BKL4wLj8ltUrv0</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FDD37A2C-0E57-4B52-9917-012A38B213E7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="lastModifiedPassenger">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{37DE72A8-13CF-4CC0-B1A0-5682971D07D1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="rowCountInsertedDimPassenger">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B7BA82BA-5DE7-428B-8B41-9000453B22CF}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="rowCountUpdatedDimPassenger">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\cleanup passenger tables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5E6C3C56-9904-4F57-91C5-2126130FF7F9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="cleanup passenger tables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8B56CBDD-A0AE-44D0-9078-AC0D46027334}"
+          SQLTask:SqlStatementSource="DELETE FROM Core.DimPassenger;&#xA;TRUNCATE TABLE Stage.Passenger;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'DimPassenger';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\insert new record to ETL_Metadata"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{236CA1A1-F68C-458C-AF72-61E4E2DC5F0B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="insert new record to ETL_Metadata"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8B56CBDD-A0AE-44D0-9078-AC0D46027334}"
+          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata &#xA;VALUES ('DimPassenger' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Passenger Source To Stage"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{E7E6A9E7-79FA-40D0-9D71-CE65AE6A481E}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Passenger Source To Stage"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Passenger Source To Stage.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{DDD29A6B-A976-4ED9-B18A-23E866510C81}"
+          DTS:EventID="0"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{28143790-7A06-46A8-BBC8-B86E53E4C195}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Passenger Source To Stage.EventHandlers[OnError]\Update ETL_Metadata on error"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{91D4F667-14BD-41C4-A29A-3285E6B846A2}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Update ETL_Metadata on error"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{8B56CBDD-A0AE-44D0-9078-AC0D46027334}"
+                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnSourceToStage',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimPassenger'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="System::ErrorDescription"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Passenger Source To Stage\Passenger Data Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Passenger Data Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Passenger]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Passenger Source To Stage\Passenger Data Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.snapdb-source.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.snapdb-source.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[PassengerID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[PassengerID]"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[PassengerID]"
+                      name="PassengerID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[RegistrationDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[RegistrationDate]"
+                      length="27"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[RegistrationDate]"
+                      name="RegistrationDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="100"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="100"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[BirthDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
+                      length="10"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[BirthDate]"
+                      name="BirthDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                      length="12"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                      name="PhoneNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[NationalCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[NationalCode]"
+                      length="10"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[NationalCode]"
+                      name="NationalCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[Email]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      length="100"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[Email]"
+                      name="Email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      length="10"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[CreatedAt]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
+                      length="27"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[CreatedAt]"
+                      name="CreatedAt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
+                      length="27"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
+                      name="ModifiedAt"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[PassengerID]"
+                      dataType="i4"
+                      name="PassengerID" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[RegistrationDate]"
+                      dataType="wstr"
+                      length="27"
+                      name="RegistrationDate" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="100"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
+                      dataType="wstr"
+                      length="10"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                      dataType="wstr"
+                      length="12"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[NationalCode]"
+                      dataType="wstr"
+                      length="10"
+                      name="NationalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="100"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="10"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="CreatedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="ModifiedAt" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[PassengerID]"
+                      dataType="i4"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[PassengerID]"
+                      name="PassengerID" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[RegistrationDate]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[RegistrationDate]"
+                      name="RegistrationDate" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
+                      name="BirthDate" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                      name="PhoneNumber" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[NationalCode]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[NationalCode]"
+                      name="NationalCode" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      name="Email" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[CreatedAt]"
+                      name="CreatedAt" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[ModifiedAt]"
+                      name="ModifiedAt" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Passenger Source To Stage\Passenger Stage"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Passenger Stage"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Stage].[Passenger]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Passenger Source To Stage\Passenger Stage.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.snap-dw.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].Columns[PassengerID]"
+                      cachedDataType="i4"
+                      cachedName="PassengerID"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[PassengerID]"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[PassengerID]" />
+                    <inputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].Columns[RegistrationDate]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="RegistrationDate"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[RegistrationDate]"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[RegistrationDate]" />
+                    <inputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].Columns[BirthDate]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="BirthDate"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="PhoneNumber"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].Columns[NationalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="NationalCode"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[NationalCode]"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[NationalCode]" />
+                    <inputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].Columns[CreatedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="CreatedAt"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[CreatedAt]" />
+                    <inputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].Columns[ModifiedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="ModifiedAt"
+                      externalMetadataColumnId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      lineageId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[PassengerID]"
+                      dataType="i4"
+                      name="PassengerID" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[RegistrationDate]"
+                      dataType="wstr"
+                      length="27"
+                      name="RegistrationDate" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="100"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
+                      dataType="wstr"
+                      length="10"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      dataType="wstr"
+                      length="12"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[NationalCode]"
+                      dataType="wstr"
+                      length="10"
+                      name="NationalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="100"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="10"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="CreatedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="ModifiedAt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Passenger Source To Stage\Passenger Stage.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Passenger Source To Stage\Passenger Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Passenger Source To Stage\Passenger Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Passenger Source To Stage\Passenger Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Passenger Source To Stage.Paths[OLE DB Source Output]"
+              endId="Package\Passenger Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Passenger Source To Stage\Passenger Data Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Passenger Stage To Core"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{26C95D96-2A24-4C51-BF00-68B7B5DE5375}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Passenger Stage To Core"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Passenger Stage To Core.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{0DB3379B-4E86-49DE-AE7E-BDB6B534157F}"
+          DTS:EventID="0"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{3B4AC55D-BCCF-481A-BFEA-E341B208B1E8}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Passenger Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{3C0C517F-017A-4203-8728-88560A4C3F51}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Update ETL_Metadata On error"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{8B56CBDD-A0AE-44D0-9078-AC0D46027334}"
+                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimPassenger'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="System::ErrorDescription"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Passenger Stage To Core\DImPassenger Core"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DImPassenger Core"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Core].[DimPassenger]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Passenger Stage To Core\DImPassenger Core.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.snap-dw.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="PhoneNumber"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[NationalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="NationalCode"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[NationalCode]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[NationalCode]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[RegistrationDate]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="RegistrationDate"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[ReigisterationDate]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[RegistrationDate]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[FristName]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[BirthDate]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="BirthDate"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[PassengerID]"
+                      cachedDataType="i4"
+                      cachedName="PassengerID"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[PassengerId]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[PassengerID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[PassengerKey]"
+                      dataType="i4"
+                      name="PassengerKey" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[PassengerId]"
+                      dataType="i4"
+                      name="PassengerId" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[ReigisterationDate]"
+                      dataType="wstr"
+                      length="27"
+                      name="ReigisterationDate" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[FristName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FristName" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="100"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
+                      dataType="wstr"
+                      length="10"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      dataType="wstr"
+                      length="12"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[NationalCode]"
+                      dataType="wstr"
+                      length="10"
+                      name="NationalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="100"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="10"
+                      name="Gender" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Passenger Stage To Core\DImPassenger Core.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Passenger Stage To Core\DImPassenger Core.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\DImPassenger Core.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Passenger Stage To Core\DImPassenger Core.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Passenger Stage To Core\Passenger Stage Data"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Passenger Stage Data"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Stage].[Passenger]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Passenger Stage To Core\Passenger Stage Data.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.snap-dw.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[PassengerID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[PassengerID]"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[PassengerID]"
+                      name="PassengerID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[RegistrationDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[RegistrationDate]"
+                      length="27"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[RegistrationDate]"
+                      name="RegistrationDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="100"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="100"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[BirthDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
+                      length="10"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[BirthDate]"
+                      name="BirthDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                      length="12"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                      name="PhoneNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[NationalCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[NationalCode]"
+                      length="10"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[NationalCode]"
+                      name="NationalCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[Email]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      length="100"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[Email]"
+                      name="Email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      length="10"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[CreatedAt]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
+                      length="27"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[CreatedAt]"
+                      name="CreatedAt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
+                      length="27"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
+                      name="ModifiedAt"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[PassengerID]"
+                      dataType="i4"
+                      name="PassengerID" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[RegistrationDate]"
+                      dataType="wstr"
+                      length="27"
+                      name="RegistrationDate" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="100"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
+                      dataType="wstr"
+                      length="10"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                      dataType="wstr"
+                      length="12"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[NationalCode]"
+                      dataType="wstr"
+                      length="10"
+                      name="NationalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="100"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="10"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="CreatedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="ModifiedAt" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[PassengerID]"
+                      dataType="i4"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[PassengerID]"
+                      name="PassengerID" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[RegistrationDate]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[RegistrationDate]"
+                      name="RegistrationDate" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
+                      name="BirthDate" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                      name="PhoneNumber" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[NationalCode]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[NationalCode]"
+                      name="NationalCode" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      name="Email" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[CreatedAt]"
+                      name="CreatedAt" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[ModifiedAt]"
+                      name="ModifiedAt" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Passenger Stage To Core\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::rowCountInsertedDimPassenger</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Passenger Stage To Core\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Passenger Stage To Core\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Passenger Stage To Core\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Passenger Stage To Core.Paths[OLE DB Source Output]"
+              endId="Package\Passenger Stage To Core\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Passenger Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Passenger Stage To Core.Paths[Row Count Output 1]"
+              endId="Package\Passenger Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Passenger Stage To Core\Row Count.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update ETL_Metadata onSuccess"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{98F4BB74-ECAB-4E7E-A3BF-AE89F0870330}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update ETL_Metadata onSuccess"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8B56CBDD-A0AE-44D0-9078-AC0D46027334}"
+          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = 0&#xA;  WHERE TableName = 'DimPassenger'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::rowCountInsertedDimPassenger"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{11BEC386-97FC-4643-A8AA-84C7604B8B5B}"
+      DTS:From="Package\Passenger Source To Stage"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Passenger Stage To Core" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{6473A5ED-AD76-4ADA-902D-32854F111F48}"
+      DTS:From="Package\cleanup passenger tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\insert new record to ETL_Metadata" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{A2BBB299-30AA-42A3-8D38-6450E417D56B}"
+      DTS:From="Package\insert new record to ETL_Metadata"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Passenger Source To Stage" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{40588271-D9F0-4690-97D3-0D46556B5A9D}"
+      DTS:From="Package\Passenger Stage To Core"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Update ETL_Metadata onSuccess" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="207.2,41.6"
+          Id="Package\Passenger Source To Stage"
+          TopLeft="202.857143288973,185.0588233672" />
+        <NodeLayout
+          Size="196.8,41.6"
+          Id="Package\Passenger Stage To Core"
+          TopLeft="210.000000447035,266.117646825561" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="307.428571868004,226.6588233672">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.4588234583611"
+              Start="0,0"
+              End="0,31.9588234583611">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.9588234583611" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="244,41.6"
+          Id="Package\insert new record to ETL_Metadata"
+          TopLeft="187.857143257041,112.411764607349" />
+        <NodeLayout
+          Size="197.6,41.6"
+          Id="Package\cleanup passenger tables"
+          TopLeft="205.000000436391,32.8823529123538" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="306.828571846716,74.4823529123538">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.9294116949951"
+              Start="0,0"
+              End="0,30.4294116949951">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.4294116949951" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="308.157143273007,154.011764607349">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.0470587598514"
+              Start="0,0"
+              End="0,23.5470587598514">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5470587598514" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="234.4,41.6"
+          Id="Package\Update ETL_Metadata onSuccess"
+          TopLeft="197.142857562523,359.411764390844" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="311.371429004779,307.717646825561">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.6941175652827"
+              Start="0,0"
+              End="0,44.1941175652827">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.1941175652827" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Passenger Source To Stage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="187.2,41.6"
+          Id="Package\Passenger Source To Stage\Passenger Data Source"
+          TopLeft="215.714286173485,58.1176470078812" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Passenger Source To Stage\Passenger Stage"
+          TopLeft="232.857143352835,194.999999829075" />
+        <EdgeLayout
+          Id="Package\Passenger Source To Stage.Paths[OLE DB Source Output]"
+          TopLeft="310.08571476316,99.7176470078812">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,95.2823528211938"
+              Start="0,0"
+              End="0,87.7823528211938">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,87.7823528211938" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Passenger Source To Stage\Passenger Data Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Passenger Source To Stage\Passenger Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Passenger Stage To Core">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="181.6,41.6"
+          Id="Package\Passenger Stage To Core\Passenger Stage Data"
+          TopLeft="290.666662335396,181.833330623806" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Passenger Stage To Core\DImPassenger Core"
+          TopLeft="298.33332888782,423.499993689358" />
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Passenger Stage To Core\Row Count"
+          TopLeft="319.999995231629,309.99999538064" />
+        <EdgeLayout
+          Id="Package\Passenger Stage To Core.Paths[OLE DB Source Output]"
+          TopLeft="383.133328783512,223.433330623806">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,86.5666647568345"
+              Start="0,0"
+              End="0,79.0666647568345">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,79.0666647568345" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Passenger Stage To Core.Paths[Row Count Output 1]"
+          TopLeft="384.366662059724,351.59999538064">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,71.8999983087184"
+              Start="0,0"
+              End="0,64.3999983087184">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.3999983087184" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Passenger Stage To Core\DImPassenger Core">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Passenger Stage To Core\Passenger Stage Data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <DtsEventHandler
+    design-time-name="Package\Passenger Source To Stage.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="224,41.6"
+          Id="Package\Passenger Source To Stage.EventHandlers[OnError]\Update ETL_Metadata on error"
+          TopLeft="405.999993950129,95.9999985694885" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Passenger Stage To Core.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="225.6,41.6"
+          Id="Package\Passenger Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
+          TopLeft="347.999994814396,192.333330467343" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
