@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Initial_DimPassenger"
   DTS:PackageType="5"
-  DTS:VersionBuild="49"
-  DTS:VersionGUID="{2053190E-2E93-4686-9C0D-15C7977D999E}">
+  DTS:VersionBuild="51"
+  DTS:VersionGUID="{8353A79C-810A-43EB-97EC-24E874321F4D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA5EeLdpzlW0qM4IPX1hVSRAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADVed6vsXt92okf8RkdC4CGNY1JiEZm66i7dR5/bt/TWAAAAAAOgAAAAAIAACAAAABqgYqJyzq9fg70UEIGAmPOr4B6sWZ+lWw3bfv4WMRMySAAAADi32Lmw3y0pq3LFF9lRD6mjW5gCKfxikpyDkkXJkghgEAAAABZSrqUs+Y7HTFXzG/+cb8Yw77kXCcVrSO/Bg3rI5SKnx15BjC1T8y8lwd4JhO7LhhFI8/+VcZrJQLvXBgDKuwB</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA5EeLdpzlW0qM4IPX1hVSRAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADAL1JC8VbZQR1ixN57SPUP9yZ6e6qRIe30Z3/buqcGpAAAAAAOgAAAAAIAACAAAAAcZWEtLNzkyMDInyn7MtrYb4a6jroA2SCfOxpzS4zqPiAAAACJbT/CX4dIB8NI33+oLJLyKCGTz5LaxRQw4Yk4nnrI4kAAAABL6kNHbeki6zof5JL3MsUbo0yjvVYzCTgJSoUNlDfUTE8A2sE7U5siloGaIhnJrUNAqEBS1kWkaR6QJKmz6C91</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA5EeLdpzlW0qM4IPX1hVSRAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACVf3QlfEtMmLReYnvKEhk89FRkJaMW2SIBHPdZScY9VwAAAAAOgAAAAAIAACAAAACboQbJAsSRa1V4YIq9k01ww0y4zZbVVgy/5SnFXWCBDSAAAABZY3AOIfdr7n//7fWrd5wi3ztGWhuftcvuq889JAZTA0AAAADQ40Z+PI1sjhn4L655p4JfMYJ4nU5q+uC7zhFqOV8lF5HTcqg9DJpMiByyH4cNrFYKq+dzkvYuy+lRsI9stypj</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA5EeLdpzlW0qM4IPX1hVSRAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACTNjIsB2vHJBuQqxShgBXQwS1l1Se3cNv+xsjiTnNXYAAAAAAOgAAAAAIAACAAAAAnpgZlsbvYzpkr2HzJnvEfEbJ3JyKexWHgjAs5urMPVCAAAACgHG0zyDwkNnwr4aRDQ1P4ZCpRaRpfJMNvVkabeR3P9kAAAAD8xWfe9RGrjz66+Gkc5GQ0Gk6a/QnKNlaTuddbfjEuYdWdVE02GCogPMrJkki8hN4wfAzgQVOfY1DuLd6W3MKq</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -77,7 +77,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{8B56CBDD-A0AE-44D0-9078-AC0D46027334}"
-          SQLTask:SqlStatementSource="DELETE FROM Core.DimPassenger;&#xA;TRUNCATE TABLE Stage.Passenger;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'DimPassenger';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="DELETE FROM Core.DimPassenger;&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'DimPassenger';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -95,627 +95,6 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{8B56CBDD-A0AE-44D0-9078-AC0D46027334}"
           SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata &#xA;VALUES ('DimPassenger' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Source To Stage"
-      DTS:CreationName="Microsoft.Pipeline"
-      DTS:Description="Data Flow Task"
-      DTS:DTSID="{E7E6A9E7-79FA-40D0-9D71-CE65AE6A481E}"
-      DTS:ExecutableType="Microsoft.Pipeline"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Source To Stage"
-      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:EventHandlers>
-        <DTS:EventHandler
-          DTS:refId="Package\Source To Stage.EventHandlers[OnError]"
-          DTS:CreationName="OnError"
-          DTS:DTSID="{DDD29A6B-A976-4ED9-B18A-23E866510C81}"
-          DTS:EventID="0"
-          DTS:EventName="OnError"
-          DTS:LocaleID="-1">
-          <DTS:Variables>
-            <DTS:Variable
-              DTS:CreationName=""
-              DTS:Description="The propagate property of the event"
-              DTS:DTSID="{28143790-7A06-46A8-BBC8-B86E53E4C195}"
-              DTS:IncludeInDebugDump="6789"
-              DTS:Namespace="System"
-              DTS:ObjectName="Propagate">
-              <DTS:VariableValue
-                DTS:DataType="11">-1</DTS:VariableValue>
-            </DTS:Variable>
-          </DTS:Variables>
-          <DTS:Executables>
-            <DTS:Executable
-              DTS:refId="Package\Source To Stage.EventHandlers[OnError]\Update ETL_Metadata on error"
-              DTS:CreationName="Microsoft.ExecuteSQLTask"
-              DTS:Description="Execute SQL Task"
-              DTS:DTSID="{91D4F667-14BD-41C4-A29A-3285E6B846A2}"
-              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-              DTS:LocaleID="-1"
-              DTS:ObjectName="Update ETL_Metadata on error"
-              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-              <DTS:Variables />
-              <DTS:ObjectData>
-                <SQLTask:SqlTaskData
-                  SQLTask:Connection="{8B56CBDD-A0AE-44D0-9078-AC0D46027334}"
-                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnSourceToStage',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimPassenger'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
-                  <SQLTask:ParameterBinding
-                    SQLTask:ParameterName="0"
-                    SQLTask:DtsVariableName="System::ErrorDescription"
-                    SQLTask:ParameterDirection="Input"
-                    SQLTask:DataType="130"
-                    SQLTask:ParameterSize="-1" />
-                </SQLTask:SqlTaskData>
-              </DTS:ObjectData>
-            </DTS:Executable>
-          </DTS:Executables>
-        </DTS:EventHandler>
-      </DTS:EventHandlers>
-      <DTS:ObjectData>
-        <pipeline
-          version="1">
-          <components>
-            <component
-              refId="Package\Source To Stage\Data Source"
-              componentClassID="Microsoft.OLEDBSource"
-              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-              description="OLE DB Source"
-              name="Data Source"
-              usesDispositions="true"
-              version="7">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[Passenger]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                <property
-                  dataType="System.String"
-                  description="The variable that contains the SQL command to be executed."
-                  name="SqlCommandVariable"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">0</property>
-                <property
-                  dataType="System.String"
-                  description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Source To Stage\Data Source.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost.snapdb-source.sa]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost.snapdb-source.sa]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <outputs>
-                <output
-                  refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output]"
-                  name="OLE DB Source Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[PassengerID]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[PassengerID]"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[PassengerID]"
-                      name="PassengerID"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[RegistrationDate]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[RegistrationDate]"
-                      length="27"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[RegistrationDate]"
-                      name="RegistrationDate"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[FirstName]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
-                      length="100"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[FirstName]"
-                      name="FirstName"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[LastName]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
-                      length="100"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[LastName]"
-                      name="LastName"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[BirthDate]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
-                      length="10"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[BirthDate]"
-                      name="BirthDate"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
-                      length="12"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
-                      name="PhoneNumber"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[NationalCode]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[NationalCode]"
-                      length="10"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[NationalCode]"
-                      name="NationalCode"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[Email]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
-                      length="100"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[Email]"
-                      name="Email"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[Gender]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
-                      length="10"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[Gender]"
-                      name="Gender"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[CreatedAt]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
-                      length="27"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[CreatedAt]"
-                      name="CreatedAt"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
-                      length="27"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
-                      name="ModifiedAt"
-                      truncationRowDisposition="FailComponent" />
-                  </outputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[PassengerID]"
-                      dataType="i4"
-                      name="PassengerID" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[RegistrationDate]"
-                      dataType="wstr"
-                      length="27"
-                      name="RegistrationDate" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
-                      dataType="wstr"
-                      length="100"
-                      name="FirstName" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
-                      dataType="wstr"
-                      length="100"
-                      name="LastName" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
-                      dataType="wstr"
-                      length="10"
-                      name="BirthDate" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
-                      dataType="wstr"
-                      length="12"
-                      name="PhoneNumber" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[NationalCode]"
-                      dataType="wstr"
-                      length="10"
-                      name="NationalCode" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
-                      dataType="wstr"
-                      length="100"
-                      name="Email" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
-                      dataType="wstr"
-                      length="10"
-                      name="Gender" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
-                      dataType="wstr"
-                      length="27"
-                      name="CreatedAt" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
-                      dataType="wstr"
-                      length="27"
-                      name="ModifiedAt" />
-                  </externalMetadataColumns>
-                </output>
-                <output
-                  refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output]"
-                  isErrorOut="true"
-                  name="OLE DB Source Error Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[PassengerID]"
-                      dataType="i4"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[PassengerID]"
-                      name="PassengerID" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[RegistrationDate]"
-                      dataType="wstr"
-                      length="27"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[RegistrationDate]"
-                      name="RegistrationDate" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
-                      dataType="wstr"
-                      length="100"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
-                      name="FirstName" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
-                      dataType="wstr"
-                      length="100"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
-                      name="LastName" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
-                      dataType="wstr"
-                      length="10"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
-                      name="BirthDate" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
-                      dataType="wstr"
-                      length="12"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
-                      name="PhoneNumber" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[NationalCode]"
-                      dataType="wstr"
-                      length="10"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[NationalCode]"
-                      name="NationalCode" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[Email]"
-                      dataType="wstr"
-                      length="100"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[Email]"
-                      name="Email" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[Gender]"
-                      dataType="wstr"
-                      length="10"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[Gender]"
-                      name="Gender" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[CreatedAt]"
-                      dataType="wstr"
-                      length="27"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[CreatedAt]"
-                      name="CreatedAt" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[ModifiedAt]"
-                      dataType="wstr"
-                      length="27"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[ModifiedAt]"
-                      name="ModifiedAt" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Source To Stage\Stage"
-              componentClassID="Microsoft.OLEDBDestination"
-              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
-              description="OLE DB Destination"
-              name="Stage"
-              usesDispositions="true"
-              version="4">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[Stage].[Passenger]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">3</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepIdentity">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">false</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
-                  name="FastLoadMaxInsertCommitSize">2147483647</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Source To Stage\Stage.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost.snap-dw.sa]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost.snap-dw.sa]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input]"
-                  errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Destination Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].Columns[PassengerID]"
-                      cachedDataType="i4"
-                      cachedName="PassengerID"
-                      externalMetadataColumnId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[PassengerID]"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[PassengerID]" />
-                    <inputColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].Columns[RegistrationDate]"
-                      cachedDataType="wstr"
-                      cachedLength="27"
-                      cachedName="RegistrationDate"
-                      externalMetadataColumnId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[RegistrationDate]"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[RegistrationDate]" />
-                    <inputColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].Columns[FirstName]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="FirstName"
-                      externalMetadataColumnId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[FirstName]" />
-                    <inputColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].Columns[LastName]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="LastName"
-                      externalMetadataColumnId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[LastName]" />
-                    <inputColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].Columns[BirthDate]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="BirthDate"
-                      externalMetadataColumnId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[BirthDate]" />
-                    <inputColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
-                      cachedDataType="wstr"
-                      cachedLength="12"
-                      cachedName="PhoneNumber"
-                      externalMetadataColumnId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
-                    <inputColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].Columns[NationalCode]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="NationalCode"
-                      externalMetadataColumnId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[NationalCode]"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[NationalCode]" />
-                    <inputColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].Columns[Email]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="Email"
-                      externalMetadataColumnId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[Email]" />
-                    <inputColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].Columns[Gender]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="Gender"
-                      externalMetadataColumnId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[Gender]" />
-                    <inputColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].Columns[CreatedAt]"
-                      cachedDataType="wstr"
-                      cachedLength="27"
-                      cachedName="CreatedAt"
-                      externalMetadataColumnId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[CreatedAt]" />
-                    <inputColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].Columns[ModifiedAt]"
-                      cachedDataType="wstr"
-                      cachedLength="27"
-                      cachedName="ModifiedAt"
-                      externalMetadataColumnId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
-                      lineageId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[PassengerID]"
-                      dataType="i4"
-                      name="PassengerID" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[RegistrationDate]"
-                      dataType="wstr"
-                      length="27"
-                      name="RegistrationDate" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
-                      dataType="wstr"
-                      length="100"
-                      name="FirstName" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
-                      dataType="wstr"
-                      length="100"
-                      name="LastName" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
-                      dataType="wstr"
-                      length="10"
-                      name="BirthDate" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
-                      dataType="wstr"
-                      length="12"
-                      name="PhoneNumber" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[NationalCode]"
-                      dataType="wstr"
-                      length="10"
-                      name="NationalCode" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
-                      dataType="wstr"
-                      length="100"
-                      name="Email" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
-                      dataType="wstr"
-                      length="10"
-                      name="Gender" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
-                      dataType="wstr"
-                      length="27"
-                      name="CreatedAt" />
-                    <externalMetadataColumn
-                      refId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
-                      dataType="wstr"
-                      length="27"
-                      name="ModifiedAt" />
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Source To Stage\Stage.Outputs[OLE DB Destination Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Source To Stage\Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Source To Stage\Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Source To Stage\Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Source To Stage\Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-          </components>
-          <paths>
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output]"
-              endId="Package\Source To Stage\Stage.Inputs[OLE DB Destination Input]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Data Source.Outputs[OLE DB Source Output]" />
-          </paths>
-        </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -762,7 +141,7 @@
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{8B56CBDD-A0AE-44D0-9078-AC0D46027334}"
-                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimPassenger'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimPassenger'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
                     SQLTask:DtsVariableName="System::ErrorDescription"
@@ -1367,7 +746,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{8B56CBDD-A0AE-44D0-9078-AC0D46027334}"
-          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = 0&#xA;  WHERE TableName = 'DimPassenger'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = 0&#xA;  WHERE TableName = 'DimPassenger'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::rowCountInserted"
@@ -1382,8 +761,8 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{11BEC386-97FC-4643-A8AA-84C7604B8B5B}"
-      DTS:From="Package\Source To Stage"
+      DTS:DTSID="{522B9113-B5E8-4E27-A60A-6B4312A52B43}"
+      DTS:From="Package\insert new record to ETL_Metadata"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\Stage To Core" />
@@ -1395,14 +774,6 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\insert new record to ETL_Metadata" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
-      DTS:CreationName=""
-      DTS:DTSID="{A2BBB299-30AA-42A3-8D38-6450E417D56B}"
-      DTS:From="Package\insert new record to ETL_Metadata"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 2"
-      DTS:To="Package\Source To Stage" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
@@ -1423,85 +794,37 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="114,42"
+          Size="122,42"
           Id="Package\cleanup"
-          TopLeft="216.428571889291,32.1176470306712" />
+          TopLeft="683.428571889291,97.1176470306712" />
         <NodeLayout
           Size="244,42"
           Id="Package\insert new record to ETL_Metadata"
-          TopLeft="150.714286035116,112.411764607349" />
+          TopLeft="617.714286035116,177.411764607349" />
         <NodeLayout
-          Size="156,42"
-          Id="Package\Source To Stage"
-          TopLeft="195.000000415104,187.352941012248" />
-        <NodeLayout
-          Size="146,42"
+          Size="150,42"
           Id="Package\Stage To Core"
-          TopLeft="205.714286152197,279.882352695849" />
+          TopLeft="666.714286152197,280.882352695849" />
         <NodeLayout
           Size="234,42"
           Id="Package\Update ETL_Metadata onSuccess"
-          TopLeft="166.428571782855,386.941176131419" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="275.757143283651,228.952941012248">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,50.9294116836007"
-              Start="0,0"
-              End="0,43.4294116836007">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,43.4294116836007" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="627.428571782855,387.941176131419" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="273.171428962204,73.7176470306712">
+          TopLeft="742.071428962204,139.117647030671">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,38.6941175766778"
+              EndConnector="0,38.2941175766778"
               Start="0,0"
-              End="0,31.1941175766778">
+              End="0,30.7941175766778">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.1941175766778" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="272.85714322511,154.011764607349">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,33.3411764048989"
-              Start="0,0"
-              End="0,25.8411764048989">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.8411764048989" />
+                    End="0,30.7941175766778" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1512,18 +835,40 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="281.071428967526,321.482352695849">
+          TopLeft="743.071428967526,322.882352695849">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,65.4588234355705"
+              EndConnector="0,65.05882343557"
               Start="0,0"
-              End="0,57.9588234355705">
+              End="0,57.55882343557">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,57.9588234355705" />
+                    End="0,57.55882343557" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="740.714286093656,219.411764607349">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.4705880885"
+              Start="0,0"
+              End="0,53.9705880885">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.9705880885" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1535,82 +880,6 @@
       </GraphLayout>
     </LayoutInfo>
   </Package>
-  <TaskHost
-    design-time-name="Package\Source To Stage">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="136,42"
-          Id="Package\Source To Stage\Data Source"
-          TopLeft="215.714286173485,58.1176470078812" />
-        <NodeLayout
-          Size="105,42"
-          Id="Package\Source To Stage\Stage"
-          TopLeft="232.857143352835,194.999999829075" />
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output]"
-          TopLeft="284.48571476316,99.7176470078812">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,95.2823528211938"
-              Start="0,0"
-              End="0,87.7823528211938">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,87.7823528211938" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <DtsEventHandler
-    design-time-name="Package\Source To Stage.EventHandlers[OnError]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="224,41.6"
-          Id="Package\Source To Stage.EventHandlers[OnError]\Update ETL_Metadata on error"
-          TopLeft="405.999993950129,95.9999985694885" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Data Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Stage To Core">
     <LayoutInfo>
@@ -1681,7 +950,7 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="225.6,41.6"
+          Size="226,42"
           Id="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
           TopLeft="347.999994814396,192.333330467343" />
       </GraphLayout>
