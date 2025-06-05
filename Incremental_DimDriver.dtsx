@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
   DTS:DTSID="{A9D86BFD-228F-4E40-9B21-630A9BEE244E}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LastModifiedProductVersion="16.0.5467.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="42"
-  DTS:VersionGUID="{CA63BB91-360B-42FD-A86A-CF05D580014B}">
+  DTS:VersionBuild="44"
+  DTS:VersionGUID="{D9BEF3FC-375E-4F63-A618-456BEC7DC864}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -5397,39 +5397,39 @@ AND DriverId = ?</property>
               startId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Output]" />
             <path
               refId="Package\Stage To Core.Paths[Lookup Match Output6]"
-              endId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input]"
+              endId="Package\Stage To Core\Lookup Province.Inputs[Lookup Input]"
               name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output5]"
-              endId="Package\Stage To Core\Lookup Province 1.Inputs[Lookup Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup City 1.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output3]"
-              endId="Package\Stage To Core\Lookup City 1.Inputs[Lookup Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output]" />
+              startId="Package\Stage To Core\Lookup City.Outputs[Lookup Match Output]" />
             <path
               refId="Package\Stage To Core.Paths[Lookup Match Output4]"
-              endId="Package\Stage To Core\Lookup Car 1.Inputs[Lookup Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup Province 1.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output2]"
               endId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Inputs[Derived Column Input]"
               name="Lookup Match Output"
               startId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output]" />
             <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output1]"
+              refId="Package\Stage To Core.Paths[Lookup Match Output3]"
+              endId="Package\Stage To Core\Lookup Car 1.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\Lookup Province 1.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output5]"
               endId="Package\Stage To Core\Lookup Car.Inputs[Lookup Input]"
               name="Lookup Match Output"
               startId="Package\Stage To Core\Lookup Province.Outputs[Lookup Match Output]" />
             <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output]"
-              endId="Package\Stage To Core\Lookup Province.Inputs[Lookup Input]"
+              refId="Package\Stage To Core.Paths[Lookup Match Output1]"
+              endId="Package\Stage To Core\Lookup Province 1.Inputs[Lookup Input]"
               name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup City.Outputs[Lookup Match Output]" />
+              startId="Package\Stage To Core\Lookup City 1.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output]"
+              endId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output2]"
+              endId="Package\Stage To Core\Lookup City 1.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output]" />
             <path
               refId="Package\Stage To Core.Paths[Lookup No Match Output]"
               endId="Package\Stage To Core\Lookup City.Inputs[Lookup Input]"
@@ -5446,12 +5446,12 @@ AND DriverId = ?</property>
               name="OLE DB Source Output"
               startId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Stage To Core.Paths[Row Count Output 11]"
+              refId="Package\Stage To Core.Paths[Row Count Output 1]"
               endId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input]"
               name="Row Count Output 1"
               startId="Package\Stage To Core\Row Count 1.Outputs[Row Count Output 1]" />
             <path
-              refId="Package\Stage To Core.Paths[Row Count Output 1]"
+              refId="Package\Stage To Core.Paths[Row Count Output 11]"
               endId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
               startId="Package\Stage To Core\Row Count.Outputs[Row Count Output 1]" />
@@ -5488,10 +5488,22 @@ AND DriverId = ?</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
-          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = 0&#xA;  WHERE TableName = 'DimDriver'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = ?+?&#xA;  WHERE TableName = 'DimDriver'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::rowCountInserted"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::rowCountUpdatedScd1"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::rowCountUpdatedScd2"
             SQLTask:ParameterDirection="Input"
             SQLTask:DataType="131"
             SQLTask:ParameterSize="-1" />
@@ -5554,43 +5566,43 @@ AND DriverId = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="114.4,41.6"
+          Size="114,42"
           Id="Package\cleanup"
           TopLeft="62.8571428632259,44.7058823663471" />
         <NodeLayout
-          Size="172.8,41.6"
+          Size="173,42"
           Id="Package\ETL_MetaData Start"
           TopLeft="238.57142895156,38.999999965815" />
         <NodeLayout
-          Size="262.4,41.6"
+          Size="262,42"
           Id="Package\set LastRunETL DateTime to a Variable"
           TopLeft="442.142858084063,110.999999874655" />
         <NodeLayout
-          Size="156,41.6"
+          Size="161,42"
           Id="Package\Source To Stage"
           TopLeft="259.285714709943,207.588235164751" />
         <NodeLayout
-          Size="145.6,41.6"
+          Size="146,42"
           Id="Package\Stage To Core"
           TopLeft="265.000000436392,289.411764504794" />
         <NodeLayout
-          Size="234.4,41.6"
+          Size="234,42"
           Id="Package\Update ETL_Metadata onSuccess"
           TopLeft="226.428571782856,388.823529123538" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="337.542857573168,249.188235164751">
+          TopLeft="338.892857573167,249.588235164751">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,40.2235293400437"
+              EndConnector="0,39.823529340043"
               Start="0,0"
-              End="0,32.7235293400437">
+              End="0,32.323529340043">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.7235293400437" />
+                    End="0,32.323529340043" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -5623,30 +5635,30 @@ AND DriverId = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="573.342858084063,152.599999874655">
+          TopLeft="573.142858084063,152.999999874655">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-236.05714337412,54.9882352900964"
+              EndConnector="-233.35714337412,54.588235290096"
               Start="0,0"
-              End="-236.05714337412,47.4882352900964">
+              End="-233.35714337412,47.088235290096">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.4941176450482" />
+                    End="0,23.294117645048" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,23.4941176450482"
-                    Point2="0,27.4941176450482"
-                    Point3="-4,27.4941176450482" />
+                    Point1="0,23.294117645048"
+                    Point2="0,27.294117645048"
+                    Point3="-4,27.294117645048" />
                   <mssgle:LineSegment
-                    End="-232.05714337412,27.4941176450482" />
+                    End="-229.35714337412,27.294117645048" />
                   <mssgle:CubicBezierSegment
-                    Point1="-232.05714337412,27.4941176450482"
-                    Point2="-236.05714337412,27.4941176450482"
-                    Point3="-236.05714337412,31.4941176450482" />
+                    Point1="-229.35714337412,27.294117645048"
+                    Point2="-233.35714337412,27.294117645048"
+                    Point3="-233.35714337412,31.294117645048" />
                   <mssgle:LineSegment
-                    End="-236.05714337412,47.4882352900964" />
+                    End="-233.35714337412,47.088235290096" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -5720,35 +5732,35 @@ AND DriverId = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="153.6,41.6"
+          Size="154,42"
           Id="Package\Source To Stage\Province Source"
           TopLeft="279.28571488024,74.9411764048994" />
         <NodeLayout
-          Size="131.2,41.6"
+          Size="131,42"
           Id="Package\Source To Stage\City Source"
           TopLeft="92.8571430548115,75.7058822865821" />
         <NodeLayout
-          Size="142.4,41.6"
+          Size="142,42"
           Id="Package\Source To Stage\Driver Source"
           TopLeft="633.571429920136,77.2352940499473" />
         <NodeLayout
-          Size="148,41.6"
+          Size="148,42"
           Id="Package\Source To Stage\Province Stage"
           TopLeft="281.428572027659,207.235293935998" />
         <NodeLayout
-          Size="126.4,41.6"
+          Size="126,42"
           Id="Package\Source To Stage\City Stage"
           TopLeft="100.000000212874,207.235293935997" />
         <NodeLayout
-          Size="129.6,41.6"
+          Size="134,42"
           Id="Package\Source To Stage\Car Source"
           TopLeft="463.94285766896,77.99999993163" />
         <NodeLayout
-          Size="124,41.6"
+          Size="124,42"
           Id="Package\Source To Stage\Car Stage"
           TopLeft="470.371429111216,203.411764527584" />
         <NodeLayout
-          Size="136.8,41.6"
+          Size="137,42"
           Id="Package\Source To Stage\Driver Stage"
           TopLeft="635.714287067555,201.882352764219" />
         <EdgeLayout
@@ -5775,18 +5787,18 @@ AND DriverId = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Source To Stage.Paths[OLE DB Source Output2]"
-          TopLeft="530.557143390088,119.59999993163">
+          TopLeft="531.657143390088,119.99999993163">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,83.811764595954"
+              EndConnector="0,83.411764595954"
               Start="0,0"
-              End="0,76.311764595954">
+              End="0,75.911764595954">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,76.311764595954" />
+                    End="0,75.911764595954" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -5889,43 +5901,111 @@ AND DriverId = ?</property>
       <GraphLayout
         Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="129.6,41.6"
+          Size="130,42"
           Id="Package\Stage To Core\Row Count"
           TopLeft="75.9000000000002,716.699999999999" />
         <NodeLayout
-          Size="133.6,41.6"
-          Id="Package\Stage To Core\Lookup City"
-          TopLeft="269.614285683875,201.052941183173" />
-        <NodeLayout
-          Size="200.8,41.6"
+          Size="201,42"
           Id="Package\Stage To Core\lookup to insert or update"
           TopLeft="449.3,107.1" />
         <NodeLayout
-          Size="136.8,41.6"
-          Id="Package\Stage To Core\Driver Stage"
-          TopLeft="481.3,5.49999999999973" />
+          Size="142,42"
+          Id="Package\Stage To Core\Lookup City 1"
+          TopLeft="633.880334282526,189.743735692704" />
         <NodeLayout
-          Size="270.4,41.6"
-          Id="Package\Stage To Core\Resize CityName,ProvinceName Columns"
-          TopLeft="5.50000000000017,615.099999999999" />
+          Size="170,42"
+          Id="Package\Stage To Core\OLE DB Destination"
+          TopLeft="631.349207693183,942.999999499886" />
         <NodeLayout
-          Size="155.2,41.6"
-          Id="Package\Stage To Core\Lookup Province"
-          TopLeft="249.1,310.299999999999" />
+          Size="154,42"
+          Id="Package\Stage To Core\Conditional Split"
+          TopLeft="622.112555427579,487.694592800283" />
         <NodeLayout
-          Size="245.6,41.6"
-          Id="Package\Stage To Core\add isCurrent , StartDate , EndDate"
-          TopLeft="139.9,513.499999999999" />
+          Size="165,42"
+          Id="Package\Stage To Core\OLE DB Command"
+          TopLeft="386.50793733071,743.803921159748" />
         <NodeLayout
-          Size="132,41.6"
+          Size="132,42"
           Id="Package\Stage To Core\Lookup Car"
           TopLeft="260.7,411.899999999999" />
         <NodeLayout
-          Size="150.4,41.6"
+          Size="142,42"
+          Id="Package\Stage To Core\Row Count 2"
+          TopLeft="647.619048997658,868.823528819671" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Stage To Core\Lookup Province"
+          TopLeft="249.1,310.299999999999" />
+        <NodeLayout
+          Size="270,42"
+          Id="Package\Stage To Core\Resize CityName,ProvinceName Columns"
+          TopLeft="5.50000000000017,615.099999999999" />
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Stage To Core\Lookup Car 1"
+          TopLeft="620.441373220066,389.654010714686" />
+        <NodeLayout
+          Size="150,42"
           Id="Package\Stage To Core\DimDriver Core"
           TopLeft="65.5000000000002,818.299999999999" />
+        <NodeLayout
+          Size="246,42"
+          Id="Package\Stage To Core\add isCurrent , StartDate , EndDate"
+          TopLeft="139.9,513.499999999999" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Stage To Core\OLE DB Command 1"
+          TopLeft="637.904763219173,801.816993110286" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Stage To Core\Row Count 1"
+          TopLeft="452.380953343953,645.465685878198" />
+        <NodeLayout
+          Size="270,42"
+          Id="Package\Stage To Core\Resize CityName,ProvinceName Columns 1"
+          TopLeft="700.793652285456,728.645751371082" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Stage To Core\Lookup Province 1"
+          TopLeft="616.105937242101,282.194576036858" />
+        <NodeLayout
+          Size="134,42"
+          Id="Package\Stage To Core\Lookup City"
+          TopLeft="269.614285683875,201.052941183173" />
+        <NodeLayout
+          Size="200,42"
+          Id="Package\Stage To Core\add isCurrent , EndDate 1"
+          TopLeft="731.225398095881,644.888888610344" />
+        <NodeLayout
+          Size="137,42"
+          Id="Package\Stage To Core\Driver Stage"
+          TopLeft="481.3,5.49999999999973" />
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Row Count Output 1]"
+          Id="Package\Stage To Core.Paths[Row Count Output 12]"
+          TopLeft="717.48412834542,910.823528819671">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.1764706802151"
+              Start="0,0"
+              End="0,24.6764706802151">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.6764706802151" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,4.33823534010753,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Row Count Output 11]"
           TopLeft="140.7,758.299999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -5947,6 +6027,42 @@ AND DriverId = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Stage To Core.Paths[Row Count Output 1]"
+          TopLeft="521.980953343953,687.065685878198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-53.0730160132423,56.7382352815492"
+              Start="0,0"
+              End="-53.0730160132423,49.2382352815492">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.3691176407746" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.3691176407746"
+                    Point2="0,28.3691176407746"
+                    Point3="-4,28.3691176407746" />
+                  <mssgle:LineSegment
+                    End="-49.0730160132423,28.3691176407746" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-49.0730160132423,28.3691176407746"
+                    Point2="-53.0730160132423,28.3691176407746"
+                    Point3="-53.0730160132423,32.3691176407746" />
+                  <mssgle:LineSegment
+                    End="-53.0730160132423,49.2382352815492" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-34.5365080066211,33.3691176407746,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Stage To Core.Paths[OLE DB Source Output]"
           TopLeft="549.7,47.0999999999997">
           <EdgeLayout.Curve>
@@ -5960,6 +6076,28 @@ AND DriverId = ?</property>
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[OLE DB Command Output]"
+          TopLeft="721.761906108415,843.816993110286">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.0065357093849"
+              Start="0,0"
+              End="0,17.5065357093849">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5065357093849" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6000,12 +6138,72 @@ AND DriverId = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-146.382577210146,26.1894908188022,111.6127734375,11.609375"
+              BoundingBox="-146.382577210145,26.1894908188022,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output2]"
+          Id="Package\Stage To Core.Paths[Lookup Match Output6]"
+          TopLeft="336.414285683875,242.652941183173">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9.71428568387512,67.6470588168264"
+              Start="0,0"
+              End="-9.71428568387512,60.1470588168264">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.8235294084132" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.8235294084132"
+                    Point2="0,33.8235294084132"
+                    Point3="-4,33.8235294084132" />
+                  <mssgle:LineSegment
+                    End="-5.71428568387512,33.8235294084132" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5.71428568387512,33.8235294084132"
+                    Point2="-9.71428568387512,33.8235294084132"
+                    Point3="-9.71428568387512,37.8235294084132" />
+                  <mssgle:LineSegment
+                    End="-9.71428568387512,60.1470588168264" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-53.0485295606876,38.8235294084132,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output5]"
+          TopLeft="326.7,351.899999999999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,20.4453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output4]"
           TopLeft="326.7,453.499999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -6041,63 +6239,133 @@ AND DriverId = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output1]"
-          TopLeft="326.7,351.899999999999">
+          Id="Package\Stage To Core.Paths[Lookup Match Output3]"
+          TopLeft="697.473655231084,323.794576036858">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
+              EndConnector="0,65.8594346778281"
               Start="0,0"
-              End="0,52.4999999999999">
+              End="0,58.3594346778281">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.4999999999999" />
+                    End="0,58.3594346778281" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,20.4453124999999,96.3827734375,11.609375"
+              BoundingBox="-48.19138671875,23.375029838914,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output2]"
+          TopLeft="581.833333333333,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="123.247000949193,41.0437356927044"
+              Start="0,0"
+              End="123.247000949193,33.5437356927044">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.6121681222645" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.6121681222645"
+                    Point2="0,16.6121681222645"
+                    Point3="4,16.6121681222645" />
+                  <mssgle:LineSegment
+                    End="119.247000949193,16.6121681222645" />
+                  <mssgle:CubicBezierSegment
+                    Point1="119.247000949193,16.6121681222645"
+                    Point2="123.247000949193,16.6121681222645"
+                    Point3="123.247000949193,20.6121681222645" />
+                  <mssgle:LineSegment
+                    End="123.247000949193,33.5437356927044" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="13.4321137558465,21.6121681222645,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output1]"
+          TopLeft="702.993135762313,231.343735692704">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.8508403441539"
+              Start="0,0"
+              End="0,43.3508403441539">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.3508403441539" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,15.870732672077,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Lookup Match Output]"
-          TopLeft="336.414285683875,242.652941183173">
+          TopLeft="696.676964323823,431.254010714686">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-9.71428568387512,67.6470588168264"
+              EndConnector="0,56.4405820855973"
               Start="0,0"
-              End="-9.71428568387512,60.1470588168264">
+              End="0,48.9405820855973">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29.8235294084132" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,29.8235294084132"
-                    Point2="0,33.8235294084132"
-                    Point3="-4,33.8235294084132" />
-                  <mssgle:LineSegment
-                    End="-5.71428568387512,33.8235294084132" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-5.71428568387512,33.8235294084132"
-                    Point2="-9.71428568387512,33.8235294084132"
-                    Point3="-9.71428568387512,37.8235294084132" />
-                  <mssgle:LineSegment
-                    End="-9.71428568387512,60.1470588168264" />
+                    End="0,48.9405820855973" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-53.0485295606876,38.8235294084132,96.3827734375,11.609375"
+              BoundingBox="-48.19138671875,18.6656035427987,96.3827734375,11.609375"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Derived Column Output1]"
+          TopLeft="833.609525190669,686.488888610344">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.1568627607382"
+              Start="0,0"
+              End="0,34.6568627607382">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.6568627607382" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6135,6 +6403,40 @@ AND DriverId = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Stage To Core.Paths[Data Conversion Output1]"
+          TopLeft="835.993652285456,770.245751371082">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-110.888889066284,31.5712417392033"
+              Start="0,0"
+              End="-110.888889066284,24.0712417392033">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.7856208696016" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.7856208696016"
+                    Point2="0,15.7856208696016"
+                    Point3="-4,15.7856208696016" />
+                  <mssgle:LineSegment
+                    End="-106.888889066284,15.7856208696016" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-106.888889066284,15.7856208696016"
+                    Point2="-110.888889066284,15.7856208696016"
+                    Point3="-110.888889066284,19.7856208696016" />
+                  <mssgle:LineSegment
+                    End="-110.888889066284,24.0712417392033" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Stage To Core.Paths[Data Conversion Output]"
           TopLeft="140.7,656.699999999999">
           <EdgeLayout.Curve>
@@ -6148,168 +6450,6 @@ AND DriverId = ?</property>
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="142.4,41.6"
-          Id="Package\Stage To Core\Lookup City 1"
-          TopLeft="633.880334282526,189.743735692704" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output3]"
-          TopLeft="581.833333333333,148.7">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="123.247000949193,41.0437356927044"
-              Start="0,0"
-              End="123.247000949193,33.5437356927044">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,12.6121681222645" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,12.6121681222645"
-                    Point2="0,16.6121681222645"
-                    Point3="4,16.6121681222645" />
-                  <mssgle:LineSegment
-                    End="119.247000949193,16.6121681222645" />
-                  <mssgle:CubicBezierSegment
-                    Point1="119.247000949193,16.6121681222645"
-                    Point2="123.247000949193,16.6121681222645"
-                    Point3="123.247000949193,20.6121681222645" />
-                  <mssgle:LineSegment
-                    End="123.247000949193,33.5437356927044" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="13.4321137558465,21.6121681222645,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="169.6,41.6"
-          Id="Package\Stage To Core\Lookup Province 1"
-          TopLeft="616.105937242101,282.194576036858" />
-        <NodeLayout
-          Size="147.2,41.6"
-          Id="Package\Stage To Core\Lookup Car 1"
-          TopLeft="620.441373220066,389.654010714686" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output4]"
-          TopLeft="697.473655231084,323.794576036858">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,65.8594346778281"
-              Start="0,0"
-              End="0,58.3594346778281">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,58.3594346778281" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,23.375029838914,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output5]"
-          TopLeft="702.993135762313,231.343735692704">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,50.8508403441539"
-              Start="0,0"
-              End="0,43.3508403441539">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,43.3508403441539" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,15.870732672077,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="154.4,41.6"
-          Id="Package\Stage To Core\Conditional Split"
-          TopLeft="622.112555427579,487.694592800283" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output6]"
-          TopLeft="696.676964323823,431.254010714686">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,56.4405820855973"
-              Start="0,0"
-              End="0,48.9405820855973">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,48.9405820855973" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,18.6656035427986,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="164.8,41.6"
-          Id="Package\Stage To Core\OLE DB Command"
-          TopLeft="386.50793733071,743.803921159748" />
-        <NodeLayout
-          Size="170.4,41.6"
-          Id="Package\Stage To Core\OLE DB Destination"
-          TopLeft="631.349207693183,942.999999499886" />
-        <NodeLayout
-          Size="270.4,41.6"
-          Id="Package\Stage To Core\Resize CityName,ProvinceName Columns 1"
-          TopLeft="700.793652285456,728.645751371082" />
-        <NodeLayout
-          Size="200,41.6"
-          Id="Package\Stage To Core\add isCurrent , EndDate 1"
-          TopLeft="731.225398095881,644.888888610344" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Derived Column Output1]"
-          TopLeft="833.609525190669,686.488888610344">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,42.1568627607382"
-              Start="0,0"
-              End="0,34.6568627607382">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.6568627607382" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6350,52 +6490,10 @@ AND DriverId = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="30.4252299279011,51.9490678367016,46.6623828125,11.609375"
+              BoundingBox="30.425229927901,51.9490678367016,46.6623828125,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="174.4,41.6"
-          Id="Package\Stage To Core\OLE DB Command 1"
-          TopLeft="637.904763219173,801.816993110286" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Data Conversion Output1]"
-          TopLeft="835.993652285456,770.245751371082">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-110.888889066284,31.5712417392033"
-              Start="0,0"
-              End="-110.888889066284,24.0712417392033">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,11.7856208696016" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,11.7856208696016"
-                    Point2="0,15.7856208696016"
-                    Point3="-4,15.7856208696016" />
-                  <mssgle:LineSegment
-                    End="-106.888889066284,15.7856208696016" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-106.888889066284,15.7856208696016"
-                    Point2="-110.888889066284,15.7856208696016"
-                    Point3="-110.888889066284,19.7856208696016" />
-                  <mssgle:LineSegment
-                    End="-110.888889066284,24.0712417392033" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="139.2,41.6"
-          Id="Package\Stage To Core\Row Count 1"
-          TopLeft="452.380953343953,645.465685878198" />
         <EdgeLayout
           Id="Package\Stage To Core.Paths[scd type 1]"
           TopLeft="674.912555427579,529.294592800283">
@@ -6432,88 +6530,6 @@ AND DriverId = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Row Count Output 11]"
-          TopLeft="521.980953343953,687.065685878198">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-53.0730160132423,56.7382352815492"
-              Start="0,0"
-              End="-53.0730160132423,49.2382352815492">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,24.3691176407746" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,24.3691176407746"
-                    Point2="0,28.3691176407746"
-                    Point3="-4,28.3691176407746" />
-                  <mssgle:LineSegment
-                    End="-49.0730160132423,28.3691176407746" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-49.0730160132423,28.3691176407746"
-                    Point2="-53.0730160132423,28.3691176407746"
-                    Point3="-53.0730160132423,32.3691176407746" />
-                  <mssgle:LineSegment
-                    End="-53.0730160132423,49.2382352815492" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="139.2,41.6"
-          Id="Package\Stage To Core\Row Count 2"
-          TopLeft="647.619048997658,868.823528819671" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[OLE DB Command Output]"
-          TopLeft="721.161906108415,843.416993110286">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,25.4065357093851"
-              Start="0,0"
-              End="0,17.9065357093851">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,17.9065357093851" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Row Count Output 12]"
-          TopLeft="716.884128345421,910.423528819671">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,32.5764706802155"
-              Start="0,0"
-              End="0,25.0764706802155">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.0764706802155" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -6535,7 +6551,7 @@ AND DriverId = ?</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -6545,23 +6561,10 @@ AND DriverId = ?</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\DimDriver Core">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -6571,7 +6574,7 @@ AND DriverId = ?</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -6581,7 +6584,7 @@ AND DriverId = ?</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -6589,12 +6592,15 @@ AND DriverId = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup Province 1">
+    design-time-name="Package\Stage To Core\OLE DB Destination">
     <Properties>
       <Property>
-        <Name>OverwriteParamsSQLProp</Name>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -6622,7 +6628,7 @@ AND DriverId = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\OLE DB Destination">
+    design-time-name="Package\Stage To Core\DimDriver Core">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -6631,6 +6637,16 @@ AND DriverId = ?</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Lookup Province 1">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
