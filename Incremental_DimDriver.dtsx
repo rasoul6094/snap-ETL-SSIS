@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="44"
-  DTS:VersionGUID="{D9BEF3FC-375E-4F63-A618-456BEC7DC864}">
+  DTS:VersionBuild="54"
+  DTS:VersionGUID="{4BBC2F4F-2E0D-431C-95F1-3C2C9BF9D678}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -198,8 +198,7 @@
                   description="The SQL command to be executed."
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT * FROM
-Car
-WHERE ModifiedAt &gt; ?</property>
+Car</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -2117,6 +2116,90 @@ WHERE ModifiedAt &gt; ?</property>
                       cachedDataType="i4"
                       cachedName="CityIdDest"
                       lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CityIdDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="LastName"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[BirthDate]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="BirthDate"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[PhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="PhoneNumber"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[NationalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="NationalCode"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[NationalCode]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Email"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Gender"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[FullAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="300"
+                      cachedName="FullAddress"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[FullAddress]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[LastNameDest]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="LastNameDest"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[LastNameDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[BirthDateDest]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="BirthDateDest"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[BirthDateDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[PhoneNumberDest]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="PhoneNumberDest"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[PhoneNumberDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[NationalCodeDest]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="NationalCodeDest"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[NationalCodeDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[EmailDest]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="EmailDest"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[EmailDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[GenderDest]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="GenderDest"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[GenderDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[FullAddressDest]"
+                      cachedDataType="wstr"
+                      cachedLength="300"
+                      cachedName="FullAddressDest"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[FullAddressDest]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -2164,13 +2247,13 @@ WHERE ModifiedAt &gt; ?</property>
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">([ISNULL](#{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[FirstName]}) ? "" : #{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[FirstName]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[FirstNameDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[FirstNameDest]})</property>
+                      name="Expression">([ISNULL](#{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[FirstName]}) ? "" : #{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[FirstName]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[FirstNameDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[FirstNameDest]}) || ([ISNULL](#{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[LastName]}) ? "" : #{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[LastName]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[LastNameDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[LastNameDest]}) || ([ISNULL](#{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[PhoneNumber]}) ? "" : #{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[PhoneNumber]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[PhoneNumberDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[PhoneNumberDest]}) || ([ISNULL](#{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[NationalCode]}) ? "" : #{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[NationalCode]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[NationalCodeDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[NationalCodeDest]}) || ([ISNULL](#{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[Gender]}) ? "" : #{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[Gender]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[GenderDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[GenderDest]}) || ([ISNULL](#{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[BirthDate]}) ? "" : #{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[BirthDate]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[BirthDateDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[BirthDateDest]}) || ([ISNULL](#{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[Email]}) ? "" : #{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[Email]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[EmailDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[EmailDest]}) || ([ISNULL](#{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[FullAddress]}) ? "" : #{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[FullAddress]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[FullAddressDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[FullAddressDest]})</property>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the friendly version of the expression. This expression version uses column names."
                       expressionType="Notify"
-                      name="FriendlyExpression">(ISNULL(FirstName) ? "" : FirstName) != (ISNULL(FirstNameDest) ? "" : FirstNameDest)</property>
+                      name="FriendlyExpression">(ISNULL(FirstName) ? "" : FirstName) != (ISNULL(FirstNameDest) ? "" : FirstNameDest) || (ISNULL(LastName) ? "" : LastName) != (ISNULL(LastNameDest) ? "" : LastNameDest) || (ISNULL(PhoneNumber) ? "" : PhoneNumber) != (ISNULL(PhoneNumberDest) ? "" : PhoneNumberDest) || (ISNULL(NationalCode) ? "" : NationalCode) != (ISNULL(NationalCodeDest) ? "" : NationalCodeDest) || (ISNULL(Gender) ? "" : Gender) != (ISNULL(GenderDest) ? "" : GenderDest) || (ISNULL(BirthDate) ? "" : BirthDate) != (ISNULL(BirthDateDest) ? "" : BirthDateDest) || (ISNULL(Email) ? "" : Email) != (ISNULL(EmailDest) ? "" : EmailDest) || (ISNULL(FullAddress) ? "" : FullAddress) != (ISNULL(FullAddressDest) ? "" : FullAddressDest)</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
@@ -5397,39 +5480,39 @@ AND DriverId = ?</property>
               startId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Output]" />
             <path
               refId="Package\Stage To Core.Paths[Lookup Match Output6]"
-              endId="Package\Stage To Core\Lookup Province.Inputs[Lookup Input]"
+              endId="Package\Stage To Core\Lookup City 1.Inputs[Lookup Input]"
               name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup City.Outputs[Lookup Match Output]" />
+              startId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output]" />
             <path
               refId="Package\Stage To Core.Paths[Lookup Match Output4]"
-              endId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Inputs[Derived Column Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output3]"
-              endId="Package\Stage To Core\Lookup Car 1.Inputs[Lookup Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup Province 1.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output5]"
-              endId="Package\Stage To Core\Lookup Car.Inputs[Lookup Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup Province.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output1]"
               endId="Package\Stage To Core\Lookup Province 1.Inputs[Lookup Input]"
               name="Lookup Match Output"
               startId="Package\Stage To Core\Lookup City 1.Outputs[Lookup Match Output]" />
             <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output]"
+              refId="Package\Stage To Core.Paths[Lookup Match Output3]"
+              endId="Package\Stage To Core\Lookup Car.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\Lookup Province.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output5]"
               endId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input]"
               name="Lookup Match Output"
               startId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output]" />
             <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output2]"
-              endId="Package\Stage To Core\Lookup City 1.Inputs[Lookup Input]"
+              refId="Package\Stage To Core.Paths[Lookup Match Output1]"
+              endId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Inputs[Derived Column Input]"
               name="Lookup Match Output"
-              startId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output]" />
+              startId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output]"
+              endId="Package\Stage To Core\Lookup Province.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\Lookup City.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output2]"
+              endId="Package\Stage To Core\Lookup Car 1.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\Lookup Province 1.Outputs[Lookup Match Output]" />
             <path
               refId="Package\Stage To Core.Paths[Lookup No Match Output]"
               endId="Package\Stage To Core\Lookup City.Inputs[Lookup Input]"
@@ -5488,7 +5571,7 @@ AND DriverId = ?</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
-          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = ?+?&#xA;  WHERE TableName = 'DimDriver'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;    LastRunStatus = 'Success',&#xA;    LastRunMessage = 'ETL ran successfully',&#xA;    TotalRowsInserted = ?,&#xA;    TotalRowsUpdated = CAST(? AS INT) + CAST(? AS INT)&#xA;WHERE TableName = 'DimDriver'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::rowCountInserted"
@@ -5867,6 +5950,19 @@ AND DriverId = ?</property>
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\City Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\Source To Stage\Driver Source">
     <Properties>
       <Property>
@@ -5999,9 +6095,7 @@ AND DriverId = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-8,4.33823534010753,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6057,9 +6151,7 @@ AND DriverId = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-34.5365080066211,33.3691176407746,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6144,126 +6236,6 @@ AND DriverId = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Lookup Match Output6]"
-          TopLeft="336.414285683875,242.652941183173">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-9.71428568387512,67.6470588168264"
-              Start="0,0"
-              End="-9.71428568387512,60.1470588168264">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,29.8235294084132" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,29.8235294084132"
-                    Point2="0,33.8235294084132"
-                    Point3="-4,33.8235294084132" />
-                  <mssgle:LineSegment
-                    End="-5.71428568387512,33.8235294084132" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-5.71428568387512,33.8235294084132"
-                    Point2="-9.71428568387512,33.8235294084132"
-                    Point3="-9.71428568387512,37.8235294084132" />
-                  <mssgle:LineSegment
-                    End="-9.71428568387512,60.1470588168264" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-53.0485295606876,38.8235294084132,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output5]"
-          TopLeft="326.7,351.899999999999">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,20.4453125,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output4]"
-          TopLeft="326.7,453.499999999999">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-64,59.9999999999999"
-              Start="0,0"
-              End="-64,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,26"
-                    Point2="0,30"
-                    Point3="-4,30" />
-                  <mssgle:LineSegment
-                    End="-60,30" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-60,30"
-                    Point2="-64,30"
-                    Point3="-64,34" />
-                  <mssgle:LineSegment
-                    End="-64,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-80.19138671875,35,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output3]"
-          TopLeft="697.473655231084,323.794576036858">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,65.8594346778281"
-              Start="0,0"
-              End="0,58.3594346778281">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,58.3594346778281" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,23.375029838914,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output2]"
           TopLeft="581.833333333333,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -6299,7 +6271,31 @@ AND DriverId = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output1]"
+          Id="Package\Stage To Core.Paths[Lookup Match Output5]"
+          TopLeft="696.676964323823,431.254010714686">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.4405820855973"
+              Start="0,0"
+              End="0,48.9405820855973">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.9405820855973" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,18.6656035427987,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output4]"
           TopLeft="702.993135762313,231.343735692704">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -6323,26 +6319,122 @@ AND DriverId = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output]"
-          TopLeft="696.676964323823,431.254010714686">
+          Id="Package\Stage To Core.Paths[Lookup Match Output3]"
+          TopLeft="326.7,351.899999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,56.4405820855973"
+              EndConnector="0,59.9999999999999"
               Start="0,0"
-              End="0,48.9405820855973">
+              End="0,52.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,48.9405820855973" />
+                    End="0,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,18.6656035427987,96.3827734375,11.609375"
+              BoundingBox="-48.19138671875,20.4453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output2]"
+          TopLeft="697.473655231084,323.794576036858">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65.8594346778281"
+              Start="0,0"
+              End="0,58.3594346778281">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.3594346778281" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,23.375029838914,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output1]"
+          TopLeft="326.7,453.499999999999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-64,59.9999999999999"
+              Start="0,0"
+              End="-64,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="-4,30" />
+                  <mssgle:LineSegment
+                    End="-60,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-60,30"
+                    Point2="-64,30"
+                    Point3="-64,34" />
+                  <mssgle:LineSegment
+                    End="-64,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-80.19138671875,35,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output]"
+          TopLeft="336.414285683875,242.652941183173">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9.71428568387512,67.6470588168264"
+              Start="0,0"
+              End="-9.71428568387512,60.1470588168264">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.8235294084132" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.8235294084132"
+                    Point2="0,33.8235294084132"
+                    Point3="-4,33.8235294084132" />
+                  <mssgle:LineSegment
+                    End="-5.71428568387512,33.8235294084132" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5.71428568387512,33.8235294084132"
+                    Point2="-9.71428568387512,33.8235294084132"
+                    Point3="-9.71428568387512,37.8235294084132" />
+                  <mssgle:LineSegment
+                    End="-9.71428568387512,60.1470588168264" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-53.0485295606876,38.8235294084132,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -6526,7 +6618,7 @@ AND DriverId = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-99.6114455730632,52.1833362654916,46.2912890625,11.609375"
+              BoundingBox="-99.611445573063,52.1833362654916,46.2912890625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -6601,6 +6693,29 @@ AND DriverId = ?</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Lookup Car">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[Stage].[Car]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
