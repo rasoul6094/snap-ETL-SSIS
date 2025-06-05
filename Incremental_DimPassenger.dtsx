@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
   DTS:DTSID="{94C18F94-3549-4D9E-AD26-369B142AF658}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LastModifiedProductVersion="16.0.5467.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="29"
-  DTS:VersionGUID="{246A7595-9CA3-4DB3-89E1-936040B9849F}">
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{26E6CE61-48F9-47F8-A310-A06C2B140341}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -918,7 +918,7 @@ WHERE ModifiedAt &gt; ?</property>
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="FirstName"
-                      externalMetadataColumnId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[FristName]"
+                      externalMetadataColumnId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
                       lineageId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[FirstName]" />
                   </inputColumns>
                   <externalMetadataColumns
@@ -936,11 +936,6 @@ WHERE ModifiedAt &gt; ?</property>
                       dataType="wstr"
                       length="27"
                       name="ReigisterationDate" />
-                    <externalMetadataColumn
-                      refId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[FristName]"
-                      dataType="wstr"
-                      length="100"
-                      name="FristName" />
                     <externalMetadataColumn
                       refId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
                       dataType="wstr"
@@ -971,6 +966,11 @@ WHERE ModifiedAt &gt; ?</property>
                       dataType="wstr"
                       length="10"
                       name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FirstName" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1504,7 +1504,7 @@ where [refTable].[PassengerId] = ?</property>
                   expressionType="Notify"
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE Core.DimPassenger
-SET FristName = ?, LastName= ? , BirthDate= ? , PhoneNumber= ? , NationalCode = ? , Email = ? , Gender = ?
+SET FirstName = ?, LastName= ? , BirthDate= ? , PhoneNumber= ? , NationalCode = ? , Email = ? , Gender = ?
 WHERE PassengerId= ?</property>
                 <property
                   dataType="System.Int32"
@@ -1861,27 +1861,27 @@ WHERE PassengerId= ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="114.4,41.6"
+          Size="114,42"
           Id="Package\cleanup"
           TopLeft="197.857143150605,57.7058823549521" />
         <NodeLayout
-          Size="172.8,41.6"
+          Size="173,42"
           Id="Package\ETL_MetaData Start"
           TopLeft="207.142857456085,135.705882286582" />
         <NodeLayout
-          Size="262.4,41.6"
+          Size="262,42"
           Id="Package\set LastRunETL DateTime to a Variable"
           TopLeft="187.142857541235,222.235293947392" />
         <NodeLayout
-          Size="156,41.6"
+          Size="156,42"
           Id="Package\Source To Stage"
           TopLeft="200.000000298023,296.294117439938" />
         <NodeLayout
-          Size="145.6,41.6"
+          Size="146,42"
           Id="Package\Stage To Core"
           TopLeft="204.285714592861,362.823529146329" />
         <NodeLayout
-          Size="234.4,41.6"
+          Size="234,42"
           Id="Package\Update ETL_Metadata onSuccess"
           TopLeft="189.28571456093,449.999999658149" />
         <EdgeLayout
@@ -2122,27 +2122,27 @@ WHERE PassengerId= ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="130.4,41.6"
+          Size="130,42"
           Id="Package\Stage To Core\Stage Data"
           TopLeft="297.589739155311,41.8333327099685" />
         <NodeLayout
-          Size="176,41.6"
+          Size="176,42"
           Id="Package\Stage To Core\update existing rows"
           TopLeft="174.615382013413,344.153841282313" />
         <NodeLayout
-          Size="161.6,41.6"
+          Size="162,42"
           Id="Package\Stage To Core\update row count"
           TopLeft="180.115382013412,277.038457492223" />
         <NodeLayout
-          Size="112.8,41.6"
+          Size="113,42"
           Id="Package\Stage To Core\Lookup"
           TopLeft="325.384610536007,139.076921426333" />
         <NodeLayout
-          Size="155.2,41.6"
+          Size="155,42"
           Id="Package\Stage To Core\insert row count"
           TopLeft="467.807685865806,272.423073392648" />
         <NodeLayout
-          Size="152.8,41.6"
+          Size="153,42"
           Id="Package\Stage To Core\insert new rows"
           TopLeft="474.615377543064,341.692304746463" />
         <EdgeLayout

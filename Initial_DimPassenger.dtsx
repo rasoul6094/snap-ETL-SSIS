@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
   DTS:DTSID="{411CE766-3561-4226-86C8-65AC0A38DF32}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LastModifiedProductVersion="16.0.5467.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Initial_DimPassenger"
   DTS:PackageType="5"
-  DTS:VersionBuild="47"
-  DTS:VersionGUID="{CF8C2E6F-F813-4496-8C31-E1E9202EF5D0}">
+  DTS:VersionBuild="49"
+  DTS:VersionGUID="{2053190E-2E93-4686-9C0D-15C7977D999E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,11 +25,11 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=snap-dw;Provider=SQLOLEDB.1;Persist Security Info=True;Application Name=SSIS-Package-{8B56CBDD-A0AE-44D0-9078-AC0D46027334}localhost.snap-dw.sa;Auto Translate=False;">
+          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=snap-dw;Provider=SQLOLEDB.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Package-{8B56CBDD-A0AE-44D0-9078-AC0D46027334}localhost.snap-dw.sa;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAACr1AhikPW0qIBs4KMs/wHgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADQ2utlb7HDFNgTQTfnkfJQkz1iYY8JzxeRpnvv0UzgRwAAAAAOgAAAAAIAACAAAAAS7eqUBaT5PpG5HDzCmQg2VYyXoICyR9X52D1XySSuZRAAAAAYjVt1peeZ8BVFZMPUKx1wQAAAAKqz3PU+PcIwVrNjLgaV1TpRAlGurGCpCoiRRv+hcr4uY/Mzj6+nbuqqglPQE7oLixZeBBHjXtj2CKj0xpg44iA</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA5EeLdpzlW0qM4IPX1hVSRAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADVed6vsXt92okf8RkdC4CGNY1JiEZm66i7dR5/bt/TWAAAAAAOgAAAAAIAACAAAABqgYqJyzq9fg70UEIGAmPOr4B6sWZ+lWw3bfv4WMRMySAAAADi32Lmw3y0pq3LFF9lRD6mjW5gCKfxikpyDkkXJkghgEAAAABZSrqUs+Y7HTFXzG/+cb8Yw77kXCcVrSO/Bg3rI5SKnx15BjC1T8y8lwd4JhO7LhhFI8/+VcZrJQLvXBgDKuwB</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -42,11 +42,11 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=snapdb-source;Provider=SQLOLEDB.1;Persist Security Info=True;Application Name=SSIS-Package-{06992110-99AA-4E70-BE05-E477D231C9FE}localhost.snapdb-source.sa;Auto Translate=False;">
+          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=snapdb-source;Provider=SQLOLEDB.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Package-{06992110-99AA-4E70-BE05-E477D231C9FE}localhost.snapdb-source.sa;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAACr1AhikPW0qIBs4KMs/wHgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACIOmOyd9VY2oW7ZA4gyWY56+NdGhMZThbaAK1v1GMg0gAAAAAOgAAAAAIAACAAAAAHFic6QmUimD3kHOXUQVmj4G0J1elv2tlrRlIYb+8wnBAAAADIodcMjVQM3JxhecdI//6LQAAAAHeWdHL9OgRZJ4+vrqkMd9zLpQsWQmO5Voedt76DeyRop+u+86pFP40cIXdCOAhu9p2s/XW9h7WWirncM6VrNZM</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA5EeLdpzlW0qM4IPX1hVSRAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACVf3QlfEtMmLReYnvKEhk89FRkJaMW2SIBHPdZScY9VwAAAAAOgAAAAAIAACAAAACboQbJAsSRa1V4YIq9k01ww0y4zZbVVgy/5SnFXWCBDSAAAABZY3AOIfdr7n//7fWrd5wi3ztGWhuftcvuq889JAZTA0AAAADQ40Z+PI1sjhn4L655p4JfMYJ4nU5q+uC7zhFqOV8lF5HTcqg9DJpMiByyH4cNrFYKq+dzkvYuy+lRsI9stypj</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -894,13 +894,6 @@
                       externalMetadataColumnId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[ReigisterationDate]"
                       lineageId="Package\Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[RegistrationDate]" />
                     <inputColumn
-                      refId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[FirstName]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="FirstName"
-                      externalMetadataColumnId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[FristName]"
-                      lineageId="Package\Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[FirstName]" />
-                    <inputColumn
                       refId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[BirthDate]"
                       cachedDataType="wstr"
                       cachedLength="10"
@@ -913,6 +906,13 @@
                       cachedName="PassengerID"
                       externalMetadataColumnId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[PassengerId]"
                       lineageId="Package\Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[PassengerID]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[FirstName]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -929,11 +929,6 @@
                       dataType="wstr"
                       length="27"
                       name="ReigisterationDate" />
-                    <externalMetadataColumn
-                      refId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[FristName]"
-                      dataType="wstr"
-                      length="100"
-                      name="FristName" />
                     <externalMetadataColumn
                       refId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
                       dataType="wstr"
@@ -964,6 +959,11 @@
                       dataType="wstr"
                       length="10"
                       name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FirstName" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1425,23 +1425,23 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="114.4,41.6"
+          Size="114,42"
           Id="Package\cleanup"
           TopLeft="216.428571889291,32.1176470306712" />
         <NodeLayout
-          Size="244,41.6"
+          Size="244,42"
           Id="Package\insert new record to ETL_Metadata"
           TopLeft="150.714286035116,112.411764607349" />
         <NodeLayout
-          Size="156,41.6"
+          Size="156,42"
           Id="Package\Source To Stage"
           TopLeft="195.000000415104,187.352941012248" />
         <NodeLayout
-          Size="145.6,41.6"
+          Size="146,42"
           Id="Package\Stage To Core"
           TopLeft="205.714286152197,279.882352695849" />
         <NodeLayout
-          Size="234.4,41.6"
+          Size="234,42"
           Id="Package\Update ETL_Metadata onSuccess"
           TopLeft="166.428571782855,386.941176131419" />
         <EdgeLayout
@@ -1541,11 +1541,11 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="136,41.6"
+          Size="136,42"
           Id="Package\Source To Stage\Data Source"
           TopLeft="215.714286173485,58.1176470078812" />
         <NodeLayout
-          Size="104.8,41.6"
+          Size="105,42"
           Id="Package\Source To Stage\Stage"
           TopLeft="232.857143352835,194.999999829075" />
         <EdgeLayout
@@ -1617,15 +1617,15 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="181.6,41.6"
+          Size="182,42"
           Id="Package\Stage To Core\Passenger Stage Data"
           TopLeft="290.666662335396,181.833330623806" />
         <NodeLayout
-          Size="171.2,41.6"
+          Size="171,42"
           Id="Package\Stage To Core\DImPassenger Core"
           TopLeft="298.33332888782,423.499993689358" />
         <NodeLayout
-          Size="129.6,41.6"
+          Size="130,42"
           Id="Package\Stage To Core\Row Count"
           TopLeft="319.999995231629,309.99999538064" />
         <EdgeLayout
