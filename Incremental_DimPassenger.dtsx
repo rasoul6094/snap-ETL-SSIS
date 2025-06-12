@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
   DTS:DTSID="{94C18F94-3549-4D9E-AD26-369B142AF658}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="32"
-  DTS:VersionGUID="{634644B3-D0F2-4203-82A3-B87E56BE7241}">
+  DTS:VersionBuild="35"
+  DTS:VersionGUID="{2741AD56-C956-4FB1-9409-CDA41F0F3716}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -225,6 +225,13 @@
                       externalMetadataColumnId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[PassengerId]"
                       lineageId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[PassengerID]" />
                     <inputColumn
+                      refId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
                       refId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].Columns[LastName]"
                       cachedDataType="wstr"
                       cachedLength="100"
@@ -273,13 +280,6 @@
                       cachedName="RegistrationDate"
                       externalMetadataColumnId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[ReigisterationDate]"
                       lineageId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[RegistrationDate]" />
-                    <inputColumn
-                      refId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].Columns[FirstName]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="FirstName"
-                      externalMetadataColumnId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
-                      lineageId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[FirstName]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -296,6 +296,11 @@
                       dataType="wstr"
                       length="27"
                       name="ReigisterationDate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FirstName" />
                     <externalMetadataColumn
                       refId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
                       dataType="wstr"
@@ -326,11 +331,6 @@
                       dataType="wstr"
                       length="10"
                       name="Gender" />
-                    <externalMetadataColumn
-                      refId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
-                      dataType="wstr"
-                      length="100"
-                      name="FirstName" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -591,6 +591,26 @@ where [refTable].[PassengerId] = ?</property>
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
+                      refId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[CreatedAt]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
+                      length="27"
+                      lineageId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[CreatedAt]"
+                      name="CreatedAt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
+                      length="27"
+                      lineageId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
+                      name="ModifiedAt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
                       refId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[PassengerID]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
@@ -679,29 +699,19 @@ where [refTable].[PassengerId] = ?</property>
                       lineageId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[Gender]"
                       name="Gender"
                       truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[CreatedAt]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
-                      length="27"
-                      lineageId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[CreatedAt]"
-                      name="CreatedAt"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
-                      length="27"
-                      lineageId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
-                      name="ModifiedAt"
-                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="CreatedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="ModifiedAt" />
                     <externalMetadataColumn
                       refId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].ExternalColumns[PassengerID]"
                       dataType="i4"
@@ -746,16 +756,6 @@ where [refTable].[PassengerId] = ?</property>
                       dataType="wstr"
                       length="10"
                       name="Gender" />
-                    <externalMetadataColumn
-                      refId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
-                      dataType="wstr"
-                      length="27"
-                      name="CreatedAt" />
-                    <externalMetadataColumn
-                      refId="Package\Stage To Core\Stage Data.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
-                      dataType="wstr"
-                      length="27"
-                      name="ModifiedAt" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1205,21 +1205,43 @@ WHERE PassengerId= ?</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="173,42"
+          Size="172.8,41.6"
           Id="Package\ETL_MetaData Start"
           TopLeft="605.142857456085,107.705882286582" />
         <NodeLayout
-          Size="262,42"
+          Size="262.4,41.6"
           Id="Package\set LastRunETL DateTime to a Variable"
           TopLeft="561.142857541235,197.235293947392" />
         <NodeLayout
-          Size="146,42"
+          Size="145.6,41.6"
           Id="Package\Stage To Core"
           TopLeft="616.285714592861,334.823529146329" />
         <NodeLayout
-          Size="234,42"
+          Size="233.6,41.6"
           Id="Package\Update ETL_Metadata onSuccess"
           TopLeft="567.28571456093,423.999999658149" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="690.714286067048,239.235293947392">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,95.588235198937"
+              Start="0,0"
+              End="0,88.088235198937">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,88.088235198937" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="691.89285749866,149.705882286582">
@@ -1264,28 +1286,6 @@ WHERE PassengerId= ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="690.714286067048,239.235293947392">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,95.588235198937"
-              Start="0,0"
-              End="0,88.088235198937">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,88.088235198937" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1295,101 +1295,29 @@ WHERE PassengerId= ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="130,42"
-          Id="Package\Stage To Core\Stage Data"
-          TopLeft="297.589739155311,41.8333327099685" />
-        <NodeLayout
-          Size="176,42"
+          Size="176,41.6"
           Id="Package\Stage To Core\update existing rows"
           TopLeft="174.615382013413,344.153841282313" />
         <NodeLayout
-          Size="162,42"
+          Size="161.6,41.6"
           Id="Package\Stage To Core\update row count"
           TopLeft="180.115382013412,277.038457492223" />
         <NodeLayout
-          Size="113,42"
+          Size="112.8,41.6"
           Id="Package\Stage To Core\Lookup"
-          TopLeft="325.384610536007,139.076921426333" />
+          TopLeft="316.428572102165,147.741176359319" />
         <NodeLayout
-          Size="155,42"
+          Size="155.2,41.6"
           Id="Package\Stage To Core\insert row count"
           TopLeft="467.807685865806,272.423073392648" />
         <NodeLayout
-          Size="153,42"
+          Size="152.8,41.6"
           Id="Package\Stage To Core\insert new rows"
           TopLeft="474.615377543064,341.692304746463" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup No Match Output]"
-          TopLeft="399.251277202673,180.676921426333">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="146.156408663132,91.746151966315"
-              Start="0,0"
-              End="146.156408663132,84.246151966315">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,33.4683585652643" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,33.4683585652643"
-                    Point2="0,37.4683585652643"
-                    Point3="4,37.4683585652643" />
-                  <mssgle:LineSegment
-                    End="142.156408663132,37.4683585652643" />
-                  <mssgle:CubicBezierSegment
-                    Point1="142.156408663132,37.4683585652643"
-                    Point2="146.156408663132,37.4683585652643"
-                    Point3="146.156408663132,41.4683585652643" />
-                  <mssgle:LineSegment
-                    End="146.156408663132,84.246151966315" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="17.2718176128162,42.4683585652643,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output]"
-          TopLeft="364.31794386934,180.676921426333">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-103.402561855928,96.36153606589"
-              Start="0,0"
-              End="-103.402561855928,88.86153606589">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,35.3532427010348" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,35.3532427010348"
-                    Point2="0,39.3532427010348"
-                    Point3="-4,39.3532427010348" />
-                  <mssgle:LineSegment
-                    End="-99.4025618559284,39.3532427010348" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-99.4025618559284,39.3532427010348"
-                    Point2="-103.402561855928,39.3532427010348"
-                    Point3="-103.402561855928,43.3532427010348" />
-                  <mssgle:LineSegment
-                    End="-103.402561855928,88.86153606589" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-99.8926676467142,44.3532427010348,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Stage To Core\Stage Data"
+          TopLeft="297.589739155311,41.8333327099685" />
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Row Count Output 11]"
           TopLeft="261.765382013412,318.638457492223">
@@ -1436,36 +1364,108 @@ WHERE PassengerId= ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[OLE DB Source Output]"
-          TopLeft="362.789739155311,83.4333327099685">
+          TopLeft="362.389739155311,83.4333327099685">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="18.994871380696,55.6435887163645"
+              EndConnector="10.4388329468539,64.3078436493505"
               Start="0,0"
-              End="18.994871380696,48.1435887163645">
+              End="10.4388329468539,56.8078436493505">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.8217943581822" />
+                    End="0,28.1539218246753" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,23.8217943581822"
-                    Point2="0,27.8217943581822"
-                    Point3="4,27.8217943581822" />
+                    Point1="0,28.1539218246753"
+                    Point2="0,32.1539218246753"
+                    Point3="4,32.1539218246753" />
                   <mssgle:LineSegment
-                    End="14.994871380696,27.8217943581822" />
+                    End="6.43883294685395,32.1539218246753" />
                   <mssgle:CubicBezierSegment
-                    Point1="14.994871380696,27.8217943581822"
-                    Point2="18.994871380696,27.8217943581822"
-                    Point3="18.994871380696,31.8217943581822" />
+                    Point1="6.43883294685395,32.1539218246753"
+                    Point2="10.4388329468539,32.1539218246753"
+                    Point3="10.4388329468539,36.1539218246753" />
                   <mssgle:LineSegment
-                    End="18.994871380696,48.1435887163645" />
+                    End="10.4388329468539,56.8078436493505" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup No Match Output]"
+          TopLeft="390.295238768832,189.341176359319">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="155.112447096974,83.081897033329"
+              Start="0,0"
+              End="155.112447096974,75.581897033329">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.9299495576672" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.9299495576672"
+                    Point2="0,33.9299495576672"
+                    Point3="4,33.9299495576672" />
+                  <mssgle:LineSegment
+                    End="151.112447096974,33.9299495576672" />
+                  <mssgle:CubicBezierSegment
+                    Point1="151.112447096974,33.9299495576672"
+                    Point2="155.112447096974,33.9299495576672"
+                    Point3="155.112447096974,37.9299495576672" />
+                  <mssgle:LineSegment
+                    End="155.112447096974,75.581897033329" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="21.7498368297372,38.9299495576672,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output]"
+          TopLeft="355.361905435498,189.341176359319">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-94.4465234220863,87.697281132904"
+              Start="0,0"
+              End="-94.4465234220863,80.197281132904">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.8148336934377" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.8148336934377"
+                    Point2="0,35.8148336934377"
+                    Point3="-4,35.8148336934377" />
+                  <mssgle:LineSegment
+                    End="-90.4465234220863,35.8148336934377" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-90.4465234220863,35.8148336934377"
+                    Point2="-94.4465234220863,35.8148336934377"
+                    Point3="-94.4465234220863,39.8148336934377" />
+                  <mssgle:LineSegment
+                    End="-94.4465234220863,80.197281132904" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-95.4146484297932,40.8148336934377,96.3827734375,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -1484,7 +1484,30 @@ WHERE PassengerId= ?</property>
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Stage Data">
+    design-time-name="Package\Stage To Core\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\insert new rows">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1497,30 +1520,7 @@ WHERE PassengerId= ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:string">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\insert new rows">
+    design-time-name="Package\Stage To Core\Stage Data">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

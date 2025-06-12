@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="6/5/2025 10:41:05 PM"
+  DTS:CreationDate="6/13/2025 12:29:33 AM"
   DTS:CreationName="Microsoft.Package"
-  DTS:CreatorComputerName="DESKTOP-GDRMTJV"
-  DTS:CreatorName="DESKTOP-GDRMTJV\HP"
-  DTS:DTSID="{ABE0589A-0CB5-4E1D-80F2-118C992A6BD4}"
+  DTS:CreatorComputerName="DESKTOP-0S8CU17"
+  DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
+  DTS:DTSID="{7AE74D42-30BF-438D-A411-59431989A430}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{61257D2D-0062-4B4A-847F-9B3590E74231}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{1D4FDCC9-D265-4AAF-B956-CAA3AE11CB01}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{1C9B6B2B-81BF-44BC-B0BB-E29BE1EACCD4}"
+      DTS:DTSID="{37F67F9E-04F7-463E-BC36-D707FFE5268F}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="rowCountInserted">
@@ -31,7 +31,7 @@
       DTS:refId="Package\cleanup"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{092042e0-7470-4083-9c6f-7adfa221aec2}"
+      DTS:DTSID="{72aa4e47-920c-481b-9708-1d4d54964c36}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="cleanup"
@@ -41,14 +41,14 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
-          SQLTask:SqlStatementSource="DELETE FROM Core.DimPaymentMethod;&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'DimPaymentMethod';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="DELETE FROM Core.DimRequestStatus;&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'DimRequestStatus';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\insert new record to ETL_Metadata"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{2296a69f-3725-4a7d-9c69-ce0ee2db01e1}"
+      DTS:DTSID="{1ed0d85d-b3a8-424b-a807-c42b8e78cded}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="insert new record to ETL_Metadata"
@@ -58,14 +58,14 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
-          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata &#xA;VALUES ('DimPaymentMethod' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata &#xA;VALUES ('DimRequestStatus' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Stage To Core"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{74b4df20-aca0-42d6-a50b-1c72cc729890}"
+      DTS:DTSID="{311216e8-295b-4cbb-be03-7d8395a91796}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="Stage To Core"
@@ -75,7 +75,7 @@
         <DTS:EventHandler
           DTS:refId="Package\Stage To Core.EventHandlers[OnError]"
           DTS:CreationName="OnError"
-          DTS:DTSID="{561dfe6a-eeec-4c51-8239-c619240b7c59}"
+          DTS:DTSID="{b120312f-1fd1-440f-ab23-248ad185e678}"
           DTS:EventID="0"
           DTS:EventName="OnError"
           DTS:LocaleID="-1">
@@ -83,7 +83,7 @@
             <DTS:Variable
               DTS:CreationName=""
               DTS:Description="The propagate property of the event"
-              DTS:DTSID="{56be7c51-3c9b-4edf-852c-0a59f8e6b637}"
+              DTS:DTSID="{77dd7cc0-3327-48f9-9673-8b20d9fcc8b3}"
               DTS:IncludeInDebugDump="6789"
               DTS:Namespace="System"
               DTS:ObjectName="Propagate">
@@ -96,7 +96,7 @@
               DTS:refId="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
               DTS:CreationName="Microsoft.ExecuteSQLTask"
               DTS:Description="Execute SQL Task"
-              DTS:DTSID="{288e775d-a2ea-4710-9371-dff8a8e3d6dd}"
+              DTS:DTSID="{9d1665e7-ae0c-47fd-8b3b-602c489d7eb1}"
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update ETL_Metadata On error"
@@ -105,7 +105,7 @@
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
-                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimPaymentMethod'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimRequestStatus'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
                     SQLTask:DtsVariableName="System::ErrorDescription"
@@ -138,7 +138,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[Core].[DimPaymentMethod]</property>
+                  name="OpenRowset">[Core].[DimRequestStatus]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -195,30 +195,30 @@
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].Columns[PaymentMethodID]"
-                      cachedDataType="i4"
-                      cachedName="PaymentMethodID"
-                      externalMetadataColumnId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].ExternalColumns[PaymentMethodKey]"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].Columns[PaymentMethodID]" />
-                    <inputColumn
                       refId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].Columns[Description]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="Description"
                       externalMetadataColumnId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].Columns[Description]" />
+                      lineageId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Output].Columns[Description]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].Columns[StatusID]"
+                      cachedDataType="i4"
+                      cachedName="StatusID"
+                      externalMetadataColumnId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].ExternalColumns[StatusKey]"
+                      lineageId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Output].Columns[StatusID]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].ExternalColumns[PaymentMethodKey]"
-                      dataType="i4"
-                      name="PaymentMethodKey" />
-                    <externalMetadataColumn
                       refId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
                       dataType="wstr"
-                      length="20"
+                      length="40"
                       name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].ExternalColumns[StatusKey]"
+                      dataType="i4"
+                      name="StatusKey" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -248,11 +248,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\Stage To Core\Payment Method Stage Data"
+              refId="Package\Stage To Core\request status stage area"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
-              name="Payment Method Stage Data"
+              name="request status stage area"
               usesDispositions="true"
               version="7">
               <properties>
@@ -263,7 +263,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[Stage].[PaymentMethod]</property>
+                  name="OpenRowset">[Stage].[Status]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -297,7 +297,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Stage To Core\Payment Method Stage Data.Connections[OleDbConnection]"
+                  refId="Package\Stage To Core\request status stage area.Connections[OleDbConnection]"
                   connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
                   connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
@@ -305,68 +305,68 @@
               </connections>
               <outputs>
                 <output
-                  refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output]"
+                  refId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].Columns[PaymentMethodID]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].ExternalColumns[PaymentMethodID]"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].Columns[PaymentMethodID]"
-                      name="PaymentMethodID"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].Columns[Description]"
+                      refId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Output].Columns[Description]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      externalMetadataColumnId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Output].ExternalColumns[Description]"
                       length="50"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].Columns[Description]"
+                      lineageId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Output].Columns[Description]"
                       name="Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Output].Columns[StatusID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Output].ExternalColumns[StatusID]"
+                      lineageId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Output].Columns[StatusID]"
+                      name="StatusID"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].ExternalColumns[PaymentMethodID]"
-                      dataType="i4"
-                      name="PaymentMethodID" />
-                    <externalMetadataColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      refId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Output].ExternalColumns[Description]"
                       dataType="wstr"
-                      length="50"
+                      length="100"
                       name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Output].ExternalColumns[StatusID]"
+                      dataType="i4"
+                      name="StatusID" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output]"
+                  refId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[PaymentMethodID]"
+                      refId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Error Output].Columns[StatusID]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[PaymentMethodID]"
-                      name="PaymentMethodID" />
+                      lineageId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Error Output].Columns[StatusID]"
+                      name="StatusID" />
                     <outputColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      refId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Error Output].Columns[Description]"
                       dataType="wstr"
-                      length="50"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      length="100"
+                      lineageId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Error Output].Columns[Description]"
                       name="Description" />
                     <outputColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -409,7 +409,7 @@
               refId="Package\Stage To Core.Paths[OLE DB Source Output]"
               endId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
               name="OLE DB Source Output"
-              startId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output]" />
+              startId="Package\Stage To Core\request status stage area.Outputs[OLE DB Source Output]" />
             <path
               refId="Package\Stage To Core.Paths[Row Count Output 1]"
               endId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input]"
@@ -423,7 +423,7 @@
       DTS:refId="Package\Update ETL_Metadata onSuccess"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{989524d3-c8b4-4f20-be87-a212d335acf3}"
+      DTS:DTSID="{b61325e3-b5cb-41d4-bc64-dc0c5554cfbc}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Update ETL_Metadata onSuccess"
@@ -433,7 +433,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
-          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = 0&#xA;  WHERE TableName = 'DimPaymentMethod'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = 0&#xA;  WHERE TableName = 'DimRequestStatus'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::rowCountInserted"
@@ -448,7 +448,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{fd22ee90-4d72-491a-963b-74e76505dad5}"
+      DTS:DTSID="{faa7ce3c-540c-49b0-86a2-1013aa680be1}"
       DTS:From="Package\insert new record to ETL_Metadata"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -456,7 +456,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{e24866d2-367c-4ba2-920c-2dab1a655cfd}"
+      DTS:DTSID="{490b659b-0f7f-4ab4-a6dc-286a337e61c6}"
       DTS:From="Package\cleanup"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
@@ -464,7 +464,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
-      DTS:DTSID="{7013f981-f655-49aa-810b-e8250968f81f}"
+      DTS:DTSID="{01867b11-f7be-4a63-bd17-d1e3cbf59e9c}"
       DTS:From="Package\Stage To Core"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
@@ -485,22 +485,22 @@
         <NodeLayout
           Size="118.4,41.6"
           Id="Package\cleanup"
-          TopLeft="761.714285854175,94" />
+          TopLeft="389.285715114402,136.882352821194" />
         <NodeLayout
           Size="244,41.6"
           Id="Package\insert new record to ETL_Metadata"
-          TopLeft="696,174.294117576678" />
+          TopLeft="323.571429260227,217.176470397872" />
         <NodeLayout
           Size="145.6,41.6"
           Id="Package\Stage To Core"
-          TopLeft="745.000000117081,277.764705665178" />
+          TopLeft="372.571429377308,320.647058486372" />
         <NodeLayout
           Size="233.6,41.6"
           Id="Package\Update ETL_Metadata onSuccess"
-          TopLeft="705.714285747739,384.823529100748" />
+          TopLeft="333.285715007966,427.705881921942" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="818.000000058541,216.294117576678">
+          TopLeft="445.571429318768,259.176470397872">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -522,7 +522,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="819.357142927087,136">
+          TopLeft="446.928572187314,178.882352821194">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -544,7 +544,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="820.35714293241,319.364705665178">
+          TopLeft="447.928572192637,362.247058486372">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -577,35 +577,13 @@
           Id="Package\Stage To Core\Row Count"
           TopLeft="609.999995231629,277.99999538064" />
         <NodeLayout
-          Size="220,41.6"
-          Id="Package\Stage To Core\Payment Method Stage Data"
+          Size="197.6,41.6"
+          Id="Package\Stage To Core\request status stage area"
           TopLeft="562.666662335396,144.833330623806" />
         <NodeLayout
           Size="206.4,41.6"
           Id="Package\Stage To Core\DImPaymentMethod Core"
           TopLeft="565.33332888782,417.499993689358" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
-          TopLeft="673.833328783513,186.833330623806">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,91.166664756834"
-              Start="0,0"
-              End="0,83.666664756834">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,83.666664756834" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Row Count Output 1]"
           TopLeft="671.666662059725,319.99999538064">
@@ -628,6 +606,40 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
+          TopLeft="661.466662335396,186.433330623806">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="13.3333328962329,91.566664756834"
+              Start="0,0"
+              End="13.3333328962329,84.066664756834">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.783332378417" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.783332378417"
+                    Point2="0,45.783332378417"
+                    Point3="4,45.783332378417" />
+                  <mssgle:LineSegment
+                    End="9.33333289623295,45.783332378417" />
+                  <mssgle:CubicBezierSegment
+                    Point1="9.33333289623295,45.783332378417"
+                    Point2="13.3333328962329,45.783332378417"
+                    Point3="13.3333328962329,49.783332378417" />
+                  <mssgle:LineSegment
+                    End="13.3333328962329,84.066664756834" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -637,14 +649,14 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="226,42"
+          Size="225.6,41.6"
           Id="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
           TopLeft="347.999994814396,192.333330467343" />
       </GraphLayout>
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Payment Method Stage Data">
+    design-time-name="Package\Stage To Core\request status stage area">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

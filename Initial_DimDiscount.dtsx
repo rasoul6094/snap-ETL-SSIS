@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="6/5/2025 10:41:05 PM"
+  DTS:CreationDate="6/13/2025 12:39:40 AM"
   DTS:CreationName="Microsoft.Package"
-  DTS:CreatorComputerName="DESKTOP-GDRMTJV"
-  DTS:CreatorName="DESKTOP-GDRMTJV\HP"
-  DTS:DTSID="{ABE0589A-0CB5-4E1D-80F2-118C992A6BD4}"
+  DTS:CreatorComputerName="DESKTOP-0S8CU17"
+  DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
+  DTS:DTSID="{34B3F695-5CB9-446B-ADAD-8E91D955B89A}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{61257D2D-0062-4B4A-847F-9B3590E74231}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{420B6F02-296F-4971-9FF0-C847FB20217C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{1C9B6B2B-81BF-44BC-B0BB-E29BE1EACCD4}"
+      DTS:DTSID="{7BA56B6B-B8FA-4997-AF1A-B69B2D6944B7}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="rowCountInserted">
@@ -31,7 +31,7 @@
       DTS:refId="Package\cleanup"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{092042e0-7470-4083-9c6f-7adfa221aec2}"
+      DTS:DTSID="{2c8ffbf9-cdd5-421d-92f4-cb0d7b749387}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="cleanup"
@@ -41,14 +41,14 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
-          SQLTask:SqlStatementSource="DELETE FROM Core.DimPaymentMethod;&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'DimPaymentMethod';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="DELETE FROM Core.DimDiscount;&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'DimDiscount';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\insert new record to ETL_Metadata"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{2296a69f-3725-4a7d-9c69-ce0ee2db01e1}"
+      DTS:DTSID="{fc3c93a9-76e8-45ce-b21a-ba53b8261d11}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="insert new record to ETL_Metadata"
@@ -58,14 +58,14 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
-          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata &#xA;VALUES ('DimPaymentMethod' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata &#xA;VALUES ('DimDiscount' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Stage To Core"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{74b4df20-aca0-42d6-a50b-1c72cc729890}"
+      DTS:DTSID="{e4fdda53-e1f8-4978-9fc7-57d13a81d869}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="Stage To Core"
@@ -75,7 +75,7 @@
         <DTS:EventHandler
           DTS:refId="Package\Stage To Core.EventHandlers[OnError]"
           DTS:CreationName="OnError"
-          DTS:DTSID="{561dfe6a-eeec-4c51-8239-c619240b7c59}"
+          DTS:DTSID="{734d0e5e-4bb3-458c-a679-b9deee179403}"
           DTS:EventID="0"
           DTS:EventName="OnError"
           DTS:LocaleID="-1">
@@ -83,7 +83,7 @@
             <DTS:Variable
               DTS:CreationName=""
               DTS:Description="The propagate property of the event"
-              DTS:DTSID="{56be7c51-3c9b-4edf-852c-0a59f8e6b637}"
+              DTS:DTSID="{038fdd02-09ff-4148-a91c-160d668db71b}"
               DTS:IncludeInDebugDump="6789"
               DTS:Namespace="System"
               DTS:ObjectName="Propagate">
@@ -96,7 +96,7 @@
               DTS:refId="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
               DTS:CreationName="Microsoft.ExecuteSQLTask"
               DTS:Description="Execute SQL Task"
-              DTS:DTSID="{288e775d-a2ea-4710-9371-dff8a8e3d6dd}"
+              DTS:DTSID="{b0b00203-dde3-4980-8e22-60b65fe8b568}"
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update ETL_Metadata On error"
@@ -105,7 +105,7 @@
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
-                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimPaymentMethod'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimDiscount'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
                     SQLTask:DtsVariableName="System::ErrorDescription"
@@ -123,11 +123,89 @@
           version="1">
           <components>
             <component
-              refId="Package\Stage To Core\DImPaymentMethod Core"
+              refId="Package\Stage To Core\convert nvarchar code to varchar"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="convert nvarchar code to varchar"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\convert nvarchar code to varchar.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\convert nvarchar code to varchar.Inputs[Data Conversion Input].Columns[Code]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Code"
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].Columns[Code]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\convert nvarchar code to varchar.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Stage To Core\convert nvarchar code to varchar.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\convert nvarchar code to varchar.Outputs[Data Conversion Output].Columns[Copy of Code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Stage To Core\convert nvarchar code to varchar.Outputs[Data Conversion Output].Columns[Copy of Code]"
+                      name="Copy of Code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].Columns[Code]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\convert nvarchar code to varchar.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Stage To Core\convert nvarchar code to varchar.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\convert nvarchar code to varchar.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\convert nvarchar code to varchar.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\convert nvarchar code to varchar.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\convert nvarchar code to varchar.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\dim discount core"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="DImPaymentMethod Core"
+              name="dim discount core"
               usesDispositions="true"
               version="4">
               <properties>
@@ -138,7 +216,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[Core].[DimPaymentMethod]</property>
+                  name="OpenRowset">[Core].[DimDiscount]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -180,7 +258,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Stage To Core\DImPaymentMethod Core.Connections[OleDbConnection]"
+                  refId="Package\Stage To Core\dim discount core.Connections[OleDbConnection]"
                   connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
                   connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
@@ -188,58 +266,72 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input]"
+                  refId="Package\Stage To Core\dim discount core.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].Columns[PaymentMethodID]"
-                      cachedDataType="i4"
-                      cachedName="PaymentMethodID"
-                      externalMetadataColumnId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].ExternalColumns[PaymentMethodKey]"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].Columns[PaymentMethodID]" />
+                      refId="Package\Stage To Core\dim discount core.Inputs[OLE DB Destination Input].Columns[Amount]"
+                      cachedDataType="numeric"
+                      cachedName="Amount"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Stage To Core\dim discount core.Inputs[OLE DB Destination Input].ExternalColumns[Amount]"
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].Columns[Amount]" />
                     <inputColumn
-                      refId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].Columns[Description]"
-                      cachedDataType="wstr"
+                      refId="Package\Stage To Core\dim discount core.Inputs[OLE DB Destination Input].Columns[DiscountID]"
+                      cachedDataType="i4"
+                      cachedName="DiscountID"
+                      externalMetadataColumnId="Package\Stage To Core\dim discount core.Inputs[OLE DB Destination Input].ExternalColumns[DiscountKey]"
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].Columns[DiscountID]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim discount core.Inputs[OLE DB Destination Input].Columns[Copy of Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
                       cachedLength="50"
-                      cachedName="Description"
-                      externalMetadataColumnId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].Columns[Description]" />
+                      cachedName="Copy of Code"
+                      externalMetadataColumnId="Package\Stage To Core\dim discount core.Inputs[OLE DB Destination Input].ExternalColumns[Code]"
+                      lineageId="Package\Stage To Core\convert nvarchar code to varchar.Outputs[Data Conversion Output].Columns[Copy of Code]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].ExternalColumns[PaymentMethodKey]"
+                      refId="Package\Stage To Core\dim discount core.Inputs[OLE DB Destination Input].ExternalColumns[DiscountKey]"
                       dataType="i4"
-                      name="PaymentMethodKey" />
+                      name="DiscountKey" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
-                      dataType="wstr"
-                      length="20"
-                      name="Description" />
+                      refId="Package\Stage To Core\dim discount core.Inputs[OLE DB Destination Input].ExternalColumns[Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Code" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim discount core.Inputs[OLE DB Destination Input].ExternalColumns[Amount]"
+                      dataType="i4"
+                      name="Amount" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Stage To Core\DImPaymentMethod Core.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Stage To Core\dim discount core.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Stage To Core\dim discount core.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\DImPaymentMethod Core.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Stage To Core\dim discount core.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\DImPaymentMethod Core.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Stage To Core\dim discount core.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Stage To Core\DImPaymentMethod Core.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Stage To Core\dim discount core.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\DImPaymentMethod Core.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Stage To Core\dim discount core.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -248,11 +340,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\Stage To Core\Payment Method Stage Data"
+              refId="Package\Stage To Core\discount stage data"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
-              name="Payment Method Stage Data"
+              name="discount stage data"
               usesDispositions="true"
               version="7">
               <properties>
@@ -263,7 +355,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[Stage].[PaymentMethod]</property>
+                  name="OpenRowset">[Stage].[Discount]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -297,7 +389,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Stage To Core\Payment Method Stage Data.Connections[OleDbConnection]"
+                  refId="Package\Stage To Core\discount stage data.Connections[OleDbConnection]"
                   connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
                   connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
@@ -305,68 +397,134 @@
               </connections>
               <outputs>
                 <output
-                  refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output]"
+                  refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].Columns[PaymentMethodID]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].ExternalColumns[PaymentMethodID]"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].Columns[PaymentMethodID]"
-                      name="PaymentMethodID"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].Columns[Description]"
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].Columns[CreatedAt]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      externalMetadataColumnId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
+                      length="27"
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].Columns[CreatedAt]"
+                      name="CreatedAt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
+                      length="27"
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
+                      name="ModifiedAt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].Columns[DiscountID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].ExternalColumns[DiscountID]"
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].Columns[DiscountID]"
+                      name="DiscountID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].Columns[Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].ExternalColumns[Code]"
                       length="50"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].Columns[Description]"
-                      name="Description"
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].Columns[Code]"
+                      name="Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].Columns[Amount]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].ExternalColumns[Amount]"
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].Columns[Amount]"
+                      name="Amount"
+                      precision="10"
+                      scale="2"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].ExternalColumns[PaymentMethodID]"
-                      dataType="i4"
-                      name="PaymentMethodID" />
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="CreatedAt" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="ModifiedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].ExternalColumns[DiscountID]"
+                      dataType="i4"
+                      name="DiscountID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].ExternalColumns[Code]"
                       dataType="wstr"
                       length="50"
-                      name="Description" />
+                      name="Code" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output].ExternalColumns[Amount]"
+                      dataType="numeric"
+                      name="Amount"
+                      precision="10"
+                      scale="2" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output]"
+                  refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[PaymentMethodID]"
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output].Columns[DiscountID]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[PaymentMethodID]"
-                      name="PaymentMethodID" />
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output].Columns[DiscountID]"
+                      name="DiscountID" />
                     <outputColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output].Columns[Code]"
                       dataType="wstr"
                       length="50"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[Description]"
-                      name="Description" />
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output].Columns[Code]"
+                      name="Code" />
                     <outputColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output].Columns[Amount]"
+                      dataType="numeric"
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output].Columns[Amount]"
+                      name="Amount"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output].Columns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output].Columns[CreatedAt]"
+                      name="CreatedAt" />
+                    <outputColumn
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output].Columns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output].Columns[ModifiedAt]"
+                      name="ModifiedAt" />
+                    <outputColumn
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -406,13 +564,18 @@
           </components>
           <paths>
             <path
-              refId="Package\Stage To Core.Paths[OLE DB Source Output]"
+              refId="Package\Stage To Core.Paths[Data Conversion Output]"
               endId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
+              name="Data Conversion Output"
+              startId="Package\Stage To Core\convert nvarchar code to varchar.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[OLE DB Source Output]"
+              endId="Package\Stage To Core\convert nvarchar code to varchar.Inputs[Data Conversion Input]"
               name="OLE DB Source Output"
-              startId="Package\Stage To Core\Payment Method Stage Data.Outputs[OLE DB Source Output]" />
+              startId="Package\Stage To Core\discount stage data.Outputs[OLE DB Source Output]" />
             <path
               refId="Package\Stage To Core.Paths[Row Count Output 1]"
-              endId="Package\Stage To Core\DImPaymentMethod Core.Inputs[OLE DB Destination Input]"
+              endId="Package\Stage To Core\dim discount core.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
               startId="Package\Stage To Core\Row Count.Outputs[Row Count Output 1]" />
           </paths>
@@ -423,7 +586,7 @@
       DTS:refId="Package\Update ETL_Metadata onSuccess"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{989524d3-c8b4-4f20-be87-a212d335acf3}"
+      DTS:DTSID="{805af7fb-6e47-4f27-9ba5-74896f4f3e8f}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Update ETL_Metadata onSuccess"
@@ -433,7 +596,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
-          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = 0&#xA;  WHERE TableName = 'DimPaymentMethod'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = 0&#xA;  WHERE TableName = 'DimDiscount'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::rowCountInserted"
@@ -448,7 +611,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{fd22ee90-4d72-491a-963b-74e76505dad5}"
+      DTS:DTSID="{5b2f1515-67b0-44cb-9f95-a7a90ed47a72}"
       DTS:From="Package\insert new record to ETL_Metadata"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -456,7 +619,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{e24866d2-367c-4ba2-920c-2dab1a655cfd}"
+      DTS:DTSID="{109cf6c2-b318-4148-bbcb-683927552050}"
       DTS:From="Package\cleanup"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
@@ -464,7 +627,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
-      DTS:DTSID="{7013f981-f655-49aa-810b-e8250968f81f}"
+      DTS:DTSID="{40a1479a-1101-46ce-8cc8-0df08b5781af}"
       DTS:From="Package\Stage To Core"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
@@ -483,24 +646,24 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="118.4,41.6"
+          Size="121.6,41.6"
           Id="Package\cleanup"
-          TopLeft="761.714285854175,94" />
+          TopLeft="289.285714773804,40.1176470762511" />
         <NodeLayout
           Size="244,41.6"
           Id="Package\insert new record to ETL_Metadata"
-          TopLeft="696,174.294117576678" />
+          TopLeft="223.571428919629,120.411764652929" />
         <NodeLayout
-          Size="145.6,41.6"
+          Size="150.4,41.6"
           Id="Package\Stage To Core"
-          TopLeft="745.000000117081,277.764705665178" />
+          TopLeft="272.57142903671,223.882352741429" />
         <NodeLayout
           Size="233.6,41.6"
           Id="Package\Update ETL_Metadata onSuccess"
-          TopLeft="705.714285747739,384.823529100748" />
+          TopLeft="233.285714667368,330.941176176999" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="818.000000058541,216.294117576678">
+          TopLeft="346.571428978169,162.411764652929">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -522,7 +685,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="819.357142927087,136">
+          TopLeft="347.928571846717,82.1176470762509">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -544,18 +707,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="820.35714293241,319.364705665178">
+          TopLeft="348.928571852039,265.882352741429">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,65.4588234355705"
+              EndConnector="0,65.05882343557"
               Start="0,0"
-              End="0,57.9588234355705">
+              End="0,57.55882343557">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,57.9588234355705" />
+                    End="0,57.55882343557" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -571,61 +734,93 @@
     design-time-name="Package\Stage To Core">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\Stage To Core\dim discount core"
+          TopLeft="298.33332888782,423.499993689358" />
         <NodeLayout
           Size="129.6,41.6"
           Id="Package\Stage To Core\Row Count"
-          TopLeft="609.999995231629,277.99999538064" />
+          TopLeft="312.14285235776,335.99999535785" />
         <NodeLayout
-          Size="220,41.6"
-          Id="Package\Stage To Core\Payment Method Stage Data"
-          TopLeft="562.666662335396,144.833330623806" />
+          Size="234.4,41.6"
+          Id="Package\Stage To Core\convert nvarchar code to varchar"
+          TopLeft="262.857143416697,233.282352843984" />
         <NodeLayout
-          Size="206.4,41.6"
-          Id="Package\Stage To Core\DImPaymentMethod Core"
-          TopLeft="565.33332888782,417.499993689358" />
+          Size="170.4,41.6"
+          Id="Package\Stage To Core\discount stage data"
+          TopLeft="289.95237661959,160.421565936692" />
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
-          TopLeft="673.833328783513,186.833330623806">
+          Id="Package\Stage To Core.Paths[Data Conversion Output]"
+          TopLeft="378.499997887228,274.882352843984">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,91.166664756834"
+              EndConnector="0,61.1176425138663"
               Start="0,0"
-              End="0,83.666664756834">
+              End="0,53.6176425138663">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,83.666664756834" />
+                    End="0,53.6176425138663" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Row Count Output 1]"
-          TopLeft="671.666662059725,319.99999538064">
+          TopLeft="378.03809062279,377.59999535785">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,97.499998308718"
+              EndConnector="0,45.8999983315081"
               Start="0,0"
-              End="0,89.999998308718">
+              End="0,38.3999983315081">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,89.999998308718" />
+                    End="0,38.3999983315081" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
+          TopLeft="377.604760018143,202.021565936692">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.2607869072917"
+              Start="0,0"
+              End="0,23.7607869072917">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.7607869072917" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -637,14 +832,14 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="226,42"
+          Size="225.6,41.6"
           Id="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
           TopLeft="347.999994814396,192.333330467343" />
       </GraphLayout>
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Payment Method Stage Data">
+    design-time-name="Package\Stage To Core\dim discount core">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -657,7 +852,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\DImPaymentMethod Core">
+    design-time-name="Package\Stage To Core\discount stage data">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
