@@ -1,0 +1,1964 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/13/2025 5:12:15 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-0S8CU17"
+  DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
+  DTS:DTSID="{EEFC3F0B-D88C-4C57-BCCE-AF70D3A56F88}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{EBF657C0-8636-4337-81ED-29CA0FF34630}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8E5D1E48-0516-46EF-9DF0-3507A30104E5}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="rowCountInserted">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\cleanup"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{e4a711ed-1d3a-41ec-90df-f3aa2f1347d9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="cleanup"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+          SQLTask:SqlStatementSource="DELETE FROM Core.FactTransactionTrip;&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'FactTransactionTrip';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\insert new record to ETL_Metadata"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{52e387e7-24e4-4871-9166-bd00ce60d0d3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="insert new record to ETL_Metadata"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata &#xA;VALUES ('FactTransactionTrip' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage To Core"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{921316fb-8e27-4ea3-a261-8d46746bb313}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage To Core"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Stage To Core.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{2c712f51-a5a9-4e91-b526-321a17b1977a}"
+          DTS:EventID="0"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{c06f59cd-d268-42c2-a514-dd256a441c4f}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{15e76cba-a81d-4f26-9ea5-108332165015}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Update ETL_Metadata On error"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimPassenger'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="System::ErrorDescription"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage To Core\extract date and time keys"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="extract date and time keys"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\extract date and time keys.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\extract date and time keys.Inputs[Derived Column Input].Columns[RequestStartDatetime]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="RequestStartDatetime"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[RequestStartDatetime]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\extract date and time keys.Inputs[Derived Column Input].Columns[PassengerBoardingDatetime]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="PassengerBoardingDatetime"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[PassengerBoardingDatetime]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\extract date and time keys.Inputs[Derived Column Input].Columns[TripFinishedDatetime]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="TripFinishedDatetime"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[TripFinishedDatetime]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\extract date and time keys.Inputs[Derived Column Input].Columns[FinalizedDatetime]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="FinalizedDatetime"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[FinalizedDatetime]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\extract date and time keys.Inputs[Derived Column Input].Columns[AcceptRequestDatetime]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="AcceptRequestDatetime"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[AcceptRequestDatetime]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Stage To Core\extract date and time keys.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[PassengerRequestTimeKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[PassengerRequestTimeKey]"
+                      name="PassengerRequestTimeKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)([DATEPART]("hh",(DT_DBTIMESTAMP)#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[RequestStartDatetime]}) * 10000 + [DATEPART]("mi",(DT_DBTIMESTAMP)#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[RequestStartDatetime]}) * 100 + [DATEPART]("ss",(DT_DBTIMESTAMP)#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[RequestStartDatetime]}))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)(DATEPART("hh",(DT_DBTIMESTAMP)RequestStartDatetime) * 10000 + DATEPART("mi",(DT_DBTIMESTAMP)RequestStartDatetime) * 100 + DATEPART("ss",(DT_DBTIMESTAMP)RequestStartDatetime))</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[StartTripTimeKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[StartTripTimeKey]"
+                      name="StartTripTimeKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)([DATEPART]("hh",(DT_DBTIMESTAMP)#{Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[PassengerBoardingDatetime]}) * 10000 + [DATEPART]("mi",(DT_DBTIMESTAMP)#{Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[PassengerBoardingDatetime]}) * 100 + [DATEPART]("ss",(DT_DBTIMESTAMP)#{Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[PassengerBoardingDatetime]}))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)(DATEPART("hh",(DT_DBTIMESTAMP)PassengerBoardingDatetime) * 10000 + DATEPART("mi",(DT_DBTIMESTAMP)PassengerBoardingDatetime) * 100 + DATEPART("ss",(DT_DBTIMESTAMP)PassengerBoardingDatetime))</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[EndTripTimeKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[EndTripTimeKey]"
+                      name="EndTripTimeKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)([DATEPART]("hh",(DT_DBTIMESTAMP)#{Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[TripFinishedDatetime]}) * 10000 + [DATEPART]("mi",(DT_DBTIMESTAMP)#{Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[TripFinishedDatetime]}) * 100 + [DATEPART]("ss",(DT_DBTIMESTAMP)#{Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[TripFinishedDatetime]}))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)(DATEPART("hh",(DT_DBTIMESTAMP)TripFinishedDatetime) * 10000 + DATEPART("mi",(DT_DBTIMESTAMP)TripFinishedDatetime) * 100 + DATEPART("ss",(DT_DBTIMESTAMP)TripFinishedDatetime))</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[DriverArrivalTimeKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[DriverArrivalTimeKey]"
+                      name="DriverArrivalTimeKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)([DATEPART]("hh",(DT_DBTIMESTAMP)#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[FinalizedDatetime]}) * 10000 + [DATEPART]("mi",(DT_DBTIMESTAMP)#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[FinalizedDatetime]}) * 100 + [DATEPART]("ss",(DT_DBTIMESTAMP)#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[FinalizedDatetime]}))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)(DATEPART("hh",(DT_DBTIMESTAMP)FinalizedDatetime) * 10000 + DATEPART("mi",(DT_DBTIMESTAMP)FinalizedDatetime) * 100 + DATEPART("ss",(DT_DBTIMESTAMP)FinalizedDatetime))</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[AcceptRequestTimeKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[AcceptRequestTimeKey]"
+                      name="AcceptRequestTimeKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)([DATEPART]("hh",(DT_DBTIMESTAMP)#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[AcceptRequestDatetime]}) * 10000 + [DATEPART]("mi",(DT_DBTIMESTAMP)#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[AcceptRequestDatetime]}) * 100 + [DATEPART]("ss",(DT_DBTIMESTAMP)#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[AcceptRequestDatetime]}))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)(DATEPART("hh",(DT_DBTIMESTAMP)AcceptRequestDatetime) * 10000 + DATEPART("mi",(DT_DBTIMESTAMP)AcceptRequestDatetime) * 100 + DATEPART("ss",(DT_DBTIMESTAMP)AcceptRequestDatetime))</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[StartTripDateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[StartTripDateKey]"
+                      name="StartTripDateKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)(([DATEPART]("yyyy",(DT_DBTIMESTAMP)#{Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[PassengerBoardingDatetime]}) * 10000) + ([DATEPART]("mm",(DT_DBTIMESTAMP)#{Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[PassengerBoardingDatetime]}) * 100) + [DATEPART]("dd",(DT_DBTIMESTAMP)#{Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[PassengerBoardingDatetime]}))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)((DATEPART("yyyy",(DT_DBTIMESTAMP)PassengerBoardingDatetime) * 10000) + (DATEPART("mm",(DT_DBTIMESTAMP)PassengerBoardingDatetime) * 100) + DATEPART("dd",(DT_DBTIMESTAMP)PassengerBoardingDatetime))</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[EndTripDateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[EndTripDateKey]"
+                      name="EndTripDateKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)(([DATEPART]("yyyy",(DT_DBTIMESTAMP)#{Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[TripFinishedDatetime]}) * 10000) + ([DATEPART]("mm",(DT_DBTIMESTAMP)#{Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[TripFinishedDatetime]}) * 100) + [DATEPART]("dd",(DT_DBTIMESTAMP)#{Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[TripFinishedDatetime]}))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)((DATEPART("yyyy",(DT_DBTIMESTAMP)TripFinishedDatetime) * 10000) + (DATEPART("mm",(DT_DBTIMESTAMP)TripFinishedDatetime) * 100) + DATEPART("dd",(DT_DBTIMESTAMP)TripFinishedDatetime))</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Stage To Core\extract date and time keys.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Lookup CarKey"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup CarKey"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml"></property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\Lookup CarKey.Connections[OleDbConnection]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Lookup CarKey.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Lookup CarKey.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Stage To Core\Lookup CarKey.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Lookup CarKey.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Stage To Core\Lookup CarKey.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Lookup CarKey.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Stage To Core\Lookup CarKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup CarKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Lookup CarKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup CarKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Lookup CarKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Lookup Driver Key"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Driver Key"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [Core].[DimDriver]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [Core].[DimDriver]) [refTable]
+where [refTable].[DriverId] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="DriverKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DriverId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ReigisterationDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FirstName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LastName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="BirthDate" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PhoneNumber" dataType="DT_WSTR" length="12" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="NationalCode" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Email" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Gender" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarPlate" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarYearModel" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="ProvinceId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProvinceName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CityId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CityName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FullAddress" dataType="DT_WSTR" length="300" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StartDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EndDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IsCurrent" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DriverID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\Lookup Driver Key.Connections[OleDbConnection]"
+                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Lookup Driver Key.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\Lookup Driver Key.Inputs[Lookup Input].Columns[DriverID]"
+                      cachedDataType="i4"
+                      cachedName="DriverID"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DriverID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">DriverId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Stage To Core\Lookup Driver Key.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Match Output].Columns[DriverKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Match Output].Columns[DriverKey]"
+                      name="DriverKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DriverKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Stage To Core\Lookup Driver Key.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Stage To Core\Lookup Driver Key.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Lookup PassengerKey"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup PassengerKey"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [Core].[DimPassenger]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [Core].[DimPassenger]) [refTable]
+where [refTable].[PassengerId] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="PassengerKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PassengerId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ReigisterationDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FirstName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LastName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="BirthDate" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PhoneNumber" dataType="DT_WSTR" length="12" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="NationalCode" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Email" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Gender" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[PassengerID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\Lookup PassengerKey.Connections[OleDbConnection]"
+                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Lookup PassengerKey.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\Lookup PassengerKey.Inputs[Lookup Input].Columns[PassengerID]"
+                      cachedDataType="i4"
+                      cachedName="PassengerID"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[PassengerID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">PassengerId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Lookup PassengerKey.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Stage To Core\Lookup PassengerKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup PassengerKey.Outputs[Lookup Match Output].Columns[PassengerKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup PassengerKey.Outputs[Lookup Match Output].Columns[PassengerKey]"
+                      name="PassengerKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">PassengerKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Lookup PassengerKey.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Stage To Core\Lookup PassengerKey.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Lookup PassengerKey.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Stage To Core\Lookup PassengerKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup PassengerKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Lookup PassengerKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup PassengerKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Lookup PassengerKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Lookup request stage"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup request stage"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [Stage].[Request]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [Stage].[Request]) [refTable]
+where [refTable].[RequestID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="RequestID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StatusID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="RequestStartDatetime" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PassengerID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="OriginLocationZoneID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DestinationLocationZoneID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StopDuration" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="OriginPointLat" dataType="DT_NUMERIC" length="0" precision="9" scale="6" codePage="0"/&gt;&lt;referenceColumn name="OriginPointLong" dataType="DT_NUMERIC" length="0" precision="9" scale="6" codePage="0"/&gt;&lt;referenceColumn name="DestinationPointLat" dataType="DT_NUMERIC" length="0" precision="9" scale="6" codePage="0"/&gt;&lt;referenceColumn name="DestinationPointLong" dataType="DT_NUMERIC" length="0" precision="9" scale="6" codePage="0"/&gt;&lt;referenceColumn name="DistanceInKm" dataType="DT_NUMERIC" length="0" precision="10" scale="2" codePage="0"/&gt;&lt;referenceColumn name="CostAmount" dataType="DT_NUMERIC" length="0" precision="10" scale="2" codePage="0"/&gt;&lt;referenceColumn name="FeePercentage" dataType="DT_NUMERIC" length="0" precision="5" scale="2" codePage="0"/&gt;&lt;referenceColumn name="DriverID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DriverOriginLocationZoneID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DriverOriginLocationLat" dataType="DT_NUMERIC" length="0" precision="9" scale="6" codePage="0"/&gt;&lt;referenceColumn name="DriverOriginLocationLong" dataType="DT_NUMERIC" length="0" precision="9" scale="6" codePage="0"/&gt;&lt;referenceColumn name="AcceptRequestDatetime" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FinalizedDatetime" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CreatedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ModifiedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[RequestID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\Lookup request stage.Connections[OleDbConnection]"
+                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Lookup request stage.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Inputs[Lookup Input].Columns[RequestID]"
+                      cachedDataType="i4"
+                      cachedName="RequestID"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[RequestID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">RequestID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Stage To Core\Lookup request stage.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[RequestStartDatetime]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="27"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[RequestStartDatetime]"
+                      name="RequestStartDatetime"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">RequestStartDatetime</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[StatusID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[StatusID]"
+                      name="StatusID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">StatusID</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[PassengerID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[PassengerID]"
+                      name="PassengerID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">PassengerID</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[OriginLocationZoneID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[OriginLocationZoneID]"
+                      name="OriginLocationZoneID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">OriginLocationZoneID</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DestinationLocationZoneID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DestinationLocationZoneID]"
+                      name="DestinationLocationZoneID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DestinationLocationZoneID</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[StopDuration]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[StopDuration]"
+                      name="StopDuration"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">StopDuration</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[OriginPointLat]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[OriginPointLat]"
+                      name="OriginPointLat"
+                      precision="9"
+                      scale="6"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">OriginPointLat</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[OriginPointLong]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[OriginPointLong]"
+                      name="OriginPointLong"
+                      precision="9"
+                      scale="6"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">OriginPointLong</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DestinationPointLat]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DestinationPointLat]"
+                      name="DestinationPointLat"
+                      precision="9"
+                      scale="6"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DestinationPointLat</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DistanceInKm]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DistanceInKm]"
+                      name="DistanceInKm"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DistanceInKm</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DestinationPointLong]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DestinationPointLong]"
+                      name="DestinationPointLong"
+                      precision="9"
+                      scale="6"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DestinationPointLong</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[CostAmount]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[CostAmount]"
+                      name="CostAmount"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CostAmount</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[FeePercentage]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[FeePercentage]"
+                      name="FeePercentage"
+                      precision="5"
+                      scale="2"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">FeePercentage</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DriverID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DriverID]"
+                      name="DriverID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DriverID</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DriverOriginLocationZoneID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DriverOriginLocationZoneID]"
+                      name="DriverOriginLocationZoneID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DriverOriginLocationZoneID</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DriverOriginLocationLat]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DriverOriginLocationLat]"
+                      name="DriverOriginLocationLat"
+                      precision="9"
+                      scale="6"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DriverOriginLocationLat</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DriverOriginLocationLong]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DriverOriginLocationLong]"
+                      name="DriverOriginLocationLong"
+                      precision="9"
+                      scale="6"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DriverOriginLocationLong</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[FinalizedDatetime]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="27"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[FinalizedDatetime]"
+                      name="FinalizedDatetime"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">FinalizedDatetime</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[AcceptRequestDatetime]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="27"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[AcceptRequestDatetime]"
+                      name="AcceptRequestDatetime"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">AcceptRequestDatetime</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Stage To Core\Lookup request stage.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Stage To Core\Lookup request stage.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::rowCountInserted</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\trip stage"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="trip stage"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Stage].[Trip]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\trip stage.Connections[OleDbConnection]"
+                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[CreatedAt]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
+                      length="27"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[CreatedAt]"
+                      name="CreatedAt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
+                      length="27"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
+                      name="ModifiedAt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[TripID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[TripID]"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[TripID]"
+                      name="TripID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[RequestID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[RequestID]"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[RequestID]"
+                      name="RequestID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[DiscountID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[DiscountID]"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[DiscountID]"
+                      name="DiscountID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[PaymentMethodID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[PaymentMethodID]"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[PaymentMethodID]"
+                      name="PaymentMethodID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[PassengerBoardingDatetime]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[PassengerBoardingDatetime]"
+                      length="27"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[PassengerBoardingDatetime]"
+                      name="PassengerBoardingDatetime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[TripFinishedDatetime]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[TripFinishedDatetime]"
+                      length="27"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[TripFinishedDatetime]"
+                      name="TripFinishedDatetime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[RateByPassenger]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[RateByPassenger]"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[RateByPassenger]"
+                      name="RateByPassenger"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[RateByDriver]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[RateByDriver]"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].Columns[RateByDriver]"
+                      name="RateByDriver"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="CreatedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="ModifiedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[TripID]"
+                      dataType="i4"
+                      name="TripID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[RequestID]"
+                      dataType="i4"
+                      name="RequestID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[DiscountID]"
+                      dataType="i4"
+                      name="DiscountID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[PaymentMethodID]"
+                      dataType="i4"
+                      name="PaymentMethodID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[PassengerBoardingDatetime]"
+                      dataType="wstr"
+                      length="27"
+                      name="PassengerBoardingDatetime" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[TripFinishedDatetime]"
+                      dataType="wstr"
+                      length="27"
+                      name="TripFinishedDatetime" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[RateByPassenger]"
+                      dataType="ui1"
+                      name="RateByPassenger" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output].ExternalColumns[RateByDriver]"
+                      dataType="ui1"
+                      name="RateByDriver" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[TripID]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[TripID]"
+                      name="TripID" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[RequestID]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[RequestID]"
+                      name="RequestID" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[DiscountID]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[DiscountID]"
+                      name="DiscountID" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[PaymentMethodID]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[PaymentMethodID]"
+                      name="PaymentMethodID" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[PassengerBoardingDatetime]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[PassengerBoardingDatetime]"
+                      name="PassengerBoardingDatetime" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[TripFinishedDatetime]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[TripFinishedDatetime]"
+                      name="TripFinishedDatetime" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[RateByPassenger]"
+                      dataType="ui1"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[RateByPassenger]"
+                      name="RateByPassenger" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[RateByDriver]"
+                      dataType="ui1"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[RateByDriver]"
+                      name="RateByDriver" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[CreatedAt]"
+                      name="CreatedAt" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[ModifiedAt]"
+                      name="ModifiedAt" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage To Core.Paths[Derived Column Output]"
+              endId="Package\Stage To Core\Lookup PassengerKey.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output]"
+              endId="Package\Stage To Core\extract date and time keys.Inputs[Derived Column Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output1]"
+              endId="Package\Stage To Core\Lookup Driver Key.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\Lookup PassengerKey.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output2]"
+              endId="Package\Stage To Core\Lookup CarKey.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[OLE DB Source Output]"
+              endId="Package\Stage To Core\Lookup request stage.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage To Core\trip stage.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update ETL_Metadata onSuccess"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{26e51f06-6074-467a-acb8-b08f994079a8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update ETL_Metadata onSuccess"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = 0&#xA;  WHERE TableName = 'FactTransactionTrip'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::rowCountInserted"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{af856da0-700a-4ca8-8fc7-22e06ddfc7da}"
+      DTS:From="Package\insert new record to ETL_Metadata"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Stage To Core" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{ede431e5-8b1a-4f43-806b-65238aea9472}"
+      DTS:From="Package\cleanup"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\insert new record to ETL_Metadata" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{a848de1e-2a6e-4088-aac1-08a54098d40a}"
+      DTS:From="Package\Stage To Core"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Update ETL_Metadata onSuccess" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\cleanup"
+          TopLeft="312.85714339541,62.2941176450479" />
+        <NodeLayout
+          Size="244,41.6"
+          Id="Package\insert new record to ETL_Metadata"
+          TopLeft="247.142857541235,142.588235221726" />
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Stage To Core"
+          TopLeft="296.142857658316,246.058823310226" />
+        <NodeLayout
+          Size="233.6,41.6"
+          Id="Package\Update ETL_Metadata onSuccess"
+          TopLeft="256.857143288974,353.117646745796" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="370.142857599775,184.588235221726">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.4705880885"
+              Start="0,0"
+              End="0,53.9705880885">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.9705880885" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="371.500000468323,104.294117645048">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.2941175766778"
+              Start="0,0"
+              End="0,30.7941175766778">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.7941175766778" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="372.500000473645,288.058823310226">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65.05882343557"
+              Start="0,0"
+              End="0,57.55882343557">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.55882343557" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Stage To Core">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="123.2,41.6"
+          Id="Package\Stage To Core\trip stage"
+          TopLeft="60.6666618457863,91.5980365852537" />
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Stage To Core\Row Count"
+          TopLeft="327.857138105497,439.99999526669" />
+        <NodeLayout
+          Size="180,41.6"
+          Id="Package\Stage To Core\Lookup request stage"
+          TopLeft="272.857143437984,92.1294117975503" />
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
+          TopLeft="183.866661845786,112.663724191402">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="88.9904815921976,0"
+              Start="0,0"
+              End="81.4904815921976,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="81.4904815921976,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,41.6"
+          Id="Package\Stage To Core\extract date and time keys"
+          TopLeft="614.285715593368,92.5294116836002" />
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output]"
+          TopLeft="452.857143437984,113.129411740575">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="161.428572155384,0"
+              Start="0,0"
+              End="153.928572155384,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="153.928572155384,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="28.7728993589418,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\Stage To Core\Lookup PassengerKey"
+          TopLeft="631.428572772717,210.882352798404" />
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Stage To Core\Lookup Driver Key"
+          TopLeft="367.142857924408,209.352941035038" />
+        <NodeLayout
+          Size="148.8,41.6"
+          Id="Package\Stage To Core\Lookup CarKey"
+          TopLeft="114.285714528999,211.647058680086" />
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Derived Column Output]"
+          TopLeft="719.057144183043,134.1294116836">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,76.7529411148036"
+              Start="0,0"
+              End="0,69.2529411148036">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,69.2529411148036" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output1]"
+          TopLeft="631.428572772717,230.917646916721">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-99.4857148483093,0"
+              Start="0,0"
+              End="-91.9857148483093,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-91.9857148483093,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-94.1842441429046,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output2]"
+          TopLeft="367.142857924408,231.299999857562">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-104.057143395409,0"
+              Start="0,0"
+              End="-96.5571433954094,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-96.5571433954094,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-96.4699584164547,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\Stage To Core.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="225.6,41.6"
+          Id="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
+          TopLeft="347.999994814396,192.333330467343" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\trip stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Lookup request stage">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[Stage].[Request]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Lookup PassengerKey">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[Core].[DimPassenger]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Lookup Driver Key">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[Core].[DimDriver]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
