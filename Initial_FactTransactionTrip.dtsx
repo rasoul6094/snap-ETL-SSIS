@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="19"
-  DTS:VersionGUID="{EBF657C0-8636-4337-81ED-29CA0FF34630}">
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{E6A3EA61-77F8-43BE-96E5-C1AEF79543A7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -373,13 +373,14 @@
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [Core].[DimCar]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [Core].[DimCar]) [refTable]
+where [refTable].[CarId] = ?</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the type of connection used to access the reference dataset."
@@ -410,12 +411,12 @@
                 <property
                   dataType="System.String"
                   description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml"></property>
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CarKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarPlate" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarYearModel" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="StartDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EndDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IsCurrent" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
                 <property
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap"></property>
+                  name="ParameterMap">#{Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Match Output].Columns[CarId]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -428,6 +429,8 @@
               <connections>
                 <connection
                   refId="Package\Stage To Core\Lookup CarKey.Connections[OleDbConnection]"
+                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
@@ -435,6 +438,24 @@
                 <input
                   refId="Package\Stage To Core\Lookup CarKey.Inputs[Lookup Input]"
                   name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\Lookup CarKey.Inputs[Lookup Input].Columns[CarId]"
+                      cachedDataType="i4"
+                      cachedName="CarId"
+                      lineageId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Match Output].Columns[CarId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CarId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
@@ -442,10 +463,26 @@
                 <output
                   refId="Package\Stage To Core\Lookup CarKey.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
-                  errorRowDisposition="FailComponent"
+                  errorRowDisposition="IgnoreFailure"
                   exclusionGroup="1"
                   name="Lookup Match Output"
                   synchronousInputId="Package\Stage To Core\Lookup CarKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup CarKey.Outputs[Lookup Match Output].Columns[CarKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup CarKey.Outputs[Lookup Match Output].Columns[CarKey]"
+                      name="CarKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
                   <externalMetadataColumns />
                 </output>
                 <output
@@ -601,6 +638,20 @@ where [refTable].[DriverId] = ?</property>
                           dataType="System.String"
                           description="Specifies the column in the reference table from which a column is copied."
                           name="CopyFromReferenceColumn">DriverKey</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Match Output].Columns[CarId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Match Output].Columns[CarId]"
+                      name="CarId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarId</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -1558,6 +1609,11 @@ where [refTable].[RequestID] = ?</property>
               name="Lookup Match Output"
               startId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Match Output]" />
             <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output3]"
+              endId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\Lookup CarKey.Outputs[Lookup Match Output]" />
+            <path
               refId="Package\Stage To Core.Paths[OLE DB Source Output]"
               endId="Package\Stage To Core\Lookup request stage.Inputs[Lookup Input]"
               name="OLE DB Source Output"
@@ -1728,9 +1784,25 @@ where [refTable].[RequestID] = ?</property>
           Id="Package\Stage To Core\Row Count"
           TopLeft="327.857138105497,439.99999526669" />
         <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\Stage To Core\Lookup PassengerKey"
+          TopLeft="631.428572772717,210.882352798404" />
+        <NodeLayout
           Size="180,41.6"
           Id="Package\Stage To Core\Lookup request stage"
           TopLeft="272.857143437984,92.1294117975503" />
+        <NodeLayout
+          Size="204,41.6"
+          Id="Package\Stage To Core\extract date and time keys"
+          TopLeft="614.285715593368,92.5294116836002" />
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Stage To Core\Lookup Driver Key"
+          TopLeft="367.142857924408,209.352941035038" />
+        <NodeLayout
+          Size="148.8,41.6"
+          Id="Package\Stage To Core\Lookup CarKey"
+          TopLeft="114.285714528999,211.647058680086" />
         <EdgeLayout
           Id="Package\Stage To Core.Paths[OLE DB Source Output]"
           TopLeft="183.866661845786,112.663724191402">
@@ -1753,66 +1825,28 @@ where [refTable].[RequestID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="204,41.6"
-          Id="Package\Stage To Core\extract date and time keys"
-          TopLeft="614.285715593368,92.5294116836002" />
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output]"
-          TopLeft="452.857143437984,113.129411740575">
+          Id="Package\Stage To Core.Paths[Lookup Match Output2]"
+          TopLeft="367.142857924408,231.299999857562">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="161.428572155384,0"
+              EndConnector="-104.057143395409,0"
               Start="0,0"
-              End="153.928572155384,0">
+              End="-96.5571433954094,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="153.928572155384,0" />
+                    End="-96.5571433954094,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="28.7728993589418,5,96.3827734375,11.609375"
+              BoundingBox="-96.4699584164547,5,96.3827734375,11.609375"
               RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="180.8,41.6"
-          Id="Package\Stage To Core\Lookup PassengerKey"
-          TopLeft="631.428572772717,210.882352798404" />
-        <NodeLayout
-          Size="164.8,41.6"
-          Id="Package\Stage To Core\Lookup Driver Key"
-          TopLeft="367.142857924408,209.352941035038" />
-        <NodeLayout
-          Size="148.8,41.6"
-          Id="Package\Stage To Core\Lookup CarKey"
-          TopLeft="114.285714528999,211.647058680086" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Derived Column Output]"
-          TopLeft="719.057144183043,134.1294116836">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,76.7529411148036"
-              Start="0,0"
-              End="0,69.2529411148036">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,69.2529411148036" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1840,26 +1874,84 @@ where [refTable].[RequestID] = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output2]"
-          TopLeft="367.142857924408,231.299999857562">
+          Id="Package\Stage To Core.Paths[Lookup Match Output]"
+          TopLeft="452.857143437984,113.129411740575">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-104.057143395409,0"
+              EndConnector="161.428572155384,0"
               Start="0,0"
-              End="-96.5571433954094,0">
+              End="153.928572155384,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-96.5571433954094,0" />
+                    End="153.928572155384,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-96.4699584164547,5,96.3827734375,11.609375"
+              BoundingBox="28.7728993589418,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Derived Column Output]"
+          TopLeft="719.057144183043,134.1294116836">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,76.7529411148036"
+              Start="0,0"
+              End="0,69.2529411148036">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,69.2529411148036" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output3]"
+          TopLeft="188.685714528999,253.247058680086">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="203.971423576498,186.752936586604"
+              Start="0,0"
+              End="203.971423576498,179.252936586604">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,89.376468293302" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,89.376468293302"
+                    Point2="0,93.376468293302"
+                    Point3="4,93.376468293302" />
+                  <mssgle:LineSegment
+                    End="199.971423576498,93.376468293302" />
+                  <mssgle:CubicBezierSegment
+                    Point1="199.971423576498,93.376468293302"
+                    Point2="203.971423576498,93.376468293302"
+                    Point3="203.971423576498,97.376468293302" />
+                  <mssgle:LineSegment
+                    End="203.971423576498,179.252936586604" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="44.925672725749,98.376468293302,114.120078125,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1892,35 +1984,12 @@ where [refTable].[RequestID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup request stage">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[Stage].[Request]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Stage To Core\Lookup PassengerKey">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -1930,7 +1999,30 @@ where [refTable].[RequestID] = ?</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Lookup request stage">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[Stage].[Request]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1949,6 +2041,29 @@ where [refTable].[RequestID] = ?</property>
         <Name>UsedTableName</Name>
         <Value
           type="q3:string">[Core].[DimDriver]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Lookup CarKey">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[Core].[DimCar]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
