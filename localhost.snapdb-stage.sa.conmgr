@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="localhost.snapdb-stage.sa"
+  DTS:DTSID="{1550C253-1655-4893-BF18-A9720D11D564}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=localhost;Initial Catalog=snapdb-stage;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-snap-ssis-{1550C253-1655-4893-BF18-A9720D11D564}localhost.snapdb-stage.sa;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

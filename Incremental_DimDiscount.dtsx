@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{B42E3B76-84AF-4CF1-B9F9-78C5B454F820}">
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{23EF6285-250D-4EAB-B910-40BA7062114C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -275,8 +275,8 @@
               <connections>
                 <connection
                   refId="Package\Stage To Core\Discount Stage.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
+                  connectionManagerRefId="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -476,8 +476,8 @@
               <connections>
                 <connection
                   refId="Package\Stage To Core\insert new rows.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
+                  connectionManagerRefId="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -642,7 +642,7 @@ where [refTable].[DiscountKey] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Stage To Core\79:invalid};</property>
+                  name="ParameterMap">#{Package\Stage To Core\909:invalid};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -655,8 +655,8 @@ where [refTable].[DiscountKey] = ?</property>
               <connections>
                 <connection
                   refId="Package\Stage To Core\Lookup.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
+                  connectionManagerRefId="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
@@ -755,8 +755,8 @@ WHERE DiscountKey= ?</property>
               <connections>
                 <connection
                   refId="Package\Stage To Core\update existing rows.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
+                  connectionManagerRefId="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1088,58 +1088,88 @@ WHERE DiscountKey= ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Stage To Core\insert row count"
+          TopLeft="466.379114434194,276.246602801062" />
+        <NodeLayout
+          Size="148.8,41.6"
+          Id="Package\Stage To Core\Discount Stage"
+          TopLeft="301.428572070234,3.05882352673059" />
+        <NodeLayout
           Size="161.6,41.6"
           Id="Package\Stage To Core\update row count"
           TopLeft="180.115382013412,282.391398664002" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Stage To Core\insert new rows"
+          TopLeft="474.615377543064,347.045245918242" />
         <NodeLayout
           Size="176,41.6"
           Id="Package\Stage To Core\update existing rows"
           TopLeft="174.615382013413,349.506782454092" />
         <NodeLayout
+          Size="302.4,41.6"
+          Id="Package\Stage To Core\convert discount code from nvarchar to varchar"
+          TopLeft="223.571429047353,74.1764705232167" />
+        <NodeLayout
           Size="112.8,41.6"
           Id="Package\Stage To Core\Lookup"
           TopLeft="315.384610514719,145.959274361477" />
-        <NodeLayout
-          Size="155.2,41.6"
-          Id="Package\Stage To Core\insert row count"
-          TopLeft="467.807685865806,277.776014564427" />
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Stage To Core\insert new rows"
-          TopLeft="474.615377543064,347.045245918242" />
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
+          TopLeft="375.300000558794,44.6588235267306">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.5176469964861"
+              Start="0,0"
+              End="0,22.0176469964861">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.0176469964861" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Lookup No Match Output]"
           TopLeft="389.251277181386,187.559274361477">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="156.15640868442,90.2167402029496"
+              EndConnector="154.727837252808,88.6873284395847"
               Start="0,0"
-              End="156.15640868442,82.7167402029496">
+              End="154.727837252808,81.1873284395847">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.8437596353304" />
+                    End="0,32.2191607053968" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,32.8437596353304"
-                    Point2="0,36.8437596353304"
-                    Point3="4,36.8437596353304" />
+                    Point1="0,32.2191607053968"
+                    Point2="0,36.2191607053968"
+                    Point3="4,36.2191607053968" />
                   <mssgle:LineSegment
-                    End="152.15640868442,36.8437596353304" />
+                    End="150.727837252808,36.2191607053968" />
                   <mssgle:CubicBezierSegment
-                    Point1="152.15640868442,36.8437596353304"
-                    Point2="156.15640868442,36.8437596353304"
-                    Point3="156.15640868442,40.8437596353304" />
+                    Point1="150.727837252808,36.2191607053968"
+                    Point2="154.727837252808,36.2191607053968"
+                    Point3="154.727837252808,40.2191607053968" />
                   <mssgle:LineSegment
-                    End="156.15640868442,82.7167402029496" />
+                    End="154.727837252808,81.1873284395847" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="22.2718176234601,41.8437596353304,111.6127734375,11.609375"
+              BoundingBox="21.5575319076539,41.2191607053968,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1180,6 +1210,28 @@ WHERE DiscountKey= ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Stage To Core.Paths[Data Conversion Output]"
+          TopLeft="373.278019781036,115.776470523217">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.1828038382602"
+              Start="0,0"
+              End="0,22.6828038382602">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.6828038382602" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Stage To Core.Paths[Row Count Output 11]"
           TopLeft="261.765382013412,323.991398664002">
           <EdgeLayout.Curve>
@@ -1203,70 +1255,18 @@ WHERE DiscountKey= ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Row Count Output 1]"
-          TopLeft="548.211531704435,319.376014564426">
+          TopLeft="547.497245988629,317.846602801062">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,27.6692313538148"
+              EndConnector="0,29.1986431171803"
               Start="0,0"
-              End="0,20.1692313538148">
+              End="0,21.6986431171803">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.1692313538148" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="148.8,41.6"
-          Id="Package\Stage To Core\Discount Stage"
-          TopLeft="301.428572070234,3.05882352673059" />
-        <NodeLayout
-          Size="302.4,41.6"
-          Id="Package\Stage To Core\convert discount code from nvarchar to varchar"
-          TopLeft="223.571429047353,74.1764705232167" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
-          TopLeft="375.300000558794,44.6588235267306">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,29.5176469964861"
-              Start="0,0"
-              End="0,22.0176469964861">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,22.0176469964861" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Data Conversion Output]"
-          TopLeft="373.278019781036,115.776470523217">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,30.1828038382602"
-              Start="0,0"
-              End="0,22.6828038382602">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,22.6828038382602" />
+                    End="0,21.6986431171803" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1291,25 +1291,15 @@ WHERE DiscountKey= ?</property>
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup">
+    design-time-name="Package\Stage To Core\Discount Stage">
     <Properties>
       <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
+        <Name>DataSourceViewID</Name>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -1327,15 +1317,25 @@ WHERE DiscountKey= ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Discount Stage">
+    design-time-name="Package\Stage To Core\Lookup">
     <Properties>
       <Property>
-        <Name>DataSourceViewID</Name>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q2:string">Table</Value>
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
