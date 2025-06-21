@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="6/5/2025 10:41:05 PM"
+  DTS:CreationDate="6/21/2025 3:58:14 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="DESKTOP-GDRMTJV"
   DTS:CreatorName="DESKTOP-GDRMTJV\HP"
-  DTS:DTSID="{ABE0589A-0CB5-4E1D-80F2-118C992A6BD4}"
+  DTS:DTSID="{BB5CC68A-8DEC-4911-A3C2-82F5BAD582B8}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5467.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="8"
-  DTS:VersionGUID="{D98733DE-2113-42B4-9AE5-B19203A25202}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{DEDB9F2C-98A8-4975-B8BC-34CF00787A87}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{1C9B6B2B-81BF-44BC-B0BB-E29BE1EACCD4}"
+      DTS:DTSID="{22E0F116-DD3D-4EDC-9275-F7A2E69EEADB}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="rowCountInserted">
@@ -28,44 +28,27 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\cleanup"
+      DTS:refId="Package\insert into ETL_metaData"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{092042e0-7470-4083-9c6f-7adfa221aec2}"
+      DTS:DTSID="{92f18071-07dd-4372-861c-883a3328cfc8}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="cleanup"
+      DTS:ObjectName="insert into ETL_metaData"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
-          SQLTask:SqlStatementSource="DELETE FROM Core.DimPaymentMethod;&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'DimPaymentMethod';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\insert new record to ETL_Metadata"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{2296a69f-3725-4a7d-9c69-ce0ee2db01e1}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="insert new record to ETL_Metadata"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
-          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata &#xA;VALUES ('DimPaymentMethod' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata&#xA;VALUES ('DimPaymentMethod' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Stage To Core"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{74b4df20-aca0-42d6-a50b-1c72cc729890}"
+      DTS:DTSID="{90a5d3ac-acfc-4e12-b996-a2b99fb9021c}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="Stage To Core"
@@ -75,7 +58,7 @@
         <DTS:EventHandler
           DTS:refId="Package\Stage To Core.EventHandlers[OnError]"
           DTS:CreationName="OnError"
-          DTS:DTSID="{561dfe6a-eeec-4c51-8239-c619240b7c59}"
+          DTS:DTSID="{f3d70105-9e77-41cb-9135-c15e9b868f89}"
           DTS:EventID="0"
           DTS:EventName="OnError"
           DTS:LocaleID="-1">
@@ -83,7 +66,7 @@
             <DTS:Variable
               DTS:CreationName=""
               DTS:Description="The propagate property of the event"
-              DTS:DTSID="{56be7c51-3c9b-4edf-852c-0a59f8e6b637}"
+              DTS:DTSID="{566c95f1-a8c7-4bc3-93f7-3517c5e4f46d}"
               DTS:IncludeInDebugDump="6789"
               DTS:Namespace="System"
               DTS:ObjectName="Propagate">
@@ -96,7 +79,7 @@
               DTS:refId="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
               DTS:CreationName="Microsoft.ExecuteSQLTask"
               DTS:Description="Execute SQL Task"
-              DTS:DTSID="{288e775d-a2ea-4710-9371-dff8a8e3d6dd}"
+              DTS:DTSID="{07ac2230-6aae-4621-9600-b9434daccf3c}"
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update ETL_Metadata On error"
@@ -502,10 +485,27 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Truncate DimPaymentMethod"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7e627985-5cd3-4862-b3df-4f07412f70de}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate DimPaymentMethod"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE Core.DimPaymentMethod;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Update ETL_Metadata onSuccess"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{989524d3-c8b4-4f20-be87-a212d335acf3}"
+      DTS:DTSID="{e9ec8196-be8e-42c4-9259-4838e2bf8836}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Update ETL_Metadata onSuccess"
@@ -530,23 +530,23 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{fd22ee90-4d72-491a-963b-74e76505dad5}"
-      DTS:From="Package\insert new record to ETL_Metadata"
+      DTS:DTSID="{8148FBC4-A187-40B5-941C-AAD3CA599C2A}"
+      DTS:From="Package\Truncate DimPaymentMethod"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\Stage To Core" />
     <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1 1]"
       DTS:CreationName=""
-      DTS:DTSID="{e24866d2-367c-4ba2-920c-2dab1a655cfd}"
-      DTS:From="Package\cleanup"
+      DTS:DTSID="{f11d3944-9fd8-4b54-8eb3-f18a30535884}"
+      DTS:From="Package\insert into ETL_metaData"
       DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 1"
-      DTS:To="Package\insert new record to ETL_Metadata" />
+      DTS:ObjectName="Constraint 1 1"
+      DTS:To="Package\Truncate DimPaymentMethod" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
-      DTS:DTSID="{7013f981-f655-49aa-810b-e8250968f81f}"
+      DTS:DTSID="{33c681ae-2df4-40b8-8b4f-ee9a6ffb9a23}"
       DTS:From="Package\Stage To Core"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
@@ -565,68 +565,16 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="118,42"
-          Id="Package\cleanup"
-          TopLeft="761.714285854175,94" />
-        <NodeLayout
-          Size="244,42"
-          Id="Package\insert new record to ETL_Metadata"
-          TopLeft="696,174.294117576678" />
-        <NodeLayout
           Size="146,42"
           Id="Package\Stage To Core"
-          TopLeft="745.000000117081,277.764705665178" />
+          TopLeft="109.000000117081,243.764705665178" />
         <NodeLayout
           Size="234,42"
           Id="Package\Update ETL_Metadata onSuccess"
-          TopLeft="705.714285747739,384.823529100748" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="818.000000058541,216.294117576678">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,61.4705880885"
-              Start="0,0"
-              End="0,53.9705880885">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,53.9705880885" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="819.357142927087,136">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,38.2941175766778"
-              Start="0,0"
-              End="0,30.7941175766778">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,30.7941175766778" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="69.714285747739,350.823529100748" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="820.35714293241,319.364705665178">
+          TopLeft="184.35714293241,285.364705665178">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -646,6 +594,58 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\insert into ETL_metaData"
+          TopLeft="76.7142858541749,44.823529100748" />
+        <NodeLayout
+          Size="225,42"
+          Id="Package\Truncate DimPaymentMethod"
+          TopLeft="70,124.117646677426" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1 1]"
+          TopLeft="180.607142927087,86.823529100748">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.294117576678"
+              Start="0,0"
+              End="0,29.794117576678">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.794117576678" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="182.250000058541,166.117646677426">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,77.647058987752"
+              Start="0,0"
+              End="0,70.147058987752">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,70.147058987752" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -655,10 +655,6 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="130,42"
-          Id="Package\Stage To Core\Row Count"
-          TopLeft="603.999995231629,311.99999538064" />
-        <NodeLayout
           Size="220,42"
           Id="Package\Stage To Core\Payment Method Stage Data"
           TopLeft="562.666662335396,144.833330623806" />
@@ -666,6 +662,14 @@
           Size="206,42"
           Id="Package\Stage To Core\DImPaymentMethod Core"
           TopLeft="565.33332888782,417.499993689358" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Stage To Core\convert length description"
+          TopLeft="563.666662335396,229.499993689358" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Stage To Core\Row Count"
+          TopLeft="603.999995231629,311.99999538064" />
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Row Count Output 1]"
           TopLeft="668.666662059725,353.99999538064">
@@ -688,10 +692,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="204,42"
-          Id="Package\Stage To Core\convert length description"
-          TopLeft="563.666662335396,229.499993689358" />
         <EdgeLayout
           Id="Package\Stage To Core.Paths[OLE DB Source Output]"
           TopLeft="669.166662335396,186.833330623806">
@@ -751,31 +751,5 @@
       </GraphLayout>
     </LayoutInfo>
   </DtsEventHandler>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Payment Method Stage Data">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\DImPaymentMethod Core">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
   DTS:DTSID="{411CE766-3561-4226-86C8-65AC0A38DF32}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LastModifiedProductVersion="16.0.5467.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Initial_DimPassenger"
   DTS:PackageType="5"
-  DTS:VersionBuild="56"
-  DTS:VersionGUID="{22ECD814-38A1-40FF-98AD-F96B6B256C0D}">
+  DTS:VersionBuild="57"
+  DTS:VersionGUID="{AF8E65E6-29E8-4398-B06D-04382187A9C5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -40,7 +40,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
           SQLTask:SqlStatementSource="DELETE FROM Core.DimPassenger;&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'DimPassenger';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -57,7 +57,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
           SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata &#xA;VALUES ('DimPassenger' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -104,7 +104,7 @@
               <DTS:Variables />
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
-                  SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+                  SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
                   SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimPassenger'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
@@ -181,8 +181,8 @@
               <connections>
                 <connection
                   refId="Package\Stage To Core\DImPassenger Core.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -256,6 +256,20 @@
                       cachedName="FirstName"
                       externalMetadataColumnId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
                       lineageId="Package\Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[CreatedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="CreatedAt"
+                      externalMetadataColumnId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      lineageId="Package\Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[CreatedAt]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].Columns[ModifiedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="ModifiedAt"
+                      externalMetadataColumnId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      lineageId="Package\Stage To Core\Passenger Stage Data.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -307,6 +321,16 @@
                       dataType="wstr"
                       length="100"
                       name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="CreatedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\DImPassenger Core.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="ModifiedAt" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -351,7 +375,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[Stage].[Passenger]</property>
+                  name="OpenRowset">[dbo].[Passenger]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -386,8 +410,8 @@
               <connections>
                 <connection
                   refId="Package\Stage To Core\Passenger Stage Data.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{1550C253-1655-4893-BF18-A9720D11D564}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-stage.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -709,7 +733,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
           SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = 0&#xA;  WHERE TableName = 'DimPassenger'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
@@ -760,19 +784,19 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="121.6,41.6"
+          Size="122,42"
           Id="Package\cleanup"
           TopLeft="683.428571889291,97.1176470306712" />
         <NodeLayout
-          Size="244,41.6"
+          Size="244,42"
           Id="Package\insert new record to ETL_Metadata"
           TopLeft="617.714286035116,177.411764607349" />
         <NodeLayout
-          Size="150.4,41.6"
+          Size="150,42"
           Id="Package\Stage To Core"
           TopLeft="666.714286152197,280.882352695849" />
         <NodeLayout
-          Size="233.6,41.6"
+          Size="234,42"
           Id="Package\Update ETL_Metadata onSuccess"
           TopLeft="627.428571782855,387.941176131419" />
         <EdgeLayout
@@ -850,15 +874,15 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="182.4,41.6"
+          Size="182,42"
           Id="Package\Stage To Core\Passenger Stage Data"
           TopLeft="290.666662335396,181.833330623806" />
         <NodeLayout
-          Size="171.2,41.6"
+          Size="179,42"
           Id="Package\Stage To Core\DImPassenger Core"
           TopLeft="298.33332888782,423.499993689358" />
         <NodeLayout
-          Size="129.6,41.6"
+          Size="130,42"
           Id="Package\Stage To Core\Row Count"
           TopLeft="319.999995231629,309.99999538064" />
         <EdgeLayout
@@ -885,18 +909,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Row Count Output 1]"
-          TopLeft="384.366662059724,351.59999538064">
+          TopLeft="386.416662059725,351.99999538064">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,71.8999983087184"
+              EndConnector="0,71.499998308718"
               Start="0,0"
-              End="0,64.3999983087184">
+              End="0,63.999998308718">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,64.3999983087184" />
+                    End="0,63.999998308718" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -914,7 +938,7 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="225.6,41.6"
+          Size="226,42"
           Id="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
           TopLeft="347.999994814396,192.333330467343" />
       </GraphLayout>

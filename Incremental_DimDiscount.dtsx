@@ -7,24 +7,15 @@
   DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
   DTS:DTSID="{AFA91937-E7BF-4AC2-B9ED-D8F6A08B31FC}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LastModifiedProductVersion="16.0.5467.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="8"
-  DTS:VersionGUID="{23EF6285-250D-4EAB-B910-40BA7062114C}">
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{F0D174CB-4061-4E90-890A-4E99EEA71F46}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
-    <DTS:Variable
-      DTS:CreationName=""
-      DTS:DTSID="{8C5178DF-C43C-4FEF-8BAD-8942E45AE389}"
-      DTS:IncludeInDebugDump="6789"
-      DTS:Namespace="User"
-      DTS:ObjectName="LastRunETL">
-      <DTS:VariableValue
-        DTS:DataType="7">1/1/1970</DTS:VariableValue>
-    </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{350D3128-3E8E-40B5-9E01-5DD7713C67A1}"
@@ -34,55 +25,25 @@
       <DTS:VariableValue
         DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
-    <DTS:Variable
-      DTS:CreationName=""
-      DTS:DTSID="{EE633E60-A6FD-4046-A81D-A157B27A07AB}"
-      DTS:IncludeInDebugDump="6789"
-      DTS:Namespace="User"
-      DTS:ObjectName="rowCountUpdated">
-      <DTS:VariableValue
-        DTS:DataType="3">0</DTS:VariableValue>
-    </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\ETL_MetaData Start"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{c1637f21-6e57-4a40-9e0f-e7b315d9f415}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="ETL_MetaData Start"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
-          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata&#xA;VALUES ('DimDiscount' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\set LastRunETL DateTime to a Variable"
+      DTS:refId="Package\insert into ETL_metaData"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{e14d6e0b-7078-4d86-b501-345f45edbf2f}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="set LastRunETL DateTime to a Variable"
+      DTS:ObjectName="insert into ETL_metaData"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
-          SQLTask:SqlStatementSource="SELECT CONVERT(DATETIME, MAX(LastRunEnd)) as MaxLastRunEnd&#xA;FROM ETL_Metadata&#xA;WHERE TableName = 'DimDiscount' &#xA;AND LastRunStatus = 'Success'&#xA;"
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
+          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata&#xA;VALUES ('DimDiscount' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);"
           SQLTask:ResultType="ResultSetType_SingleRow"
-          SQLTask:TypeConversionMode="None" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
-          <SQLTask:ResultBinding
-            SQLTask:ResultName="MaxLastRunEnd"
-            SQLTask:DtsVariableName="User::LastRunETL" />
-        </SQLTask:SqlTaskData>
+          SQLTask:TypeConversionMode="None" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -128,7 +89,7 @@
               <DTS:Variables />
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
-                  SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+                  SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
                   SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimDiscount'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
@@ -240,7 +201,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[Stage].[Discount]</property>
+                  name="OpenRowset">[dbo].[Discount]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -275,8 +236,8 @@
               <connections>
                 <connection
                   refId="Package\Stage To Core\Discount Stage.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
-                  connectionManagerRefId="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
+                  connectionManagerID="{1550C253-1655-4893-BF18-A9720D11D564}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-stage.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -476,8 +437,8 @@
               <connections>
                 <connection
                   refId="Package\Stage To Core\insert new rows.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
-                  connectionManagerRefId="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -511,6 +472,20 @@
                       cachedName="Copy of Code"
                       externalMetadataColumnId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[Code]"
                       lineageId="Package\Stage To Core\convert discount code from nvarchar to varchar.Outputs[Data Conversion Output].Columns[Copy of Code]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].Columns[CreatedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="CreatedAt"
+                      externalMetadataColumnId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      lineageId="Package\Stage To Core\Discount Stage.Outputs[OLE DB Source Output].Columns[CreatedAt]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].Columns[ModifiedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="ModifiedAt"
+                      externalMetadataColumnId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      lineageId="Package\Stage To Core\Discount Stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -528,6 +503,16 @@
                       refId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[Amount]"
                       dataType="i4"
                       name="Amount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="CreatedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="ModifiedAt" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -585,330 +570,13 @@
                 </output>
               </outputs>
             </component>
-            <component
-              refId="Package\Stage To Core\Lookup"
-              componentClassID="Microsoft.Lookup"
-              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
-              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup"
-              usesDispositions="true"
-              version="6">
-              <properties>
-                <property
-                  dataType="System.String"
-                  description="Specifies the SQL statement that generates the lookup table."
-                  expressionType="Notify"
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DiscountKey FROM Core.DimDiscount</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
-                  expressionType="Notify"
-                  name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT DiscountKey FROM Core.DimDiscount) [refTable]
-where [refTable].[DiscountKey] = ?</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the type of connection used to access the reference dataset."
-                  name="ConnectionType"
-                  typeConverter="LookupConnectionType">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the cache type of the lookup table."
-                  name="CacheType"
-                  typeConverter="CacheType">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
-                  name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">1</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
-                  name="NoMatchCachePercentage">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
-                  name="MaxMemoryUsage">25</property>
-                <property
-                  dataType="System.Int64"
-                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
-                  name="MaxMemoryUsage64">25</property>
-                <property
-                  dataType="System.String"
-                  description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="DiscountKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
-                <property
-                  containsID="true"
-                  dataType="System.String"
-                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Stage To Core\909:invalid};</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
-                  name="TreatDuplicateKeysAsError">false</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Stage To Core\Lookup.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
-                  connectionManagerRefId="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
-                  description="Connection manager used to access lookup data."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Stage To Core\Lookup.Inputs[Lookup Input]"
-                  name="Lookup Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Stage To Core\Lookup.Inputs[Lookup Input].Columns[DiscountID]"
-                      cachedDataType="i4"
-                      cachedName="DiscountID"
-                      lineageId="Package\Stage To Core\Discount Stage.Outputs[OLE DB Source Output].Columns[DiscountID]">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table that a column joins."
-                          name="JoinToReferenceColumn">DiscountKey</property>
-                        <property
-                          dataType="System.Null"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn" />
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Stage To Core\Lookup.Outputs[Lookup Match Output]"
-                  errorOrTruncationOperation="Lookup"
-                  exclusionGroup="1"
-                  name="Lookup Match Output"
-                  synchronousInputId="Package\Stage To Core\Lookup.Inputs[Lookup Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Stage To Core\Lookup.Outputs[Lookup No Match Output]"
-                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
-                  exclusionGroup="1"
-                  name="Lookup No Match Output"
-                  synchronousInputId="Package\Stage To Core\Lookup.Inputs[Lookup Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Stage To Core\Lookup.Outputs[Lookup Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Lookup Error Output"
-                  synchronousInputId="Package\Stage To Core\Lookup.Inputs[Lookup Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Stage To Core\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Stage To Core\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Stage To Core\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Stage To Core\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Stage To Core\update existing rows"
-              componentClassID="Microsoft.OLEDBCommand"
-              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
-              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
-              name="update existing rows"
-              usesDispositions="true"
-              version="2">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  expressionType="Notify"
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE Core.DimDiscount
-SET Code = ? , Amount = ?
-WHERE DiscountKey= ?</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Stage To Core\update existing rows.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
-                  connectionManagerRefId="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:invalid"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Stage To Core\update existing rows.Inputs[OLE DB Command Input]"
-                  errorOrTruncationOperation="Command Execution"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Command Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Stage To Core\update existing rows.Inputs[OLE DB Command Input].Columns[Amount]"
-                      cachedDataType="numeric"
-                      cachedName="Amount"
-                      cachedPrecision="10"
-                      cachedScale="2"
-                      externalMetadataColumnId="Package\Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                      lineageId="Package\Stage To Core\Discount Stage.Outputs[OLE DB Source Output].Columns[Amount]" />
-                    <inputColumn
-                      refId="Package\Stage To Core\update existing rows.Inputs[OLE DB Command Input].Columns[DiscountID]"
-                      cachedDataType="i4"
-                      cachedName="DiscountID"
-                      externalMetadataColumnId="Package\Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
-                      lineageId="Package\Stage To Core\Discount Stage.Outputs[OLE DB Source Output].Columns[DiscountID]" />
-                    <inputColumn
-                      refId="Package\Stage To Core\update existing rows.Inputs[OLE DB Command Input].Columns[Copy of Code]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="Copy of Code"
-                      externalMetadataColumnId="Package\Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      lineageId="Package\Stage To Core\convert discount code from nvarchar to varchar.Outputs[Data Conversion Output].Columns[Copy of Code]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      name="Param_0">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">65</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                      dataType="i4"
-                      name="Param_1">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">65</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\Stage To Core\update existing rows.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
-                      dataType="i4"
-                      name="Param_2">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">65</property>
-                      </properties>
-                    </externalMetadataColumn>
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Stage To Core\update existing rows.Outputs[OLE DB Command Output]"
-                  exclusionGroup="1"
-                  name="OLE DB Command Output"
-                  synchronousInputId="Package\Stage To Core\update existing rows.Inputs[OLE DB Command Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Stage To Core\update existing rows.Outputs[OLE DB Command Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Command Error Output"
-                  synchronousInputId="Package\Stage To Core\update existing rows.Inputs[OLE DB Command Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Stage To Core\update existing rows.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Stage To Core\update existing rows.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Stage To Core\update existing rows.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Stage To Core\update existing rows.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Stage To Core\update row count"
-              componentClassID="Microsoft.RowCount"
-              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
-              name="update row count">
-              <properties>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable to hold the row count."
-                  name="VariableName">User::rowCountUpdated</property>
-              </properties>
-              <inputs>
-                <input
-                  refId="Package\Stage To Core\update row count.Inputs[Row Count Input 1]"
-                  hasSideEffects="true"
-                  name="Row Count Input 1">
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Stage To Core\update row count.Outputs[Row Count Output 1]"
-                  name="Row Count Output 1"
-                  synchronousInputId="Package\Stage To Core\update row count.Inputs[Row Count Input 1]">
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
           </components>
           <paths>
             <path
               refId="Package\Stage To Core.Paths[Data Conversion Output]"
-              endId="Package\Stage To Core\Lookup.Inputs[Lookup Input]"
+              endId="Package\Stage To Core\insert row count.Inputs[Row Count Input 1]"
               name="Data Conversion Output"
               startId="Package\Stage To Core\convert discount code from nvarchar to varchar.Outputs[Data Conversion Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output]"
-              endId="Package\Stage To Core\update row count.Inputs[Row Count Input 1]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup No Match Output]"
-              endId="Package\Stage To Core\insert row count.Inputs[Row Count Input 1]"
-              name="Lookup No Match Output"
-              startId="Package\Stage To Core\Lookup.Outputs[Lookup No Match Output]" />
             <path
               refId="Package\Stage To Core.Paths[OLE DB Source Output]"
               endId="Package\Stage To Core\convert discount code from nvarchar to varchar.Inputs[Data Conversion Input]"
@@ -919,13 +587,25 @@ WHERE DiscountKey= ?</property>
               endId="Package\Stage To Core\insert new rows.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
               startId="Package\Stage To Core\insert row count.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Stage To Core.Paths[Row Count Output 11]"
-              endId="Package\Stage To Core\update existing rows.Inputs[OLE DB Command Input]"
-              name="Row Count Output 1"
-              startId="Package\Stage To Core\update row count.Outputs[Row Count Output 1]" />
           </paths>
         </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate DimDiscount"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{c1637f21-6e57-4a40-9e0f-e7b315d9f415}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate DimDiscount"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE Core.DimDiscount;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -941,17 +621,11 @@ WHERE DiscountKey= ?</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
-          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = ?&#xA;  WHERE TableName = 'DimDiscount'&#xA; AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
+          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = 0&#xA;  WHERE TableName = 'DimDiscount'&#xA; AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::rowCountInserted"
-            SQLTask:ParameterDirection="Input"
-            SQLTask:DataType="131"
-            SQLTask:ParameterSize="-1" />
-          <SQLTask:ParameterBinding
-            SQLTask:ParameterName="1"
-            SQLTask:DtsVariableName="User::rowCountUpdated"
             SQLTask:ParameterDirection="Input"
             SQLTask:DataType="131"
             SQLTask:ParameterSize="-1" />
@@ -963,19 +637,19 @@ WHERE DiscountKey= ?</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{3541d128-e276-48d0-b997-ee943a3ad033}"
-      DTS:From="Package\set LastRunETL DateTime to a Variable"
+      DTS:DTSID="{86F42D2C-DA4E-4173-9FCD-81B30DC1EADF}"
+      DTS:From="Package\insert into ETL_metaData"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Stage To Core" />
+      DTS:To="Package\Truncate DimDiscount" />
     <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{a7938f1d-f163-437a-b0d0-eb0ed53b1f5a}"
-      DTS:From="Package\ETL_MetaData Start"
+      DTS:DTSID="{433E7571-BB6F-40E4-AE94-175A1A90415C}"
+      DTS:From="Package\Truncate DimDiscount"
       DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 2"
-      DTS:To="Package\set LastRunETL DateTime to a Variable" />
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Stage To Core" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
@@ -998,35 +672,35 @@ WHERE DiscountKey= ?</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="172.8,41.6"
-          Id="Package\ETL_MetaData Start"
-          TopLeft="302.571428908985,31.7058823777421" />
+          Size="204,42"
+          Id="Package\insert into ETL_metaData"
+          TopLeft="310.571428994135,42.235294038552" />
         <NodeLayout
-          Size="262.4,41.6"
-          Id="Package\set LastRunETL DateTime to a Variable"
-          TopLeft="258.571428994135,121.235294038552" />
-        <NodeLayout
-          Size="145.6,41.6"
+          Size="146,42"
           Id="Package\Stage To Core"
-          TopLeft="313.714286045761,258.823529237489" />
+          TopLeft="331.714286045761,258.823529237489" />
         <NodeLayout
-          Size="233.6,41.6"
+          Size="188,42"
+          Id="Package\Truncate DimDiscount"
+          TopLeft="313.571428908985,139.705882377742" />
+        <NodeLayout
+          Size="234,42"
           Id="Package\Update ETL_Metadata onSuccess"
-          TopLeft="264.71428601383,347.999999749309" />
+          TopLeft="281.71428601383,352.999999749309" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="388.142857519948,163.235294038552">
+          TopLeft="410.07142895156,84.235294038552">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,95.588235198937"
+              EndConnector="0,55.47058833919"
               Start="0,0"
-              End="0,88.088235198937">
+              End="0,47.97058833919">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,88.088235198937" />
+                    End="0,47.97058833919" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1036,19 +710,19 @@ WHERE DiscountKey= ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="389.32142895156,73.7058823777421">
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="406.142857477373,181.705882377742">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,47.52941166081"
+              EndConnector="0,77.117646859747"
               Start="0,0"
-              End="0,40.02941166081">
+              End="0,69.617646859747">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,40.02941166081" />
+                    End="0,69.617646859747" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1059,18 +733,18 @@ WHERE DiscountKey= ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="384.214286029796,300.823529237489">
+          TopLeft="401.714286029796,300.823529237489">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,47.17647051182"
+              EndConnector="0,52.17647051182"
               Start="0,0"
-              End="0,39.67647051182">
+              End="0,44.67647051182">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,39.67647051182" />
+                    End="0,44.67647051182" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1086,165 +760,37 @@ WHERE DiscountKey= ?</property>
     design-time-name="Package\Stage To Core">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="155.2,41.6"
+          Size="155,42"
           Id="Package\Stage To Core\insert row count"
-          TopLeft="466.379114434194,276.246602801062" />
+          TopLeft="301.379114434194,245.246602801062" />
         <NodeLayout
-          Size="148.8,41.6"
+          Size="149,42"
           Id="Package\Stage To Core\Discount Stage"
-          TopLeft="301.428572070234,3.05882352673059" />
+          TopLeft="311.428572070234,6.05882352673059" />
         <NodeLayout
-          Size="161.6,41.6"
-          Id="Package\Stage To Core\update row count"
-          TopLeft="180.115382013412,282.391398664002" />
-        <NodeLayout
-          Size="152.8,41.6"
+          Size="153,42"
           Id="Package\Stage To Core\insert new rows"
-          TopLeft="474.615377543064,347.045245918242" />
+          TopLeft="306.615377543064,347.045245918242" />
         <NodeLayout
-          Size="176,41.6"
-          Id="Package\Stage To Core\update existing rows"
-          TopLeft="174.615382013413,349.506782454092" />
-        <NodeLayout
-          Size="302.4,41.6"
+          Size="302,42"
           Id="Package\Stage To Core\convert discount code from nvarchar to varchar"
-          TopLeft="223.571429047353,74.1764705232167" />
-        <NodeLayout
-          Size="112.8,41.6"
-          Id="Package\Stage To Core\Lookup"
-          TopLeft="315.384610514719,145.959274361477" />
+          TopLeft="234.571429047353,123.176470523217" />
         <EdgeLayout
           Id="Package\Stage To Core.Paths[OLE DB Source Output]"
-          TopLeft="375.300000558794,44.6588235267306">
+          TopLeft="385.750000558794,48.0588235267306">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5176469964861"
+              EndConnector="0,75.1176469964861"
               Start="0,0"
-              End="0,22.0176469964861">
+              End="0,67.6176469964861">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.0176469964861" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup No Match Output]"
-          TopLeft="389.251277181386,187.559274361477">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="154.727837252808,88.6873284395847"
-              Start="0,0"
-              End="154.727837252808,81.1873284395847">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.2191607053968" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,32.2191607053968"
-                    Point2="0,36.2191607053968"
-                    Point3="4,36.2191607053968" />
-                  <mssgle:LineSegment
-                    End="150.727837252808,36.2191607053968" />
-                  <mssgle:CubicBezierSegment
-                    Point1="150.727837252808,36.2191607053968"
-                    Point2="154.727837252808,36.2191607053968"
-                    Point3="154.727837252808,40.2191607053968" />
-                  <mssgle:LineSegment
-                    End="154.727837252808,81.1873284395847" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="21.5575319076539,41.2191607053968,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output]"
-          TopLeft="354.317943848052,187.559274361477">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-93.4025618346405,94.8321243025246"
-              Start="0,0"
-              End="-93.4025618346405,87.3321243025246">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.728643771101" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,34.728643771101"
-                    Point2="0,38.728643771101"
-                    Point3="-4,38.728643771101" />
-                  <mssgle:LineSegment
-                    End="-89.4025618346405,38.728643771101" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-89.4025618346405,38.728643771101"
-                    Point2="-93.4025618346405,38.728643771101"
-                    Point3="-93.4025618346405,42.728643771101" />
-                  <mssgle:LineSegment
-                    End="-93.4025618346405,87.3321243025246" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-94.8926676360703,43.728643771101,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Data Conversion Output]"
-          TopLeft="373.278019781036,115.776470523217">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,30.1828038382602"
-              Start="0,0"
-              End="0,22.6828038382602">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,22.6828038382602" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Row Count Output 11]"
-          TopLeft="261.765382013412,323.991398664002">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,25.51538379009"
-              Start="0,0"
-              End="0,18.01538379009">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,18.01538379009" />
+                    End="0,67.6176469964861" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1255,18 +801,40 @@ WHERE DiscountKey= ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Row Count Output 1]"
-          TopLeft="547.497245988629,317.846602801062">
+          TopLeft="380.997245988629,287.246602801062">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.1986431171803"
+              EndConnector="0,59.79864311718"
               Start="0,0"
-              End="0,21.6986431171803">
+              End="0,52.29864311718">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,21.6986431171803" />
+                    End="0,52.29864311718" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Data Conversion Output]"
+          TopLeft="382.225271740774,165.176470523217">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,80.0701322778453"
+              Start="0,0"
+              End="0,72.5701322778453">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,72.5701322778453" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1284,7 +852,7 @@ WHERE DiscountKey= ?</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="225.6,41.6"
+          Size="226,42"
           Id="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
           TopLeft="347.999994814396,192.333330467343" />
       </GraphLayout>
@@ -1313,29 +881,6 @@ WHERE DiscountKey= ?</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:string">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

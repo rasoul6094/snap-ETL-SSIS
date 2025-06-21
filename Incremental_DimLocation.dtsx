@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="6/13/2025 1:11:22 AM"
+  DTS:CreationDate="6/21/2025 1:46:15 PM"
   DTS:CreationName="Microsoft.Package"
-  DTS:CreatorComputerName="DESKTOP-0S8CU17"
-  DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
-  DTS:DTSID="{513C950D-0D2F-46F4-97D3-C274CF7A3C8A}"
+  DTS:CreatorComputerName="DESKTOP-GDRMTJV"
+  DTS:CreatorName="DESKTOP-GDRMTJV\HP"
+  DTS:DTSID="{381299BB-4851-4EA6-9605-6F85781A01AA}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5467.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="20"
-  DTS:VersionGUID="{158BD060-D515-4ECC-BB07-90FD24746F91}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{2FBBAA17-2AB7-4BF2-995C-68A9AD55770B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{DAB6899D-93CE-4759-BA79-E372B9B420B3}"
+      DTS:DTSID="{15C39A93-BA70-4790-8B90-15E2CAE78099}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="rowCountInserted">
@@ -28,44 +28,27 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\CleanUp"
+      DTS:refId="Package\insert into ETL_metaData"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{fac84084-10ca-48d6-99c8-690a962e697e}"
+      DTS:DTSID="{245d62ce-090b-4a0d-80be-39d813edfbaf}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="CleanUp"
+      DTS:ObjectName="insert into ETL_metaData"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
-          SQLTask:SqlStatementSource="DELETE FROM Core.DimLocation;&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'DimLocation';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\insert new record to ETL_Metadata"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{f02db7a6-556e-4f12-bb38-b5b677071e8c}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="insert new record to ETL_Metadata"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
-          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata &#xA;VALUES ('DimRequestStatus' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata&#xA;VALUES ('DimLocation' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Stage To Core"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{11857c9a-b3fa-45f3-9437-7cbc117d54fb}"
+      DTS:DTSID="{dc9b893e-99ad-471e-8365-571707ef92d6}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="Stage To Core"
@@ -75,7 +58,7 @@
         <DTS:EventHandler
           DTS:refId="Package\Stage To Core.EventHandlers[OnError]"
           DTS:CreationName="OnError"
-          DTS:DTSID="{57440e6d-6b6e-4b08-a0d3-7ff422b25cd1}"
+          DTS:DTSID="{fa7e3904-2f97-4603-bf9b-1dd8ec78e66f}"
           DTS:EventID="0"
           DTS:EventName="OnError"
           DTS:LocaleID="-1">
@@ -83,7 +66,7 @@
             <DTS:Variable
               DTS:CreationName=""
               DTS:Description="The propagate property of the event"
-              DTS:DTSID="{55d021f0-bba6-4f8a-a045-dbfa4ae01e1a}"
+              DTS:DTSID="{c1741522-5d11-4d2e-b64d-016140feb8c0}"
               DTS:IncludeInDebugDump="6789"
               DTS:Namespace="System"
               DTS:ObjectName="Propagate">
@@ -96,7 +79,7 @@
               DTS:refId="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
               DTS:CreationName="Microsoft.ExecuteSQLTask"
               DTS:Description="Execute SQL Task"
-              DTS:DTSID="{74a66b2c-5bf7-4b94-8d72-1c8968507bdf}"
+              DTS:DTSID="{e7e039e3-c070-4e44-8080-02ce15a44059}"
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update ETL_Metadata On error"
@@ -1245,10 +1228,27 @@ where [refTable].[ZoneTypeID] = ?</property>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Truncate DimLocation"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{e3e44eb3-193d-472c-819f-fd16d95f0e26}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate DimLocation"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE Core.DimLocation;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Update ETL_Metadata onSuccess"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{14debf72-75e3-4b73-8abd-77ae6ce4c7a6}"
+      DTS:DTSID="{72259dd2-006a-4c7c-ab1f-a14d60463a12}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Update ETL_Metadata onSuccess"
@@ -1273,23 +1273,23 @@ where [refTable].[ZoneTypeID] = ?</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{1011627d-5ff2-47d7-8294-ad1448bd3b08}"
-      DTS:From="Package\insert new record to ETL_Metadata"
+      DTS:DTSID="{a0eee82d-523a-4609-9821-6ab09ea28b50}"
+      DTS:From="Package\Truncate DimLocation"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\Stage To Core" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{071d2da4-c35e-4483-95eb-53533e453b95}"
-      DTS:From="Package\CleanUp"
+      DTS:DTSID="{17bc707d-5414-47ac-a4ec-4f9353cb6c75}"
+      DTS:From="Package\insert into ETL_metaData"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\insert new record to ETL_Metadata" />
+      DTS:To="Package\Truncate DimLocation" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
-      DTS:DTSID="{24d4f4e4-5bdf-4b91-86de-b9025bf19f6d}"
+      DTS:DTSID="{69c8db63-032c-4f69-9879-c12afe55e7a6}"
       DTS:From="Package\Stage To Core"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
@@ -1308,35 +1308,35 @@ where [refTable].[ZoneTypeID] = ?</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="122,42"
-          Id="Package\CleanUp"
-          TopLeft="452.285715071827,50.8235294198082" />
+          Size="204,42"
+          Id="Package\insert into ETL_metaData"
+          TopLeft="466.000000106436,77" />
         <NodeLayout
           Size="150,42"
           Id="Package\Stage To Core"
-          TopLeft="441.571429334734,238.588235084986" />
+          TopLeft="489.285714369343,261.764705665178" />
         <NodeLayout
-          Size="250,42"
-          Id="Package\insert new record to ETL_Metadata"
-          TopLeft="394.571429217652,129.117646996486" />
+          Size="187,42"
+          Id="Package\Truncate DimLocation"
+          TopLeft="471.285714252261,156.294117576678" />
         <NodeLayout
           Size="234,42"
           Id="Package\Update ETL_Metadata onSuccess"
-          TopLeft="402.285714965391,346.647058520556" />
+          TopLeft="450,369.823529100748" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="518.071429276193,171.117646996486">
+          TopLeft="564.535714310802,198.294117576678">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,67.4705880885"
+              EndConnector="0,63.4705880885"
               Start="0,0"
-              End="0,59.9705880885">
+              End="0,55.9705880885">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,59.9705880885" />
+                    End="0,55.9705880885" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1347,18 +1347,18 @@ where [refTable].[ZoneTypeID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="516.42857214474,92.8235294198082">
+          TopLeft="566.392857179349,119">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,36.2941175766778"
+              EndConnector="0,37.2941175766778"
               Start="0,0"
-              End="0,28.7941175766778">
+              End="0,29.7941175766778">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.7941175766778" />
+                    End="0,29.7941175766778" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1369,7 +1369,7 @@ where [refTable].[ZoneTypeID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="517.928572150062,280.588235084986">
+          TopLeft="565.642857184671,303.764705665178">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1590,100 +1590,5 @@ where [refTable].[ZoneTypeID] = ?</property>
       </GraphLayout>
     </LayoutInfo>
   </DtsEventHandler>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup Province">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[Province]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:string">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\dim location core">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup ZoneType">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[ZoneType]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:string">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup city">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[City]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:string">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\zone stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

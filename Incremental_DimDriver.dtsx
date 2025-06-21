@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
   DTS:DTSID="{A9D86BFD-228F-4E40-9B21-630A9BEE244E}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LastModifiedProductVersion="16.0.5467.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="59"
-  DTS:VersionGUID="{F042E2EC-6635-46FE-ADF9-3D9592FDE9AF}">
+  DTS:VersionBuild="63"
+  DTS:VersionGUID="{999B3B5C-BB61-41BE-BFE2-BE4F0924E39D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -76,31 +76,8 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
           SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata&#xA;VALUES ('DimDriver' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\set LastRunETL DateTime to a Variable"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{c563346e-49ed-48f5-b8ca-4df87e294939}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="set LastRunETL DateTime to a Variable"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
-          SQLTask:SqlStatementSource="SELECT CONVERT(DATETIME, MAX(LastRunEnd)) as MaxLastRunEnd&#xA;FROM ETL_Metadata&#xA;WHERE TableName = 'DimDriver' &#xA;AND LastRunStatus = 'Success'&#xA;"
-          SQLTask:ResultType="ResultSetType_SingleRow"
-          SQLTask:TypeConversionMode="None" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
-          <SQLTask:ResultBinding
-            SQLTask:ResultName="MaxLastRunEnd"
-            SQLTask:DtsVariableName="User::LastRunETL" />
-        </SQLTask:SqlTaskData>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -146,7 +123,7 @@
               <DTS:Variables />
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
-                  SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+                  SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
                   SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimDriver'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
@@ -165,34 +142,42 @@
           version="1">
           <components>
             <component
-              refId="Package\Stage To Core\add isCurrent , EndDate 1"
+              refId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate"
               componentClassID="Microsoft.DerivedColumn"
               contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
-              name="add isCurrent , EndDate 1"
+              name="add isCurrent , EndDate 1 , set startDate"
               usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\Stage To Core\add isCurrent , EndDate 1.Inputs[Derived Column Input]"
+                  refId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Inputs[Derived Column Input]"
                   description="Input to the Derived Column Transformation"
                   name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Inputs[Derived Column Input].Columns[ModifiedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="ModifiedAt"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
+                  </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Output]"
+                  refId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Output]"
                   description="Default Output of the Derived Column Transformation"
                   exclusionGroup="1"
                   name="Derived Column Output"
-                  synchronousInputId="Package\Stage To Core\add isCurrent , EndDate 1.Inputs[Derived Column Input]">
+                  synchronousInputId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Inputs[Derived Column Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Output].Columns[IsCurrent]"
                       dataType="i4"
                       errorOrTruncationOperation="Computation"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Output].Columns[IsCurrent]"
                       name="IsCurrent"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -210,11 +195,11 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Output].Columns[EndDate]"
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Output].Columns[EndDate]"
                       dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Computation"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Output].Columns[EndDate]"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Output].Columns[EndDate]"
                       name="EndDate"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -231,27 +216,50 @@
                           name="FriendlyExpression">(DT_DBTIMESTAMP2,0)"2100-01-01 00:00:00"</property>
                       </properties>
                     </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Output].Columns[StartDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="27"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Output].Columns[StartDate]"
+                      name="StartDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ModifiedAt</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Error Output]"
+                  refId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Error Output]"
                   description="Error Output of the Derived Column Transformation"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Derived Column Error Output"
-                  synchronousInputId="Package\Stage To Core\add isCurrent , EndDate 1.Inputs[Derived Column Input]">
+                  synchronousInputId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Inputs[Derived Column Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -260,34 +268,42 @@
               </outputs>
             </component>
             <component
-              refId="Package\Stage To Core\add isCurrent , EndDate 1 1"
+              refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate"
               componentClassID="Microsoft.DerivedColumn"
               contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
-              name="add isCurrent , EndDate 1 1"
+              name="add isCurrent , EndDate 1 and set startDate"
               usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\Stage To Core\add isCurrent , EndDate 1 1.Inputs[Derived Column Input]"
+                  refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Inputs[Derived Column Input]"
                   description="Input to the Derived Column Transformation"
                   name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Inputs[Derived Column Input].Columns[ModifiedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="ModifiedAt"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
+                  </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Stage To Core\add isCurrent , EndDate 1 1.Outputs[Derived Column Output]"
+                  refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output]"
                   description="Default Output of the Derived Column Transformation"
                   exclusionGroup="1"
                   name="Derived Column Output"
-                  synchronousInputId="Package\Stage To Core\add isCurrent , EndDate 1 1.Inputs[Derived Column Input]">
+                  synchronousInputId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Inputs[Derived Column Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\add isCurrent , EndDate 1 1.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[IsCurrent]"
                       dataType="i4"
                       errorOrTruncationOperation="Computation"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 1.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[IsCurrent]"
                       name="IsCurrent"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -305,11 +321,11 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Stage To Core\add isCurrent , EndDate 1 1.Outputs[Derived Column Output].Columns[EndDate]"
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[EndDate]"
                       dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Computation"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 1.Outputs[Derived Column Output].Columns[EndDate]"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[EndDate]"
                       name="EndDate"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -326,27 +342,50 @@
                           name="FriendlyExpression">(DT_DBTIMESTAMP2,0)"2100-01-01 00:00:00"</property>
                       </properties>
                     </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[StartDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="27"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[StartDate]"
+                      name="StartDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ModifiedAt</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Stage To Core\add isCurrent , EndDate 1 1.Outputs[Derived Column Error Output]"
+                  refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Error Output]"
                   description="Error Output of the Derived Column Transformation"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Derived Column Error Output"
-                  synchronousInputId="Package\Stage To Core\add isCurrent , EndDate 1 1.Inputs[Derived Column Input]">
+                  synchronousInputId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Inputs[Derived Column Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\add isCurrent , EndDate 1 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Stage To Core\add isCurrent , EndDate 1 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -808,8 +847,8 @@
               <connections>
                 <connection
                   refId="Package\Stage To Core\DimDriver Core.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -888,27 +927,12 @@
                       externalMetadataColumnId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CityId]"
                       lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[CityID]" />
                     <inputColumn
-                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].Columns[CarYearModel]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="4"
-                      cachedName="CarYearModel"
-                      externalMetadataColumnId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarYearModel]"
-                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarYearModel]" />
-                    <inputColumn
                       refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].Columns[CarPlate]"
                       cachedDataType="wstr"
                       cachedLength="15"
                       cachedName="CarPlate"
                       externalMetadataColumnId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarPlate]"
                       lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarPlate]" />
-                    <inputColumn
-                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].Columns[CarName]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="CarName"
-                      externalMetadataColumnId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarName]"
-                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarName]" />
                     <inputColumn
                       refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].Columns[StartDate]"
                       cachedDataType="dbTimeStamp2"
@@ -962,6 +986,63 @@
                       cachedName="FirstName"
                       externalMetadataColumnId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
                       lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].Columns[ModifiedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="ModifiedAt"
+                      externalMetadataColumnId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].Columns[CarYear]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="CarYear"
+                      externalMetadataColumnId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarYear]"
+                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarYear]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].Columns[CarTransmission]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarTransmission"
+                      externalMetadataColumnId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarTransmission]"
+                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarTransmission]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].Columns[CarFuelType]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarFuelType"
+                      externalMetadataColumnId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarFuelType]"
+                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarFuelType]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].Columns[CarColor]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarColor"
+                      externalMetadataColumnId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarColor]"
+                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarColor]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].Columns[CarBrand]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarBrand"
+                      externalMetadataColumnId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarBrand]"
+                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarBrand]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].Columns[CarModel]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarModel"
+                      externalMetadataColumnId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarModel]"
+                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarModel]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].Columns[CreatedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="CreatedAt"
+                      externalMetadataColumnId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[CreatedAt]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1008,21 +1089,10 @@
                       dataType="i4"
                       name="CarId" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarName]"
-                      dataType="wstr"
-                      length="50"
-                      name="CarName" />
-                    <externalMetadataColumn
                       refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarPlate]"
                       dataType="wstr"
                       length="15"
                       name="CarPlate" />
-                    <externalMetadataColumn
-                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarYearModel]"
-                      codePage="1252"
-                      dataType="str"
-                      length="4"
-                      name="CarYearModel" />
                     <externalMetadataColumn
                       refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[ProvinceId]"
                       dataType="i4"
@@ -1070,6 +1140,47 @@
                       dataType="wstr"
                       length="100"
                       name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarModel]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarModel" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarBrand]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarBrand" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarColor]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarColor" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarFuelType]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarFuelType" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarTransmission]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarTransmission" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CarYear]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="CarYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="CreatedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\DimDriver Core.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="ModifiedAt" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1114,7 +1225,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[Stage].[Driver]</property>
+                  name="OpenRowset">[dbo].[Driver]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1149,8 +1260,8 @@
               <connections>
                 <connection
                   refId="Package\Stage To Core\Driver Stage.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{1550C253-1655-4893-BF18-A9720D11D564}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-stage.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1503,13 +1614,13 @@
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [Stage].[Car]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Car]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [Stage].[Car]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Car]) [refTable]
 where [refTable].[CarID] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -1541,7 +1652,7 @@ where [refTable].[CarID] = ?</property>
                 <property
                   dataType="System.String"
                   description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CarID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarPlate" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarYearModel" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CreatedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ModifiedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CarID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarModel" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarBrand" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarPlate" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarColor" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarFuelType" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarTransmission" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarYear" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CreatedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ModifiedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
                 <property
                   containsID="true"
                   dataType="System.String"
@@ -1559,8 +1670,8 @@ where [refTable].[CarID] = ?</property>
               <connections>
                 <connection
                   refId="Package\Stage To Core\Lookup Car.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{1550C253-1655-4893-BF18-A9720D11D564}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-stage.sa]"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
@@ -1599,21 +1710,6 @@ where [refTable].[CarID] = ?</property>
                   synchronousInputId="Package\Stage To Core\Lookup Car.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarName]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Copy Column"
-                      length="50"
-                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarName]"
-                      name="CarName"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">CarName</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
                       refId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarPlate]"
                       dataType="wstr"
                       errorOrTruncationOperation="Copy Column"
@@ -1629,19 +1725,94 @@ where [refTable].[CarID] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarYearModel]"
-                      codePage="1252"
-                      dataType="str"
+                      refId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarModel]"
+                      dataType="wstr"
                       errorOrTruncationOperation="Copy Column"
-                      length="4"
-                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarYearModel]"
-                      name="CarYearModel"
+                      length="50"
+                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarModel]"
+                      name="CarModel"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
                           dataType="System.String"
                           description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">CarYearModel</property>
+                          name="CopyFromReferenceColumn">CarModel</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarBrand]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarBrand]"
+                      name="CarBrand"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarBrand</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarColor]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarColor]"
+                      name="CarColor"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarColor</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarFuelType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarFuelType]"
+                      name="CarFuelType"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarFuelType</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarTransmission]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarTransmission]"
+                      name="CarTransmission"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarTransmission</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarYear]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="4"
+                      lineageId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output].Columns[CarYear]"
+                      name="CarYear"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarYear</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -1693,13 +1864,13 @@ where [refTable].[CarID] = ?</property>
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [Stage].[Car]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Car]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [Stage].[Car]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Car]) [refTable]
 where [refTable].[CarID] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -1731,7 +1902,7 @@ where [refTable].[CarID] = ?</property>
                 <property
                   dataType="System.String"
                   description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CarID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarPlate" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarYearModel" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CreatedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ModifiedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CarID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarModel" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarBrand" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarPlate" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarColor" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarFuelType" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarTransmission" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarYear" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CreatedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ModifiedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
                 <property
                   containsID="true"
                   dataType="System.String"
@@ -1749,8 +1920,8 @@ where [refTable].[CarID] = ?</property>
               <connections>
                 <connection
                   refId="Package\Stage To Core\Lookup Car 1.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{1550C253-1655-4893-BF18-A9720D11D564}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-stage.sa]"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
@@ -1789,21 +1960,6 @@ where [refTable].[CarID] = ?</property>
                   synchronousInputId="Package\Stage To Core\Lookup Car 1.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarName]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Copy Column"
-                      length="50"
-                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarName]"
-                      name="CarName"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">CarName</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
                       refId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarPlate]"
                       dataType="wstr"
                       errorOrTruncationOperation="Copy Column"
@@ -1819,19 +1975,94 @@ where [refTable].[CarID] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarYearModel]"
-                      codePage="1252"
-                      dataType="str"
+                      refId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarModel]"
+                      dataType="wstr"
                       errorOrTruncationOperation="Copy Column"
-                      length="4"
-                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarYearModel]"
-                      name="CarYearModel"
+                      length="50"
+                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarModel]"
+                      name="CarModel"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
                           dataType="System.String"
                           description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">CarYearModel</property>
+                          name="CopyFromReferenceColumn">CarModel</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarBrand]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarBrand]"
+                      name="CarBrand"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarBrand</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarColor]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarColor]"
+                      name="CarColor"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarColor</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarFuelType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarFuelType]"
+                      name="CarFuelType"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarFuelType</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarTransmission]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarTransmission]"
+                      name="CarTransmission"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarTransmission</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarYear]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="4"
+                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarYear]"
+                      name="CarYear"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarYear</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -1883,13 +2114,13 @@ where [refTable].[CarID] = ?</property>
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [Stage].[City]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[City]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [Stage].[City]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[City]) [refTable]
 where [refTable].[CityID] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -1939,8 +2170,8 @@ where [refTable].[CityID] = ?</property>
               <connections>
                 <connection
                   refId="Package\Stage To Core\Lookup City.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{1550C253-1655-4893-BF18-A9720D11D564}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-stage.sa]"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
@@ -2042,13 +2273,13 @@ where [refTable].[CityID] = ?</property>
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [Stage].[City]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[City]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [Stage].[City]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[City]) [refTable]
 where [refTable].[CityID] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -2098,8 +2329,8 @@ where [refTable].[CityID] = ?</property>
               <connections>
                 <connection
                   refId="Package\Stage To Core\Lookup City 1.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{1550C253-1655-4893-BF18-A9720D11D564}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-stage.sa]"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
@@ -2201,13 +2432,13 @@ where [refTable].[CityID] = ?</property>
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [Stage].[Province]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Province]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [Stage].[Province]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Province]) [refTable]
 where [refTable].[ProvinceID] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -2257,8 +2488,8 @@ where [refTable].[ProvinceID] = ?</property>
               <connections>
                 <connection
                   refId="Package\Stage To Core\Lookup Province.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{1550C253-1655-4893-BF18-A9720D11D564}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-stage.sa]"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
@@ -2360,13 +2591,13 @@ where [refTable].[ProvinceID] = ?</property>
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [Stage].[Province]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Province]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [Stage].[Province]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Province]) [refTable]
 where [refTable].[ProvinceID] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -2416,8 +2647,8 @@ where [refTable].[ProvinceID] = ?</property>
               <connections>
                 <connection
                   refId="Package\Stage To Core\Lookup Province 1.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{1550C253-1655-4893-BF18-A9720D11D564}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-stage.sa]"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
@@ -2557,7 +2788,7 @@ where [refTable].[DriverId] = ?</property>
                 <property
                   dataType="System.String"
                   description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="DriverKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DriverId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ReigisterationDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FirstName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LastName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="BirthDate" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PhoneNumber" dataType="DT_WSTR" length="12" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="NationalCode" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Email" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Gender" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarPlate" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarYearModel" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="ProvinceId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProvinceName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CityId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CityName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FullAddress" dataType="DT_WSTR" length="300" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StartDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EndDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IsCurrent" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="DriverKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DriverId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ReigisterationDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FirstName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LastName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="BirthDate" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PhoneNumber" dataType="DT_WSTR" length="12" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="NationalCode" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Email" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Gender" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarModel" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarBrand" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarColor" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarFuelType" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarTransmission" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarPlate" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CarYear" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="ProvinceId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProvinceName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CityId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CityName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FullAddress" dataType="DT_WSTR" length="300" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CreatedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ModifiedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StartDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EndDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IsCurrent" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
                 <property
                   containsID="true"
                   dataType="System.String"
@@ -2575,8 +2806,8 @@ where [refTable].[DriverId] = ?</property>
               <connections>
                 <connection
                   refId="Package\Stage To Core\lookup to insert or update.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
@@ -2718,21 +2949,6 @@ where [refTable].[DriverId] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarNameDest]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Copy Column"
-                      length="50"
-                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarNameDest]"
-                      name="CarNameDest"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">CarName</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
                       refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarPlateDest]"
                       dataType="wstr"
                       errorOrTruncationOperation="Copy Column"
@@ -2745,22 +2961,6 @@ where [refTable].[DriverId] = ?</property>
                           dataType="System.String"
                           description="Specifies the column in the reference table from which a column is copied."
                           name="CopyFromReferenceColumn">CarPlate</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarYearModelDest]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Copy Column"
-                      length="4"
-                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarYearModelDest]"
-                      name="CarYearModelDest"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">CarYearModel</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -2851,6 +3051,97 @@ where [refTable].[DriverId] = ?</property>
                           name="CopyFromReferenceColumn">FirstName</property>
                       </properties>
                     </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarYearDest]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="4"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarYearDest]"
+                      name="CarYearDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarYear</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarTransmissionDest]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarTransmissionDest]"
+                      name="CarTransmissionDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarTransmission</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarFuelTypeDest]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarFuelTypeDest]"
+                      name="CarFuelTypeDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarFuelType</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarColorDest]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarColorDest]"
+                      name="CarColorDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarColor</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarBrandDest]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarBrandDest]"
+                      name="CarBrandDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarBrand</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarModelDest]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarModelDest]"
+                      name="CarModelDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CarModel</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -2923,8 +3214,8 @@ WHERE DriverId = ?
               <connections>
                 <connection
                   refId="Package\Stage To Core\OLE DB Command.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -3174,8 +3465,8 @@ AND DriverId = ?</property>
               <connections>
                 <connection
                   refId="Package\Stage To Core\OLE DB Command 1.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -3292,8 +3583,8 @@ AND DriverId = ?</property>
               <connections>
                 <connection
                   refId="Package\Stage To Core\OLE DB Command 1 1.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -3438,8 +3729,8 @@ AND DriverId = ?</property>
               <connections>
                 <connection
                   refId="Package\Stage To Core\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -3537,13 +3828,13 @@ AND DriverId = ?</property>
                       cachedDataType="dbTimeStamp2"
                       cachedName="EndDate"
                       externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EndDate]"
-                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Output].Columns[EndDate]" />
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[EndDate]" />
                     <inputColumn
                       refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsCurrent]"
                       cachedDataType="i4"
                       cachedName="IsCurrent"
                       externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrent]"
-                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Output].Columns[IsCurrent]" />
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[IsCurrent]" />
                     <inputColumn
                       refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of CityName]"
                       cachedDataType="wstr"
@@ -3559,33 +3850,11 @@ AND DriverId = ?</property>
                       externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ProvinceName]"
                       lineageId="Package\Stage To Core\Resize CityName,ProvinceName Columns 1.Outputs[Data Conversion Output].Columns[Copy of ProvinceName]" />
                     <inputColumn
-                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ModifiedAt]"
-                      cachedDataType="wstr"
-                      cachedLength="27"
-                      cachedName="ModifiedAt"
-                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StartDate]"
-                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
-                    <inputColumn
                       refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CarIdDest]"
                       cachedDataType="i4"
                       cachedName="CarIdDest"
                       externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarId]"
                       lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarIdDest]" />
-                    <inputColumn
-                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CarNameDest]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="CarNameDest"
-                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarName]"
-                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarNameDest]" />
-                    <inputColumn
-                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CarYearModelDest]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="4"
-                      cachedName="CarYearModelDest"
-                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarYearModel]"
-                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarYearModelDest]" />
                     <inputColumn
                       refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CarPlateDest]"
                       cachedDataType="wstr"
@@ -3593,6 +3862,70 @@ AND DriverId = ?</property>
                       cachedName="CarPlateDest"
                       externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarPlate]"
                       lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarPlateDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CarYearDest]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="CarYearDest"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarYear]"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarYearDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CarTransmissionDest]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarTransmissionDest"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarTransmission]"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarTransmissionDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CarColorDest]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarColorDest"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarColor]"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarColorDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CarFuelTypeDest]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarFuelTypeDest"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarFuelType]"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarFuelTypeDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CarBrandDest]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarBrandDest"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarBrand]"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarBrandDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CarModelDest]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarModelDest"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarModel]"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[CarModelDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ModifiedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="ModifiedAt"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CreatedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="CreatedAt"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[CreatedAt]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StartDate]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="StartDate"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StartDate]"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[StartDate]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -3649,21 +3982,10 @@ AND DriverId = ?</property>
                       dataType="i4"
                       name="CarId" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarName]"
-                      dataType="wstr"
-                      length="50"
-                      name="CarName" />
-                    <externalMetadataColumn
                       refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarPlate]"
                       dataType="wstr"
                       length="15"
                       name="CarPlate" />
-                    <externalMetadataColumn
-                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarYearModel]"
-                      codePage="1252"
-                      dataType="str"
-                      length="4"
-                      name="CarYearModel" />
                     <externalMetadataColumn
                       refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ProvinceId]"
                       dataType="i4"
@@ -3701,6 +4023,47 @@ AND DriverId = ?</property>
                       refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrent]"
                       dataType="bool"
                       name="IsCurrent" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarModel]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarModel" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarBrand]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarBrand" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarColor]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarColor" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarFuelType]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarFuelType" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarTransmission]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarTransmission" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CarYear]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="CarYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="CreatedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="ModifiedAt" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -3788,8 +4151,8 @@ AND DriverId = ?</property>
               <connections>
                 <connection
                   refId="Package\Stage To Core\OLE DB Destination 1.Connections[OleDbConnection]"
-                  connectionManagerID="{4BB17458-C0C6-4811-981A-52FE4A89EC39}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[localhost.snap-dw.sa]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -3887,13 +4250,13 @@ AND DriverId = ?</property>
                       cachedDataType="dbTimeStamp2"
                       cachedName="EndDate"
                       externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[EndDate]"
-                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 1.Outputs[Derived Column Output].Columns[EndDate]" />
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Output].Columns[EndDate]" />
                     <inputColumn
                       refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[IsCurrent]"
                       cachedDataType="i4"
                       cachedName="IsCurrent"
                       externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrent]"
-                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 1.Outputs[Derived Column Output].Columns[IsCurrent]" />
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Output].Columns[IsCurrent]" />
                     <inputColumn
                       refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Copy of CityName]"
                       cachedDataType="wstr"
@@ -3909,25 +4272,11 @@ AND DriverId = ?</property>
                       externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ProvinceName]"
                       lineageId="Package\Stage To Core\Resize CityName,ProvinceName Columns 1 1.Outputs[Data Conversion Output].Columns[Copy of ProvinceName]" />
                     <inputColumn
-                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[ModifiedAt]"
-                      cachedDataType="wstr"
-                      cachedLength="27"
-                      cachedName="ModifiedAt"
-                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[StartDate]"
-                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
-                    <inputColumn
                       refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CarID]"
                       cachedDataType="i4"
                       cachedName="CarID"
                       externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarId]"
                       lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[CarID]" />
-                    <inputColumn
-                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CarName]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="CarName"
-                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarName]"
-                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarName]" />
                     <inputColumn
                       refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CarPlate]"
                       cachedDataType="wstr"
@@ -3936,13 +4285,69 @@ AND DriverId = ?</property>
                       externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarPlate]"
                       lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarPlate]" />
                     <inputColumn
-                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CarYearModel]"
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CarModel]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarModel"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarModel]"
+                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarModel]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CarBrand]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarBrand"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarBrand]"
+                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarBrand]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CarColor]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarColor"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarColor]"
+                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarColor]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CarFuelType]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarFuelType"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarFuelType]"
+                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarFuelType]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CarTransmission]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CarTransmission"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarTransmission]"
+                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarTransmission]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CarYear]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="4"
-                      cachedName="CarYearModel"
-                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarYearModel]"
-                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarYearModel]" />
+                      cachedName="CarYear"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarYear]"
+                      lineageId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output].Columns[CarYear]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CreatedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="CreatedAt"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[CreatedAt]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[StartDate]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="StartDate"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[StartDate]"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Output].Columns[StartDate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[ModifiedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="ModifiedAt"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      lineageId="Package\Stage To Core\Driver Stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -3999,21 +4404,10 @@ AND DriverId = ?</property>
                       dataType="i4"
                       name="CarId" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarName]"
-                      dataType="wstr"
-                      length="50"
-                      name="CarName" />
-                    <externalMetadataColumn
                       refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarPlate]"
                       dataType="wstr"
                       length="15"
                       name="CarPlate" />
-                    <externalMetadataColumn
-                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarYearModel]"
-                      codePage="1252"
-                      dataType="str"
-                      length="4"
-                      name="CarYearModel" />
                     <externalMetadataColumn
                       refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ProvinceId]"
                       dataType="i4"
@@ -4051,6 +4445,47 @@ AND DriverId = ?</property>
                       refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrent]"
                       dataType="bool"
                       name="IsCurrent" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarModel]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarModel" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarBrand]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarBrand" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarColor]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarColor" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarFuelType]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarFuelType" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarTransmission]"
+                      dataType="wstr"
+                      length="50"
+                      name="CarTransmission" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CarYear]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="CarYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="CreatedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="ModifiedAt" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -4533,47 +4968,47 @@ AND DriverId = ?</property>
               refId="Package\Stage To Core.Paths[Derived Column Output1]"
               endId="Package\Stage To Core\Resize CityName,ProvinceName Columns 1.Inputs[Data Conversion Input]"
               name="Derived Column Output"
-              startId="Package\Stage To Core\add isCurrent , EndDate 1.Outputs[Derived Column Output]" />
+              startId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output]" />
             <path
               refId="Package\Stage To Core.Paths[Derived Column Output2]"
               endId="Package\Stage To Core\Resize CityName,ProvinceName Columns 1 1.Inputs[Data Conversion Input]"
               name="Derived Column Output"
-              startId="Package\Stage To Core\add isCurrent , EndDate 1 1.Outputs[Derived Column Output]" />
+              startId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Outputs[Derived Column Output]" />
             <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output]"
+              refId="Package\Stage To Core.Paths[Lookup Match Output6]"
+              endId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output4]"
+              endId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Inputs[Derived Column Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output3]"
+              endId="Package\Stage To Core\Lookup City 1.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output5]"
               endId="Package\Stage To Core\Lookup Car 1.Inputs[Lookup Input]"
               name="Lookup Match Output"
               startId="Package\Stage To Core\Lookup Province 1.Outputs[Lookup Match Output]" />
             <path
               refId="Package\Stage To Core.Paths[Lookup Match Output1]"
-              endId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Inputs[Derived Column Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup Car.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output2]"
-              endId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup Car 1.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output3]"
-              endId="Package\Stage To Core\Lookup Province.Inputs[Lookup Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup City.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output4]"
               endId="Package\Stage To Core\Lookup Province 1.Inputs[Lookup Input]"
               name="Lookup Match Output"
               startId="Package\Stage To Core\Lookup City 1.Outputs[Lookup Match Output]" />
             <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output5]"
-              endId="Package\Stage To Core\Lookup City 1.Inputs[Lookup Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output6]"
+              refId="Package\Stage To Core.Paths[Lookup Match Output]"
               endId="Package\Stage To Core\Lookup Car.Inputs[Lookup Input]"
               name="Lookup Match Output"
               startId="Package\Stage To Core\Lookup Province.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output2]"
+              endId="Package\Stage To Core\Lookup Province.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\Lookup City.Outputs[Lookup Match Output]" />
             <path
               refId="Package\Stage To Core.Paths[Lookup No Match Output]"
               endId="Package\Stage To Core\Lookup City.Inputs[Lookup Input]"
@@ -4621,12 +5056,12 @@ AND DriverId = ?</property>
               startId="Package\Stage To Core\Conditional Split.Outputs[scd type 1]" />
             <path
               refId="Package\Stage To Core.Paths[scd type 2 for car]"
-              endId="Package\Stage To Core\add isCurrent , EndDate 1 1.Inputs[Derived Column Input]"
+              endId="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate.Inputs[Derived Column Input]"
               name="scd type 2 for car"
               startId="Package\Stage To Core\Conditional Split.Outputs[scd type 2 for car]" />
             <path
               refId="Package\Stage To Core.Paths[scd type 2 for driver province and city]"
-              endId="Package\Stage To Core\add isCurrent , EndDate 1.Inputs[Derived Column Input]"
+              endId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Inputs[Derived Column Input]"
               name="scd type 2 for driver province and city"
               startId="Package\Stage To Core\Conditional Split.Outputs[scd type 2 for driver province and city]" />
           </paths>
@@ -4646,7 +5081,7 @@ AND DriverId = ?</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{4BB17458-C0C6-4811-981A-52FE4A89EC39}"
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
           SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;    LastRunStatus = 'Success',&#xA;    LastRunMessage = 'ETL ran successfully',&#xA;    TotalRowsInserted = ?,&#xA;    TotalRowsUpdated = CAST(? AS INT) + CAST(? AS INT) + CAST(? AS INT)&#xA;WHERE TableName = 'DimDriver'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
@@ -4680,19 +5115,11 @@ AND DriverId = ?</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{3C6D4CC9-4FAB-44B7-91F5-9F8B92949908}"
-      DTS:From="Package\set LastRunETL DateTime to a Variable"
+      DTS:DTSID="{73D7818D-D436-407A-A8A2-6D66C835C8CB}"
+      DTS:From="Package\ETL_MetaData Start"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\Stage To Core" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 2 1]"
-      DTS:CreationName=""
-      DTS:DTSID="{77aabd5b-d09b-4e97-83f2-f8999e608744}"
-      DTS:From="Package\ETL_MetaData Start"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 2 1"
-      DTS:To="Package\set LastRunETL DateTime to a Variable" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
@@ -4715,57 +5142,31 @@ AND DriverId = ?</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="172.8,41.6"
+          Size="173,42"
           Id="Package\ETL_MetaData Start"
-          TopLeft="583.57142895156,56.999999965815" />
+          TopLeft="589.57142895156,114.999999965815" />
         <NodeLayout
-          Size="262.4,41.6"
-          Id="Package\set LastRunETL DateTime to a Variable"
-          TopLeft="542.142858084063,195.999999874655" />
-        <NodeLayout
-          Size="145.6,41.6"
+          Size="146,42"
           Id="Package\Stage To Core"
-          TopLeft="604.000000436392,367.411764504794" />
+          TopLeft="600.000000436392,285.411764504794" />
         <NodeLayout
-          Size="233.6,41.6"
+          Size="234,42"
           Id="Package\Update ETL_Metadata onSuccess"
-          TopLeft="565.428571782856,466.823529123538" />
+          TopLeft="554.428571782856,467.823529123538" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="675.071429260227,237.999999874655">
+          TopLeft="674.535714693976,156.999999965815">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,129.411764630139"
+              EndConnector="0,128.411764538979"
               Start="0,0"
-              End="0,121.911764630139">
+              End="0,120.911764538979">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,121.911764630139" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2 1]"
-          TopLeft="671.607143517811,98.999999965815">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,96.99999990884"
-              Start="0,0"
-              End="0,89.49999990884">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,89.49999990884" />
+                    End="0,120.911764538979" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4776,18 +5177,18 @@ AND DriverId = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="679.714286109624,409.011764504794">
+          TopLeft="672.214286109624,327.411764504794">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,57.8117646187441"
+              EndConnector="0,140.411764618744"
               Start="0,0"
-              End="0,50.3117646187441">
+              End="0,132.911764618744">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,50.3117646187441" />
+                    End="0,132.911764618744" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4805,111 +5206,119 @@ AND DriverId = ?</property>
       <GraphLayout
         Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="150.4,41.6"
-          Id="Package\Stage To Core\DimDriver Core"
-          TopLeft="65.5000000000002,818.299999999999" />
-        <NodeLayout
-          Size="155.2,41.6"
-          Id="Package\Stage To Core\Lookup Province"
-          TopLeft="249.1,310.299999999999" />
-        <NodeLayout
-          Size="270.4,41.6"
-          Id="Package\Stage To Core\Resize CityName,ProvinceName Columns"
-          TopLeft="5.50000000000017,615.099999999999" />
-        <NodeLayout
-          Size="147.2,41.6"
-          Id="Package\Stage To Core\Lookup Car 1"
-          TopLeft="620.441373220066,389.654010714686" />
-        <NodeLayout
-          Size="153.6,41.6"
-          Id="Package\Stage To Core\Conditional Split"
-          TopLeft="622.112555427579,487.694592800283" />
-        <NodeLayout
-          Size="142.4,41.6"
-          Id="Package\Stage To Core\Row Count 2"
-          TopLeft="657.619049018945,871.117646464719" />
-        <NodeLayout
-          Size="139.2,41.6"
-          Id="Package\Stage To Core\Row Count 1"
-          TopLeft="348.095238836242,639.348038824737" />
-        <NodeLayout
-          Size="270.4,41.6"
-          Id="Package\Stage To Core\Resize CityName,ProvinceName Columns 1"
-          TopLeft="598.650794925163,723.292810199304" />
-        <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\Stage To Core\Row Count"
-          TopLeft="75.9000000000002,716.699999999999" />
-        <NodeLayout
-          Size="169.6,41.6"
-          Id="Package\Stage To Core\Lookup Province 1"
-          TopLeft="616.105937242101,282.194576036858" />
-        <NodeLayout
-          Size="134.4,41.6"
-          Id="Package\Stage To Core\Lookup City"
-          TopLeft="269.614285683875,201.052941183173" />
-        <NodeLayout
-          Size="174.4,41.6"
+          Size="174,42"
           Id="Package\Stage To Core\OLE DB Command 1"
           TopLeft="652.904763251104,802.581698991969" />
         <NodeLayout
-          Size="136.8,41.6"
-          Id="Package\Stage To Core\Driver Stage"
-          TopLeft="481.3,5.49999999999973" />
+          Size="132,42"
+          Id="Package\Stage To Core\Lookup Car"
+          TopLeft="260.7,411.899999999999" />
         <NodeLayout
-          Size="246.4,41.6"
+          Size="170,42"
+          Id="Package\Stage To Core\Lookup Province 1"
+          TopLeft="616.105937242101,282.194576036858" />
+        <NodeLayout
+          Size="134,42"
+          Id="Package\Stage To Core\Lookup City"
+          TopLeft="269.614285683875,201.052941183173" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Stage To Core\Row Count 2 1"
+          TopLeft="965.955557376808,806.711110652779" />
+        <NodeLayout
+          Size="187,42"
+          Id="Package\Stage To Core\OLE DB Destination 1"
+          TopLeft="947.542858924915,887.005228386455" />
+        <NodeLayout
+          Size="246,42"
           Id="Package\Stage To Core\add isCurrent , StartDate , EndDate"
           TopLeft="139.9,513.499999999999" />
         <NodeLayout
-          Size="169.6,41.6"
+          Size="174,42"
+          Id="Package\Stage To Core\OLE DB Command 1 1"
+          TopLeft="953.384128735099,731.292810244885" />
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Stage To Core\Lookup Car 1"
+          TopLeft="620.441373220066,389.654010714686" />
+        <NodeLayout
+          Size="170,42"
           Id="Package\Stage To Core\OLE DB Destination"
           TopLeft="631.349207693183,942.999999499886" />
         <NodeLayout
-          Size="200.8,41.6"
+          Size="139,42"
+          Id="Package\Stage To Core\Row Count 1"
+          TopLeft="348.095238836242,639.348038824737" />
+        <NodeLayout
+          Size="270,42"
+          Id="Package\Stage To Core\Resize CityName,ProvinceName Columns 1"
+          TopLeft="598.650794925163,723.292810199304" />
+        <NodeLayout
+          Size="201,42"
           Id="Package\Stage To Core\lookup to insert or update"
           TopLeft="449.3,107.1" />
         <NodeLayout
-          Size="142.4,41.6"
+          Size="142,42"
           Id="Package\Stage To Core\Lookup City 1"
           TopLeft="633.880334282526,189.743735692704" />
         <NodeLayout
-          Size="164.8,41.6"
+          Size="130,42"
+          Id="Package\Stage To Core\Row Count"
+          TopLeft="75.9000000000002,716.699999999999" />
+        <NodeLayout
+          Size="277,42"
+          Id="Package\Stage To Core\add isCurrent , EndDate 1 , set startDate"
+          TopLeft="940.276191956676,585.0705880885" />
+        <NodeLayout
+          Size="270,42"
+          Id="Package\Stage To Core\Resize CityName,ProvinceName Columns"
+          TopLeft="5.50000000000017,615.099999999999" />
+        <NodeLayout
+          Size="270,42"
+          Id="Package\Stage To Core\Resize CityName,ProvinceName Columns 1 1"
+          TopLeft="901.273017556576,664.239215559142" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Stage To Core\DimDriver Core"
+          TopLeft="65.5000000000002,818.299999999999" />
+        <NodeLayout
+          Size="165,42"
           Id="Package\Stage To Core\OLE DB Command"
           TopLeft="332.936508645242,743.803921159748" />
         <NodeLayout
-          Size="200,41.6"
-          Id="Package\Stage To Core\add isCurrent , EndDate 1"
-          TopLeft="629.796826451395,641.830065083613" />
+          Size="137,42"
+          Id="Package\Stage To Core\Driver Stage"
+          TopLeft="481.3,5.49999999999973" />
         <NodeLayout
-          Size="132,41.6"
-          Id="Package\Stage To Core\Lookup Car"
-          TopLeft="260.7,411.899999999999" />
+          Size="155,42"
+          Id="Package\Stage To Core\Lookup Province"
+          TopLeft="249.1,310.299999999999" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Stage To Core\Row Count 2"
+          TopLeft="657.619049018945,871.117646464719" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Stage To Core\Conditional Split"
+          TopLeft="622.112555427579,487.694592800283" />
+        <NodeLayout
+          Size="292,42"
+          Id="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate"
+          TopLeft="572.796826451395,634.830065083613" />
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Derived Column Output]"
-          TopLeft="262.7,555.099999999999">
+          Id="Package\Stage To Core.Paths[Data Conversion Output2]"
+          TopLeft="1038.52857314584,705.839215559142">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-122,60.0000000000001"
+              EndConnector="0,25.4535946857427"
               Start="0,0"
-              End="-122,52.5000000000001">
+              End="0,17.9535946857427">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,26.0000000000001" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,26.0000000000001"
-                    Point2="0,30.0000000000001"
-                    Point3="-4,30.0000000000001" />
-                  <mssgle:LineSegment
-                    End="-118,30.0000000000001" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-118,30.0000000000001"
-                    Point2="-122,30.0000000000001"
-                    Point3="-122,34.0000000000001" />
-                  <mssgle:LineSegment
-                    End="-122,52.5000000000001" />
+                    End="0,17.9535946857427" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4963,6 +5372,78 @@ AND DriverId = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Stage To Core.Paths[scd type 2 for driver province and city]"
+          TopLeft="699.112555427579,529.694592800283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="19.684271023816,105.13547228333"
+              Start="0,0"
+              End="19.684271023816,97.63547228333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.567736141665" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,48.567736141665"
+                    Point2="0,52.567736141665"
+                    Point3="4,52.567736141665" />
+                  <mssgle:LineSegment
+                    End="15.684271023816,52.567736141665" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.684271023816,52.567736141665"
+                    Point2="19.684271023816,52.567736141665"
+                    Point3="19.684271023816,56.567736141665" />
+                  <mssgle:LineSegment
+                    End="19.684271023816,97.63547228333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-74.684876206842,57.567736141665,169.0540234375,11.658203125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[scd type 2 for car]"
+          TopLeft="735.612555427579,529.694592800283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="343.163636529097,55.375995288217"
+              Start="0,0"
+              End="343.163636529097,47.875995288217">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.0870451844493" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.0870451844493"
+                    Point2="0,19.0870451844493"
+                    Point3="4,19.0870451844493" />
+                  <mssgle:LineSegment
+                    End="339.163636529097,19.0870451844493" />
+                  <mssgle:CubicBezierSegment
+                    Point1="339.163636529097,19.0870451844493"
+                    Point2="343.163636529097,19.0870451844493"
+                    Point3="343.163636529097,23.0870451844493" />
+                  <mssgle:LineSegment
+                    End="343.163636529097,47.875995288217" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="132.088048733299,24.0870451844493,78.9875390625,11.658203125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Stage To Core.Paths[scd type 1]"
           TopLeft="674.645888760912,529.294592800283">
           <EdgeLayout.Curve>
@@ -4996,6 +5477,28 @@ AND DriverId = ?</property>
             <mssgm:EdgeLabel
               BoundingBox="-151.620969493585,49.7021213748812,46.2912890625,11.609375"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Row Count Output 13]"
+          TopLeft="1043.54920815086,848.311110652779">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.6941177336761"
+              Start="0,0"
+              End="0,31.1941177336761">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.1941177336761" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -5099,6 +5602,28 @@ AND DriverId = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Stage To Core.Paths[OLE DB Command Output1]"
+          TopLeft="1043.26984305595,772.892810244885">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.818300407894"
+              Start="0,0"
+              End="0,26.318300407894">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.318300407894" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Stage To Core.Paths[OLE DB Command Output]"
           TopLeft="740.104763251104,844.181698991969">
           <EdgeLayout.Curve>
@@ -5170,126 +5695,6 @@ AND DriverId = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Lookup Match Output6]"
-          TopLeft="326.7,351.899999999999">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,20.4453125,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output5]"
-          TopLeft="581.833333333333,148.7">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="123.247000949193,41.0437356927044"
-              Start="0,0"
-              End="123.247000949193,33.5437356927044">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,12.6121681222645" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,12.6121681222645"
-                    Point2="0,16.6121681222645"
-                    Point3="4,16.6121681222645" />
-                  <mssgle:LineSegment
-                    End="119.247000949193,16.6121681222645" />
-                  <mssgle:CubicBezierSegment
-                    Point1="119.247000949193,16.6121681222645"
-                    Point2="123.247000949193,16.6121681222645"
-                    Point3="123.247000949193,20.6121681222645" />
-                  <mssgle:LineSegment
-                    End="123.247000949193,33.5437356927044" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="13.4321137558465,21.6121681222645,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output4]"
-          TopLeft="702.993135762313,231.343735692704">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,50.8508403441539"
-              Start="0,0"
-              End="0,43.3508403441539">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,43.3508403441539" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,15.870732672077,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output3]"
-          TopLeft="336.414285683875,242.652941183173">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-9.71428568387512,67.6470588168264"
-              Start="0,0"
-              End="-9.71428568387512,60.1470588168264">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,29.8235294084132" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,29.8235294084132"
-                    Point2="0,33.8235294084132"
-                    Point3="-4,33.8235294084132" />
-                  <mssgle:LineSegment
-                    End="-5.71428568387512,33.8235294084132" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-5.71428568387512,33.8235294084132"
-                    Point2="-9.71428568387512,33.8235294084132"
-                    Point3="-9.71428568387512,37.8235294084132" />
-                  <mssgle:LineSegment
-                    End="-9.71428568387512,60.1470588168264" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-53.0485295606876,38.8235294084132,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output2]"
           TopLeft="696.676964323823,431.254010714686">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -5313,7 +5718,31 @@ AND DriverId = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output1]"
+          Id="Package\Stage To Core.Paths[Lookup Match Output5]"
+          TopLeft="697.473655231084,323.794576036858">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65.8594346778281"
+              Start="0,0"
+              End="0,58.3594346778281">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.3594346778281" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,23.375029838914,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output4]"
           TopLeft="326.7,453.499999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -5349,175 +5778,151 @@ AND DriverId = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output3]"
+          TopLeft="581.833333333333,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="123.247000949193,41.0437356927044"
+              Start="0,0"
+              End="123.247000949193,33.5437356927044">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.6121681222645" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.6121681222645"
+                    Point2="0,16.6121681222645"
+                    Point3="4,16.6121681222645" />
+                  <mssgle:LineSegment
+                    End="119.247000949193,16.6121681222645" />
+                  <mssgle:CubicBezierSegment
+                    Point1="119.247000949193,16.6121681222645"
+                    Point2="123.247000949193,16.6121681222645"
+                    Point3="123.247000949193,20.6121681222645" />
+                  <mssgle:LineSegment
+                    End="123.247000949193,33.5437356927044" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="13.4321137558465,21.6121681222645,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output2]"
+          TopLeft="336.414285683875,242.652941183173">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9.71428568387512,67.6470588168264"
+              Start="0,0"
+              End="-9.71428568387512,60.1470588168264">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.8235294084132" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.8235294084132"
+                    Point2="0,33.8235294084132"
+                    Point3="-4,33.8235294084132" />
+                  <mssgle:LineSegment
+                    End="-5.71428568387512,33.8235294084132" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5.71428568387512,33.8235294084132"
+                    Point2="-9.71428568387512,33.8235294084132"
+                    Point3="-9.71428568387512,37.8235294084132" />
+                  <mssgle:LineSegment
+                    End="-9.71428568387512,60.1470588168264" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-53.0485295606876,38.8235294084132,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output1]"
+          TopLeft="702.993135762313,231.343735692704">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.8508403441539"
+              Start="0,0"
+              End="0,43.3508403441539">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.3508403441539" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,15.870732672077,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Stage To Core.Paths[Lookup Match Output]"
-          TopLeft="697.473655231084,323.794576036858">
+          TopLeft="326.7,351.899999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,65.8594346778281"
+              EndConnector="0,59.9999999999999"
               Start="0,0"
-              End="0,58.3594346778281">
+              End="0,52.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,58.3594346778281" />
+                    End="0,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,23.375029838914,96.3827734375,11.609375"
+              BoundingBox="-48.19138671875,20.4453125,96.3827734375,11.609375"
               RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Derived Column Output1]"
-          TopLeft="731.823810688279,683.430065083613">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,39.86274511569"
-              Start="0,0"
-              End="0,32.36274511569">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.36274511569" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[scd type 2 for driver province and city]"
-          TopLeft="726.48802427282,529.294592800283">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,112.53547228333"
-              Start="0,0"
-              End="0,105.03547228333">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,105.03547228333" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-84.52701171875,46.6886345791652,169.0540234375,11.658203125"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="160,41.6"
-          Id="Package\Stage To Core\Row Count 2 1"
-          TopLeft="965.955557376808,806.711110652779" />
-        <NodeLayout
-          Size="270.4,41.6"
-          Id="Package\Stage To Core\Resize CityName,ProvinceName Columns 1 1"
-          TopLeft="901.273017556576,664.239215559142" />
-        <NodeLayout
-          Size="174.4,41.6"
-          Id="Package\Stage To Core\OLE DB Command 1 1"
-          TopLeft="953.384128735099,731.292810244885" />
-        <NodeLayout
-          Size="187.2,41.6"
-          Id="Package\Stage To Core\OLE DB Destination 1"
-          TopLeft="947.542858924915,887.005228386455" />
-        <NodeLayout
-          Size="200,41.6"
-          Id="Package\Stage To Core\add isCurrent , EndDate 1 1"
-          TopLeft="940.276191956676,585.0705880885" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Data Conversion Output2]"
-          TopLeft="1038.52857314584,705.839215559142">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,25.4535946857427"
-              Start="0,0"
-              End="0,17.9535946857427">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,17.9535946857427" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Row Count Output 13]"
-          TopLeft="1043.54920815086,848.311110652779">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,38.6941177336761"
-              Start="0,0"
-              End="0,31.1941177336761">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.1941177336761" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[OLE DB Command Output1]"
-          TopLeft="1043.26984305595,772.892810244885">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,33.818300407894"
-              Start="0,0"
-              End="0,26.318300407894">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26.318300407894" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Derived Column Output2]"
-          TopLeft="1038.37460475663,626.6705880885">
+          TopLeft="1078.77619195668,627.0705880885">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,37.5686274706422"
+              EndConnector="-42.5031744001001,37.168627470642"
               Start="0,0"
-              End="0,30.0686274706422">
+              End="-42.5031744001001,29.668627470642">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.0686274706422" />
+                    End="0,14.584313735321" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.584313735321"
+                    Point2="0,18.584313735321"
+                    Point3="-4,18.584313735321" />
+                  <mssgle:LineSegment
+                    End="-38.5031744001001,18.584313735321" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-38.5031744001001,18.584313735321"
+                    Point2="-42.5031744001001,18.584313735321"
+                    Point3="-42.5031744001001,22.584313735321" />
+                  <mssgle:LineSegment
+                    End="-42.5031744001001,29.668627470642" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -5527,39 +5932,71 @@ AND DriverId = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[scd type 2 for car]"
-          TopLeft="735.312555427579,529.294592800283">
+          Id="Package\Stage To Core.Paths[Derived Column Output1]"
+          TopLeft="718.796826451395,676.830065083613">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="272.963636529098,55.7759952882167"
+              EndConnector="14.8539684737681,46.462745115691"
               Start="0,0"
-              End="272.963636529098,48.2759952882167">
+              End="14.8539684737681,38.962745115691">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.3279302302206" />
+                    End="0,19.2313725578455" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,20.3279302302206"
-                    Point2="0,24.3279302302206"
-                    Point3="4,24.3279302302206" />
+                    Point1="0,19.2313725578455"
+                    Point2="0,23.2313725578455"
+                    Point3="4,23.2313725578455" />
                   <mssgle:LineSegment
-                    End="268.963636529098,24.3279302302206" />
+                    End="10.8539684737681,23.2313725578455" />
                   <mssgle:CubicBezierSegment
-                    Point1="268.963636529098,24.3279302302206"
-                    Point2="272.963636529098,24.3279302302206"
-                    Point3="272.963636529098,28.3279302302206" />
+                    Point1="10.8539684737681,23.2313725578455"
+                    Point2="14.8539684737681,23.2313725578455"
+                    Point3="14.8539684737681,27.2313725578455" />
                   <mssgle:LineSegment
-                    End="272.963636529098,48.2759952882167" />
+                    End="14.8539684737681,38.962745115691" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="96.9880487332988,29.3279302302206,78.9875390625,11.658203125"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Derived Column Output]"
+          TopLeft="262.7,555.099999999999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-122,60.0000000000001"
+              Start="0,0"
+              End="-122,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.0000000000001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.0000000000001"
+                    Point2="0,30.0000000000001"
+                    Point3="-4,30.0000000000001" />
+                  <mssgle:LineSegment
+                    End="-118,30.0000000000001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-118,30.0000000000001"
+                    Point2="-122,30.0000000000001"
+                    Point3="-122,34.0000000000001" />
+                  <mssgle:LineSegment
+                    End="-122,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -5578,7 +6015,76 @@ AND DriverId = ?</property>
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\DimDriver Core">
+    design-time-name="Package\Stage To Core\Lookup Car">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[Car]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Lookup Province 1">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[Province]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Lookup City">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[City]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\OLE DB Destination 1">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -5601,7 +6107,7 @@ AND DriverId = ?</property>
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[Stage].[Car]</Value>
+          type="q3:string">[dbo].[Car]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
@@ -5610,16 +6116,6 @@ AND DriverId = ?</property>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup Province 1">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -5642,7 +6138,7 @@ AND DriverId = ?</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:string">false</Value>
+          type="q2:boolean">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -5652,7 +6148,7 @@ AND DriverId = ?</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:string">0</Value>
+          type="q4:int">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -5670,7 +6166,7 @@ AND DriverId = ?</property>
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[Stage].[City]</Value>
+          type="q3:string">[dbo].[City]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
@@ -5683,7 +6179,33 @@ AND DriverId = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup Car">
+    design-time-name="Package\Stage To Core\DimDriver Core">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Driver Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Lookup Province">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
@@ -5693,7 +6215,7 @@ AND DriverId = ?</property>
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[Stage].[Car]</Value>
+          type="q3:string">[dbo].[Province]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
@@ -5702,19 +6224,6 @@ AND DriverId = ?</property>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\OLE DB Destination 1">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
