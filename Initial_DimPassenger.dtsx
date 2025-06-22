@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Initial_DimPassenger"
   DTS:PackageType="5"
-  DTS:VersionBuild="59"
-  DTS:VersionGUID="{899D5581-74D1-4731-8F57-8D0435BB2B78}">
+  DTS:VersionBuild="60"
+  DTS:VersionGUID="{90B505F8-1562-46FC-9DFC-059D5F264E85}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -872,17 +872,17 @@
     design-time-name="Package\Stage To Core">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="130,42"
+          Size="129.6,41.6"
           Id="Package\Stage To Core\Row Count"
           TopLeft="319.999995231629,309.99999538064" />
         <NodeLayout
-          Size="179,42"
+          Size="179.2,41.6"
           Id="Package\Stage To Core\DImPassenger Core"
           TopLeft="298.33332888782,423.499993689358" />
         <NodeLayout
-          Size="182,42"
+          Size="182.4,41.6"
           Id="Package\Stage To Core\Passenger Stage Data"
           TopLeft="290.666662335396,181.833330623806" />
         <EdgeLayout
@@ -904,9 +904,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -928,9 +926,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
