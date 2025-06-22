@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{79639BE8-212A-47F9-9192-BD9A2E5F8EC1}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{40279FD9-37A9-4E06-ADCE-F543BB481317}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -369,6 +369,149 @@
                       refId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Derived Default Value for dimension Keys"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Default Value for dimension Keys"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input].Columns[DriverOriginLocationKey]"
+                      cachedDataType="i4"
+                      cachedName="DriverOriginLocationKey"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Lookup DriverOriginLocation.Outputs[Lookup Match Output].Columns[DriverOriginLocationKey]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[REPLACENULL](#{Package\Stage To Core\Lookup DriverOriginLocation.Outputs[Lookup Match Output].Columns[DriverOriginLocationKey]},-1)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">REPLACENULL(DriverOriginLocationKey,-1)</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input].Columns[FinalizedRequestTimeKey]"
+                      cachedDataType="i4"
+                      cachedName="FinalizedRequestTimeKey"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[FinalizedRequestTimeKey]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[REPLACENULL](#{Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[FinalizedRequestTimeKey]},-1)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">REPLACENULL(FinalizedRequestTimeKey,-1)</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input].Columns[FinalizedRequestDateKey]"
+                      cachedDataType="i4"
+                      cachedName="FinalizedRequestDateKey"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[FinalizedRequestDateKey]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[REPLACENULL](#{Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[FinalizedRequestDateKey]},-1)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">REPLACENULL(FinalizedRequestDateKey,-1)</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input].Columns[DriverKey]"
+                      cachedDataType="i4"
+                      cachedName="DriverKey"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Lookup DriverKey.Outputs[Lookup Match Output].Columns[DriverKey]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[REPLACENULL](#{Package\Stage To Core\Lookup DriverKey.Outputs[Lookup Match Output].Columns[DriverKey]},-1)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">REPLACENULL(DriverKey,-1)</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -2339,9 +2482,14 @@ WHERE StatusId &lt;&gt; 2</property>
               startId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output]" />
             <path
               refId="Package\Stage To Core.Paths[Derived Column Output1]"
-              endId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
+              endId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input]"
               name="Derived Column Output"
               startId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Derived Column Output2]"
+              endId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
+              name="Derived Column Output"
+              startId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Output]" />
             <path
               refId="Package\Stage To Core.Paths[Lookup Match Output]"
               endId="Package\Stage To Core\Lookup Passenger Key.Inputs[Lookup Input]"
@@ -2546,7 +2694,7 @@ WHERE StatusId &lt;&gt; 2</property>
         <NodeLayout
           Size="132.8,41.6"
           Id="Package\Stage To Core\Row Count"
-          TopLeft="226.857138105497,508.99999526669" />
+          TopLeft="256.857138169359,574.764701091397" />
         <NodeLayout
           Size="217.6,41.6"
           Id="Package\Stage To Core\Lookup Destination Location"
@@ -2570,7 +2718,7 @@ WHERE StatusId &lt;&gt; 2</property>
         <NodeLayout
           Size="182.4,59.2"
           Id="Package\Stage To Core\Fact trip denteination"
-          TopLeft="500,501" />
+          TopLeft="525.000000053219,537.705882320767" />
         <NodeLayout
           Size="212,41.6"
           Id="Package\Stage To Core\Derived Calculate measure"
@@ -2607,18 +2755,30 @@ WHERE StatusId &lt;&gt; 2</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Row Count Output 1]"
-          TopLeft="359.857138105497,530.249997633345">
+          TopLeft="389.657138169359,595.564701091397">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="140.142861894503,0"
+              EndConnector="135.34286188386,-28.2588187706302"
               Start="0,0"
-              End="132.642861894503,0">
+              End="127.84286188386,-28.2588187706302">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="132.642861894503,0" />
+                    End="63.6714309419298,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="63.6714309419298,0"
+                    Point2="67.6714309419298,0"
+                    Point3="67.6714309419298,-4" />
+                  <mssgle:LineSegment
+                    End="67.6714309419298,-24.2588187706302" />
+                  <mssgle:CubicBezierSegment
+                    Point1="67.6714309419298,-24.2588187706302"
+                    Point2="67.6714309419298,-28.2588187706302"
+                    Point3="71.6714309419298,-28.2588187706302" />
+                  <mssgle:LineSegment
+                    End="127.84286188386,-28.2588187706302" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2793,20 +2953,58 @@ WHERE StatusId &lt;&gt; 2</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="273.6,41.6"
+          Id="Package\Stage To Core\Derived Default Value for dimension Keys"
+          TopLeft="164.02857156998,494.094117291803" />
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Derived Column Output1]"
-          TopLeft="295.678569052749,468">
+          TopLeft="299.41428578499,467.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,40.99999526669"
+              EndConnector="0,26.4941172918026"
               Start="0,0"
-              End="0,33.49999526669">
+              End="0,18.9941172918026">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.49999526669" />
+                    End="0,18.9941172918026" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Derived Column Output2]"
+          TopLeft="300.82857156998,535.694117291803">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="22.4285665993787,39.0705837995947"
+              Start="0,0"
+              End="22.4285665993787,31.5705837995947">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5352918997974" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.5352918997974"
+                    Point2="0,19.5352918997974"
+                    Point3="4,19.5352918997974" />
+                  <mssgle:LineSegment
+                    End="18.4285665993787,19.5352918997974" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.4285665993787,19.5352918997974"
+                    Point2="22.4285665993787,19.5352918997974"
+                    Point3="22.4285665993787,23.5352918997974" />
+                  <mssgle:LineSegment
+                    End="22.4285665993787,31.5705837995947" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2830,5 +3028,18 @@ WHERE StatusId &lt;&gt; 2</property>
       </GraphLayout>
     </LayoutInfo>
   </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Request stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

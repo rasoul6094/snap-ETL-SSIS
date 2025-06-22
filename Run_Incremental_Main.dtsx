@@ -1,70 +1,70 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="6/13/2025 1:36:32 AM"
+  DTS:CreationDate="6/22/2025 6:16:33 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="DESKTOP-0S8CU17"
   DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
-  DTS:DTSID="{78956D4D-4F09-407F-9643-BEE8CF91CD12}"
+  DTS:DTSID="{991C7FAB-AEC1-4FF6-AE0D-C84F93F909DA}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{F61A4CD6-D640-4DF7-8E5E-C338AEAA2ADF}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{1E2DCB1A-0AB9-4CB4-BCD9-1DC281ED38CC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\initial facts"
+      DTS:refId="Package\incremental dims"
       DTS:CreationName="Microsoft.ExecutePackageTask"
       DTS:Description="Execute Package Task"
-      DTS:DTSID="{9BB399EB-62BF-4019-9751-22FC3AE0A90E}"
+      DTS:DTSID="{dd5e41b2-586d-48d2-8b17-4cd01e40fcce}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="initial facts"
+      DTS:ObjectName="incremental dims"
       DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
-          <PackageName>RunInitialFacts.dtsx</PackageName>
+          <PackageName>Run_Incremental_Dims.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\initial srouce to sage"
+      DTS:refId="Package\incremental facts"
       DTS:CreationName="Microsoft.ExecutePackageTask"
       DTS:Description="Execute Package Task"
-      DTS:DTSID="{88D23286-6458-4DCA-A25B-19C3542C334C}"
+      DTS:DTSID="{528b611c-8d3c-45c0-ba7c-86a95c3484d6}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="initial srouce to sage"
+      DTS:ObjectName="incremental facts"
       DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
-          <PackageName>Initial_SourceToStage.dtsx</PackageName>
+          <PackageName>Run_Incremental_Facts.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\intiial dims"
+      DTS:refId="Package\incremental srouce to sage"
       DTS:CreationName="Microsoft.ExecutePackageTask"
       DTS:Description="Execute Package Task"
-      DTS:DTSID="{BFD3EB3D-3100-4944-B826-9FC58C05D67E}"
+      DTS:DTSID="{6e9cf911-586e-4554-a046-b5a010418cb1}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="intiial dims"
+      DTS:ObjectName="incremental srouce to sage"
       DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
-          <PackageName>RunInitialDims.dtsx</PackageName>
+          <PackageName>Incremental_SourceToStage.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -73,19 +73,19 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{0C876D3F-AB5D-44E3-8CB1-35E1A9F38079}"
-      DTS:From="Package\initial srouce to sage"
+      DTS:DTSID="{26a0d0d5-6e5c-4163-a193-0bbbdcccfdd6}"
+      DTS:From="Package\incremental srouce to sage"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\intiial dims" />
+      DTS:To="Package\incremental dims" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{47142C7A-04B0-401F-A74E-C397B5EC09CD}"
-      DTS:From="Package\intiial dims"
+      DTS:DTSID="{2681fc2f-c18c-4eef-8eab-5b37ec589d02}"
+      DTS:From="Package\incremental dims"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\initial facts" />
+      DTS:To="Package\incremental facts" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -100,27 +100,31 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="175.2,41.6"
-          Id="Package\initial srouce to sage"
-          TopLeft="133.571428855767,38.999999965815" />
+          Size="158.4,41.6"
+          Id="Package\incremental dims"
+          TopLeft="84.285714337413,183.882352832589" />
         <NodeLayout
-          Size="128.8,41.6"
-          Id="Package\intiial dims"
-          TopLeft="157.85714319318,162.882352798404" />
+          Size="159.2,41.6"
+          Id="Package\incremental facts"
+          TopLeft="98.5714286535376,287.882352741429" />
+        <NodeLayout
+          Size="205.6,41.6"
+          Id="Package\incremental srouce to sage"
+          TopLeft="60,60" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="221.714286024474,80.599999965815">
+          TopLeft="163.142857168707,101.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,82.2823528325885"
+              EndConnector="0,82.282352832589"
               Start="0,0"
-              End="0,74.7823528325885">
+              End="0,74.782352832589">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,74.7823528325885" />
+                    End="0,74.782352832589" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -129,24 +133,32 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="136.8,41.6"
-          Id="Package\initial facts"
-          TopLeft="152.857143182536,266.882352707244" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="221.757143187858,204.482352798404">
+          TopLeft="163.485714337413,225.482352832589">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,62.3999999088402"
+              EndConnector="14.6857143161245,62.39999990884"
               Start="0,0"
-              End="0,54.8999999088402">
+              End="14.6857143161245,54.89999990884">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,54.8999999088402" />
+                    End="0,27.19999995442" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.19999995442"
+                    Point2="0,31.19999995442"
+                    Point3="4,31.19999995442" />
+                  <mssgle:LineSegment
+                    End="10.6857143161245,31.19999995442" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10.6857143161245,31.19999995442"
+                    Point2="14.6857143161245,31.19999995442"
+                    Point3="14.6857143161245,35.19999995442" />
+                  <mssgle:LineSegment
+                    End="14.6857143161245,54.89999990884" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="51"
-  DTS:VersionGUID="{7D5FBB05-A51A-4D28-9D90-4241BAC45658}">
+  DTS:VersionBuild="54"
+  DTS:VersionGUID="{C4AF2F07-5FA8-49CC-A996-AC35EEBA210C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -3093,45 +3093,57 @@ where [refTable].[RequestID] = ?</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="212.8,41.6"
+          Id="Package\Stage To Core\lookup payment method key"
+          TopLeft="474.542858147925,299.623529191908" />
+        <NodeLayout
           Size="164.8,41.6"
           Id="Package\Stage To Core\Lookup Driver Key"
           TopLeft="540.000000883426,209.235293981577" />
-        <NodeLayout
-          Size="184.8,41.6"
-          Id="Package\Stage To Core\Lookup request stage"
-          TopLeft="480.857143437984,101.12941179755" />
-        <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\Stage To Core\Trip Stage"
-          TopLeft="217.666661845786,97.5980365852537" />
         <NodeLayout
           Size="204,41.6"
           Id="Package\Stage To Core\extract date and time keys"
           TopLeft="785.285715593368,94.5294116836002" />
         <NodeLayout
-          Size="280.8,41.6"
-          Id="Package\Stage To Core\Lookup Discount Amount and Discount key"
-          TopLeft="172.523804634505,209.176470694142" />
-        <NodeLayout
           Size="182.4,59.2"
           Id="Package\Stage To Core\Fact trip denteination"
           TopLeft="644.714286024473,550.705882309372" />
         <NodeLayout
-          Size="180.8,41.6"
-          Id="Package\Stage To Core\Lookup PassengerKey"
-          TopLeft="804.428572772717,211.882352798404" />
+          Size="184.8,41.6"
+          Id="Package\Stage To Core\Lookup request stage"
+          TopLeft="480.857143437984,101.12941179755" />
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\Stage To Core\lookup origin locaiton key"
+          TopLeft="727.857144108536,299.364701421852" />
         <NodeLayout
           Size="132.8,41.6"
           Id="Package\Stage To Core\Row Count"
           TopLeft="227.571423821303,573.235289328032" />
         <NodeLayout
+          Size="273.6,41.6"
+          Id="Package\Stage To Core\Derived Default Value for dimension Keys"
+          TopLeft="158.571428610962,505.035293787862" />
+        <NodeLayout
+          Size="224,41.6"
+          Id="Package\Stage To Core\lookup destination location key"
+          TopLeft="181.428571516762,297.835289658487" />
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Stage To Core\Trip Stage"
+          TopLeft="217.666661845786,97.5980365852537" />
+        <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\Stage To Core\Lookup PassengerKey"
+          TopLeft="804.428572772717,211.882352798404" />
+        <NodeLayout
           Size="212,41.6"
           Id="Package\Stage To Core\Derived Calculate measure"
           TopLeft="209.857142895156,421.411764709904" />
         <NodeLayout
-          Size="273.6,41.6"
-          Id="Package\Stage To Core\Derived Default Value for dimension Keys"
-          TopLeft="158.571428610962,505.035293787862" />
+          Size="280.8,41.6"
+          Id="Package\Stage To Core\Lookup Discount Amount and Discount key"
+          TopLeft="172.523804634505,209.176470694142" />
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Row Count Output 1]"
           TopLeft="360.371423821303,594.035289328032">
@@ -3186,6 +3198,126 @@ where [refTable].[RequestID] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output6]"
+          TopLeft="827.057144108536,340.964701421852">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-511.20000121338,80.4470632880516"
+              Start="0,0"
+              End="-511.20000121338,72.9470632880516">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.2235316440258" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.2235316440258"
+                    Point2="0,40.2235316440258"
+                    Point3="-4,40.2235316440258" />
+                  <mssgle:LineSegment
+                    End="-507.20000121338,40.2235316440258" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-507.20000121338,40.2235316440258"
+                    Point2="-511.20000121338,40.2235316440258"
+                    Point3="-511.20000121338,44.2235316440258" />
+                  <mssgle:LineSegment
+                    End="-511.20000121338,72.9470632880516" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-303.79138732544,45.2235316440258,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output5]"
+          TopLeft="687.342858147925,320.29411530688">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40.5142859606108,0"
+              Start="0,0"
+              End="33.0142859606108,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="33.0142859606108,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-31.6842437384446,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output4]"
+          TopLeft="405.428571516762,319.529409425198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="69.1142866311638,0"
+              Start="0,0"
+              End="61.6142866311638,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="61.6142866311638,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-17.3842434031681,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output3]"
+          TopLeft="312.923804634505,250.776470694142">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-19.4952331177435,47.0588189643452"
+              Start="0,0"
+              End="-19.4952331177435,39.5588189643452">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5294094821726" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5294094821726"
+                    Point2="0,23.5294094821726"
+                    Point3="-4,23.5294094821726" />
+                  <mssgle:LineSegment
+                    End="-15.4952331177435,23.5294094821726" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-15.4952331177435,23.5294094821726"
+                    Point2="-19.4952331177435,23.5294094821726"
+                    Point3="-19.4952331177435,27.5294094821726" />
+                  <mssgle:LineSegment
+                    End="-19.4952331177435,39.5588189643452" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-57.9390032776217,28.5294094821726,96.3827734375,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3338,138 +3470,6 @@ where [refTable].[RequestID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="224,41.6"
-          Id="Package\Stage To Core\lookup destination location key"
-          TopLeft="181.428571516762,297.835289658487" />
-        <NodeLayout
-          Size="198.4,41.6"
-          Id="Package\Stage To Core\lookup origin locaiton key"
-          TopLeft="727.857144108536,299.364701421852" />
-        <NodeLayout
-          Size="212.8,41.6"
-          Id="Package\Stage To Core\lookup payment method key"
-          TopLeft="474.542858147925,299.623529191908" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output3]"
-          TopLeft="312.923804634505,250.776470694142">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-19.4952331177435,47.0588189643452"
-              Start="0,0"
-              End="-19.4952331177435,39.5588189643452">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,19.5294094821726" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,19.5294094821726"
-                    Point2="0,23.5294094821726"
-                    Point3="-4,23.5294094821726" />
-                  <mssgle:LineSegment
-                    End="-15.4952331177435,23.5294094821726" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-15.4952331177435,23.5294094821726"
-                    Point2="-19.4952331177435,23.5294094821726"
-                    Point3="-19.4952331177435,27.5294094821726" />
-                  <mssgle:LineSegment
-                    End="-19.4952331177435,39.5588189643452" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-57.9390032776217,28.5294094821726,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output4]"
-          TopLeft="405.428571516762,319.529409425198">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="69.1142866311638,0"
-              Start="0,0"
-              End="61.6142866311638,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="61.6142866311638,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-17.3842434031681,5,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output5]"
-          TopLeft="687.342858147925,320.29411530688">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="40.5142859606108,0"
-              Start="0,0"
-              End="33.0142859606108,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="33.0142859606108,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-31.6842437384446,5,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output6]"
-          TopLeft="827.057144108536,340.964701421852">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-511.20000121338,80.4470632880516"
-              Start="0,0"
-              End="-511.20000121338,72.9470632880516">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,36.2235316440258" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,36.2235316440258"
-                    Point2="0,40.2235316440258"
-                    Point3="-4,40.2235316440258" />
-                  <mssgle:LineSegment
-                    End="-507.20000121338,40.2235316440258" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-507.20000121338,40.2235316440258"
-                    Point2="-511.20000121338,40.2235316440258"
-                    Point3="-511.20000121338,44.2235316440258" />
-                  <mssgle:LineSegment
-                    End="-511.20000121338,72.9470632880516" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-303.79138732544,45.2235316440258,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -3485,6 +3485,29 @@ where [refTable].[RequestID] = ?</property>
       </GraphLayout>
     </LayoutInfo>
   </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\lookup payment method key">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[Core].[DimPaymentMethod]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Stage To Core\Lookup Driver Key">
     <Properties>
@@ -3509,30 +3532,7 @@ where [refTable].[RequestID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup request stage">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[Request]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Trip Stage">
+    design-time-name="Package\Stage To Core\Fact trip denteination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3545,22 +3545,22 @@ where [refTable].[RequestID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup Discount Amount and Discount key">
+    design-time-name="Package\Stage To Core\Lookup request stage">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[Core].[DimDiscount]</Value>
+          type="q3:string">[dbo].[Request]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3568,7 +3568,53 @@ where [refTable].[RequestID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Fact trip denteination">
+    design-time-name="Package\Stage To Core\lookup origin locaiton key">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[Core].[DimLocation]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\lookup destination location key">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[Core].[DimLocation]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Trip Stage">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3604,68 +3650,22 @@ where [refTable].[RequestID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\lookup destination location key">
+    design-time-name="Package\Stage To Core\Lookup Discount Amount and Discount key">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[Core].[DimLocation]</Value>
+          type="q3:string">[Core].[DimDiscount]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\lookup origin locaiton key">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[Core].[DimLocation]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\lookup payment method key">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[Core].[DimPaymentMethod]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>

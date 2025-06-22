@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-GDRMTJV\HP"
   DTS:DTSID="{6AFE548A-6D61-4319-A0FD-567C4F511D3E}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{3DB3CA53-E7A6-4422-8DB4-B2955236CF8A}">
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{8084AAF6-3465-4986-898F-3E9B13392A7B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -145,7 +145,7 @@
                       refId="Package\Stage To Core\Derived Calculate measure.Inputs[Derived Column Input].Columns[DiscountAmount]"
                       cachedDataType="i4"
                       cachedName="DiscountAmount"
-                      lineageId="Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Match Output].Columns[DiscountAmount]" />
+                      lineageId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output].Columns[DiscountAmount]" />
                     <inputColumn
                       refId="Package\Stage To Core\Derived Calculate measure.Inputs[Derived Column Input].Columns[PassengerBoardingDatetime]"
                       cachedDataType="wstr"
@@ -237,7 +237,7 @@
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">[REPLACENULL](#{Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Match Output].Columns[DiscountAmount]},0)</property>
+                          name="Expression">[REPLACENULL](#{Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output].Columns[DiscountAmount]},0)</property>
                         <property
                           containsID="true"
                           dataType="System.String"
@@ -285,7 +285,7 @@
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[CostAmount]} - [REPLACENULL](#{Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Match Output].Columns[DiscountAmount]},0)</property>
+                          name="Expression">#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[CostAmount]} - [REPLACENULL](#{Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output].Columns[DiscountAmount]},0)</property>
                         <property
                           containsID="true"
                           dataType="System.String"
@@ -473,6 +473,80 @@
                       refId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Derived Default Value for dimension Keys"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Default Value for dimension Keys"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input].Columns[DiscountKey]"
+                      cachedDataType="i4"
+                      cachedName="DiscountKey"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output].Columns[DiscountKey]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[REPLACENULL](#{Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output].Columns[DiscountKey]},-1)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">REPLACENULL(DiscountKey,-1)</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -932,29 +1006,29 @@
                       externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DelayPessangerBoardingInSec]"
                       lineageId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Output].Columns[DelayPessangerBoardingInSec]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[OriginLocationKey]"
-                      cachedDataType="i4"
-                      cachedName="OriginLocationKey"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[OriginLocationKey]"
-                      lineageId="Package\Stage To Core\Lookup Origin Location.Outputs[Lookup Match Output].Columns[OriginLocationKey]" />
-                    <inputColumn
                       refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[DestinationLocationKey]"
                       cachedDataType="i4"
                       cachedName="DestinationLocationKey"
                       externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DestinationLocationKey]"
-                      lineageId="Package\Stage To Core\Lookup Destination Location.Outputs[Lookup Match Output].Columns[DestinationLocationKey]" />
+                      lineageId="Package\Stage To Core\lookup destination location key.Outputs[Lookup Match Output].Columns[DestinationLocationKey]" />
                     <inputColumn
                       refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[PaymentMethodKey]"
                       cachedDataType="i4"
                       cachedName="PaymentMethodKey"
                       externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[PaymentMethodKey]"
-                      lineageId="Package\Stage To Core\Lookup Payment Method.Outputs[Lookup Match Output].Columns[PaymentMethodKey]" />
+                      lineageId="Package\Stage To Core\lookup payment method key.Outputs[Lookup Match Output].Columns[PaymentMethodKey]" />
                     <inputColumn
                       refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[DiscountKey]"
                       cachedDataType="i4"
                       cachedName="DiscountKey"
                       externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DiscountKey]"
-                      lineageId="Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Match Output].Columns[DiscountKey]" />
+                      lineageId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output].Columns[DiscountKey]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[OriginLocationKey]"
+                      cachedDataType="i4"
+                      cachedName="OriginLocationKey"
+                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[OriginLocationKey]"
+                      lineageId="Package\Stage To Core\lookup origin locaiton key.Outputs[Lookup Match Output].Columns[OriginLocationKey]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1091,11 +1165,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\Stage To Core\Lookup Destination Location"
+              refId="Package\Stage To Core\lookup destination location key"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup Destination Location"
+              name="lookup destination location key"
               usesDispositions="true"
               version="6">
               <properties>
@@ -1126,7 +1200,7 @@ where [refTable].[LocationKey] = ?</property>
                   dataType="System.Int32"
                   description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
                   name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">1</property>
+                  typeConverter="LookupNoMatchBehavior">0</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
@@ -1147,7 +1221,7 @@ where [refTable].[LocationKey] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DestinationLocationKey]};</property>
+                  name="ParameterMap">#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DestinationLocationZoneID]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1159,7 +1233,7 @@ where [refTable].[LocationKey] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Stage To Core\Lookup Destination Location.Connections[OleDbConnection]"
+                  refId="Package\Stage To Core\lookup destination location key.Connections[OleDbConnection]"
                   connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
                   connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
                   description="Connection manager used to access lookup data."
@@ -1167,14 +1241,14 @@ where [refTable].[LocationKey] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Stage To Core\Lookup Destination Location.Inputs[Lookup Input]"
+                  refId="Package\Stage To Core\lookup destination location key.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Stage To Core\Lookup Destination Location.Inputs[Lookup Input].Columns[DestinationLocationKey]"
+                      refId="Package\Stage To Core\lookup destination location key.Inputs[Lookup Input].Columns[DestinationLocationZoneID]"
                       cachedDataType="i4"
-                      cachedName="DestinationLocationKey"
-                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DestinationLocationKey]">
+                      cachedName="DestinationLocationZoneID"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DestinationLocationZoneID]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -1192,17 +1266,18 @@ where [refTable].[LocationKey] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Stage To Core\Lookup Destination Location.Outputs[Lookup Match Output]"
+                  refId="Package\Stage To Core\lookup destination location key.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\Stage To Core\Lookup Destination Location.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Stage To Core\lookup destination location key.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Destination Location.Outputs[Lookup Match Output].Columns[DestinationLocationKey]"
+                      refId="Package\Stage To Core\lookup destination location key.Outputs[Lookup Match Output].Columns[DestinationLocationKey]"
                       dataType="i4"
                       errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Stage To Core\Lookup Destination Location.Outputs[Lookup Match Output].Columns[DestinationLocationKey]"
+                      lineageId="Package\Stage To Core\lookup destination location key.Outputs[Lookup Match Output].Columns[DestinationLocationKey]"
                       name="DestinationLocationKey"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -1216,30 +1291,30 @@ where [refTable].[LocationKey] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Stage To Core\Lookup Destination Location.Outputs[Lookup No Match Output]"
+                  refId="Package\Stage To Core\lookup destination location key.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\Stage To Core\Lookup Destination Location.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Stage To Core\lookup destination location key.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Stage To Core\Lookup Destination Location.Outputs[Lookup Error Output]"
+                  refId="Package\Stage To Core\lookup destination location key.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\Stage To Core\Lookup Destination Location.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Stage To Core\lookup destination location key.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Destination Location.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\Stage To Core\lookup destination location key.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Lookup Destination Location.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Stage To Core\lookup destination location key.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Destination Location.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\Stage To Core\lookup destination location key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Lookup Destination Location.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Stage To Core\lookup destination location key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1248,11 +1323,11 @@ where [refTable].[LocationKey] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\Stage To Core\Lookup Discount Anount"
+              refId="Package\Stage To Core\Lookup Discount Amount and Discount key"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup Discount Anount"
+              name="Lookup Discount Amount and Discount key"
               usesDispositions="true"
               version="6">
               <properties>
@@ -1304,7 +1379,7 @@ where [refTable].[DiscountKey] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[DiscountKey]};</property>
+                  name="ParameterMap">#{Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[DiscountID]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1316,7 +1391,7 @@ where [refTable].[DiscountKey] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Stage To Core\Lookup Discount Anount.Connections[OleDbConnection]"
+                  refId="Package\Stage To Core\Lookup Discount Amount and Discount key.Connections[OleDbConnection]"
                   connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
                   connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
                   description="Connection manager used to access lookup data."
@@ -1324,14 +1399,14 @@ where [refTable].[DiscountKey] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Stage To Core\Lookup Discount Anount.Inputs[Lookup Input]"
+                  refId="Package\Stage To Core\Lookup Discount Amount and Discount key.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Stage To Core\Lookup Discount Anount.Inputs[Lookup Input].Columns[DiscountKey]"
+                      refId="Package\Stage To Core\Lookup Discount Amount and Discount key.Inputs[Lookup Input].Columns[DiscountID]"
                       cachedDataType="i4"
-                      cachedName="DiscountKey"
-                      lineageId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[DiscountKey]">
+                      cachedName="DiscountID"
+                      lineageId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[DiscountID]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -1349,18 +1424,18 @@ where [refTable].[DiscountKey] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Match Output]"
+                  refId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
                   errorRowDisposition="IgnoreFailure"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\Stage To Core\Lookup Discount Anount.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Stage To Core\Lookup Discount Amount and Discount key.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Match Output].Columns[DiscountAmount]"
+                      refId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output].Columns[DiscountAmount]"
                       dataType="i4"
                       errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Match Output].Columns[DiscountAmount]"
+                      lineageId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output].Columns[DiscountAmount]"
                       name="DiscountAmount"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -1371,10 +1446,10 @@ where [refTable].[DiscountKey] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Match Output].Columns[DiscountKey]"
+                      refId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output].Columns[DiscountKey]"
                       dataType="i4"
                       errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Match Output].Columns[DiscountKey]"
+                      lineageId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output].Columns[DiscountKey]"
                       name="DiscountKey"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -1388,30 +1463,30 @@ where [refTable].[DiscountKey] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup No Match Output]"
+                  refId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\Stage To Core\Lookup Discount Anount.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Stage To Core\Lookup Discount Amount and Discount key.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Error Output]"
+                  refId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\Stage To Core\Lookup Discount Anount.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Stage To Core\Lookup Discount Amount and Discount key.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1578,11 +1653,11 @@ where [refTable].[DriverId] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\Stage To Core\Lookup Origin Location"
+              refId="Package\Stage To Core\lookup origin locaiton key"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup Origin Location"
+              name="lookup origin locaiton key"
               usesDispositions="true"
               version="6">
               <properties>
@@ -1613,7 +1688,7 @@ where [refTable].[LocationKey] = ?</property>
                   dataType="System.Int32"
                   description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
                   name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">1</property>
+                  typeConverter="LookupNoMatchBehavior">0</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
@@ -1634,7 +1709,7 @@ where [refTable].[LocationKey] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[OriginLocationKey]};</property>
+                  name="ParameterMap">#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[OriginLocationZoneID]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1646,7 +1721,7 @@ where [refTable].[LocationKey] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Stage To Core\Lookup Origin Location.Connections[OleDbConnection]"
+                  refId="Package\Stage To Core\lookup origin locaiton key.Connections[OleDbConnection]"
                   connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
                   connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
                   description="Connection manager used to access lookup data."
@@ -1654,14 +1729,14 @@ where [refTable].[LocationKey] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Stage To Core\Lookup Origin Location.Inputs[Lookup Input]"
+                  refId="Package\Stage To Core\lookup origin locaiton key.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Stage To Core\Lookup Origin Location.Inputs[Lookup Input].Columns[OriginLocationKey]"
+                      refId="Package\Stage To Core\lookup origin locaiton key.Inputs[Lookup Input].Columns[OriginLocationZoneID]"
                       cachedDataType="i4"
-                      cachedName="OriginLocationKey"
-                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[OriginLocationKey]">
+                      cachedName="OriginLocationZoneID"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[OriginLocationZoneID]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -1679,17 +1754,18 @@ where [refTable].[LocationKey] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Stage To Core\Lookup Origin Location.Outputs[Lookup Match Output]"
+                  refId="Package\Stage To Core\lookup origin locaiton key.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\Stage To Core\Lookup Origin Location.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Stage To Core\lookup origin locaiton key.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Origin Location.Outputs[Lookup Match Output].Columns[OriginLocationKey]"
+                      refId="Package\Stage To Core\lookup origin locaiton key.Outputs[Lookup Match Output].Columns[OriginLocationKey]"
                       dataType="i4"
                       errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Stage To Core\Lookup Origin Location.Outputs[Lookup Match Output].Columns[OriginLocationKey]"
+                      lineageId="Package\Stage To Core\lookup origin locaiton key.Outputs[Lookup Match Output].Columns[OriginLocationKey]"
                       name="OriginLocationKey"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -1703,30 +1779,30 @@ where [refTable].[LocationKey] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Stage To Core\Lookup Origin Location.Outputs[Lookup No Match Output]"
+                  refId="Package\Stage To Core\lookup origin locaiton key.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\Stage To Core\Lookup Origin Location.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Stage To Core\lookup origin locaiton key.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Stage To Core\Lookup Origin Location.Outputs[Lookup Error Output]"
+                  refId="Package\Stage To Core\lookup origin locaiton key.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\Stage To Core\Lookup Origin Location.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Stage To Core\lookup origin locaiton key.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Origin Location.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\Stage To Core\lookup origin locaiton key.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Lookup Origin Location.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Stage To Core\lookup origin locaiton key.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Origin Location.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\Stage To Core\lookup origin locaiton key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Lookup Origin Location.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Stage To Core\lookup origin locaiton key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1893,11 +1969,11 @@ where [refTable].[PassengerId] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\Stage To Core\Lookup Payment Method"
+              refId="Package\Stage To Core\lookup payment method key"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup Payment Method"
+              name="lookup payment method key"
               usesDispositions="true"
               version="6">
               <properties>
@@ -1928,7 +2004,7 @@ where [refTable].[PaymentMethodKey] = ?</property>
                   dataType="System.Int32"
                   description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
                   name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">1</property>
+                  typeConverter="LookupNoMatchBehavior">0</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
@@ -1949,7 +2025,7 @@ where [refTable].[PaymentMethodKey] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[PaymentMethodKey]};</property>
+                  name="ParameterMap">#{Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[PaymentMethodID]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1961,7 +2037,7 @@ where [refTable].[PaymentMethodKey] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Stage To Core\Lookup Payment Method.Connections[OleDbConnection]"
+                  refId="Package\Stage To Core\lookup payment method key.Connections[OleDbConnection]"
                   connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
                   connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
                   description="Connection manager used to access lookup data."
@@ -1969,14 +2045,14 @@ where [refTable].[PaymentMethodKey] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Stage To Core\Lookup Payment Method.Inputs[Lookup Input]"
+                  refId="Package\Stage To Core\lookup payment method key.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Stage To Core\Lookup Payment Method.Inputs[Lookup Input].Columns[PaymentMethodKey]"
+                      refId="Package\Stage To Core\lookup payment method key.Inputs[Lookup Input].Columns[PaymentMethodID]"
                       cachedDataType="i4"
-                      cachedName="PaymentMethodKey"
-                      lineageId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[PaymentMethodKey]">
+                      cachedName="PaymentMethodID"
+                      lineageId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[PaymentMethodID]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -1994,17 +2070,18 @@ where [refTable].[PaymentMethodKey] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Stage To Core\Lookup Payment Method.Outputs[Lookup Match Output]"
+                  refId="Package\Stage To Core\lookup payment method key.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\Stage To Core\Lookup Payment Method.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Stage To Core\lookup payment method key.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Payment Method.Outputs[Lookup Match Output].Columns[PaymentMethodKey]"
+                      refId="Package\Stage To Core\lookup payment method key.Outputs[Lookup Match Output].Columns[PaymentMethodKey]"
                       dataType="i4"
                       errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Stage To Core\Lookup Payment Method.Outputs[Lookup Match Output].Columns[PaymentMethodKey]"
+                      lineageId="Package\Stage To Core\lookup payment method key.Outputs[Lookup Match Output].Columns[PaymentMethodKey]"
                       name="PaymentMethodKey"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -2018,30 +2095,30 @@ where [refTable].[PaymentMethodKey] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Stage To Core\Lookup Payment Method.Outputs[Lookup No Match Output]"
+                  refId="Package\Stage To Core\lookup payment method key.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\Stage To Core\Lookup Payment Method.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Stage To Core\lookup payment method key.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Stage To Core\Lookup Payment Method.Outputs[Lookup Error Output]"
+                  refId="Package\Stage To Core\lookup payment method key.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\Stage To Core\Lookup Payment Method.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Stage To Core\lookup payment method key.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Payment Method.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\Stage To Core\lookup payment method key.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Lookup Payment Method.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Stage To Core\lookup payment method key.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup Payment Method.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\Stage To Core\lookup payment method key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Lookup Payment Method.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Stage To Core\lookup payment method key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -2201,11 +2278,11 @@ where [refTable].[RequestID] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[OriginLocationKey]"
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[OriginLocationZoneID]"
                       dataType="i4"
                       errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[OriginLocationKey]"
-                      name="OriginLocationKey"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[OriginLocationZoneID]"
+                      name="OriginLocationZoneID"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
@@ -2215,11 +2292,11 @@ where [refTable].[RequestID] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DestinationLocationKey]"
+                      refId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DestinationLocationZoneID]"
                       dataType="i4"
                       errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DestinationLocationKey]"
-                      name="DestinationLocationKey"
+                      lineageId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[DestinationLocationZoneID]"
+                      name="DestinationLocationZoneID"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
@@ -2533,9 +2610,7 @@ where [refTable].[RequestID] = ?</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select *
- from Stage.Trip
-where [ModifiedAt] &gt; ?</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -2556,7 +2631,7 @@ where [ModifiedAt] &gt; ?</property>
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping">"0:Input",{C0B0803C-3536-4304-9C4B-7A46923C9B90};</property>
+                  name="ParameterMapping"></property>
               </properties>
               <connections>
                 <connection
@@ -2610,22 +2685,22 @@ where [ModifiedAt] &gt; ?</property>
                       name="RequestID"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[DiscountKey]"
+                      refId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[DiscountID]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].ExternalColumns[DiscountID]"
-                      lineageId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[DiscountKey]"
-                      name="DiscountKey"
+                      lineageId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[DiscountID]"
+                      name="DiscountID"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[PaymentMethodKey]"
+                      refId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[PaymentMethodID]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].ExternalColumns[PaymentMethodID]"
-                      lineageId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[PaymentMethodKey]"
-                      name="PaymentMethodKey"
+                      lineageId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[PaymentMethodID]"
+                      name="PaymentMethodID"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Stage To Core\Trip Stage.Outputs[OLE DB Source Output].Columns[PassengerBoardingDatetime]"
@@ -2796,47 +2871,52 @@ where [ModifiedAt] &gt; ?</property>
               refId="Package\Stage To Core.Paths[Derived Column Output]"
               endId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
               name="Derived Column Output"
-              startId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Output]" />
+              startId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Output]" />
             <path
               refId="Package\Stage To Core.Paths[Derived Column Output1]"
+              endId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input]"
+              name="Derived Column Output"
+              startId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Derived Column Output2]"
               endId="Package\Stage To Core\Lookup PassengerKey.Inputs[Lookup Input]"
               name="Derived Column Output"
               startId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output]" />
             <path
               refId="Package\Stage To Core.Paths[Lookup Match Output]"
+              endId="Package\Stage To Core\Derived Calculate measure.Inputs[Derived Column Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\lookup origin locaiton key.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output1]"
+              endId="Package\Stage To Core\lookup origin locaiton key.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\lookup payment method key.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output2]"
+              endId="Package\Stage To Core\lookup payment method key.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\lookup destination location key.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output3]"
+              endId="Package\Stage To Core\lookup destination location key.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output4]"
+              endId="Package\Stage To Core\Lookup Discount Amount and Discount key.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output5]"
               endId="Package\Stage To Core\Lookup Driver Key.Inputs[Lookup Input]"
               name="Lookup Match Output"
               startId="Package\Stage To Core\Lookup PassengerKey.Outputs[Lookup Match Output]" />
             <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output1]"
+              refId="Package\Stage To Core.Paths[Lookup Match Output6]"
               endId="Package\Stage To Core\extract date and time keys.Inputs[Derived Column Input]"
               name="Lookup Match Output"
               startId="Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output2]"
-              endId="Package\Stage To Core\Lookup Payment Method.Inputs[Lookup Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup Discount Anount.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output3]"
-              endId="Package\Stage To Core\Lookup Origin Location.Inputs[Lookup Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup Payment Method.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output4]"
-              endId="Package\Stage To Core\Lookup Destination Location.Inputs[Lookup Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup Origin Location.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output5]"
-              endId="Package\Stage To Core\Derived Calculate measure.Inputs[Derived Column Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup Destination Location.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Stage To Core.Paths[Lookup Match Output6]"
-              endId="Package\Stage To Core\Lookup Discount Anount.Inputs[Lookup Input]"
-              name="Lookup Match Output"
-              startId="Package\Stage To Core\Lookup Driver Key.Outputs[Lookup Match Output]" />
             <path
               refId="Package\Stage To Core.Paths[OLE DB Source Output]"
               endId="Package\Stage To Core\Lookup request stage.Inputs[Lookup Input]"
@@ -2907,39 +2987,17 @@ where [ModifiedAt] &gt; ?</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="173,42"
+          Size="172.8,41.6"
           Id="Package\ETL_MetaData Start"
           TopLeft="103.99999991485,60" />
         <NodeLayout
-          Size="150,42"
+          Size="150.4,41.6"
           Id="Package\Stage To Core"
           TopLeft="108.142857051626,191.117646859747" />
         <NodeLayout
-          Size="234,42"
+          Size="233.6,41.6"
           Id="Package\Update ETL_Metadata onSuccess"
           TopLeft="59.142857019695,280.294117371567" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="179.64285703566,233.117646859747">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,47.17647051182"
-              Start="0,0"
-              End="0,39.67647051182">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,39.67647051182" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="186.821428483238,102">
@@ -2962,6 +3020,28 @@ where [ModifiedAt] &gt; ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="179.64285703566,233.117646859747">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.17647051182"
+              Start="0,0"
+              End="0,39.67647051182">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.67647051182" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -2971,218 +3051,120 @@ where [ModifiedAt] &gt; ?</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="192,42"
-          Id="Package\Stage To Core\Lookup Origin Location"
-          TopLeft="700.666661845786,299.539213218054" />
+          Size="212.8,41.6"
+          Id="Package\Stage To Core\lookup payment method key"
+          TopLeft="473.485715550793,466.188234948246" />
         <NodeLayout
-          Size="218,42"
-          Id="Package\Stage To Core\Lookup Destination Location"
-          TopLeft="693.666661845786,395.539213218053" />
-        <NodeLayout
-          Size="130,42"
-          Id="Package\Stage To Core\Trip Stage"
-          TopLeft="135.666661845786,66.0686249016535" />
-        <NodeLayout
-          Size="133,42"
-          Id="Package\Stage To Core\Row Count"
-          TopLeft="126.523799951283,475.539208484744" />
-        <NodeLayout
-          Size="181,42"
-          Id="Package\Stage To Core\Lookup PassengerKey"
-          TopLeft="704.095234618503,178.421566016458" />
-        <NodeLayout
-          Size="199,42"
-          Id="Package\Stage To Core\Lookup Discount Anount"
-          TopLeft="104.333323691572,296.539213218054" />
-        <NodeLayout
-          Size="204,42"
-          Id="Package\Stage To Core\extract date and time keys"
-          TopLeft="684.952377439154,61.0686249016535" />
-        <NodeLayout
-          Size="201,42"
-          Id="Package\Stage To Core\Lookup Payment Method"
-          TopLeft="423.95237612998,303.539213218054" />
-        <NodeLayout
-          Size="165,42"
+          Size="164.8,41.6"
           Id="Package\Stage To Core\Lookup Driver Key"
-          TopLeft="391.809519770194,181.892154253091" />
+          TopLeft="538.942858286294,375.799999737915" />
         <NodeLayout
-          Size="182,59"
+          Size="204,41.6"
+          Id="Package\Stage To Core\extract date and time keys"
+          TopLeft="784.228572996236,261.094117439938" />
+        <NodeLayout
+          Size="182.4,59.2"
           Id="Package\Stage To Core\Fact trip denteination"
-          TopLeft="399.666661845786,467.539213218053" />
+          TopLeft="643.657143427341,717.270588065711" />
         <NodeLayout
-          Size="212,42"
-          Id="Package\Stage To Core\Derived Calculate measure"
-          TopLeft="91.6666618457863,392.539213218053" />
-        <NodeLayout
-          Size="185,42"
+          Size="184.8,41.6"
           Id="Package\Stage To Core\Lookup request stage"
-          TopLeft="380.52380528377,67.6686250156036" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Derived Column Output]"
-          TopLeft="195.345230898535,434.539213218053">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,40.99999526669"
-              Start="0,0"
-              End="0,33.49999526669">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,33.49999526669" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="479.800000840852,267.694117553888" />
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\Stage To Core\lookup origin locaiton key"
+          TopLeft="726.800001511404,465.92940717819" />
+        <NodeLayout
+          Size="132.8,41.6"
+          Id="Package\Stage To Core\Row Count"
+          TopLeft="226.514281224171,739.799995084371" />
+        <NodeLayout
+          Size="273.6,41.6"
+          Id="Package\Stage To Core\Derived Default Value for dimension Keys"
+          TopLeft="157.51428601383,671.599999544201" />
+        <NodeLayout
+          Size="224,41.6"
+          Id="Package\Stage To Core\lookup destination location key"
+          TopLeft="180.37142891963,464.399995414825" />
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Stage To Core\Trip Stage"
+          TopLeft="216.609519248653,264.162742341591" />
+        <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\Stage To Core\Lookup PassengerKey"
+          TopLeft="803.371430175585,378.447058554742" />
+        <NodeLayout
+          Size="212,41.6"
+          Id="Package\Stage To Core\Derived Calculate measure"
+          TopLeft="208.800000298024,587.976470466243" />
+        <NodeLayout
+          Size="280.8,41.6"
+          Id="Package\Stage To Core\Lookup Discount Amount and Discount key"
+          TopLeft="171.466662037373,375.74117645048" />
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Row Count Output 1]"
-          TopLeft="259.523799951283,496.789210851398">
+          TopLeft="359.31428122417,760.599995084371">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="140.142861894503,0"
+              EndConnector="284.34286220317,-13.7294070186606"
               Start="0,0"
-              End="132.642861894503,0">
+              End="276.84286220317,-13.7294070186606">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="132.642861894503,0" />
+                    End="138.171431101585,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="138.171431101585,0"
+                    Point2="142.171431101585,0"
+                    Point3="142.171431101585,-4" />
+                  <mssgle:LineSegment
+                    End="142.171431101585,-9.72940701866059" />
+                  <mssgle:CubicBezierSegment
+                    Point1="142.171431101585,-9.72940701866059"
+                    Point2="142.171431101585,-13.7294070186606"
+                    Point3="146.171431101585,-13.7294070186606" />
+                  <mssgle:LineSegment
+                    End="276.84286220317,-13.7294070186606" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="126.717837351585,1,30.9071875,9.568359375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[OLE DB Source Output]"
-          TopLeft="265.666661845786,87.8686249586285">
+          TopLeft="346.609519248654,286.92842994774">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="114.857143437984,0"
+              EndConnector="133.190481592198,0"
               Start="0,0"
-              End="107.357143437984,0">
+              End="125.690481592198,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="107.357143437984,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output5]"
-          TopLeft="693.666661845786,415.039213218053">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-390,0"
-              Start="0,0"
-              End="-382.5,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-382.5,0" />
+                    End="125.690481592198,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-239.44138671875,5,96.3827734375,11.609375"
+              BoundingBox="33.229010327349,5,59.2324609375,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output4]"
-          TopLeft="799.666661845786,341.539213218053">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,54"
-              Start="0,0"
-              End="0,46.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,46.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,17.4453125,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output3]"
-          TopLeft="624.75237612998,322.339213218054">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="75.9142857158062,0"
-              Start="0,0"
-              End="68.4142857158062,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="68.4142857158062,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-13.9842438608469,5,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output2]"
-          TopLeft="303.533323691572,320.839213218054">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="120.419052438408,0"
-              Start="0,0"
-              End="112.919052438408,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="112.919052438408,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="8.268139500454,5,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output1]"
-          TopLeft="565.52380528377,85.3686249586286">
+          Id="Package\Stage To Core.Paths[Lookup Match Output6]"
+          TopLeft="664.800000840852,285.394117496913">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3200,37 +3182,181 @@ where [ModifiedAt] &gt; ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="7.77289935894201,5,96.3827734375,11.609375"
+              BoundingBox="7.77289935894201,5,147.0734765625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output]"
-          TopLeft="704.095234618503,201.156860134774">
+          Id="Package\Stage To Core.Paths[Lookup Match Output5]"
+          TopLeft="803.371430175585,397.923529146328">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-147.285714848309,0"
+              EndConnector="-99.6285718892907,0"
               Start="0,0"
-              End="-139.785714848309,0">
+              End="-92.1285718892907,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-139.785714848309,0" />
+                    End="-92.1285718892907,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-118.084244142905,5,96.3827734375,11.609375"
+              BoundingBox="-94.2556726633954,5,136.1534765625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Derived Column Output1]"
-          TopLeft="790.773806028828,103.068624901653">
+          Id="Package\Stage To Core.Paths[Lookup Match Output4]"
+          TopLeft="538.942858286294,396.570588094197">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-86.6761962489212,0"
+              Start="0,0"
+              End="-79.1761962489212,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-79.1761962489212,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-87.7794848432106,5,136.1534765625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output3]"
+          TopLeft="311.866662037373,417.34117645048">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-19.4952331177435,47.0588189643452"
+              Start="0,0"
+              End="-19.4952331177435,39.5588189643452">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5294094821726" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5294094821726"
+                    Point2="0,23.5294094821726"
+                    Point3="-4,23.5294094821726" />
+                  <mssgle:LineSegment
+                    End="-15.4952331177435,23.5294094821726" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-15.4952331177435,23.5294094821726"
+                    Point2="-19.4952331177435,23.5294094821726"
+                    Point3="-19.4952331177435,27.5294094821726" />
+                  <mssgle:LineSegment
+                    End="-19.4952331177435,39.5588189643452" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-57.9390032776218,28.5294094821726,161.0234765625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output2]"
+          TopLeft="404.37142891963,486.094115181536">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="69.1142866311638,0"
+              Start="0,0"
+              End="61.6142866311638,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="61.6142866311638,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-17.3842434031681,5,136.1534765625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output1]"
+          TopLeft="686.285715550793,486.858821063218">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40.5142859606108,0"
+              Start="0,0"
+              End="33.0142859606108,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="33.0142859606108,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-31.6842437384446,5,147.0734765625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output]"
+          TopLeft="826.000001511404,507.529407178191">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-511.20000121338,80.4470632880516"
+              Start="0,0"
+              End="-511.20000121338,72.9470632880516">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.2235316440258" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.2235316440258"
+                    Point2="0,40.2235316440258"
+                    Point3="-4,40.2235316440258" />
+                  <mssgle:LineSegment
+                    End="-507.20000121338,40.2235316440258" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-507.20000121338,40.2235316440258"
+                    Point2="-511.20000121338,40.2235316440258"
+                    Point3="-511.20000121338,44.2235316440258" />
+                  <mssgle:LineSegment
+                    End="-511.20000121338,72.9470632880516" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-303.79138732544,45.2235316440258,136.1534765625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Derived Column Output2]"
+          TopLeft="890.05000158591,303.094117439938">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3247,42 +3373,68 @@ where [ModifiedAt] &gt; ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-15.45359375,29.1422908699019,30.9071875,9.568359375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Lookup Match Output6]"
-          TopLeft="474.309519770194,223.892154253091">
+          Id="Package\Stage To Core.Paths[Derived Column Output1]"
+          TopLeft="314.800000298024,629.576470466243">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-270.476196078622,72.647058964963"
+              EndConnector="-20.4857142841941,42.023529077958"
               Start="0,0"
-              End="-270.476196078622,65.147058964963">
+              End="-20.4857142841941,34.523529077958">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.3235294824815" />
+                    End="0,17.011764538979" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,32.3235294824815"
-                    Point2="0,36.3235294824815"
-                    Point3="-4,36.3235294824815" />
+                    Point1="0,17.011764538979"
+                    Point2="0,21.011764538979"
+                    Point3="-4,21.011764538979" />
                   <mssgle:LineSegment
-                    End="-266.476196078622,36.3235294824815" />
+                    End="-16.4857142841941,21.011764538979" />
                   <mssgle:CubicBezierSegment
-                    Point1="-266.476196078622,36.3235294824815"
-                    Point2="-270.476196078622,36.3235294824815"
-                    Point3="-270.476196078622,40.3235294824815" />
+                    Point1="-16.4857142841941,21.011764538979"
+                    Point2="-20.4857142841941,21.011764538979"
+                    Point3="-20.4857142841941,25.011764538979" />
                   <mssgle:LineSegment
-                    End="-270.476196078622,65.147058964963" />
+                    End="-20.4857142841941,34.523529077958" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-183.429484758061,41.3235294824815,96.3827734375,11.609375"
+              BoundingBox="-25.696450892097,26.011764538979,30.9071875,9.568359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Derived Column Output]"
+          TopLeft="293.614283619001,713.199999544201">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26.59999554017"
+              Start="0,0"
+              End="0,19.09999554017">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.09999554017" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-25.19765625,3.938181363835,50.3953125,11.2236328125"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -3302,52 +3454,6 @@ where [ModifiedAt] &gt; ?</property>
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup Origin Location">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[Core].[DimLocation]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup Destination Location">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[Core].[DimLocation]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Stage To Core\Trip Stage">
     <Properties>
       <Property>
@@ -3357,134 +3463,6 @@ where [ModifiedAt] &gt; ?</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup PassengerKey">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[Core].[DimPassenger]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup Discount Anount">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[Core].[DimDiscount]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup Payment Method">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[Core].[DimPaymentMethod]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup Driver Key">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[Core].[DimDriver]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Fact trip denteination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup request stage">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[Request]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

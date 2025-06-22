@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-GDRMTJV\HP"
   DTS:DTSID="{381299BB-4851-4EA6-9605-6F85781A01AA}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="4"
-  DTS:VersionGUID="{2FBBAA17-2AB7-4BF2-995C-68A9AD55770B}">
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{A577E4A0-496D-4FBD-95BF-BEFE02BD3157}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -496,7 +496,7 @@ where [refTable].[CityID] = ?</property>
                   dataType="System.Int32"
                   description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
                   name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">0</property>
+                  typeConverter="LookupNoMatchBehavior">1</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
@@ -564,7 +564,6 @@ where [refTable].[CityID] = ?</property>
                 <output
                   refId="Package\Stage To Core\Lookup city.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
-                  errorRowDisposition="IgnoreFailure"
                   exclusionGroup="1"
                   name="Lookup Match Output"
                   synchronousInputId="Package\Stage To Core\Lookup city.Inputs[Lookup Input]">
@@ -669,7 +668,7 @@ where [refTable].[ProvinceID] = ?</property>
                   dataType="System.Int32"
                   description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
                   name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">0</property>
+                  typeConverter="LookupNoMatchBehavior">1</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
@@ -737,7 +736,6 @@ where [refTable].[ProvinceID] = ?</property>
                 <output
                   refId="Package\Stage To Core\Lookup Province.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
-                  errorRowDisposition="IgnoreFailure"
                   exclusionGroup="1"
                   name="Lookup Match Output"
                   synchronousInputId="Package\Stage To Core\Lookup Province.Inputs[Lookup Input]">
@@ -828,7 +826,7 @@ where [refTable].[ZoneTypeID] = ?</property>
                   dataType="System.Int32"
                   description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
                   name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">0</property>
+                  typeConverter="LookupNoMatchBehavior">1</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
@@ -896,7 +894,6 @@ where [refTable].[ZoneTypeID] = ?</property>
                 <output
                   refId="Package\Stage To Core\Lookup ZoneType.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
-                  errorRowDisposition="IgnoreFailure"
                   exclusionGroup="1"
                   name="Lookup Match Output"
                   synchronousInputId="Package\Stage To Core\Lookup ZoneType.Inputs[Lookup Input]">
@@ -1308,19 +1305,19 @@ where [refTable].[ZoneTypeID] = ?</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="204,42"
+          Size="204,41.6"
           Id="Package\insert into ETL_metaData"
           TopLeft="466.000000106436,77" />
         <NodeLayout
-          Size="150,42"
+          Size="150.4,41.6"
           Id="Package\Stage To Core"
           TopLeft="489.285714369343,261.764705665178" />
         <NodeLayout
-          Size="187,42"
+          Size="187.2,41.6"
           Id="Package\Truncate DimLocation"
           TopLeft="471.285714252261,156.294117576678" />
         <NodeLayout
-          Size="234,42"
+          Size="233.6,41.6"
           Id="Package\Update ETL_Metadata onSuccess"
           TopLeft="450,369.823529100748" />
         <EdgeLayout
@@ -1398,31 +1395,31 @@ where [refTable].[ZoneTypeID] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="161,42"
+          Size="160.8,41.6"
           Id="Package\Stage To Core\Lookup Province"
           TopLeft="580.000001234668,100.364705858893" />
         <NodeLayout
-          Size="130,42"
+          Size="129.6,41.6"
           Id="Package\Stage To Core\Row Count"
           TopLeft="354.285709590328,208.294113116848" />
         <NodeLayout
-          Size="159,42"
+          Size="159.2,41.6"
           Id="Package\Stage To Core\dim location core"
           TopLeft="426.904757732943,383.73528784186" />
         <NodeLayout
-          Size="162,42"
+          Size="161.6,41.6"
           Id="Package\Stage To Core\Lookup ZoneType"
           TopLeft="581.42857266628,205.894117531098" />
         <NodeLayout
-          Size="132,42"
+          Size="132,41.6"
           Id="Package\Stage To Core\Lookup city"
           TopLeft="327.857143555065,108.011764675719" />
         <NodeLayout
-          Size="155,42"
+          Size="155.2,41.6"
           Id="Package\Stage To Core\Data Conversion"
           TopLeft="429.285715199551,304.035293981577" />
         <NodeLayout
-          Size="130,42"
+          Size="129.6,41.6"
           Id="Package\Stage To Core\zone stage"
           TopLeft="147.095233458341,102.303918928811" />
         <EdgeLayout
@@ -1444,7 +1441,9 @@ where [refTable].[ZoneTypeID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-8,7.29999693014155,48.3124609375,16"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1478,7 +1477,9 @@ where [refTable].[ZoneTypeID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="28.4464090546112,32.0705904323647,30.9071875,9.568359375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1500,7 +1501,9 @@ where [refTable].[ZoneTypeID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-2.32527542038845,5,48.3124609375,16"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1523,7 +1526,7 @@ where [refTable].[ZoneTypeID] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-113.098169819226,5,96.3827734375,11.609375"
+              BoundingBox="-121.966822162976,5,153.89078125,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1547,7 +1550,7 @@ where [refTable].[ZoneTypeID] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,22.2100183361025,96.3827734375,11.609375"
+              BoundingBox="-48.19138671875,22.2100183361025,136.1534765625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1571,7 +1574,7 @@ where [refTable].[ZoneTypeID] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="8.13004212105151,5,96.3827734375,11.609375"
+              BoundingBox="-20.6239617851985,5,153.89078125,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1590,5 +1593,100 @@ where [refTable].[ZoneTypeID] = ?</property>
       </GraphLayout>
     </LayoutInfo>
   </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Lookup Province">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[Province]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\dim location core">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Lookup ZoneType">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[ZoneType]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Lookup city">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[City]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\zone stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

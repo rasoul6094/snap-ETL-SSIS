@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="18"
-  DTS:VersionGUID="{5F2150D9-1338-479D-937E-B74F7E3F8C2F}">
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{771920EB-C4DF-49D8-9EDA-9A390EE11DDE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -5755,114 +5755,114 @@
               startId="Package\Source To Stage\City Source.Outputs[OLE DB Source Output]" />
             <path
               refId="Package\Source To Stage.Paths[OLE DB Source Output10]"
-              endId="Package\Source To Stage\Row Count Payment Method.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Payment Method Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output9]"
-              endId="Package\Source To Stage\Row Count Discount.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Discount Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output8]"
-              endId="Package\Source To Stage\Row Count Zone Type.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Zone Type Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output7]"
-              endId="Package\Source To Stage\Row Count Status.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Status Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output6]"
-              endId="Package\Source To Stage\Row Count Passenger.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Passenger Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output11]"
-              endId="Package\Source To Stage\Row Count Zone.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Zone Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output4]"
-              endId="Package\Source To Stage\Row Count Driver.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Driver Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output3]"
-              endId="Package\Source To Stage\Row Count Car.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Car Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output2]"
-              endId="Package\Source To Stage\Row Count Trip.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Trip Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output1]"
               endId="Package\Source To Stage\Row Count Province.Inputs[Row Count Input 1]"
               name="OLE DB Source Output"
               startId="Package\Source To Stage\Province Source.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output5]"
+              refId="Package\Source To Stage.Paths[OLE DB Source Output9]"
+              endId="Package\Source To Stage\Row Count Trip.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Trip Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output8]"
+              endId="Package\Source To Stage\Row Count Car.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Car Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output7]"
+              endId="Package\Source To Stage\Row Count Driver.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Driver Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output6]"
+              endId="Package\Source To Stage\Row Count Zone.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Zone Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output11]"
               endId="Package\Source To Stage\Row Count Request.Inputs[Row Count Input 1]"
               name="OLE DB Source Output"
               startId="Package\Source To Stage\Request Source.Outputs[OLE DB Source Output]" />
             <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output4]"
+              endId="Package\Source To Stage\Row Count Status.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Status Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output3]"
+              endId="Package\Source To Stage\Row Count Zone Type.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Zone Type Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output2]"
+              endId="Package\Source To Stage\Row Count Discount.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Discount Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output1]"
+              endId="Package\Source To Stage\Row Count Payment Method.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Payment Method Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output5]"
+              endId="Package\Source To Stage\Row Count Passenger.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Passenger Source.Outputs[OLE DB Source Output]" />
+            <path
               refId="Package\Source To Stage.Paths[Row Count Output 19]"
-              endId="Package\Source To Stage\Status Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Status.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Source To Stage.Paths[Row Count Output 18]"
-              endId="Package\Source To Stage\Discount Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Discount.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Source To Stage.Paths[Row Count Output 17]"
-              endId="Package\Source To Stage\City Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count City.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Source To Stage.Paths[Row Count Output 16]"
-              endId="Package\Source To Stage\Province Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Province.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Source To Stage.Paths[Row Count Output 15]"
-              endId="Package\Source To Stage\Car Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Car.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Source To Stage.Paths[Row Count Output 13]"
-              endId="Package\Source To Stage\Zone Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Zone.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Source To Stage.Paths[Row Count Output 12]"
-              endId="Package\Source To Stage\Trip Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Trip.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Source To Stage.Paths[Row Count Output 11]"
-              endId="Package\Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Passenger.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Source To Stage.Paths[Row Count Output 1]"
-              endId="Package\Source To Stage\Request Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Request.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Source To Stage.Paths[Row Count Output 110]"
               endId="Package\Source To Stage\Driver Stage.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
               startId="Package\Source To Stage\Row Count Driver.Outputs[Row Count Output 1]" />
             <path
-              refId="Package\Source To Stage.Paths[Row Count Output 14]"
+              refId="Package\Source To Stage.Paths[Row Count Output 18]"
+              endId="Package\Source To Stage\Request Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Request.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 17]"
+              endId="Package\Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Passenger.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 16]"
+              endId="Package\Source To Stage\Trip Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Trip.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 15]"
+              endId="Package\Source To Stage\Zone Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Zone.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 13]"
+              endId="Package\Source To Stage\Province Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Province.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 12]"
+              endId="Package\Source To Stage\City Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count City.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 11]"
+              endId="Package\Source To Stage\Discount Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Discount.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 1]"
+              endId="Package\Source To Stage\Status Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Status.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 110]"
               endId="Package\Source To Stage\Payment Method Stage.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
               startId="Package\Source To Stage\Row Count Payment Method.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 14]"
+              endId="Package\Source To Stage\Car Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Car.Outputs[Row Count Output 1]" />
             <path
               refId="Package\Source To Stage.Paths[Row Count Output 111]"
               endId="Package\Source To Stage\Zone Type Stage.Inputs[OLE DB Destination Input]"
@@ -6237,18 +6237,18 @@
           TopLeft="281.428572027659,221.235293935998" />
         <EdgeLayout
           Id="Package\Source To Stage.Paths[OLE DB Source Output3]"
-          TopLeft="532.900000361886,115.411764641534">
+          TopLeft="1199.14285744012,352.588234993827">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,38.6470585889279"
+              EndConnector="0,42.4117650061727"
               Start="0,0"
-              End="0,31.1470585889279">
+              End="0,34.9117650061727">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.1470585889279" />
+                    End="0,34.9117650061727" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6259,18 +6259,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Source To Stage.Paths[OLE DB Source Output2]"
-          TopLeft="989.72142883448,351.058823230462">
+          TopLeft="162.678571527406,355.529411581046">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,39.9411767695379"
+              EndConnector="0,34.470588418954"
               Start="0,0"
-              End="0,32.4411767695379">
+              End="0,26.970588418954">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.4411767695379" />
+                    End="0,26.970588418954" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6281,18 +6281,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Source To Stage.Paths[OLE DB Source Output1]"
-          TopLeft="356.39285744012,116.941176404899">
+          TopLeft="577.34285766896,350.835293935998">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,31.0588235951006"
+              EndConnector="8.25714233103997,38.223529294464"
               Start="0,0"
-              End="0,23.5588235951006">
+              End="8.25714233103997,30.723529294464">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.5588235951006" />
+                    End="0,15.111764647232" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.111764647232"
+                    Point2="0,19.111764647232"
+                    Point3="4,19.111764647232" />
+                  <mssgle:LineSegment
+                    End="4.25714233103997,19.111764647232" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.25714233103997,19.111764647232"
+                    Point2="8.25714233103997,19.111764647232"
+                    Point3="8.25714233103997,23.111764647232" />
+                  <mssgle:LineSegment
+                    End="8.25714233103997,30.723529294464" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6347,138 +6359,6 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Source To Stage.Paths[Row Count Output 110]"
-          TopLeft="714.178572107487,200">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,31.882352764219"
-              Start="0,0"
-              End="0,24.382352764219">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,24.382352764219" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 19]"
-          TopLeft="1112.60714363489,209.058823230462">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,28.4705881226849"
-              Start="0,0"
-              End="0,20.9705881226849">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.9705881226849" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 18]"
-          TopLeft="165.250000106437,432">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,33.058823230461"
-              Start="0,0"
-              End="0,25.558823230461">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.558823230461" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 17]"
-          TopLeft="156.178571633843,188.058823230462">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,27.1764707055349"
-              Start="0,0"
-              End="0,19.6764707055349">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,19.6764707055349" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 16]"
-          TopLeft="357.46428601383,190">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,31.235293935998"
-              Start="0,0"
-              End="0,23.735293935998">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,23.735293935998" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 15]"
-          TopLeft="538.614286083014,196.058823230462">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,29.352941297122"
-              Start="0,0"
-              End="0,21.852941297122">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,21.852941297122" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 14]"
           TopLeft="582.935714555608,431.058823230462">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -6500,19 +6380,19 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 13]"
-          TopLeft="803.678572107487,435.705882058683">
+          Id="Package\Source To Stage.Paths[Row Count Output 19]"
+          TopLeft="714.178572107487,200">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,40.9999999999999"
+              EndConnector="0,31.882352764219"
               Start="0,0"
-              End="0,33.4999999999999">
+              End="0,24.382352764219">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.4999999999999" />
+                    End="0,24.382352764219" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6522,51 +6402,7 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 12]"
-          TopLeft="990.435714555608,433">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,43.058823116512"
-              Start="0,0"
-              End="0,35.558823116512">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,35.558823116512" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 11]"
-          TopLeft="363.71428601383,429.058823230462">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,41"
-              Start="0,0"
-              End="0,33.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,33.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 1]"
+          Id="Package\Source To Stage.Paths[Row Count Output 18]"
           TopLeft="908.678571633843,197.058823230462">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -6588,151 +6424,183 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 17]"
+          TopLeft="363.71428601383,429.058823230462">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 16]"
+          TopLeft="990.435714555608,433">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.058823116512"
+              Start="0,0"
+              End="0,35.558823116512">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.558823116512" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 15]"
+          TopLeft="803.678572107487,435.705882058683">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.9999999999999"
+              Start="0,0"
+              End="0,33.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 14]"
+          TopLeft="538.614286083014,196.058823230462">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.352941297122"
+              Start="0,0"
+              End="0,21.852941297122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.852941297122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 13]"
+          TopLeft="357.46428601383,190">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.235293935998"
+              Start="0,0"
+              End="0,23.735293935998">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.735293935998" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 12]"
+          TopLeft="156.178571633843,188.058823230462">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27.1764707055349"
+              Start="0,0"
+              End="0,19.6764707055349">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.6764707055349" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 11]"
+          TopLeft="165.250000106437,432">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.058823230461"
+              Start="0,0"
+              End="0,25.558823230461">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.558823230461" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 1]"
+          TopLeft="1112.60714363489,209.058823230462">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.4705881226849"
+              Start="0,0"
+              End="0,20.9705881226849">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.9705881226849" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Source To Stage.Paths[OLE DB Source Output11]"
-          TopLeft="804.750000670552,350.588235107777">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,43.1176469509065"
-              Start="0,0"
-              End="0,35.6176469509065">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,35.6176469509065" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output10]"
-          TopLeft="577.34285766896,350.835293935998">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="8.25714233103997,38.223529294464"
-              Start="0,0"
-              End="8.25714233103997,30.723529294464">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,15.111764647232" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,15.111764647232"
-                    Point2="0,19.111764647232"
-                    Point3="4,19.111764647232" />
-                  <mssgle:LineSegment
-                    End="4.25714233103997,19.111764647232" />
-                  <mssgle:CubicBezierSegment
-                    Point1="4.25714233103997,19.111764647232"
-                    Point2="8.25714233103997,19.111764647232"
-                    Point3="8.25714233103997,23.111764647232" />
-                  <mssgle:LineSegment
-                    End="8.25714233103997,30.723529294464" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output9]"
-          TopLeft="162.678571527406,355.529411581046">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,34.470588418954"
-              Start="0,0"
-              End="0,26.970588418954">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26.970588418954" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output8]"
-          TopLeft="1199.14285744012,352.588234993827">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,42.4117650061727"
-              Start="0,0"
-              End="0,34.9117650061727">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.9117650061727" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output7]"
-          TopLeft="1110.67857219796,118.411764402241">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,48.6470588282215"
-              Start="0,0"
-              End="0,41.1470588282215">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,41.1470588282215" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output6]"
-          TopLeft="365.14285744012,352.764705699363">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,34.2941175310987"
-              Start="0,0"
-              End="0,26.7941175310987">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26.7941175310987" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output5]"
           TopLeft="910.107143054812,114.35294087551">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -6754,7 +6622,73 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output4]"
+          Id="Package\Source To Stage.Paths[OLE DB Source Output10]"
+          TopLeft="356.39285744012,116.941176404899">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.0588235951006"
+              Start="0,0"
+              End="0,23.5588235951006">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5588235951006" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[OLE DB Source Output9]"
+          TopLeft="989.72142883448,351.058823230462">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.9411767695379"
+              Start="0,0"
+              End="0,32.4411767695379">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.4411767695379" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[OLE DB Source Output8]"
+          TopLeft="532.900000361886,115.411764641534">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.6470585889279"
+              Start="0,0"
+              End="0,31.1470585889279">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.1470585889279" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[OLE DB Source Output7]"
           TopLeft="715.000000670552,116.764705813313">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -6767,6 +6701,72 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,33.7352941866874" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[OLE DB Source Output6]"
+          TopLeft="804.750000670552,350.588235107777">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.1176469509065"
+              Start="0,0"
+              End="0,35.6176469509065">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.6176469509065" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[OLE DB Source Output5]"
+          TopLeft="365.14285744012,352.764705699363">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.2941175310987"
+              Start="0,0"
+              End="0,26.7941175310987">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.7941175310987" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[OLE DB Source Output4]"
+          TopLeft="1110.67857219796,118.411764402241">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.6470588282215"
+              Start="0,0"
+              End="0,41.1470588282215">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.1470588282215" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

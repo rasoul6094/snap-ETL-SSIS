@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Initial_FactTransactionRequest"
   DTS:PackageType="5"
-  DTS:VersionBuild="42"
-  DTS:VersionGUID="{62EC81C0-542B-4299-A412-9EEF87EED542}">
+  DTS:VersionBuild="46"
+  DTS:VersionGUID="{A4FBA43F-2996-4525-830E-4C0BD2EDA32C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -426,13 +426,13 @@
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">[REPLACENULL](#{Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[FinalizedRequestTimeKey]},-1)</property>
+                          name="Expression">[REPLACENULL](#{Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[FinalizedRequestTimeKey]},0)</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">REPLACENULL(FinalizedRequestTimeKey,-1)</property>
+                          name="FriendlyExpression">REPLACENULL(FinalizedRequestTimeKey,0)</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
@@ -449,13 +449,13 @@
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">[REPLACENULL](#{Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[FinalizedRequestDateKey]},-1)</property>
+                          name="Expression">[REPLACENULL](#{Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[FinalizedRequestDateKey]},19700101)</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">REPLACENULL(FinalizedRequestDateKey,-1)</property>
+                          name="FriendlyExpression">REPLACENULL(FinalizedRequestDateKey,19700101)</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
@@ -2710,25 +2710,13 @@ WHERE StatusID &lt;&gt; 1</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="150.4,41.6"
-          Id="Package\Stage To Core\Request stage"
-          TopLeft="226.666661845786,97.5980365852537" />
+          Size="198.4,41.6"
+          Id="Package\Stage To Core\Fact request denteination"
+          TopLeft="626.428571697705,530.823529385623" />
         <NodeLayout
-          Size="132.8,41.6"
-          Id="Package\Stage To Core\Row Count"
-          TopLeft="353.999995519008,530.411759953804" />
-        <NodeLayout
-          Size="217.6,41.6"
-          Id="Package\Stage To Core\Lookup Destination Location"
-          TopLeft="794,429" />
-        <NodeLayout
-          Size="161.6,41.6"
-          Id="Package\Stage To Core\Lookup DriverKey"
-          TopLeft="96.0000003193111,207.411764561769" />
-        <NodeLayout
-          Size="192,41.6"
-          Id="Package\Stage To Core\Lookup Origin Location"
-          TopLeft="801,333" />
+          Size="273.6,41.6"
+          Id="Package\Stage To Core\Derived Default Value for dimension Keys"
+          TopLeft="56.085714241619,488.317646700216" />
         <NodeLayout
           Size="185.6,41.6"
           Id="Package\Stage To Core\Lookup Status Request"
@@ -2738,43 +2726,37 @@ WHERE StatusID &lt;&gt; 1</property>
           Id="Package\Stage To Core\Lookup DriverOriginLocation"
           TopLeft="61.2380904886793,333" />
         <NodeLayout
-          Size="198.4,41.6"
-          Id="Package\Stage To Core\Fact request denteination"
-          TopLeft="626.428571697705,530.823529385623" />
-        <NodeLayout
-          Size="212,41.6"
-          Id="Package\Stage To Core\Derived Calculate measure"
-          TopLeft="74.8571426077764,399.235294141107" />
+          Size="132.8,41.6"
+          Id="Package\Stage To Core\Row Count"
+          TopLeft="353.999995519008,530.411759953804" />
         <NodeLayout
           Size="204,41.6"
           Id="Package\Stage To Core\extract date and time keys"
           TopLeft="842.285715593368,102.5294116836" />
         <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\Stage To Core\Lookup DriverKey"
+          TopLeft="96.0000003193111,207.411764561769" />
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Stage To Core\Request stage"
+          TopLeft="226.666661845786,97.5980365852537" />
+        <NodeLayout
+          Size="192,41.6"
+          Id="Package\Stage To Core\Lookup Origin Location"
+          TopLeft="801,333" />
+        <NodeLayout
+          Size="217.6,41.6"
+          Id="Package\Stage To Core\Lookup Destination Location"
+          TopLeft="794,429" />
+        <NodeLayout
+          Size="212,41.6"
+          Id="Package\Stage To Core\Derived Calculate measure"
+          TopLeft="74.8571426077764,399.235294141107" />
+        <NodeLayout
           Size="192,41.6"
           Id="Package\Stage To Core\Lookup Passenger Key"
           TopLeft="559.142857924408,204.352941035038" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Derived Column Output]"
-          TopLeft="946.242858483202,144.1294116836">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,57.5764705232172"
-              Start="0,0"
-              End="0,50.0764705232172">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,50.0764705232172" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Row Count Output 1]"
           TopLeft="486.799995519008,551.417644669714">
@@ -2975,10 +2957,40 @@ WHERE StatusID &lt;&gt; 1</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="273.6,41.6"
-          Id="Package\Stage To Core\Derived Default Value for dimension Keys"
-          TopLeft="56.085714241619,488.317646700216" />
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Derived Column Output2]"
+          TopLeft="329.685714241619,509.117646700216">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="24.3142812773889,42.0941132535878"
+              Start="0,0"
+              End="16.8142812773889,42.0941132535878">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="8.15714063869447,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.15714063869447,0"
+                    Point2="12.1571406386945,0"
+                    Point3="12.1571406386945,4" />
+                  <mssgle:LineSegment
+                    End="12.1571406386945,38.0941132535878" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.1571406386945,38.0941132535878"
+                    Point2="12.1571406386945,42.0941132535878"
+                    Point3="16.1571406386945,42.0941132535878" />
+                  <mssgle:LineSegment
+                    End="16.8142812773889,42.0941132535878" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Derived Column Output1]"
           TopLeft="180.857142607776,440.835294141107">
@@ -3014,31 +3026,19 @@ WHERE StatusID &lt;&gt; 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Derived Column Output2]"
-          TopLeft="329.685714241619,509.117646700216">
+          Id="Package\Stage To Core.Paths[Derived Column Output]"
+          TopLeft="946.242858483202,144.1294116836">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="24.3142812773889,42.0941132535878"
+              EndConnector="0,57.5764705232172"
               Start="0,0"
-              End="16.8142812773889,42.0941132535878">
+              End="0,50.0764705232172">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="8.15714063869447,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="8.15714063869447,0"
-                    Point2="12.1571406386945,0"
-                    Point3="12.1571406386945,4" />
-                  <mssgle:LineSegment
-                    End="12.1571406386945,38.0941132535878" />
-                  <mssgle:CubicBezierSegment
-                    Point1="12.1571406386945,38.0941132535878"
-                    Point2="12.1571406386945,42.0941132535878"
-                    Point3="16.1571406386945,42.0941132535878" />
-                  <mssgle:LineSegment
-                    End="16.8142812773889,42.0941132535878" />
+                    End="0,50.0764705232172" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3063,20 +3063,7 @@ WHERE StatusID &lt;&gt; 1</property>
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Request stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup Destination Location">
+    design-time-name="Package\Stage To Core\Lookup DriverOriginLocation">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
@@ -3168,7 +3155,7 @@ WHERE StatusID &lt;&gt; 1</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup DriverOriginLocation">
+    design-time-name="Package\Stage To Core\Lookup Passenger Key">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
@@ -3178,7 +3165,7 @@ WHERE StatusID &lt;&gt; 1</property>
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[Core].[DimLocation]</Value>
+          type="q3:string">[Core].[DimPassenger]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
@@ -3204,7 +3191,7 @@ WHERE StatusID &lt;&gt; 1</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Lookup Passenger Key">
+    design-time-name="Package\Stage To Core\Lookup Destination Location">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
@@ -3214,7 +3201,7 @@ WHERE StatusID &lt;&gt; 1</property>
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[Core].[DimPassenger]</Value>
+          type="q3:string">[Core].[DimLocation]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
@@ -3223,6 +3210,19 @@ WHERE StatusID &lt;&gt; 1</property>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Request stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

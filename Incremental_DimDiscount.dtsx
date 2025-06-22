@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
   DTS:DTSID="{AFA91937-E7BF-4AC2-B9ED-D8F6A08B31FC}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="14"
-  DTS:VersionGUID="{F0D174CB-4061-4E90-890A-4E99EEA71F46}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{6F9EC20E-1395-4928-8CE6-CC337892257E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -42,7 +42,6 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
           SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata&#xA;VALUES ('DimDiscount' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);"
-          SQLTask:ResultType="ResultSetType_SingleRow"
           SQLTask:TypeConversionMode="None" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -672,19 +671,19 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="204,42"
+          Size="204,41.6"
           Id="Package\insert into ETL_metaData"
           TopLeft="310.571428994135,42.235294038552" />
         <NodeLayout
-          Size="146,42"
+          Size="145.6,41.6"
           Id="Package\Stage To Core"
           TopLeft="331.714286045761,258.823529237489" />
         <NodeLayout
-          Size="188,42"
+          Size="188,41.6"
           Id="Package\Truncate DimDiscount"
           TopLeft="313.571428908985,139.705882377742" />
         <NodeLayout
-          Size="234,42"
+          Size="233.6,41.6"
           Id="Package\Update ETL_Metadata onSuccess"
           TopLeft="281.71428601383,352.999999749309" />
         <EdgeLayout
@@ -760,45 +759,23 @@
     design-time-name="Package\Stage To Core">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="155,42"
+          Size="155.2,41.6"
           Id="Package\Stage To Core\insert row count"
           TopLeft="301.379114434194,245.246602801062" />
         <NodeLayout
-          Size="149,42"
+          Size="148.8,41.6"
           Id="Package\Stage To Core\Discount Stage"
           TopLeft="311.428572070234,6.05882352673059" />
         <NodeLayout
-          Size="153,42"
-          Id="Package\Stage To Core\insert new rows"
-          TopLeft="306.615377543064,347.045245918242" />
-        <NodeLayout
-          Size="302,42"
+          Size="302.4,41.6"
           Id="Package\Stage To Core\convert discount code from nvarchar to varchar"
           TopLeft="234.571429047353,123.176470523217" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
-          TopLeft="385.750000558794,48.0588235267306">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,75.1176469964861"
-              Start="0,0"
-              End="0,67.6176469964861">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,67.6176469964861" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Stage To Core\insert new rows"
+          TopLeft="306.615377543064,347.045245918242" />
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Row Count Output 1]"
           TopLeft="380.997245988629,287.246602801062">
@@ -818,7 +795,33 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-15.45359375,21.36514187109,30.9071875,9.568359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
+          TopLeft="385.750000558794,48.0588235267306">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,75.1176469964861"
+              Start="0,0"
+              End="0,67.6176469964861">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,67.6176469964861" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-15.45359375,29.0246438107431,30.9071875,9.568359375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -840,7 +843,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-15.45359375,31.5008864514227,30.9071875,9.568359375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
