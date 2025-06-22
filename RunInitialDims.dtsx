@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
   DTS:DTSID="{1847B2D5-BADC-474A-AAFC-3F7303DD0DE6}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{4344908D-E4AE-475F-A321-EA2E09FFDB24}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{DE2854BB-8791-4F2F-9B9B-493B9EFFF46B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -145,34 +145,34 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="138,42"
+          Size="137.6,41.6"
           Id="Package\Sequence Container\dim discount"
           TopLeft="144.071428866411,8.55882352673062" />
         <NodeLayout
-          Size="126,42"
+          Size="126.4,41.6"
           Id="Package\Sequence Container\dim driver"
           TopLeft="318.357143523134,7.0294117633653" />
         <NodeLayout
-          Size="135,42"
+          Size="135.2,41.6"
           Id="Package\Sequence Container\dim location"
           TopLeft="5.5,67.3352941525024" />
         <NodeLayout
-          Size="147,42"
+          Size="147.2,41.6"
           Id="Package\Sequence Container\dim passenger"
           TopLeft="208.357143288972,75.0882352331209" />
         <NodeLayout
-          Size="179,42"
+          Size="179.2,41.6"
           Id="Package\Sequence Container\dim payment method"
           TopLeft="76.2142858648177,142.935294175292" />
         <NodeLayout
-          Size="166,42"
+          Size="166.4,41.6"
           Id="Package\Sequence Container\dim request status"
           TopLeft="316.214286375714,142.252941069223" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="541,236"
-          Size="541,279"
+          PanelSize="540.8,236"
+          Size="540.8,279.2"
           Id="Package\Sequence Container"
           TopLeft="107.857143086742,43.5882352559109" />
       </GraphLayout>

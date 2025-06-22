@@ -7,15 +7,25 @@
   DTS:CreatorName="DESKTOP-GDRMTJV\HP"
   DTS:DTSID="{2261FD0C-797C-45DD-B6F1-CD202A9F060A}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{51DB64CB-34C7-420E-8D3E-57B17581B04C}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{79639BE8-212A-47F9-9192-BD9A2E5F8EC1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
-  <DTS:Variables />
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F5E755DB-1AF3-4899-B205-6C3875985090}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="rowCountInserted">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\cleanup"
@@ -2440,19 +2450,19 @@ WHERE StatusId &lt;&gt; 2</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="118,42"
+          Size="118.4,41.6"
           Id="Package\cleanup"
           TopLeft="125.714285854175,60" />
         <NodeLayout
-          Size="244,42"
+          Size="244,41.6"
           Id="Package\insert new record to ETL_Metadata"
           TopLeft="60,140.294117576678" />
         <NodeLayout
-          Size="150,42"
+          Size="150.4,41.6"
           Id="Package\Stage To Core"
           TopLeft="109.000000117081,243.764705665178" />
         <NodeLayout
-          Size="234,42"
+          Size="233.6,41.6"
           Id="Package\Update ETL_Metadata onSuccess"
           TopLeft="69.714285747739,350.823529100748" />
         <EdgeLayout
@@ -2530,47 +2540,47 @@ WHERE StatusId &lt;&gt; 2</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="150,42"
+          Size="150.4,41.6"
           Id="Package\Stage To Core\Request stage"
           TopLeft="226.666661845786,97.5980365852537" />
         <NodeLayout
-          Size="133,42"
+          Size="132.8,41.6"
           Id="Package\Stage To Core\Row Count"
           TopLeft="226.857138105497,508.99999526669" />
         <NodeLayout
-          Size="218,42"
+          Size="217.6,41.6"
           Id="Package\Stage To Core\Lookup Destination Location"
           TopLeft="794,429" />
         <NodeLayout
-          Size="162,42"
+          Size="161.6,41.6"
           Id="Package\Stage To Core\Lookup DriverKey"
           TopLeft="96.0000003193111,207.411764561769" />
         <NodeLayout
-          Size="192,42"
+          Size="192,41.6"
           Id="Package\Stage To Core\Lookup Origin Location"
           TopLeft="801,333" />
         <NodeLayout
-          Size="186,42"
+          Size="185.6,41.6"
           Id="Package\Stage To Core\Lookup Status Request"
           TopLeft="855.000001373036,201.705882206817" />
         <NodeLayout
-          Size="219,42"
+          Size="219.2,41.6"
           Id="Package\Stage To Core\Lookup DriverOriginLocation"
           TopLeft="61.2380904886793,333" />
         <NodeLayout
-          Size="182,59"
+          Size="182.4,59.2"
           Id="Package\Stage To Core\Fact trip denteination"
           TopLeft="500,501" />
         <NodeLayout
-          Size="212,42"
+          Size="212,41.6"
           Id="Package\Stage To Core\Derived Calculate measure"
           TopLeft="192,426" />
         <NodeLayout
-          Size="204,42"
+          Size="204,41.6"
           Id="Package\Stage To Core\extract date and time keys"
           TopLeft="842.285715593368,102.5294116836" />
         <NodeLayout
-          Size="192,42"
+          Size="192,41.6"
           Id="Package\Stage To Core\Lookup Passenger Key"
           TopLeft="559.142857924408,204.352941035038" />
         <EdgeLayout
@@ -2592,9 +2602,7 @@ WHERE StatusId &lt;&gt; 2</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2616,9 +2624,7 @@ WHERE StatusId &lt;&gt; 2</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2640,9 +2646,7 @@ WHERE StatusId &lt;&gt; 2</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2808,9 +2812,7 @@ WHERE StatusId &lt;&gt; 2</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

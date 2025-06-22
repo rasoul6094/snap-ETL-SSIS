@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-GDRMTJV\HP"
   DTS:DTSID="{467A7E23-832C-4911-986B-059A5DE7E1FA}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Initial_FactTransactionRequest"
   DTS:PackageType="5"
-  DTS:VersionBuild="33"
-  DTS:VersionGUID="{938E27AA-55E4-468D-AEB5-00E5C5237391}">
+  DTS:VersionBuild="42"
+  DTS:VersionGUID="{62EC81C0-542B-4299-A412-9EEF87EED542}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -27,6 +27,23 @@
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\cleanup"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{bc6721aa-3300-4c74-a0b7-efcb006324e9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="cleanup"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE Core.FactTransactionRequest;&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'FactTransactionRequest';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\ETL_MetaData Start"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
@@ -360,6 +377,149 @@
               </outputs>
             </component>
             <component
+              refId="Package\Stage To Core\Derived Default Value for dimension Keys"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Default Value for dimension Keys"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input].Columns[DriverOriginLocationKey]"
+                      cachedDataType="i4"
+                      cachedName="DriverOriginLocationKey"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Lookup DriverOriginLocation.Outputs[Lookup Match Output].Columns[DriverOriginLocationKey]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[REPLACENULL](#{Package\Stage To Core\Lookup DriverOriginLocation.Outputs[Lookup Match Output].Columns[DriverOriginLocationKey]},-1)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">REPLACENULL(DriverOriginLocationKey,-1)</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input].Columns[FinalizedRequestTimeKey]"
+                      cachedDataType="i4"
+                      cachedName="FinalizedRequestTimeKey"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[FinalizedRequestTimeKey]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[REPLACENULL](#{Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[FinalizedRequestTimeKey]},-1)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">REPLACENULL(FinalizedRequestTimeKey,-1)</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input].Columns[FinalizedRequestDateKey]"
+                      cachedDataType="i4"
+                      cachedName="FinalizedRequestDateKey"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[FinalizedRequestDateKey]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[REPLACENULL](#{Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[FinalizedRequestDateKey]},-1)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">REPLACENULL(FinalizedRequestDateKey,-1)</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input].Columns[DriverKey]"
+                      cachedDataType="i4"
+                      cachedName="DriverKey"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Lookup DriverKey.Outputs[Lookup Match Output].Columns[DriverKey]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[REPLACENULL](#{Package\Stage To Core\Lookup DriverKey.Outputs[Lookup Match Output].Columns[DriverKey]},-1)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">REPLACENULL(DriverKey,-1)</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\Stage To Core\extract date and time keys"
               componentClassID="Microsoft.DerivedColumn"
               contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -513,11 +673,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\Stage To Core\Fact trip denteination"
+              refId="Package\Stage To Core\Fact request denteination"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="Fact trip denteination"
+              name="Fact request denteination"
               usesDispositions="true"
               version="4">
               <properties>
@@ -570,7 +730,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Stage To Core\Fact trip denteination.Connections[OleDbConnection]"
+                  refId="Package\Stage To Core\Fact request denteination.Connections[OleDbConnection]"
                   connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
                   connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
                   description="The OLE DB runtime connection used to access the database."
@@ -578,181 +738,181 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input]"
+                  refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[OriginLocationKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[OriginLocationKey]"
                       cachedDataType="i4"
                       cachedName="OriginLocationKey"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[OriginLocationKey]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[OriginLocationKey]"
                       lineageId="Package\Stage To Core\Lookup Origin Location.Outputs[Lookup Match Output].Columns[OriginLocationKey]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[DestinationLocationKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[DestinationLocationKey]"
                       cachedDataType="i4"
                       cachedName="DestinationLocationKey"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DestinationLocationKey]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[DestinationLocationKey]"
                       lineageId="Package\Stage To Core\Lookup Destination Location.Outputs[Lookup Match Output].Columns[DestinationLocationKey]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[PassengerKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[PassengerKey]"
                       cachedDataType="i4"
                       cachedName="PassengerKey"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[PassengerKey]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[PassengerKey]"
                       lineageId="Package\Stage To Core\Lookup Passenger Key.Outputs[Lookup Match Output].Columns[PassengerKey]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[TripTotalCostAmount]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[TripTotalCostAmount]"
                       cachedDataType="numeric"
                       cachedName="TripTotalCostAmount"
                       cachedPrecision="10"
                       cachedScale="2"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripTotalCostAmount]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripTotalCostAmount]"
                       lineageId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Output].Columns[TripTotalCostAmount]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[TripPlatformFeeAmount]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[TripPlatformFeeAmount]"
                       cachedDataType="numeric"
                       cachedName="TripPlatformFeeAmount"
                       cachedPrecision="16"
                       cachedScale="4"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripPlatformFeeAmount]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripPlatformFeeAmount]"
                       lineageId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Output].Columns[TripPlatformFeeAmount]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[TripNetDriverIncomeAmount]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[TripNetDriverIncomeAmount]"
                       cachedDataType="numeric"
                       cachedName="TripNetDriverIncomeAmount"
                       cachedPrecision="17"
                       cachedScale="4"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripNetDriverIncomeAmount]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripNetDriverIncomeAmount]"
                       lineageId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Output].Columns[TripNetDriverIncomeAmount]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[TripDistanceInKm]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[TripDistanceInKm]"
                       cachedDataType="numeric"
                       cachedName="TripDistanceInKm"
                       cachedPrecision="10"
                       cachedScale="2"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripDistanceInKm]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripDistanceInKm]"
                       lineageId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Output].Columns[TripDistanceInKm]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[InitiateRequestDateKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[InitiateRequestDateKey]"
                       cachedDataType="i4"
                       cachedName="InitiateRequestDateKey"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[InitiateRequestDateKey]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[InitiateRequestDateKey]"
                       lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[InitiateRequestDateKey]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[InitiateRequestTimeKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[InitiateRequestTimeKey]"
                       cachedDataType="i4"
                       cachedName="InitiateRequestTimeKey"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[InitiateRequestTimeKey]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[InitiateRequestTimeKey]"
                       lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[InitiateRequestTimeKey]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[RequestStatusKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[RequestStatusKey]"
                       cachedDataType="i4"
                       cachedName="RequestStatusKey"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[RequestStatusKey]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[RequestStatusKey]"
                       lineageId="Package\Stage To Core\Lookup Status Request.Outputs[Lookup Match Output].Columns[RequestStatusKey]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[DriverDistanceToPassengerOriginInKm]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[DriverDistanceToPassengerOriginInKm]"
                       cachedDataType="i4"
                       cachedName="DriverDistanceToPassengerOriginInKm"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverDistanceToPassengerOriginInKm]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverDistanceToPassengerOriginInKm]"
                       lineageId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Output].Columns[DriverDistanceToPassengerOriginInKm]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[FinalizedDurationInSec]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[FinalizedDurationInSec]"
                       cachedDataType="i4"
                       cachedName="FinalizedDurationInSec"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[FinalizedDurationInSec]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[FinalizedDurationInSec]"
                       lineageId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Output].Columns[FinalizedDurationInSec]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[FinalizedRequestTimeKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[FinalizedRequestTimeKey]"
                       cachedDataType="i4"
                       cachedName="FinalizedRequestTimeKey"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[FinalizedRequestTimeKey]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[FinalizedRequestTimeKey]"
                       lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[FinalizedRequestTimeKey]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[FinalizedRequestDateKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[FinalizedRequestDateKey]"
                       cachedDataType="i4"
                       cachedName="FinalizedRequestDateKey"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[FinalizedRequestDateKey]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[FinalizedRequestDateKey]"
                       lineageId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output].Columns[FinalizedRequestDateKey]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[DriverOriginLocationKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[DriverOriginLocationKey]"
                       cachedDataType="i4"
                       cachedName="DriverOriginLocationKey"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverOriginLocationKey]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverOriginLocationKey]"
                       lineageId="Package\Stage To Core\Lookup DriverOriginLocation.Outputs[Lookup Match Output].Columns[DriverOriginLocationKey]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[DriverKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].Columns[DriverKey]"
                       cachedDataType="i4"
                       cachedName="DriverKey"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverKey]"
+                      externalMetadataColumnId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverKey]"
                       lineageId="Package\Stage To Core\Lookup DriverKey.Outputs[Lookup Match Output].Columns[DriverKey]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[PassengerKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[PassengerKey]"
                       dataType="i4"
                       name="PassengerKey" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverKey]"
                       dataType="i4"
                       name="DriverKey" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[OriginLocationKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[OriginLocationKey]"
                       dataType="i4"
                       name="OriginLocationKey" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DestinationLocationKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[DestinationLocationKey]"
                       dataType="i4"
                       name="DestinationLocationKey" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripTotalCostAmount]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripTotalCostAmount]"
                       dataType="i4"
                       name="TripTotalCostAmount" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripPlatformFeeAmount]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripPlatformFeeAmount]"
                       dataType="i4"
                       name="TripPlatformFeeAmount" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripNetDriverIncomeAmount]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripNetDriverIncomeAmount]"
                       dataType="i4"
                       name="TripNetDriverIncomeAmount" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripDistanceInKm]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[TripDistanceInKm]"
                       dataType="i4"
                       name="TripDistanceInKm" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[InitiateRequestDateKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[InitiateRequestDateKey]"
                       dataType="i4"
                       name="InitiateRequestDateKey" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[InitiateRequestTimeKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[InitiateRequestTimeKey]"
                       dataType="i4"
                       name="InitiateRequestTimeKey" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[RequestStatusKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[RequestStatusKey]"
                       dataType="i4"
                       name="RequestStatusKey" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverOriginLocationKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverOriginLocationKey]"
                       dataType="i4"
                       name="DriverOriginLocationKey" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverDistanceToPassengerOriginInKm]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverDistanceToPassengerOriginInKm]"
                       dataType="i4"
                       name="DriverDistanceToPassengerOriginInKm" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[FinalizedRequestDateKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[FinalizedRequestDateKey]"
                       dataType="i4"
                       name="FinalizedRequestDateKey" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[FinalizedRequestTimeKey]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[FinalizedRequestTimeKey]"
                       dataType="i4"
                       name="FinalizedRequestTimeKey" />
                     <externalMetadataColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[FinalizedDurationInSec]"
+                      refId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input].ExternalColumns[FinalizedDurationInSec]"
                       dataType="i4"
                       name="FinalizedDurationInSec" />
                   </externalMetadataColumns>
@@ -760,22 +920,22 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Stage To Core\Fact trip denteination.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Stage To Core\Fact request denteination.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Stage To Core\Fact request denteination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Fact trip denteination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Stage To Core\Fact request denteination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Stage To Core\Fact request denteination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Stage To Core\Fact trip denteination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Stage To Core\Fact request denteination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -2344,9 +2504,14 @@ WHERE StatusID &lt;&gt; 1</property>
               startId="Package\Stage To Core\extract date and time keys.Outputs[Derived Column Output]" />
             <path
               refId="Package\Stage To Core.Paths[Derived Column Output1]"
-              endId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
+              endId="Package\Stage To Core\Derived Default Value for dimension Keys.Inputs[Derived Column Input]"
               name="Derived Column Output"
               startId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Derived Column Output2]"
+              endId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
+              name="Derived Column Output"
+              startId="Package\Stage To Core\Derived Default Value for dimension Keys.Outputs[Derived Column Output]" />
             <path
               refId="Package\Stage To Core.Paths[Lookup Match Output]"
               endId="Package\Stage To Core\Lookup Passenger Key.Inputs[Lookup Input]"
@@ -2384,7 +2549,7 @@ WHERE StatusID &lt;&gt; 1</property>
               startId="Package\Stage To Core\Request stage.Outputs[OLE DB Source Output]" />
             <path
               refId="Package\Stage To Core.Paths[Row Count Output 1]"
-              endId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input]"
+              endId="Package\Stage To Core\Fact request denteination.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
               startId="Package\Stage To Core\Row Count.Outputs[Row Count Output 1]" />
           </paths>
@@ -2426,6 +2591,14 @@ WHERE StatusID &lt;&gt; 1</property>
       DTS:ObjectName="Constraint"
       DTS:To="Package\Stage To Core" />
     <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{D817FC81-70D6-4323-84FF-3D0354440E95}"
+      DTS:From="Package\cleanup"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\ETL_MetaData Start" />
+    <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
       DTS:DTSID="{72d59937-5a9b-43f5-aac8-2abfa7e248a6}"
@@ -2447,15 +2620,19 @@ WHERE StatusID &lt;&gt; 1</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="173,42"
+          Size="118.4,41.6"
+          Id="Package\cleanup"
+          TopLeft="118.571428823836,45.1176470192762" />
+        <NodeLayout
+          Size="172.8,41.6"
           Id="Package\ETL_MetaData Start"
           TopLeft="97.714285747739,124.823529100748" />
         <NodeLayout
-          Size="150,42"
+          Size="150.4,41.6"
           Id="Package\Stage To Core"
           TopLeft="109.000000117081,243.764705665178" />
         <NodeLayout
-          Size="234,42"
+          Size="233.6,41.6"
           Id="Package\Update ETL_Metadata onSuccess"
           TopLeft="69.714285747739,350.823529100748" />
         <EdgeLayout
@@ -2472,6 +2649,28 @@ WHERE StatusID &lt;&gt; 1</property>
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,69.44117656443" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="180.942857285788,86.7176470192762">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.1058820814718"
+              Start="0,0"
+              End="0,30.6058820814718">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.6058820814718" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2511,47 +2710,47 @@ WHERE StatusID &lt;&gt; 1</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="150,42"
+          Size="150.4,41.6"
           Id="Package\Stage To Core\Request stage"
           TopLeft="226.666661845786,97.5980365852537" />
         <NodeLayout
-          Size="133,42"
+          Size="132.8,41.6"
           Id="Package\Stage To Core\Row Count"
-          TopLeft="226.857138105497,508.99999526669" />
+          TopLeft="353.999995519008,530.411759953804" />
         <NodeLayout
-          Size="218,42"
+          Size="217.6,41.6"
           Id="Package\Stage To Core\Lookup Destination Location"
           TopLeft="794,429" />
         <NodeLayout
-          Size="162,42"
+          Size="161.6,41.6"
           Id="Package\Stage To Core\Lookup DriverKey"
           TopLeft="96.0000003193111,207.411764561769" />
         <NodeLayout
-          Size="192,42"
+          Size="192,41.6"
           Id="Package\Stage To Core\Lookup Origin Location"
           TopLeft="801,333" />
         <NodeLayout
-          Size="186,42"
+          Size="185.6,41.6"
           Id="Package\Stage To Core\Lookup Status Request"
           TopLeft="855.000001373036,201.705882206817" />
         <NodeLayout
-          Size="219,42"
+          Size="219.2,41.6"
           Id="Package\Stage To Core\Lookup DriverOriginLocation"
           TopLeft="61.2380904886793,333" />
         <NodeLayout
-          Size="182,59"
-          Id="Package\Stage To Core\Fact trip denteination"
-          TopLeft="500,501" />
+          Size="198.4,41.6"
+          Id="Package\Stage To Core\Fact request denteination"
+          TopLeft="626.428571697705,530.823529385623" />
         <NodeLayout
-          Size="212,42"
+          Size="212,41.6"
           Id="Package\Stage To Core\Derived Calculate measure"
-          TopLeft="192,426" />
+          TopLeft="74.8571426077764,399.235294141107" />
         <NodeLayout
-          Size="204,42"
+          Size="204,41.6"
           Id="Package\Stage To Core\extract date and time keys"
           TopLeft="842.285715593368,102.5294116836" />
         <NodeLayout
-          Size="192,42"
+          Size="192,41.6"
           Id="Package\Stage To Core\Lookup Passenger Key"
           TopLeft="559.142857924408,204.352941035038" />
         <EdgeLayout
@@ -2573,33 +2772,29 @@ WHERE StatusID &lt;&gt; 1</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-27.99357421875,19.4239774491086,55.9871484375,11.228515625"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Row Count Output 1]"
-          TopLeft="359.857138105497,530.249997633345">
+          TopLeft="486.799995519008,551.417644669714">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="140.142861894503,0"
+              EndConnector="139.628576178697,0"
               Start="0,0"
-              End="132.642861894503,0">
+              End="132.128576178697,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="132.642861894503,0" />
+                    End="132.128576178697,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="41.1237746972515,5,50.3953125,11.2236328125"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2621,9 +2816,7 @@ WHERE StatusID &lt;&gt; 1</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="200.865952655041,5,55.9871484375,11.228515625"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2646,7 +2839,7 @@ WHERE StatusID &lt;&gt; 1</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="176.119216474411,5,161.0234765625,11.609375"
+              BoundingBox="176.119216474411,5,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2670,7 +2863,7 @@ WHERE StatusID &lt;&gt; 1</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-227.533167083799,5,161.0234765625,11.609375"
+              BoundingBox="-227.533167083799,5,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2694,7 +2887,7 @@ WHERE StatusID &lt;&gt; 1</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-80.51173828125,32.4394302191157,161.0234765625,11.609375"
+              BoundingBox="-80.51173828125,32.4394302191157,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2718,31 +2911,43 @@ WHERE StatusID &lt;&gt; 1</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-80.51173828125,17.4453125,161.0234765625,11.609375"
+              BoundingBox="-80.51173828125,17.4453125,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Lookup Match Output1]"
-          TopLeft="794,448.5">
+          TopLeft="794,449.8">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-390,0"
+              EndConnector="-507.142857392224,-29.7647058588926"
               Start="0,0"
-              End="-382.5,0">
+              End="-499.642857392224,-29.7647058588926">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-382.5,0" />
+                    End="-249.571428696112,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-249.571428696112,0"
+                    Point2="-253.571428696112,0"
+                    Point3="-253.571428696112,-4" />
+                  <mssgle:LineSegment
+                    End="-253.571428696112,-25.7647058588926" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-253.571428696112,-25.7647058588926"
+                    Point2="-253.571428696112,-29.7647058588926"
+                    Point3="-257.571428696112,-29.7647058588926" />
+                  <mssgle:LineSegment
+                    End="-499.642857392224,-29.7647058588926" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-271.76173828125,5,161.0234765625,11.609375"
+              BoundingBox="-301.762815414862,1,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2766,32 +2971,80 @@ WHERE StatusID &lt;&gt; 1</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-128.690310005564,5,161.0234765625,11.609375"
+              BoundingBox="-128.690310005564,5,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="273.6,41.6"
+          Id="Package\Stage To Core\Derived Default Value for dimension Keys"
+          TopLeft="56.085714241619,488.317646700216" />
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Derived Column Output1]"
-          TopLeft="295.678569052749,468">
+          TopLeft="180.857142607776,440.835294141107">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,40.99999526669"
+              EndConnector="12.0285716338425,47.4823525591088"
               Start="0,0"
-              End="0,33.49999526669">
+              End="12.0285716338425,39.9823525591088">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.49999526669" />
+                    End="0,19.7411762795544" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.7411762795544"
+                    Point2="0,23.7411762795544"
+                    Point3="4,23.7411762795544" />
+                  <mssgle:LineSegment
+                    End="8.02857163384255,23.7411762795544" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.02857163384255,23.7411762795544"
+                    Point2="12.0285716338425,23.7411762795544"
+                    Point3="12.0285716338425,27.7411762795544" />
+                  <mssgle:LineSegment
+                    End="12.0285716338425,39.9823525591088" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-25.19765625,11.138181227095,50.3953125,11.2236328125"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Derived Column Output2]"
+          TopLeft="329.685714241619,509.117646700216">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="24.3142812773889,42.0941132535878"
+              Start="0,0"
+              End="16.8142812773889,42.0941132535878">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="8.15714063869447,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.15714063869447,0"
+                    Point2="12.1571406386945,0"
+                    Point3="12.1571406386945,4" />
+                  <mssgle:LineSegment
+                    End="12.1571406386945,38.0941132535878" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.1571406386945,38.0941132535878"
+                    Point2="12.1571406386945,42.0941132535878"
+                    Point3="16.1571406386945,42.0941132535878" />
+                  <mssgle:LineSegment
+                    End="16.8142812773889,42.0941132535878" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2851,7 +3104,7 @@ WHERE StatusID &lt;&gt; 1</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -2861,7 +3114,7 @@ WHERE StatusID &lt;&gt; 1</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2938,7 +3191,7 @@ WHERE StatusID &lt;&gt; 1</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Fact trip denteination">
+    design-time-name="Package\Stage To Core\Fact request denteination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
