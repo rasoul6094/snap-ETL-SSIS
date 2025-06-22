@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="20"
-  DTS:VersionGUID="{158BD060-D515-4ECC-BB07-90FD24746F91}">
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{5063FDF2-859F-4489-96B2-7924AA024A3E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -1312,13 +1312,13 @@ where [refTable].[ZoneTypeID] = ?</property>
           Id="Package\CleanUp"
           TopLeft="452.285715071827,50.8235294198082" />
         <NodeLayout
-          Size="150,42"
-          Id="Package\Stage To Core"
-          TopLeft="441.571429334734,238.588235084986" />
-        <NodeLayout
           Size="250,42"
           Id="Package\insert new record to ETL_Metadata"
           TopLeft="394.571429217652,129.117646996486" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Stage To Core"
+          TopLeft="441.571429334734,238.588235084986" />
         <NodeLayout
           Size="234,42"
           Id="Package\Update ETL_Metadata onSuccess"
@@ -1523,7 +1523,7 @@ where [refTable].[ZoneTypeID] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-113.098169819226,5,96.3827734375,11.609375"
+              BoundingBox="-93.2128182567259,5,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1571,7 +1571,7 @@ where [refTable].[ZoneTypeID] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="8.13004212105151,5,96.3827734375,11.609375"
+              BoundingBox="8.1300421210515,5,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>

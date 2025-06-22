@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Initial_FactTransactionRequest"
   DTS:PackageType="5"
-  DTS:VersionBuild="28"
-  DTS:VersionGUID="{17CCC597-7F49-4271-B10D-7B6E370EF3E1}">
+  DTS:VersionBuild="33"
+  DTS:VersionGUID="{938E27AA-55E4-468D-AEB5-00E5C5237391}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -659,12 +659,6 @@
                       externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverDistanceToPassengerOriginInKm]"
                       lineageId="Package\Stage To Core\Derived Calculate measure.Outputs[Derived Column Output].Columns[DriverDistanceToPassengerOriginInKm]" />
                     <inputColumn
-                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[DriverKey]"
-                      cachedDataType="i4"
-                      cachedName="DriverKey"
-                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverKey]"
-                      lineageId="Package\Stage To Core\Lookup DriverKey.Outputs[Lookup Match Output].Columns[DriverKey]" />
-                    <inputColumn
                       refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[FinalizedDurationInSec]"
                       cachedDataType="i4"
                       cachedName="FinalizedDurationInSec"
@@ -688,6 +682,12 @@
                       cachedName="DriverOriginLocationKey"
                       externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverOriginLocationKey]"
                       lineageId="Package\Stage To Core\Lookup DriverOriginLocation.Outputs[Lookup Match Output].Columns[DriverOriginLocationKey]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].Columns[DriverKey]"
+                      cachedDataType="i4"
+                      cachedName="DriverKey"
+                      externalMetadataColumnId="Package\Stage To Core\Fact trip denteination.Inputs[OLE DB Destination Input].ExternalColumns[DriverKey]"
+                      lineageId="Package\Stage To Core\Lookup DriverKey.Outputs[Lookup Match Output].Columns[DriverKey]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1754,9 +1754,31 @@ where [refTable].[StatusKey] = ?</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT * 
-FROM Stage.Request 
-WHERE StatusId &lt;&gt; 2</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+  [RequestID],
+  [StatusID],
+  [RequestStartDatetime],
+  [PassengerID],
+  [OriginLocationZoneID],
+  [DestinationLocationZoneID],
+  [StopDuration],
+  [OriginPointLat],
+  [OriginPointLong],
+  [DestinationPointLat],
+  [DestinationPointLong],
+  [DistanceInKm],
+  [CostAmount],
+  [FeePercentage],
+  [DriverID],
+  [DriverOriginLocationZoneID],
+  [DriverOriginLocationLat],
+  [DriverOriginLocationLong],
+  [AcceptRequestDatetime],
+  [FinalizedDatetime],
+  [CreatedAt],
+  [ModifiedAt]
+FROM [Request]
+WHERE StatusID &lt;&gt; 1</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1773,7 +1795,7 @@ WHERE StatusId &lt;&gt; 2</property>
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">0</property>
+                  typeConverter="AccessMode">2</property>
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
@@ -2425,6 +2447,10 @@ WHERE StatusId &lt;&gt; 2</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="173,42"
+          Id="Package\ETL_MetaData Start"
+          TopLeft="97.714285747739,124.823529100748" />
+        <NodeLayout
           Size="150,42"
           Id="Package\Stage To Core"
           TopLeft="109.000000117081,243.764705665178" />
@@ -2432,32 +2458,6 @@ WHERE StatusId &lt;&gt; 2</property>
           Size="234,42"
           Id="Package\Update ETL_Metadata onSuccess"
           TopLeft="69.714285747739,350.823529100748" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="185.35714293241,285.764705665178">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,65.05882343557"
-              Start="0,0"
-              End="0,57.55882343557">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,57.55882343557" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="173,42"
-          Id="Package\ETL_MetaData Start"
-          TopLeft="97.714285747739,124.823529100748" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="184.10714293241,166.823529100748">
@@ -2472,6 +2472,28 @@ WHERE StatusId &lt;&gt; 2</property>
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,69.44117656443" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="185.35714293241,285.764705665178">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65.05882343557"
+              Start="0,0"
+              End="0,57.55882343557">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.55882343557" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2551,7 +2573,9 @@ WHERE StatusId &lt;&gt; 2</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-27.99357421875,19.4239774491086,55.9871484375,11.228515625"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2573,7 +2597,9 @@ WHERE StatusId &lt;&gt; 2</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="41.1237746972515,5,50.3953125,11.2236328125"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2595,7 +2621,9 @@ WHERE StatusId &lt;&gt; 2</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="200.865952655041,5,55.9871484375,11.228515625"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2618,7 +2646,7 @@ WHERE StatusId &lt;&gt; 2</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="208.43956803691,5,96.3827734375,11.609375"
+              BoundingBox="176.119216474411,5,161.0234765625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2642,7 +2670,7 @@ WHERE StatusId &lt;&gt; 2</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-195.212815521298,5,96.3827734375,11.609375"
+              BoundingBox="-227.533167083799,5,161.0234765625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2666,7 +2694,7 @@ WHERE StatusId &lt;&gt; 2</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,32.4394302191157,96.3827734375,11.609375"
+              BoundingBox="-80.51173828125,32.4394302191157,161.0234765625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2690,7 +2718,7 @@ WHERE StatusId &lt;&gt; 2</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,17.4453125,96.3827734375,11.609375"
+              BoundingBox="-80.51173828125,17.4453125,161.0234765625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2714,7 +2742,7 @@ WHERE StatusId &lt;&gt; 2</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-239.44138671875,5,96.3827734375,11.609375"
+              BoundingBox="-271.76173828125,5,161.0234765625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2738,7 +2766,7 @@ WHERE StatusId &lt;&gt; 2</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-96.3699584430638,5,96.3827734375,11.609375"
+              BoundingBox="-128.690310005564,5,161.0234765625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2761,7 +2789,9 @@ WHERE StatusId &lt;&gt; 2</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-25.19765625,11.138181227095,50.3953125,11.2236328125"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2821,7 +2851,7 @@ WHERE StatusId &lt;&gt; 2</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:string">false</Value>
+          type="q2:boolean">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -2831,7 +2861,7 @@ WHERE StatusId &lt;&gt; 2</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:string">0</Value>
+          type="q4:int">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2867,7 +2897,7 @@ WHERE StatusId &lt;&gt; 2</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -2877,7 +2907,7 @@ WHERE StatusId &lt;&gt; 2</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
