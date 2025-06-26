@@ -1,0 +1,2975 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/26/2025 4:11:22 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-GDRMTJV"
+  DTS:CreatorName="DESKTOP-GDRMTJV\HP"
+  DTS:DTSID="{9B350075-A751-4136-8488-D764A51C11D0}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{1AF7FC6D-0913-4461-93ED-2EC729074365}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7CEA08EB-847C-4ED0-8B07-42DFD9BFBE67}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="rowCountInserted">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\cleanup"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{85287fdb-2ae0-4546-b692-c5fca53ab496}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="cleanup"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE Core.FactAccDriver;&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'FactAccDriver';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\insert new record to ETL_Metadata"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{c53869ee-728d-4a15-a6d6-d18cb3ba5fee}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="insert new record to ETL_Metadata"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
+          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata &#xA;VALUES ('FactAccDriver' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage To Core"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{eac37c1d-6279-443e-98f5-c7eb41740d33}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage To Core"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Stage To Core.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{39403e00-7635-4576-a538-9f52820b4cb8}"
+          DTS:EventID="3"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{35e4c9f8-1037-46e9-8a80-aeb26ca56563}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{f3824bcf-8bdd-49a4-a71e-95c4cb79a020}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Update ETL_Metadata On error"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
+                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'FactAccDriver'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="System::ErrorDescription"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage To Core\Aggregate Trip Info for driver"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Aggregate Trip Info for driver"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+  DriverKey,
+
+  SUM(TotalTripTotalCostAmount) AS RunningTotalTripTotalCostAmount,
+  SUM(TotalTripFeeAmount) AS RunningTotalTripFeeAmount,
+  SUM(TotalTripNetDriverIncomeAmount) AS RunningTotalTripNetDriverIncomeAmount,
+
+  AVG(AvgTripTotalCostAmount) AS RunningAvgTripTotalCostAmount,
+  AVG(AvgTripFeeAmount) AS RunningAvgTripFeeAmount,
+  AVG(AvgTripNetDriverIncomeAmount) AS RunningAvgTripNetDriverIncomeAmount,
+
+  SUM(TotalTripDistanceInKm) AS RunningTotalTripDistanceInKm,
+  SUM(TotalTripDurationInMin) AS RunningTotalTripDurationInMin,
+  SUM(TotalTripStopDurationInMin) AS RunningTotalTripStopDurationInMin,
+
+  AVG(AvgTripDistanceInKm) AS RunningAvgTripDistanceInKm,
+  AVG(AvgTripDurationInMin) AS RunningAvgTripDurationInMin,
+  AVG(AvgTripStopDurationInMin) AS RunningAvgTripStopDurationInMin,
+
+  AVG(AvgDriverArrivalInSec) AS RunningAvgDriverArrivalInSec,
+  AVG(AvgPessangerBoardingInSec) AS RunningAvgPessangerBoardingInSec,
+
+  AVG(
+      AvgRateByPassenger
+  )  AS RunningAvgRate,
+
+  COUNT(AvgRateByPassenger)  AS RunningTotalRateCount,
+
+  SUM(TripCount) AS RunningTotalTripCount
+
+FROM Core.FactDailyDriverTrip
+GROUP BY DriverKey</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\Aggregate Trip Info for driver.Connections[OleDbConnection]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[DriverKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[DriverKey]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[DriverKey]"
+                      name="DriverKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripTotalCostAmount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalTripTotalCostAmount]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripTotalCostAmount]"
+                      name="RunningTotalTripTotalCostAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripFeeAmount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalTripFeeAmount]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripFeeAmount]"
+                      name="RunningTotalTripFeeAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripNetDriverIncomeAmount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalTripNetDriverIncomeAmount]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripNetDriverIncomeAmount]"
+                      name="RunningTotalTripNetDriverIncomeAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripTotalCostAmount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgTripTotalCostAmount]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripTotalCostAmount]"
+                      name="RunningAvgTripTotalCostAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripFeeAmount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgTripFeeAmount]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripFeeAmount]"
+                      name="RunningAvgTripFeeAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripNetDriverIncomeAmount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgTripNetDriverIncomeAmount]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripNetDriverIncomeAmount]"
+                      name="RunningAvgTripNetDriverIncomeAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripDistanceInKm]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalTripDistanceInKm]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripDistanceInKm]"
+                      name="RunningTotalTripDistanceInKm"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripDurationInMin]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalTripDurationInMin]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripDurationInMin]"
+                      name="RunningTotalTripDurationInMin"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripStopDurationInMin]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalTripStopDurationInMin]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripStopDurationInMin]"
+                      name="RunningTotalTripStopDurationInMin"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripDistanceInKm]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgTripDistanceInKm]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripDistanceInKm]"
+                      name="RunningAvgTripDistanceInKm"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripDurationInMin]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgTripDurationInMin]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripDurationInMin]"
+                      name="RunningAvgTripDurationInMin"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripStopDurationInMin]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgTripStopDurationInMin]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripStopDurationInMin]"
+                      name="RunningAvgTripStopDurationInMin"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgDriverArrivalInSec]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgDriverArrivalInSec]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgDriverArrivalInSec]"
+                      name="RunningAvgDriverArrivalInSec"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgPessangerBoardingInSec]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgPessangerBoardingInSec]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgPessangerBoardingInSec]"
+                      name="RunningAvgPessangerBoardingInSec"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgRate]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgRate]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgRate]"
+                      name="RunningAvgRate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalRateCount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalRateCount]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalRateCount]"
+                      name="RunningTotalRateCount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripCount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalTripCount]"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripCount]"
+                      name="RunningTotalTripCount"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[DriverKey]"
+                      dataType="i4"
+                      name="DriverKey" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalTripTotalCostAmount]"
+                      dataType="i4"
+                      name="RunningTotalTripTotalCostAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalTripFeeAmount]"
+                      dataType="i4"
+                      name="RunningTotalTripFeeAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalTripNetDriverIncomeAmount]"
+                      dataType="i4"
+                      name="RunningTotalTripNetDriverIncomeAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgTripTotalCostAmount]"
+                      dataType="i4"
+                      name="RunningAvgTripTotalCostAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgTripFeeAmount]"
+                      dataType="i4"
+                      name="RunningAvgTripFeeAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgTripNetDriverIncomeAmount]"
+                      dataType="i4"
+                      name="RunningAvgTripNetDriverIncomeAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalTripDistanceInKm]"
+                      dataType="i4"
+                      name="RunningTotalTripDistanceInKm" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalTripDurationInMin]"
+                      dataType="i4"
+                      name="RunningTotalTripDurationInMin" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalTripStopDurationInMin]"
+                      dataType="i4"
+                      name="RunningTotalTripStopDurationInMin" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgTripDistanceInKm]"
+                      dataType="i4"
+                      name="RunningAvgTripDistanceInKm" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgTripDurationInMin]"
+                      dataType="i4"
+                      name="RunningAvgTripDurationInMin" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgTripStopDurationInMin]"
+                      dataType="i4"
+                      name="RunningAvgTripStopDurationInMin" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgDriverArrivalInSec]"
+                      dataType="i4"
+                      name="RunningAvgDriverArrivalInSec" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgPessangerBoardingInSec]"
+                      dataType="i4"
+                      name="RunningAvgPessangerBoardingInSec" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningAvgRate]"
+                      dataType="i4"
+                      name="RunningAvgRate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalRateCount]"
+                      dataType="i4"
+                      name="RunningTotalRateCount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].ExternalColumns[RunningTotalTripCount]"
+                      dataType="i4"
+                      name="RunningTotalTripCount" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[DriverKey]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[DriverKey]"
+                      name="DriverKey" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalTripTotalCostAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalTripTotalCostAmount]"
+                      name="RunningTotalTripTotalCostAmount" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalTripFeeAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalTripFeeAmount]"
+                      name="RunningTotalTripFeeAmount" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalTripNetDriverIncomeAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalTripNetDriverIncomeAmount]"
+                      name="RunningTotalTripNetDriverIncomeAmount" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgTripTotalCostAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgTripTotalCostAmount]"
+                      name="RunningAvgTripTotalCostAmount" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgTripFeeAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgTripFeeAmount]"
+                      name="RunningAvgTripFeeAmount" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgTripNetDriverIncomeAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgTripNetDriverIncomeAmount]"
+                      name="RunningAvgTripNetDriverIncomeAmount" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalTripDistanceInKm]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalTripDistanceInKm]"
+                      name="RunningTotalTripDistanceInKm" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalTripDurationInMin]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalTripDurationInMin]"
+                      name="RunningTotalTripDurationInMin" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalTripStopDurationInMin]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalTripStopDurationInMin]"
+                      name="RunningTotalTripStopDurationInMin" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgTripDistanceInKm]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgTripDistanceInKm]"
+                      name="RunningAvgTripDistanceInKm" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgTripDurationInMin]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgTripDurationInMin]"
+                      name="RunningAvgTripDurationInMin" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgTripStopDurationInMin]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgTripStopDurationInMin]"
+                      name="RunningAvgTripStopDurationInMin" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgDriverArrivalInSec]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgDriverArrivalInSec]"
+                      name="RunningAvgDriverArrivalInSec" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgPessangerBoardingInSec]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgPessangerBoardingInSec]"
+                      name="RunningAvgPessangerBoardingInSec" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgRate]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningAvgRate]"
+                      name="RunningAvgRate" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalRateCount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalRateCount]"
+                      name="RunningTotalRateCount" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalTripCount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[RunningTotalTripCount]"
+                      name="RunningTotalTripCount" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\all driver"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="all driver"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT d.DriverKey
+FROM Core.DimDriver d
+WHERE d.IsCurrent = 1</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\all driver.Connections[OleDbConnection]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\all driver.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\all driver.Outputs[OLE DB Source Output].Columns[DriverKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\all driver.Outputs[OLE DB Source Output].ExternalColumns[DriverKey]"
+                      lineageId="Package\Stage To Core\all driver.Outputs[OLE DB Source Output].Columns[DriverKey]"
+                      name="DriverKey"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\all driver.Outputs[OLE DB Source Output].ExternalColumns[DriverKey]"
+                      dataType="i4"
+                      name="DriverKey" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage To Core\all driver.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\all driver.Outputs[OLE DB Source Error Output].Columns[DriverKey]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\all driver.Outputs[OLE DB Source Error Output].Columns[DriverKey]"
+                      name="DriverKey" />
+                    <outputColumn
+                      refId="Package\Stage To Core\all driver.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\all driver.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\all driver.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\all driver.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningTotalTripTotalCostAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripTotalCostAmount"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripTotalCostAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningTotalTripFeeAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripFeeAmount"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripFeeAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningTotalTripNetDriverIncomeAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripNetDriverIncomeAmount"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripNetDriverIncomeAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningAvgTripTotalCostAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripTotalCostAmount"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripTotalCostAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningAvgTripFeeAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripFeeAmount"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripFeeAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningAvgTripNetDriverIncomeAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripNetDriverIncomeAmount"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripNetDriverIncomeAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningTotalTripDistanceInKm]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripDistanceInKm"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripDistanceInKm]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningTotalTripDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripDurationInMin"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripDurationInMin]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningTotalTripStopDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripStopDurationInMin"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripStopDurationInMin]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningAvgTripDistanceInKm]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripDistanceInKm"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripDistanceInKm]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningAvgTripDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripDurationInMin"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripDurationInMin]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningAvgTripStopDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripStopDurationInMin"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripStopDurationInMin]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningAvgDriverArrivalInSec]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgDriverArrivalInSec"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgDriverArrivalInSec]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningAvgPessangerBoardingInSec]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgPessangerBoardingInSec"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgPessangerBoardingInSec]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningTotalRateCount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalRateCount"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalRateCount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input].Columns[RunningTotalTripCount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripCount"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripCount]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripTotalCostAmount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripTotalCostAmount]"
+                      name="DerivedRunningTotalTripTotalCostAmount"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripTotalCostAmount]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripTotalCostAmount]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningTotalTripTotalCostAmount) ? 0 : RunningTotalTripTotalCostAmount</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripFeeAmount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripFeeAmount]"
+                      name="DerivedRunningTotalTripFeeAmount"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripFeeAmount]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripFeeAmount]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningTotalTripFeeAmount) ? 0 : RunningTotalTripFeeAmount</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripNetDriverIncomeAmount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripNetDriverIncomeAmount]"
+                      name="DerivedRunningTotalTripNetDriverIncomeAmount"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripNetDriverIncomeAmount]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripNetDriverIncomeAmount]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningTotalTripNetDriverIncomeAmount) ? 0 : RunningTotalTripNetDriverIncomeAmount</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripTotalCostAmount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripTotalCostAmount]"
+                      name="DerivedRunningAvgTripTotalCostAmount"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripTotalCostAmount]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripTotalCostAmount]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningAvgTripTotalCostAmount) ? 0 : RunningAvgTripTotalCostAmount</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripFeeAmount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripFeeAmount]"
+                      name="DerivedRunningAvgTripFeeAmount"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripFeeAmount]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripFeeAmount]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningAvgTripFeeAmount) ? 0 : RunningAvgTripFeeAmount</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripNetDriverIncomeAmount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripNetDriverIncomeAmount]"
+                      name="DerivedRunningAvgTripNetDriverIncomeAmount"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripNetDriverIncomeAmount]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripNetDriverIncomeAmount]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningAvgTripNetDriverIncomeAmount) ? 0 : RunningAvgTripNetDriverIncomeAmount</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripDistanceInKm]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripDistanceInKm]"
+                      name="DerivedRunningTotalTripDistanceInKm"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripDistanceInKm]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripDistanceInKm]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningTotalTripDistanceInKm) ? 0 : RunningTotalTripDistanceInKm</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripDurationInMin]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripDurationInMin]"
+                      name="DerivedRunningTotalTripDurationInMin"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripDurationInMin]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripDurationInMin]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningTotalTripDurationInMin) ? 0 : RunningTotalTripDurationInMin</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripStopDurationInMin]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripStopDurationInMin]"
+                      name="DerivedRunningTotalTripStopDurationInMin"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripStopDurationInMin]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripStopDurationInMin]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningTotalTripStopDurationInMin) ? 0 : RunningTotalTripStopDurationInMin</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripDistanceInKm]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripDistanceInKm]"
+                      name="DerivedRunningAvgTripDistanceInKm"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripDistanceInKm]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripDistanceInKm]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningAvgTripDistanceInKm) ? 0 : RunningAvgTripDistanceInKm</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripDurationInMin]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripDurationInMin]"
+                      name="DerivedRunningAvgTripDurationInMin"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripDurationInMin]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripDurationInMin]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningAvgTripDurationInMin) ? 0 : RunningAvgTripDurationInMin</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripStopDurationInMin]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripStopDurationInMin]"
+                      name="DerivedRunningAvgTripStopDurationInMin"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripStopDurationInMin]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripStopDurationInMin]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningAvgTripStopDurationInMin) ? 0 : RunningAvgTripStopDurationInMin</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgDriverArrivalInSec]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgDriverArrivalInSec]"
+                      name="DerivedRunningAvgDriverArrivalInSec"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgDriverArrivalInSec]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgDriverArrivalInSec]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningAvgDriverArrivalInSec) ? 0 : RunningAvgDriverArrivalInSec</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgPessangerBoardingInSec]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgPessangerBoardingInSec]"
+                      name="DerivedRunningAvgPessangerBoardingInSec"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgPessangerBoardingInSec]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgPessangerBoardingInSec]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningAvgPessangerBoardingInSec) ? 0 : RunningAvgPessangerBoardingInSec</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalRateCount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalRateCount]"
+                      name="DerivedRunningTotalRateCount"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalRateCount]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalRateCount]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningTotalRateCount) ? 0 : RunningTotalRateCount</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripCount]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripCount]"
+                      name="DerivedRunningTotalTripCount"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripCount]}) ? 0 : #{Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripCount]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(RunningTotalTripCount) ? 0 : RunningTotalTripCount</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Left Input].Columns[DriverKey]"
+                      cachedDataType="i4"
+                      cachedName="DriverKey"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Stage To Core\Sort.Outputs[Sort Output].Columns[DriverKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[DriverKey]"
+                      cachedDataType="i4"
+                      cachedName="DriverKey"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[DriverKey]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalTripTotalCostAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripTotalCostAmount"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripTotalCostAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalTripFeeAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripFeeAmount"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripFeeAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalTripNetDriverIncomeAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripNetDriverIncomeAmount"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripNetDriverIncomeAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgTripTotalCostAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripTotalCostAmount"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripTotalCostAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgTripFeeAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripFeeAmount"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripFeeAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgTripNetDriverIncomeAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripNetDriverIncomeAmount"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripNetDriverIncomeAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalTripDistanceInKm]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripDistanceInKm"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripDistanceInKm]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalTripDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripDurationInMin"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripDurationInMin]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalTripStopDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripStopDurationInMin"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripStopDurationInMin]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgTripDistanceInKm]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripDistanceInKm"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripDistanceInKm]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgTripDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripDurationInMin"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripDurationInMin]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgTripStopDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripStopDurationInMin"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripStopDurationInMin]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgDriverArrivalInSec]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgDriverArrivalInSec"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgDriverArrivalInSec]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgPessangerBoardingInSec]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgPessangerBoardingInSec"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgPessangerBoardingInSec]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgRate]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgRate"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgRate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalRateCount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalRateCount"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalRateCount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalTripCount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripCount"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripCount]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[DriverKey]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[DriverKey]"
+                      name="DriverKey"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Left Input].Columns[DriverKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripTotalCostAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripTotalCostAmount]"
+                      name="RunningTotalTripTotalCostAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalTripTotalCostAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripFeeAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripFeeAmount]"
+                      name="RunningTotalTripFeeAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalTripFeeAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripNetDriverIncomeAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripNetDriverIncomeAmount]"
+                      name="RunningTotalTripNetDriverIncomeAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalTripNetDriverIncomeAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripTotalCostAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripTotalCostAmount]"
+                      name="RunningAvgTripTotalCostAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgTripTotalCostAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripFeeAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripFeeAmount]"
+                      name="RunningAvgTripFeeAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgTripFeeAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripNetDriverIncomeAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripNetDriverIncomeAmount]"
+                      name="RunningAvgTripNetDriverIncomeAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgTripNetDriverIncomeAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripDistanceInKm]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripDistanceInKm]"
+                      name="RunningTotalTripDistanceInKm">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalTripDistanceInKm]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripDurationInMin]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripDurationInMin]"
+                      name="RunningTotalTripDurationInMin">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalTripDurationInMin]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripStopDurationInMin]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripStopDurationInMin]"
+                      name="RunningTotalTripStopDurationInMin">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalTripStopDurationInMin]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripDistanceInKm]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripDistanceInKm]"
+                      name="RunningAvgTripDistanceInKm">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgTripDistanceInKm]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripDurationInMin]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripDurationInMin]"
+                      name="RunningAvgTripDurationInMin">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgTripDurationInMin]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripStopDurationInMin]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgTripStopDurationInMin]"
+                      name="RunningAvgTripStopDurationInMin">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgTripStopDurationInMin]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgDriverArrivalInSec]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgDriverArrivalInSec]"
+                      name="RunningAvgDriverArrivalInSec">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgDriverArrivalInSec]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgPessangerBoardingInSec]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgPessangerBoardingInSec]"
+                      name="RunningAvgPessangerBoardingInSec">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgPessangerBoardingInSec]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgRate]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgRate]"
+                      name="RunningAvgRate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningAvgRate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalRateCount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalRateCount]"
+                      name="RunningTotalRateCount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalRateCount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripCount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningTotalTripCount]"
+                      name="RunningTotalTripCount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input].Columns[RunningTotalTripCount]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Core].[FactAccDriver]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DriverKey]"
+                      cachedDataType="i4"
+                      cachedName="DriverKey"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DriverKey]"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[DriverKey]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningTotalTripTotalCostAmount]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningTotalTripTotalCostAmount"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalTripTotalCostAmount]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripTotalCostAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningTotalTripFeeAmount]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningTotalTripFeeAmount"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalTripFeeAmount]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripFeeAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningTotalTripNetDriverIncomeAmount]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningTotalTripNetDriverIncomeAmount"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalTripNetDriverIncomeAmount]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripNetDriverIncomeAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningAvgTripTotalCostAmount]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningAvgTripTotalCostAmount"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgTripTotalCostAmount]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripTotalCostAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningAvgTripFeeAmount]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningAvgTripFeeAmount"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgTripFeeAmount]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripFeeAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningAvgTripNetDriverIncomeAmount]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningAvgTripNetDriverIncomeAmount"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgTripNetDriverIncomeAmount]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripNetDriverIncomeAmount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningTotalTripDistanceInKm]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningTotalTripDistanceInKm"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalTripDistanceInKm]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripDistanceInKm]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningTotalTripDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningTotalTripDurationInMin"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalTripDurationInMin]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripDurationInMin]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningTotalTripStopDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningTotalTripStopDurationInMin"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalTripStopDurationInMin]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripStopDurationInMin]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningAvgTripDistanceInKm]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningAvgTripDistanceInKm"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgTripDistanceInKm]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripDistanceInKm]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningAvgTripDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningAvgTripDurationInMin"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgTripDurationInMin]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripDurationInMin]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningAvgTripStopDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningAvgTripStopDurationInMin"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgTripStopDurationInMin]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgTripStopDurationInMin]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningAvgDriverArrivalInSec]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningAvgDriverArrivalInSec"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgDriverArrivalInSec]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgDriverArrivalInSec]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningAvgPessangerBoardingInSec]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningAvgPessangerBoardingInSec"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgPessangerBoardingInSec]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningAvgPessangerBoardingInSec]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RunningAvgRate]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgRate"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgRate]"
+                      lineageId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output].Columns[RunningAvgRate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningTotalRateCount]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningTotalRateCount"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalRateCount]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalRateCount]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DerivedRunningTotalTripCount]"
+                      cachedDataType="i4"
+                      cachedName="DerivedRunningTotalTripCount"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalTripCount]"
+                      lineageId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output].Columns[DerivedRunningTotalTripCount]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DriverKey]"
+                      dataType="i4"
+                      name="DriverKey" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalTripTotalCostAmount]"
+                      dataType="i4"
+                      name="RunningTotalTripTotalCostAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalTripFeeAmount]"
+                      dataType="i4"
+                      name="RunningTotalTripFeeAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalTripNetDriverIncomeAmount]"
+                      dataType="i4"
+                      name="RunningTotalTripNetDriverIncomeAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgTripTotalCostAmount]"
+                      dataType="i4"
+                      name="RunningAvgTripTotalCostAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgTripFeeAmount]"
+                      dataType="i4"
+                      name="RunningAvgTripFeeAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgTripNetDriverIncomeAmount]"
+                      dataType="i4"
+                      name="RunningAvgTripNetDriverIncomeAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalTripDistanceInKm]"
+                      dataType="i4"
+                      name="RunningTotalTripDistanceInKm" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalTripDurationInMin]"
+                      dataType="i4"
+                      name="RunningTotalTripDurationInMin" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalTripStopDurationInMin]"
+                      dataType="i4"
+                      name="RunningTotalTripStopDurationInMin" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgTripDistanceInKm]"
+                      dataType="i4"
+                      name="RunningAvgTripDistanceInKm" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgTripDurationInMin]"
+                      dataType="i4"
+                      name="RunningAvgTripDurationInMin" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgTripStopDurationInMin]"
+                      dataType="i4"
+                      name="RunningAvgTripStopDurationInMin" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgDriverArrivalInSec]"
+                      dataType="i4"
+                      name="RunningAvgDriverArrivalInSec" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgPessangerBoardingInSec]"
+                      dataType="i4"
+                      name="RunningAvgPessangerBoardingInSec" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningAvgRate]"
+                      dataType="i4"
+                      name="RunningAvgRate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalRateCount]"
+                      dataType="i4"
+                      name="RunningTotalRateCount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunningTotalTripCount]"
+                      dataType="i4"
+                      name="RunningTotalTripCount" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::rowCountInserted</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort.Inputs[Sort Input].Columns[DriverKey]"
+                      cachedDataType="i4"
+                      cachedName="DriverKey"
+                      lineageId="Package\Stage To Core\all driver.Outputs[OLE DB Source Output].Columns[DriverKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort.Outputs[Sort Output].Columns[DriverKey]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort.Outputs[Sort Output].Columns[DriverKey]"
+                      name="DriverKey"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\all driver.Outputs[OLE DB Source Output].Columns[DriverKey]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Sort 1"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Sort 1.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[DriverKey]"
+                      cachedDataType="i4"
+                      cachedName="DriverKey"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[DriverKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningTotalTripTotalCostAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripTotalCostAmount"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripTotalCostAmount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningTotalTripFeeAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripFeeAmount"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripFeeAmount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningTotalTripNetDriverIncomeAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripNetDriverIncomeAmount"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripNetDriverIncomeAmount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningAvgTripTotalCostAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripTotalCostAmount"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripTotalCostAmount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningAvgTripFeeAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripFeeAmount"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripFeeAmount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningAvgTripNetDriverIncomeAmount]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripNetDriverIncomeAmount"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripNetDriverIncomeAmount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningTotalTripDistanceInKm]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripDistanceInKm"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripDistanceInKm]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningTotalTripDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripDurationInMin"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripDurationInMin]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningTotalTripStopDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripStopDurationInMin"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripStopDurationInMin]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningAvgTripDistanceInKm]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripDistanceInKm"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripDistanceInKm]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningAvgTripDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripDurationInMin"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripDurationInMin]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningAvgTripStopDurationInMin]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgTripStopDurationInMin"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripStopDurationInMin]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningAvgDriverArrivalInSec]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgDriverArrivalInSec"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgDriverArrivalInSec]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningAvgPessangerBoardingInSec]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgPessangerBoardingInSec"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgPessangerBoardingInSec]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningAvgRate]"
+                      cachedDataType="i4"
+                      cachedName="RunningAvgRate"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgRate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningTotalRateCount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalRateCount"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalRateCount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Stage To Core\Sort 1.Inputs[Sort Input].Columns[RunningTotalTripCount]"
+                      cachedDataType="i4"
+                      cachedName="RunningTotalTripCount"
+                      lineageId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripCount]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Sort 1.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[DriverKey]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[DriverKey]"
+                      name="DriverKey"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[DriverKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripTotalCostAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripTotalCostAmount]"
+                      name="RunningTotalTripTotalCostAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripTotalCostAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripFeeAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripFeeAmount]"
+                      name="RunningTotalTripFeeAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripFeeAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripNetDriverIncomeAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripNetDriverIncomeAmount]"
+                      name="RunningTotalTripNetDriverIncomeAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripNetDriverIncomeAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripTotalCostAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripTotalCostAmount]"
+                      name="RunningAvgTripTotalCostAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripTotalCostAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripFeeAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripFeeAmount]"
+                      name="RunningAvgTripFeeAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripFeeAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripNetDriverIncomeAmount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripNetDriverIncomeAmount]"
+                      name="RunningAvgTripNetDriverIncomeAmount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripNetDriverIncomeAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripDistanceInKm]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripDistanceInKm]"
+                      name="RunningTotalTripDistanceInKm">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripDistanceInKm]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripDurationInMin]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripDurationInMin]"
+                      name="RunningTotalTripDurationInMin">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripDurationInMin]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripStopDurationInMin]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripStopDurationInMin]"
+                      name="RunningTotalTripStopDurationInMin">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripStopDurationInMin]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripDistanceInKm]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripDistanceInKm]"
+                      name="RunningAvgTripDistanceInKm">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripDistanceInKm]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripDurationInMin]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripDurationInMin]"
+                      name="RunningAvgTripDurationInMin">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripDurationInMin]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripStopDurationInMin]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgTripStopDurationInMin]"
+                      name="RunningAvgTripStopDurationInMin">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgTripStopDurationInMin]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgDriverArrivalInSec]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgDriverArrivalInSec]"
+                      name="RunningAvgDriverArrivalInSec">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgDriverArrivalInSec]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgPessangerBoardingInSec]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgPessangerBoardingInSec]"
+                      name="RunningAvgPessangerBoardingInSec">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgPessangerBoardingInSec]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgRate]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningAvgRate]"
+                      name="RunningAvgRate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningAvgRate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalRateCount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalRateCount]"
+                      name="RunningTotalRateCount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalRateCount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripCount]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Sort 1.Outputs[Sort Output].Columns[RunningTotalTripCount]"
+                      name="RunningTotalTripCount">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output].Columns[RunningTotalTripCount]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage To Core.Paths[Derived Column Output]"
+              endId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
+              name="Derived Column Output"
+              startId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Merge Join Output]"
+              endId="Package\Stage To Core\Derived Column.Inputs[Derived Column Input]"
+              name="Merge Join Output"
+              startId="Package\Stage To Core\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[OLE DB Source Output]"
+              endId="Package\Stage To Core\Sort.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage To Core\all driver.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[OLE DB Source Output1]"
+              endId="Package\Stage To Core\Sort 1.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage To Core\Aggregate Trip Info for driver.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Row Count Output 1]"
+              endId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Stage To Core\Row Count.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Stage To Core.Paths[Sort Output]"
+              endId="Package\Stage To Core\Merge Join.Inputs[Merge Join Left Input]"
+              name="Sort Output"
+              startId="Package\Stage To Core\Sort.Outputs[Sort Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Sort Output1]"
+              endId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input]"
+              name="Sort Output"
+              startId="Package\Stage To Core\Sort 1.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update ETL_Metadata onSuccess"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5fd5c2e2-4d7c-4749-8fa8-713c9ba18bf0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update ETL_Metadata onSuccess"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
+          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = 0&#xA;  WHERE TableName = 'FactAccDriver'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::rowCountInserted"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{6091634a-449a-4c32-af56-a17888efcedb}"
+      DTS:From="Package\insert new record to ETL_Metadata"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Stage To Core" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{76e6fdc3-3713-47f5-8d12-e548b642c151}"
+      DTS:From="Package\cleanup"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\insert new record to ETL_Metadata" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{7618254a-3642-4a5d-bbae-936087f70653}"
+      DTS:From="Package\Stage To Core"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update ETL_Metadata onSuccess" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="118,42"
+          Id="Package\cleanup"
+          TopLeft="125.714285854175,60" />
+        <NodeLayout
+          Size="244,42"
+          Id="Package\insert new record to ETL_Metadata"
+          TopLeft="60,140.294117576678" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Stage To Core"
+          TopLeft="100,248" />
+        <NodeLayout
+          Size="246,42"
+          Id="Package\Update ETL_Metadata onSuccess"
+          TopLeft="65,371" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="178.5,182.294117576678">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65.7058824233219"
+              Start="0,0"
+              End="0,58.2058824233219">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.2058824233219" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="183.357142927087,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.2941175766781"
+              Start="0,0"
+              End="0,30.7941175766781">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.7941175766781" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="175,290">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="13,81"
+              Start="0,0"
+              End="13,73.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.5"
+                    Point2="0,40.5"
+                    Point3="4,40.5" />
+                  <mssgle:LineSegment
+                    End="9,40.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="9,40.5"
+                    Point2="13,40.5"
+                    Point3="13,44.5" />
+                  <mssgle:LineSegment
+                    End="13,73.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Stage To Core">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Stage To Core\Row Count"
+          TopLeft="366,475" />
+        <NodeLayout
+          Size="219,42"
+          Id="Package\Stage To Core\Aggregate Trip Info for driver"
+          TopLeft="502,81" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Stage To Core\OLE DB Destination"
+          TopLeft="351,575" />
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Row Count Output 1]"
+          TopLeft="436,517">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="121,42"
+          Id="Package\Stage To Core\all driver"
+          TopLeft="137,84" />
+        <NodeLayout
+          Size="99,42"
+          Id="Package\Stage To Core\Sort"
+          TopLeft="150,173" />
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
+          TopLeft="198.5,126">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47"
+              Start="0,0"
+              End="0,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="108,42"
+          Id="Package\Stage To Core\Sort 1"
+          TopLeft="584,182" />
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[OLE DB Source Output1]"
+          TopLeft="611.5,123">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="26.5,59"
+              Start="0,0"
+              End="26.5,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.5"
+                    Point2="0,29.5"
+                    Point3="4,29.5" />
+                  <mssgle:LineSegment
+                    End="22.5,29.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.5,29.5"
+                    Point2="26.5,29.5"
+                    Point3="26.5,33.5" />
+                  <mssgle:LineSegment
+                    End="26.5,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Stage To Core\Merge Join"
+          TopLeft="368,280" />
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Sort Output]"
+          TopLeft="199.5,215">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="235,65"
+              Start="0,0"
+              End="235,57.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.5"
+                    Point2="0,32.5"
+                    Point3="4,32.5" />
+                  <mssgle:LineSegment
+                    End="231,32.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="231,32.5"
+                    Point2="235,32.5"
+                    Point3="235,36.5" />
+                  <mssgle:LineSegment
+                    End="235,57.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Sort Output1]"
+          TopLeft="638,224">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-182.666666666667,56"
+              Start="0,0"
+              End="-182.666666666667,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.2005943536404" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.2005943536404"
+                    Point2="0,33.2005943536404"
+                    Point3="-4,33.2005943536404" />
+                  <mssgle:LineSegment
+                    End="-178.666666666667,33.2005943536404" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-178.666666666667,33.2005943536404"
+                    Point2="-182.666666666667,33.2005943536404"
+                    Point3="-182.666666666667,37.2005943536404" />
+                  <mssgle:LineSegment
+                    End="-182.666666666667,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Stage To Core\Derived Column"
+          TopLeft="363,378" />
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Merge Join Output]"
+          TopLeft="438.25,322">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Derived Column Output]"
+          TopLeft="442,420">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9.5,55"
+              Start="0,0"
+              End="-9.5,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.5"
+                    Point2="0,27.5"
+                    Point3="-4,27.5" />
+                  <mssgle:LineSegment
+                    End="-5.5,27.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5.5,27.5"
+                    Point2="-9.5,27.5"
+                    Point3="-9.5,31.5" />
+                  <mssgle:LineSegment
+                    End="-9.5,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\Stage To Core.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="233,42"
+          Id="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
+          TopLeft="163,158" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Aggregate Trip Info for driver">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\all driver">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
