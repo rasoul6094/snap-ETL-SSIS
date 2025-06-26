@@ -5,20 +5,20 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="DESKTOP-GDRMTJV"
   DTS:CreatorName="DESKTOP-GDRMTJV\HP"
-  DTS:DTSID="{BC44E84A-BFDE-4B79-BA55-42F0D073CBCE}"
+  DTS:DTSID="{25EAF1D7-74E9-4F36-BAC2-D7D92D5D13DE}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
-  DTS:ObjectName="Initial_FactDailyDriverTrip"
+  DTS:ObjectName="Incremental_FactDailyDriverTrip"
   DTS:PackageType="5"
-  DTS:VersionBuild="16"
-  DTS:VersionGUID="{5FF03C52-0DCD-4A0A-8FAD-1C6415C87FA7}">
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{C6E28E84-AC97-4BDE-ABC3-31AAE6294D43}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{6D6D25B7-B6A3-4B3B-9800-CBC5C8AF1AE5}"
+      DTS:DTSID="{A24152D3-55F1-4963-B90E-174AEE477113}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="rowCountInserted">
@@ -28,27 +28,10 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\cleanup"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{5c0d1445-42b2-4ec4-8e51-864805a546c6}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="cleanup"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
-          SQLTask:SqlStatementSource="TRUNCATE TABLE Core.FactDailyDriverTrip;&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'FactDailyDriverTrip';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
       DTS:refId="Package\insert new record to ETL_Metadata"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{227ed841-8721-4395-937b-1a109999ad3e}"
+      DTS:DTSID="{DF8FF828-D3E0-4BAD-AE1B-311BD2C76650}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="insert new record to ETL_Metadata"
@@ -65,7 +48,7 @@
       DTS:refId="Package\Stage To Core"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{FE95068C-543A-4F01-97ED-4C7D6CFC2121}"
+      DTS:DTSID="{C6F9E669-9040-4B3F-83FB-79E09604DE07}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="Stage To Core"
@@ -75,7 +58,7 @@
         <DTS:EventHandler
           DTS:refId="Package\Stage To Core.EventHandlers[OnError]"
           DTS:CreationName="OnError"
-          DTS:DTSID="{B10BF111-2939-41BE-9FED-B9A127DD19F2}"
+          DTS:DTSID="{E802C90E-CF18-4E44-A761-ACF50DB3D8FA}"
           DTS:EventID="3"
           DTS:EventName="OnError"
           DTS:LocaleID="-1">
@@ -83,7 +66,7 @@
             <DTS:Variable
               DTS:CreationName=""
               DTS:Description="The propagate property of the event"
-              DTS:DTSID="{D6A30DD6-138F-46B0-B59A-DBDEE892E38A}"
+              DTS:DTSID="{AEEA3BDC-CE70-4C20-9A1E-EEC70BDF452D}"
               DTS:IncludeInDebugDump="6789"
               DTS:Namespace="System"
               DTS:ObjectName="Propagate">
@@ -96,7 +79,7 @@
               DTS:refId="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
               DTS:CreationName="Microsoft.ExecuteSQLTask"
               DTS:Description="Execute SQL Task"
-              DTS:DTSID="{69ba674f-1f25-4ebd-bc4c-36e152980885}"
+              DTS:DTSID="{F3752259-EA89-4A9E-AAF7-EFA60BB72EA1}"
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update ETL_Metadata On error"
@@ -184,6 +167,7 @@
   MAX(TripNetDriverIncomeAmount) AS MaxTripNetDriverIncomeAmount
 
 FROM Core.FactTransactionTrip
+WHERE StartTripDateKey &gt; (SELECT MAX(DateKey) FROM Core.FactDailyDriverTrip)
 GROUP BY DriverKey, StartTripDateKey</property>
                 <property
                   dataType="System.String"
@@ -728,7 +712,7 @@ CROSS JOIN (
   SELECT DateKey
   FROM Core.DimDate
   WHERE DateKey &gt; 
-    (SELECT MIN(StartTripDateKey) FROM Core.FactTransactionTrip)
+    (SELECT MAX(DateKey) FROM Core.FactDailyDriverTrip)
     AND DateKey &lt;= ( SELECT CONVERT(INT, FORMAT(DATEADD(DAY, -1, GETDATE()), 'yyyyMMdd'))) 
 ) dt
 WHERE d.IsCurrent = 1</property>
@@ -3263,7 +3247,7 @@ WHERE d.IsCurrent = 1</property>
       DTS:refId="Package\Update ETL_Metadata onSuccess"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{2a63b223-d53f-4821-88b3-015af4c60e56}"
+      DTS:DTSID="{C3CCB35F-081D-41D6-A96F-3BCF4AAF0B98}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Update ETL_Metadata onSuccess"
@@ -3288,23 +3272,15 @@ WHERE d.IsCurrent = 1</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{66D2600B-6F0E-4EF0-BEEF-C75F78954D9B}"
+      DTS:DTSID="{A6299EDE-D0BA-4212-BDAD-1A217D4280CD}"
       DTS:From="Package\insert new record to ETL_Metadata"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\Stage To Core" />
     <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
-      DTS:CreationName=""
-      DTS:DTSID="{531bb79e-9cc5-4322-b672-2ee5eae60bea}"
-      DTS:From="Package\cleanup"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 1"
-      DTS:To="Package\insert new record to ETL_Metadata" />
-    <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
-      DTS:DTSID="{AA8B0E13-22D3-4DAF-95E7-B1153F74C7D7}"
+      DTS:DTSID="{A496B303-B639-44EE-8ADC-1E42FE0780EC}"
       DTS:From="Package\Stage To Core"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
@@ -3322,10 +3298,6 @@ WHERE d.IsCurrent = 1</property>
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="118.4,41.6"
-          Id="Package\cleanup"
-          TopLeft="211.714285854175,69" />
         <NodeLayout
           Size="244,41.6"
           Id="Package\insert new record to ETL_Metadata"
@@ -3352,28 +3324,6 @@ WHERE d.IsCurrent = 1</property>
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,58.2058824233219" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="269.357142927087,111">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,38.2941175766781"
-              Start="0,0"
-              End="0,30.7941175766781">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,30.7941175766781" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

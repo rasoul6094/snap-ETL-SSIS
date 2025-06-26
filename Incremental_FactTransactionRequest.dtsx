@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{40279FD9-37A9-4E06-ADCE-F543BB481317}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{3BDB1EF9-87BF-4DD6-A000-1566CF5312E2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -27,23 +27,6 @@
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
-    <DTS:Executable
-      DTS:refId="Package\cleanup"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{d7ed22cb-cd42-47ce-8531-328300f3f573}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="cleanup"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
-          SQLTask:SqlStatementSource="DELETE FROM Core.FactTransactionRequest;&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'FactTransactionRequest';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\insert new record to ETL_Metadata"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
@@ -2569,14 +2552,6 @@ WHERE StatusId &lt;&gt; 2</property>
       DTS:ObjectName="Constraint"
       DTS:To="Package\Stage To Core" />
     <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
-      DTS:CreationName=""
-      DTS:DTSID="{fcab81b0-f5d6-4a90-a1fb-4a9773b8691a}"
-      DTS:From="Package\cleanup"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 1"
-      DTS:To="Package\insert new record to ETL_Metadata" />
-    <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
       DTS:DTSID="{24bd4fff-f3fe-4e21-b7b8-956633f766a9}"
@@ -2597,10 +2572,6 @@ WHERE StatusId &lt;&gt; 2</property>
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="118.4,41.6"
-          Id="Package\cleanup"
-          TopLeft="125.714285854175,60" />
         <NodeLayout
           Size="244,41.6"
           Id="Package\insert new record to ETL_Metadata"
@@ -2627,28 +2598,6 @@ WHERE StatusId &lt;&gt; 2</property>
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,53.9705880885" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="183.357142927087,102">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,38.2941175766781"
-              Start="0,0"
-              End="0,30.7941175766781">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,30.7941175766781" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

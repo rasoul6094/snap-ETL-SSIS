@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-GDRMTJV\HP"
   DTS:DTSID="{7F2C12C5-9099-46C0-9021-69DD951FA0B5}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="19"
-  DTS:VersionGUID="{5AD3BA06-0E3F-4B16-A11B-95B9C329E0B8}">
+  DTS:VersionBuild="26"
+  DTS:VersionGUID="{E37BA4A4-7062-41BE-9017-AF1E578F553D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -58,7 +58,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
-          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata &#xA;VALUES ('FactDailyDriverTrip' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata &#xA;VALUES ('FactMonthlyPassengerTrip' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -187,8 +187,7 @@
 FROM Core.FactTransactionTrip f
 JOIN Core.DimDate d ON f.StartTripDateKey = d.DateKey
 JOIN Core.DimMonth m ON d.FullDateAlternateKey BETWEEN m.GregorianMonthStart AND m.GregorianMonthEnd
-GROUP BY  f.PassengerKey , m.MonthKey 
-order by m.MonthKey , f.PassengerKey</property>
+GROUP BY  f.PassengerKey , m.MonthKey</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -755,11 +754,7 @@ FROM (
     FROM Core.DimDate d
     JOIN Core.FactTransactionTrip f ON f.StartTripDateKey = d.DateKey
   )
-  AND GregorianMonthStart &lt;= (
-    SELECT MAX(d.FullDateAlternateKey)
-    FROM Core.DimDate d
-    JOIN Core.FactTransactionTrip f ON f.StartTripDateKey = d.DateKey
-  )
+  AND GregorianMonthStart &lt;= (SELECT DATEADD(MONTH, -1, DATEFROMPARTS(YEAR(GETDATE()), MONTH(GETDATE()), 1)))
 ) m
 CROSS JOIN Core.DimPassenger p</property>
                 <property
@@ -2412,6 +2407,35 @@ CROSS JOIN Core.DimPassenger p</property>
               </outputs>
             </component>
             <component
+              refId="Package\Stage To Core\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::rowCountInserted</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\Stage To Core\Sort"
               componentClassID="Microsoft.Sort"
               contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
@@ -3307,7 +3331,7 @@ CROSS JOIN Core.DimPassenger p</property>
           <paths>
             <path
               refId="Package\Stage To Core.Paths[Derived Column Output]"
-              endId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              endId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
               name="Derived Column Output"
               startId="Package\Stage To Core\Derived Column.Outputs[Derived Column Output]" />
             <path
@@ -3325,6 +3349,11 @@ CROSS JOIN Core.DimPassenger p</property>
               endId="Package\Stage To Core\Sort 1.Inputs[Sort Input]"
               name="OLE DB Source Output"
               startId="Package\Stage To Core\Aggregate Trip Info.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Row Count Output 1]"
+              endId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Stage To Core\Row Count.Outputs[Row Count Output 1]" />
             <path
               refId="Package\Stage To Core.Paths[Sort Output]"
               endId="Package\Stage To Core\Merge Join.Inputs[Merge Join Right Input]"
@@ -3403,19 +3432,19 @@ CROSS JOIN Core.DimPassenger p</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="118,42"
+          Size="118.4,41.6"
           Id="Package\cleanup"
           TopLeft="125.714285854175,60" />
         <NodeLayout
-          Size="244,42"
+          Size="244,41.6"
           Id="Package\insert new record to ETL_Metadata"
           TopLeft="60,140.294117576678" />
         <NodeLayout
-          Size="150,42"
+          Size="150.4,41.6"
           Id="Package\Stage To Core"
           TopLeft="113,249" />
         <NodeLayout
-          Size="246,42"
+          Size="246.4,41.6"
           Id="Package\Update ETL_Metadata onSuccess"
           TopLeft="65,371" />
         <EdgeLayout
@@ -3493,115 +3522,59 @@ CROSS JOIN Core.DimPassenger p</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="158,42"
+          Size="158.4,41.6"
           Id="Package\Stage To Core\Derived Column"
-          TopLeft="332,464" />
+          TopLeft="329.857142852581,386.764705950053" />
         <NodeLayout
-          Size="279,42"
+          Size="279.2,41.6"
           Id="Package\Stage To Core\Cross Join of PassengerKey + MonthKey"
           TopLeft="109,81" />
         <NodeLayout
-          Size="173,42"
-          Id="Package\Stage To Core\Aggregate Trip Info"
-          TopLeft="502,81" />
-        <NodeLayout
-          Size="177,42"
+          Size="176.8,41.6"
           Id="Package\Stage To Core\OLE DB Destination"
           TopLeft="319.5,575.75" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Derived Column Output]"
-          TopLeft="409.5,506">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,69.75"
-              Start="0,0"
-              End="0,62.25">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,62.25" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
-          Size="133,42"
+          Size="108,41.6"
+          Id="Package\Stage To Core\Sort 1"
+          TopLeft="544,210" />
+        <NodeLayout
+          Size="132.8,41.6"
           Id="Package\Stage To Core\Merge Join"
           TopLeft="339,299" />
         <NodeLayout
-          Size="99,42"
+          Size="99.2,41.6"
           Id="Package\Stage To Core\Sort"
           TopLeft="211,199" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
-          TopLeft="248.5,123">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="12,76"
-              Start="0,0"
-              End="12,68.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,34"
-                    Point2="0,38"
-                    Point3="4,38" />
-                  <mssgle:LineSegment
-                    End="8,38" />
-                  <mssgle:CubicBezierSegment
-                    Point1="8,38"
-                    Point2="12,38"
-                    Point3="12,42" />
-                  <mssgle:LineSegment
-                    End="12,68.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
-          Size="108,42"
-          Id="Package\Stage To Core\Sort 1"
-          TopLeft="544,210" />
+          Size="172.8,41.6"
+          Id="Package\Stage To Core\Aggregate Trip Info"
+          TopLeft="502,81" />
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[OLE DB Source Output1]"
-          TopLeft="588.5,123">
+          Id="Package\Stage To Core.Paths[Sort Output1]"
+          TopLeft="260.5,241">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="9.5,87"
+              EndConnector="124.166666666667,58"
               Start="0,0"
-              End="9.5,79.5">
+              End="124.166666666667,50.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,39.5" />
+                    End="0,30.3863298662704" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,39.5"
-                    Point2="0,43.5"
-                    Point3="4,43.5" />
+                    Point1="0,30.3863298662704"
+                    Point2="0,34.3863298662704"
+                    Point3="4,34.3863298662704" />
                   <mssgle:LineSegment
-                    End="5.5,43.5" />
+                    End="120.166666666667,34.3863298662704" />
                   <mssgle:CubicBezierSegment
-                    Point1="5.5,43.5"
-                    Point2="9.5,43.5"
-                    Point3="9.5,47.5" />
+                    Point1="120.166666666667,34.3863298662704"
+                    Point2="124.166666666667,34.3863298662704"
+                    Point3="124.166666666667,38.3863298662704" />
                   <mssgle:LineSegment
-                    End="9.5,79.5" />
+                    End="124.166666666667,50.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3645,31 +3618,65 @@ CROSS JOIN Core.DimPassenger p</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Sort Output1]"
-          TopLeft="260.5,241">
+          Id="Package\Stage To Core.Paths[OLE DB Source Output1]"
+          TopLeft="588.5,123">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="124.166666666667,58"
+              EndConnector="9.5,87"
               Start="0,0"
-              End="124.166666666667,50.5">
+              End="9.5,79.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.3863298662704" />
+                    End="0,39.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,30.3863298662704"
-                    Point2="0,34.3863298662704"
-                    Point3="4,34.3863298662704" />
+                    Point1="0,39.5"
+                    Point2="0,43.5"
+                    Point3="4,43.5" />
                   <mssgle:LineSegment
-                    End="120.166666666667,34.3863298662704" />
+                    End="5.5,43.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="120.166666666667,34.3863298662704"
-                    Point2="124.166666666667,34.3863298662704"
-                    Point3="124.166666666667,38.3863298662704" />
+                    Point1="5.5,43.5"
+                    Point2="9.5,43.5"
+                    Point3="9.5,47.5" />
                   <mssgle:LineSegment
-                    End="124.166666666667,50.5" />
+                    End="9.5,79.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
+          TopLeft="248.5,123">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12,76"
+              Start="0,0"
+              End="12,68.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,34"
+                    Point2="0,38"
+                    Point3="4,38" />
+                  <mssgle:LineSegment
+                    End="8,38" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8,38"
+                    Point2="12,38"
+                    Point3="12,42" />
+                  <mssgle:LineSegment
+                    End="12,68.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3680,18 +3687,90 @@ CROSS JOIN Core.DimPassenger p</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Merge Join Output]"
-          TopLeft="408.25,341">
+          TopLeft="407.228571426291,340.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,123"
+              EndConnector="0,46.1647059500525"
               Start="0,0"
-              End="0,115.5">
+              End="0,38.6647059500525">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,115.5" />
+                    End="0,38.6647059500525" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Stage To Core\Row Count"
+          TopLeft="437.857143789226,471.917646814166" />
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Derived Column Output]"
+          TopLeft="409.057142852581,428.364705950053">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="93.6000009366448,43.5529408641135"
+              Start="0,0"
+              End="93.6000009366448,36.0529408641135">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.7764704320568" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.7764704320568"
+                    Point2="0,21.7764704320568"
+                    Point3="4,21.7764704320568" />
+                  <mssgle:LineSegment
+                    End="89.6000009366448,21.7764704320568" />
+                  <mssgle:CubicBezierSegment
+                    Point1="89.6000009366448,21.7764704320568"
+                    Point2="93.6000009366448,21.7764704320568"
+                    Point3="93.6000009366448,25.7764704320568" />
+                  <mssgle:LineSegment
+                    End="93.6000009366448,36.0529408641135" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Row Count Output 1]"
+          TopLeft="502.657143789226,513.517646814166">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-94.7571437892259,62.232353185834"
+              Start="0,0"
+              End="-94.7571437892259,54.732353185834">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.116176592917" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.116176592917"
+                    Point2="0,31.116176592917"
+                    Point3="-4,31.116176592917" />
+                  <mssgle:LineSegment
+                    End="-90.7571437892259,31.116176592917" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-90.7571437892259,31.116176592917"
+                    Point2="-94.7571437892259,31.116176592917"
+                    Point3="-94.7571437892259,35.116176592917" />
+                  <mssgle:LineSegment
+                    End="-94.7571437892259,54.732353185834" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3724,14 +3803,6 @@ CROSS JOIN Core.DimPassenger p</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Stage To Core\Aggregate Trip Info">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Stage To Core\OLE DB Destination">
     <Properties>
       <Property>
@@ -3741,6 +3812,14 @@ CROSS JOIN Core.DimPassenger p</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Aggregate Trip Info">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
