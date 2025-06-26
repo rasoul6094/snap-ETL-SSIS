@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
   DTS:DTSID="{EEFC3F0B-D88C-4C57-BCCE-AF70D3A56F88}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LastModifiedProductVersion="16.0.5467.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="54"
-  DTS:VersionGUID="{C4AF2F07-5FA8-49CC-A996-AC35EEBA210C}">
+  DTS:VersionBuild="55"
+  DTS:VersionGUID="{EDB4C82E-6D0F-4045-BBB5-BB103DA6AE6C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -293,13 +293,13 @@
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[CostAmount]} - [REPLACENULL](#{Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output].Columns[DiscountAmount]},0)</property>
+                          name="Expression">(#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[CostAmount]} - [REPLACENULL](#{Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output].Columns[DiscountAmount]},0)) &lt; 0 ? 0 : (#{Package\Stage To Core\Lookup request stage.Outputs[Lookup Match Output].Columns[CostAmount]} - [REPLACENULL](#{Package\Stage To Core\Lookup Discount Amount and Discount key.Outputs[Lookup Match Output].Columns[DiscountAmount]},0))</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">CostAmount - REPLACENULL(DiscountAmount,0)</property>
+                          name="FriendlyExpression">(CostAmount - REPLACENULL(DiscountAmount,0)) &lt; 0 ? 0 : (CostAmount - REPLACENULL(DiscountAmount,0))</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -3003,19 +3003,19 @@ where [refTable].[RequestID] = ?</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="121.6,41.6"
+          Size="122,42"
           Id="Package\cleanup"
           TopLeft="312.85714339541,62.2941176450479" />
         <NodeLayout
-          Size="244,41.6"
+          Size="244,42"
           Id="Package\insert new record to ETL_Metadata"
           TopLeft="247.142857541235,142.588235221726" />
         <NodeLayout
-          Size="150.4,41.6"
+          Size="150,42"
           Id="Package\Stage To Core"
           TopLeft="296.142857658316,246.058823310226" />
         <NodeLayout
-          Size="233.6,41.6"
+          Size="234,42"
           Id="Package\Update ETL_Metadata onSuccess"
           TopLeft="256.857143288974,353.117646745796" />
         <EdgeLayout
@@ -3093,55 +3093,55 @@ where [refTable].[RequestID] = ?</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="212.8,41.6"
+          Size="213,42"
           Id="Package\Stage To Core\lookup payment method key"
           TopLeft="474.542858147925,299.623529191908" />
         <NodeLayout
-          Size="164.8,41.6"
+          Size="165,42"
           Id="Package\Stage To Core\Lookup Driver Key"
           TopLeft="540.000000883426,209.235293981577" />
         <NodeLayout
-          Size="204,41.6"
+          Size="204,42"
           Id="Package\Stage To Core\extract date and time keys"
           TopLeft="785.285715593368,94.5294116836002" />
         <NodeLayout
-          Size="182.4,59.2"
+          Size="182,59"
           Id="Package\Stage To Core\Fact trip denteination"
           TopLeft="644.714286024473,550.705882309372" />
         <NodeLayout
-          Size="184.8,41.6"
+          Size="185,42"
           Id="Package\Stage To Core\Lookup request stage"
           TopLeft="480.857143437984,101.12941179755" />
         <NodeLayout
-          Size="198.4,41.6"
+          Size="198,42"
           Id="Package\Stage To Core\lookup origin locaiton key"
           TopLeft="727.857144108536,299.364701421852" />
         <NodeLayout
-          Size="132.8,41.6"
+          Size="133,42"
           Id="Package\Stage To Core\Row Count"
           TopLeft="227.571423821303,573.235289328032" />
         <NodeLayout
-          Size="273.6,41.6"
+          Size="274,42"
           Id="Package\Stage To Core\Derived Default Value for dimension Keys"
           TopLeft="158.571428610962,505.035293787862" />
         <NodeLayout
-          Size="224,41.6"
+          Size="224,42"
           Id="Package\Stage To Core\lookup destination location key"
           TopLeft="181.428571516762,297.835289658487" />
         <NodeLayout
-          Size="129.6,41.6"
+          Size="130,42"
           Id="Package\Stage To Core\Trip Stage"
           TopLeft="217.666661845786,97.5980365852537" />
         <NodeLayout
-          Size="180.8,41.6"
+          Size="181,42"
           Id="Package\Stage To Core\Lookup PassengerKey"
           TopLeft="804.428572772717,211.882352798404" />
         <NodeLayout
-          Size="212,41.6"
+          Size="212,42"
           Id="Package\Stage To Core\Derived Calculate measure"
           TopLeft="209.857142895156,421.411764709904" />
         <NodeLayout
-          Size="280.8,41.6"
+          Size="281,42"
           Id="Package\Stage To Core\Lookup Discount Amount and Discount key"
           TopLeft="172.523804634505,209.176470694142" />
         <EdgeLayout

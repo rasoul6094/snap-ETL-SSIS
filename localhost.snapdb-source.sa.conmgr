@@ -10,7 +10,7 @@
       DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=snapdb-source;Provider=SQLOLEDB.1;Auto Translate=False;Application Name=SSIS-snap-ssis-{BD36AF48-15A6-4F24-BBF4-2836F0F15B77}localhost.snapdb-source.sa;">
       <DTS:Password
         DTS:Name="Password"
-        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAACr1AhikPW0qIBs4KMs/wHgAAAAACAAAAAAAQZgAAAAEAACAAAADGhZ2RH2yXvyM79iwxwKGKA6c62qHf+HACm0ZzCbMsfAAAAAAOgAAAAAIAACAAAAAp4YSIJGR/XsmRZ4JA195hyCpQbK9LZWqbkh6vD9cD8nAAAACUhpUwPz+9o4kvFDqicS0ovJY+fV3GSbpy+wVtmzkYOs/VgC3Qe5DaT4moe8xoqtsYLJP9lKqkM+rwfe4yN+gGrRdaZSwTX41m5AC3NKpWHwv9rEwxDjoD0lhE3nqsgw7/kWw2N0HMe9l1zY97WV6VQAAAADFeNqtPzV+NpZSNHqojDPvGij0+1YHu+KqvLsMIbpuGpWPaae3vWkuT/dnnc0UJIz7IqjW6LWkFzVXtUxS+4H0=</DTS:Password>
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA5EeLdpzlW0qM4IPX1hVSRAAAAAACAAAAAAAQZgAAAAEAACAAAABUkl6f7CtPwu0NIxl5+ctXV5lNdYAFAXXSBYyw1WHmOAAAAAAOgAAAAAIAACAAAADzPaJASZNSPvCrWwsc/aAEiascmF2oCQ5M5rm/swDId4AAAADnkShL6Wvn13gxJwGgHMtJV3MVHYur/iiSCj5xtkzIRzTIpQ7gC/MvHOh2xbnfJrNO8/pKQmqa19jGqBLgJQN3O3ZBddY62ElKYvcb4k6fA1cdWdZTxJnWHg8RqQa4J2YTbbFHI99BdTy/2OdEUzcQIx9wYvq0X8itXoSS4banYUAAAAAShTs8OrEy9BgQCFye0l9Th1ZtEcWf4nMOu8EDSFysZva26cl07eg0lOd/wZyVoVxy9MxMequtaa0y5qd+Mu/C</DTS:Password>
     </DTS:ConnectionManager>
   </DTS:ObjectData>
 </DTS:ConnectionManager>
