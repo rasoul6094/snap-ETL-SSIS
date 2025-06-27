@@ -1,0 +1,3275 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/4/2025 7:59:00 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-0S8CU17"
+  DTS:CreatorName="DESKTOP-0S8CU17\ehsan"
+  DTS:DTSID="{23F83906-F704-4C6E-BA73-053626EBC117}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Incremental_DimEmployee"
+  DTS:PackageType="5"
+  DTS:VersionBuild="79"
+  DTS:VersionGUID="{7E5B45B3-1A68-42DF-958E-3E54C44B49F5}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6FEBA3BC-260F-4BF4-973F-58E6D6127170}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastRunETL">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/1970</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7F560016-4B3E-4279-AE3A-87125CA76EF1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="rowCountInserted">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B54FB9CA-1BCB-4FF1-B659-F4A581F9232C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="rowCountUpdatedScd1">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7D53A5FB-B66D-495B-A19D-0A5544E4F694}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="rowCountUpdatedScd2">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\ETL_MetaData Start"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8F91B6BB-436F-4A35-9ADA-92E2A1750858}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ETL_MetaData Start"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
+          SQLTask:SqlStatementSource="INSERT INTO ETL_Metadata&#xA;VALUES ('DimEmployee' , GETDATE() , NULL , 'Running' , NULL , NULL , NULL);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage To Core"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{4B3DE13D-A81F-4418-9E0E-1B9DAE3EBEDE}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage To Core"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Stage To Core.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{CBEF608D-CAA4-45FE-BE4B-ACC60C91FE57}"
+          DTS:EventID="0"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{E8960E3E-FE37-47B9-9779-3B3C841B8B8D}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{FDABE6EE-DBA0-4578-A0A0-CD669411EF79}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Update ETL_Metadata On error"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
+                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'DimEmployee'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="System::ErrorDescription"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="add isCurrent , EndDate 1 and set startDate"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Inputs[Derived Column Input].Columns[ModifiedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="ModifiedAt"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      name="IsCurrent"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">1</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">1</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[EndDate]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[EndDate]"
+                      name="EndDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_DBTIMESTAMP2,0)"2100-01-01 00:00:00"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DBTIMESTAMP2,0)"2100-01-01 00:00:00"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[StartDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="27"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[StartDate]"
+                      name="StartDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ModifiedAt</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\add isCurrent , StartDate , EndDate"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="add isCurrent , StartDate , EndDate"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      name="IsCurrent"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">1</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">1</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Output].Columns[StartDate]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Output].Columns[StartDate]"
+                      name="StartDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_DBTIMESTAMP2,0)"1970-01-01 00:00:00"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DBTIMESTAMP2,0)"1970-01-01 00:00:00"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Output].Columns[EndDate]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Output].Columns[EndDate]"
+                      name="EndDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_DBTIMESTAMP2,0)"2100-01-01 00:00:00"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DBTIMESTAMP2,0)"2100-01-01 00:00:00"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[PhoneNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="PhoneNumber"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Email"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[PhoneNumberDest]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="PhoneNumberDest"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[PhoneNumberDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[EmailDest]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="EmailDest"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[EmailDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Name"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[NameDest]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="NameDest"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[NameDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Gender"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[BirthDate]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="BirthDate"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[HiringDate]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="HiringDate"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[HiringDate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[GenderDest]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="GenderDest"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[GenderDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[BirthDateDest]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="BirthDateDest"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[BirthDateDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[HiringDateDest]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="HiringDateDest"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[HiringDateDest]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[DepartmentID]"
+                      cachedDataType="i4"
+                      cachedName="DepartmentID"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[DepartmentID]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input].Columns[DepartmentIdDest]"
+                      cachedDataType="i4"
+                      cachedName="DepartmentIdDest"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[DepartmentIdDest]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Conditional Split.Outputs[scd type 2 for department]"
+                  description="Output 3 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="scd type 2 for department"
+                  synchronousInputId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[DepartmentID]} != #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[DepartmentIdDest]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">DepartmentID != DepartmentIdDest</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Conditional Split.Outputs[scd type 1]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="scd type 1"
+                  synchronousInputId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">([ISNULL](#{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Name]}) ? "" : #{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Name]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[NameDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[NameDest]}) || ([ISNULL](#{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Email]}) ? "" : #{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Email]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[EmailDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[EmailDest]}) || ([ISNULL](#{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[PhoneNumber]}) ? "" : #{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[PhoneNumber]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[PhoneNumberDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[PhoneNumberDest]}) || ([ISNULL](#{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Gender]}) ? "" : #{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Gender]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[GenderDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[GenderDest]}) || ([ISNULL](#{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[BirthDate]}) ? "" : #{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[BirthDate]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[BirthDateDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[BirthDateDest]}) || ([ISNULL](#{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[HiringDate]}) ? "" : #{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[HiringDate]}) != ([ISNULL](#{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[HiringDateDest]}) ? "" : #{Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[HiringDateDest]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">(ISNULL(Name) ? "" : Name) != (ISNULL(NameDest) ? "" : NameDest) || (ISNULL(Email) ? "" : Email) != (ISNULL(EmailDest) ? "" : EmailDest) || (ISNULL(PhoneNumber) ? "" : PhoneNumber) != (ISNULL(PhoneNumberDest) ? "" : PhoneNumberDest) || (ISNULL(Gender) ? "" : Gender) != (ISNULL(GenderDest) ? "" : GenderDest) || (ISNULL(BirthDate) ? "" : BirthDate) != (ISNULL(BirthDateDest) ? "" : BirthDateDest) || (ISNULL(HiringDate) ? "" : HiringDate) != (ISNULL(HiringDateDest) ? "" : HiringDateDest)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\dim employee"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="dim employee"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Core].[DimEmployee]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\dim employee.Connections[OleDbConnection]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="PhoneNumber"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[StartDate]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="StartDate"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[StartDate]"
+                      lineageId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Output].Columns[StartDate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[EndDate]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="EndDate"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[EndDate]"
+                      lineageId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Output].Columns[EndDate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[IsCurrent]"
+                      cachedDataType="i4"
+                      cachedName="IsCurrent"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrent]"
+                      lineageId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Output].Columns[IsCurrent]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[ModifiedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="ModifiedAt"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[CreatedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="CreatedAt"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[CreatedAt]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[DepartmentID]"
+                      cachedDataType="i4"
+                      cachedName="DepartmentID"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentId]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[DepartmentID]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeID"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeId]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[EmployeeID]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[NationalCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="NationalCode"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[NationalCode]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[NationalCode]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[BirthDate]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="BirthDate"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[HiringDate]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="HiringDate"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[HiringDate]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[HiringDate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[DepartmentName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="DepartmentName"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentName]"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentName]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[DepartmentManagerName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="DepartmentManagerName"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentManagerName]"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentManagerName]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[DepartmentEmail]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="DepartmentEmail"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentEmail]"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentEmail]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[DepartmentPhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="DepartmentPhoneNumber"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentPhoneNumber]"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentPhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].Columns[DepartmentLocation]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DepartmentLocation"
+                      externalMetadataColumnId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentLocation]"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentLocation]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="100"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[StartDate]"
+                      dataType="wstr"
+                      length="27"
+                      name="StartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[EndDate]"
+                      dataType="wstr"
+                      length="27"
+                      name="EndDate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrent]"
+                      dataType="bool"
+                      name="IsCurrent" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="CreatedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="ModifiedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentId]"
+                      dataType="i4"
+                      name="DepartmentId" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                      dataType="i4"
+                      name="EmployeeKey" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeId]"
+                      dataType="i4"
+                      name="EmployeeId" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[NationalCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="NationalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="10"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
+                      dataType="wstr"
+                      length="27"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[HiringDate]"
+                      dataType="wstr"
+                      length="27"
+                      name="HiringDate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentName]"
+                      dataType="wstr"
+                      length="100"
+                      name="DepartmentName" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentManagerName]"
+                      dataType="wstr"
+                      length="100"
+                      name="DepartmentManagerName" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentEmail]"
+                      dataType="wstr"
+                      length="100"
+                      name="DepartmentEmail" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentPhoneNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="DepartmentPhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentLocation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="DepartmentLocation" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\dim employee.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\dim employee.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\dim employee.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\dim employee.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\dim employee.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Employee stage"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Employee stage"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Employee]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\Employee stage.Connections[OleDbConnection]"
+                  connectionManagerID="{1550C253-1655-4893-BF18-A9720D11D564}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-stage.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Email]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      length="100"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Email]"
+                      name="Email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[CreatedAt]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
+                      length="27"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[CreatedAt]"
+                      name="CreatedAt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
+                      length="27"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]"
+                      name="ModifiedAt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[DepartmentID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[DepartmentID]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[DepartmentID]"
+                      name="DepartmentID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                      length="100"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[EmployeeID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[EmployeeID]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[EmployeeID]"
+                      name="EmployeeID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[NationalCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[NationalCode]"
+                      length="20"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[NationalCode]"
+                      name="NationalCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      length="10"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[BirthDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
+                      length="27"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[BirthDate]"
+                      name="BirthDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[HiringDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[HiringDate]"
+                      length="27"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[HiringDate]"
+                      name="HiringDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                      length="20"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                      name="PhoneNumber"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="100"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="CreatedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="ModifiedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[DepartmentID]"
+                      dataType="i4"
+                      name="DepartmentID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[EmployeeID]"
+                      dataType="i4"
+                      name="EmployeeID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[NationalCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="NationalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="10"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
+                      dataType="wstr"
+                      length="27"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].ExternalColumns[HiringDate]"
+                      dataType="wstr"
+                      length="27"
+                      name="HiringDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[EmployeeID]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[EmployeeID]"
+                      name="EmployeeID" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[DepartmentID]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[DepartmentID]"
+                      name="DepartmentID" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[NationalCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[NationalCode]"
+                      name="NationalCode" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
+                      name="BirthDate" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[HiringDate]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[HiringDate]"
+                      name="HiringDate" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      name="Email" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[CreatedAt]"
+                      name="CreatedAt" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[ModifiedAt]"
+                      name="ModifiedAt" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                      name="PhoneNumber" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\lookup department"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="lookup department"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Department]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Department]) [refTable]
+where [refTable].[DepartmentID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="DepartmentID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Name" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ManagerName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Email" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PhoneNumber" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Location" dataType="DT_STR" length="100" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CreatedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ModifiedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[DepartmentID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\lookup department.Connections[OleDbConnection]"
+                  connectionManagerID="{1550C253-1655-4893-BF18-A9720D11D564}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-stage.sa]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\lookup department.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\lookup department.Inputs[Lookup Input].Columns[DepartmentID]"
+                      cachedDataType="i4"
+                      cachedName="DepartmentID"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[DepartmentID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">DepartmentID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Stage To Core\lookup department.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentName]"
+                      name="DepartmentName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Name</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentManagerName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentManagerName]"
+                      name="DepartmentManagerName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ManagerName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentEmail]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentEmail]"
+                      name="DepartmentEmail"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Email</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentPhoneNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentPhoneNumber]"
+                      name="DepartmentPhoneNumber"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">PhoneNumber</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentLocation]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentLocation]"
+                      name="DepartmentLocation"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Location</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\lookup department.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Stage To Core\lookup department.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\lookup department.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Stage To Core\lookup department.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup department.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup department.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\lookup to insert or update"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="lookup to insert or update"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [Core].[DimEmployee]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [Core].[DimEmployee]) [refTable]
+where [refTable].[EmployeeId] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="EmployeeKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EmployeeId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Name" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Email" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PhoneNumber" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="NationalCode" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Gender" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="BirthDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="HiringDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DepartmentId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DepartmentName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DepartmentManagerName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DepartmentEmail" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DepartmentPhoneNumber" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DepartmentLocation" dataType="DT_STR" length="100" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CreatedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ModifiedAt" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StartDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EndDate" dataType="DT_WSTR" length="27" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IsCurrent" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[EmployeeID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\lookup to insert or update.Connections[OleDbConnection]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\lookup to insert or update.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Inputs[Lookup Input].Columns[EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeID"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[EmployeeID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">EmployeeId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Stage To Core\lookup to insert or update.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[NameDest]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[NameDest]"
+                      name="NameDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Name</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[EmailDest]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[EmailDest]"
+                      name="EmailDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Email</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[PhoneNumberDest]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[PhoneNumberDest]"
+                      name="PhoneNumberDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">PhoneNumber</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[NationalCodeDest]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[NationalCodeDest]"
+                      name="NationalCodeDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">NationalCode</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[GenderDest]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="10"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[GenderDest]"
+                      name="GenderDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Gender</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[BirthDateDest]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="27"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[BirthDateDest]"
+                      name="BirthDateDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">BirthDate</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[HiringDateDest]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="27"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[HiringDateDest]"
+                      name="HiringDateDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">HiringDate</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[DepartmentIdDest]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[DepartmentIdDest]"
+                      name="DepartmentIdDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DepartmentId</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[DepartmentNameDest]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[DepartmentNameDest]"
+                      name="DepartmentNameDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DepartmentName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[DepartmentManagerNameDest]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[DepartmentManagerNameDest]"
+                      name="DepartmentManagerNameDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DepartmentManagerName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[DepartmentEmailDest]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[DepartmentEmailDest]"
+                      name="DepartmentEmailDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DepartmentEmail</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[DepartmentPhoneNumberDest]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[DepartmentPhoneNumberDest]"
+                      name="DepartmentPhoneNumberDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DepartmentPhoneNumber</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[DepartmentLocationDest]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output].Columns[DepartmentLocationDest]"
+                      name="DepartmentLocationDest"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DepartmentLocation</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Stage To Core\lookup to insert or update.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Stage To Core\lookup to insert or update.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE Core.DimEmployee
+SET Name= ?,
+PhoneNumber = ?,
+Email = ?,
+Gender= ?,
+BirthDate = ?,
+HiringDate = ?
+WHERE EmployeeId = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].Columns[PhoneNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="PhoneNumber"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].Columns[BirthDate]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="BirthDate"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].Columns[HiringDate]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="HiringDate"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[HiringDate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].Columns[EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeID"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[EmployeeID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="wstr"
+                      length="100"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="wstr"
+                      length="100"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="wstr"
+                      length="10"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="wstr"
+                      length="27"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      dataType="wstr"
+                      length="27"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      dataType="i4"
+                      name="Param_6">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\OLE DB Command 1"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command 1"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE Core.DimEmployee
+SET IsCurrent =0,
+EndDate = ?
+WHERE IsCurrent = 1
+AND EmployeeId = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\OLE DB Command 1.Connections[OleDbConnection]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\OLE DB Command 1.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[ModifiedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="ModifiedAt"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeID"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[EmployeeID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="wstr"
+                      length="27"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\OLE DB Command 1.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Stage To Core\OLE DB Command 1.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage To Core\OLE DB Command 1.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Stage To Core\OLE DB Command 1.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Core].[DimEmployee]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage To Core\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{DECE9F59-266F-4E37-A0BD-354C960BE892}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-dw.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="PhoneNumber"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EndDate]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="EndDate"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EndDate]"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[EndDate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsCurrent]"
+                      cachedDataType="i4"
+                      cachedName="IsCurrent"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrent]"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[IsCurrent]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ModifiedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="ModifiedAt"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[ModifiedAt]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CreatedAt]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="CreatedAt"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[CreatedAt]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StartDate]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="StartDate"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StartDate]"
+                      lineageId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output].Columns[StartDate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DepartmentID]"
+                      cachedDataType="i4"
+                      cachedName="DepartmentID"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentId]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[DepartmentID]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeID"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeId]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[EmployeeID]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NationalCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="NationalCode"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NationalCode]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[NationalCode]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[BirthDate]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="BirthDate"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[HiringDate]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="HiringDate"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HiringDate]"
+                      lineageId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output].Columns[HiringDate]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DepartmentName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="DepartmentName"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentName]"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentName]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DepartmentManagerName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="DepartmentManagerName"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentManagerName]"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentManagerName]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DepartmentEmail]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="DepartmentEmail"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentEmail]"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentEmail]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DepartmentPhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="DepartmentPhoneNumber"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentPhoneNumber]"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentPhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DepartmentLocation]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DepartmentLocation"
+                      externalMetadataColumnId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentLocation]"
+                      lineageId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output].Columns[DepartmentLocation]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="100"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StartDate]"
+                      dataType="wstr"
+                      length="27"
+                      name="StartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EndDate]"
+                      dataType="wstr"
+                      length="27"
+                      name="EndDate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrent]"
+                      dataType="bool"
+                      name="IsCurrent" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreatedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="CreatedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="ModifiedAt" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentId]"
+                      dataType="i4"
+                      name="DepartmentId" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                      dataType="i4"
+                      name="EmployeeKey" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeId]"
+                      dataType="i4"
+                      name="EmployeeId" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NationalCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="NationalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="10"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
+                      dataType="wstr"
+                      length="27"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HiringDate]"
+                      dataType="wstr"
+                      length="27"
+                      name="HiringDate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentName]"
+                      dataType="wstr"
+                      length="100"
+                      name="DepartmentName" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentManagerName]"
+                      dataType="wstr"
+                      length="100"
+                      name="DepartmentManagerName" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentEmail]"
+                      dataType="wstr"
+                      length="100"
+                      name="DepartmentEmail" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentPhoneNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="DepartmentPhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentLocation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="DepartmentLocation" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage To Core\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage To Core\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::rowCountInserted</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Row Count 1"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count 1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::rowCountUpdatedScd1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Row Count 1.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Row Count 1.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Stage To Core\Row Count 1.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage To Core\Row Count 2"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count 2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::rowCountUpdatedScd2</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Stage To Core\Row Count 2.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage To Core\Row Count 2.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Stage To Core\Row Count 2.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage To Core.Paths[Derived Column Output]"
+              endId="Package\Stage To Core\Row Count.Inputs[Row Count Input 1]"
+              name="Derived Column Output"
+              startId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Derived Column Output1]"
+              endId="Package\Stage To Core\OLE DB Command 1.Inputs[OLE DB Command Input]"
+              name="Derived Column Output"
+              startId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output]"
+              endId="Package\Stage To Core\Conditional Split.Inputs[Conditional Split Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup Match Output1]"
+              endId="Package\Stage To Core\lookup to insert or update.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Stage To Core\lookup department.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Lookup No Match Output]"
+              endId="Package\Stage To Core\add isCurrent , StartDate , EndDate.Inputs[Derived Column Input]"
+              name="Lookup No Match Output"
+              startId="Package\Stage To Core\lookup to insert or update.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[OLE DB Command Output]"
+              endId="Package\Stage To Core\Row Count 2.Inputs[Row Count Input 1]"
+              name="OLE DB Command Output"
+              startId="Package\Stage To Core\OLE DB Command 1.Outputs[OLE DB Command Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[OLE DB Source Output]"
+              endId="Package\Stage To Core\lookup department.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage To Core\Employee stage.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Stage To Core.Paths[Row Count Output 1]"
+              endId="Package\Stage To Core\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Row Count Output 1"
+              startId="Package\Stage To Core\Row Count 1.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Stage To Core.Paths[Row Count Output 11]"
+              endId="Package\Stage To Core\dim employee.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Stage To Core\Row Count.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Stage To Core.Paths[Row Count Output 12]"
+              endId="Package\Stage To Core\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Stage To Core\Row Count 2.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Stage To Core.Paths[scd type 1]"
+              endId="Package\Stage To Core\Row Count 1.Inputs[Row Count Input 1]"
+              name="scd type 1"
+              startId="Package\Stage To Core\Conditional Split.Outputs[scd type 1]" />
+            <path
+              refId="Package\Stage To Core.Paths[scd type 2 for driver province and city]"
+              endId="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate.Inputs[Derived Column Input]"
+              name="scd type 2 for driver province and city"
+              startId="Package\Stage To Core\Conditional Split.Outputs[scd type 2 for department]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update ETL_Metadata onSuccess"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B471FB2F-3060-4781-9ECF-A0DF919E4C6D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update ETL_Metadata onSuccess"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
+          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;    LastRunStatus = 'Success',&#xA;    LastRunMessage = 'ETL ran successfully',&#xA;    TotalRowsInserted = ?,&#xA;    TotalRowsUpdated = CAST(? AS INT) + CAST(? AS INT)&#xA;WHERE TableName = 'DimEmployee'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::rowCountInserted"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::rowCountUpdatedScd1"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::rowCountUpdatedScd2"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{0E84E5FC-7E29-4845-AFFC-BE659AE04884}"
+      DTS:From="Package\ETL_MetaData Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Stage To Core" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{A1A3232F-7C72-4872-A5B0-06FF09B99988}"
+      DTS:From="Package\Stage To Core"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Update ETL_Metadata onSuccess" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\ETL_MetaData Start"
+          TopLeft="589.57142895156,114.999999965815" />
+        <NodeLayout
+          Size="145.6,41.6"
+          Id="Package\Stage To Core"
+          TopLeft="600.000000436392,285.411764504794" />
+        <NodeLayout
+          Size="233.6,41.6"
+          Id="Package\Update ETL_Metadata onSuccess"
+          TopLeft="554.428571782856,467.823529123538" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="674.535714693976,156.999999965815">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,128.411764538979"
+              Start="0,0"
+              End="0,120.911764538979">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,120.911764538979" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="672.214286109624,327.411764504794">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,140.411764618744"
+              Start="0,0"
+              End="0,132.911764618744">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,132.911764618744" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Stage To Core">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="169.6,41.6"
+          Id="Package\Stage To Core\OLE DB Destination"
+          TopLeft="649.206350588339,900.94117600734" />
+        <NodeLayout
+          Size="142.4,41.6"
+          Id="Package\Stage To Core\Row Count 2"
+          TopLeft="665.476191892814,818.352940628616" />
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Stage To Core\Conditional Split"
+          TopLeft="633.541126880479,358.459298795916" />
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Stage To Core\OLE DB Command"
+          TopLeft="346.507937245561,683.392156506818" />
+        <NodeLayout
+          Size="144,41.6"
+          Id="Package\Stage To Core\dim employee"
+          TopLeft="82.6428571793501,672.241176598613" />
+        <NodeLayout
+          Size="139.2,41.6"
+          Id="Package\Stage To Core\Row Count 1"
+          TopLeft="362.380953152367,578.171568290125" />
+        <NodeLayout
+          Size="174.4,41.6"
+          Id="Package\Stage To Core\OLE DB Command 1"
+          TopLeft="650.047620387879,730.6993461138" />
+        <NodeLayout
+          Size="246.4,41.6"
+          Id="Package\Stage To Core\add isCurrent , StartDate , EndDate"
+          TopLeft="165.614285769025,350.617647201596" />
+        <NodeLayout
+          Size="200.8,41.6"
+          Id="Package\Stage To Core\lookup to insert or update"
+          TopLeft="447.157142852581,152.217647019276" />
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Stage To Core\Row Count"
+          TopLeft="115.185714369344,560.700000136739" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Stage To Core\lookup department"
+          TopLeft="615.71428702498,65.7647058247076" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Stage To Core\Employee stage"
+          TopLeft="472.014285694519,0.147058828221194" />
+        <NodeLayout
+          Size="292,41.6"
+          Id="Package\Stage To Core\add isCurrent , EndDate 1 and set startDate"
+          TopLeft="572.796826451395,640.183006255391" />
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
+          TopLeft="548.414285694519,41.7470588282212">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="150.900001330461,24.0176469964864"
+              Start="0,0"
+              End="150.900001330461,16.5176469964864">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.00882349824322" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.00882349824322"
+                    Point2="0,12.0088234982432"
+                    Point3="4,12.0088234982432" />
+                  <mssgle:LineSegment
+                    End="146.900001330461,12.0088234982432" />
+                  <mssgle:CubicBezierSegment
+                    Point1="146.900001330461,12.0088234982432"
+                    Point2="150.900001330461,12.0088234982432"
+                    Point3="150.900001330461,16.0088234982432" />
+                  <mssgle:LineSegment
+                    End="150.900001330461,16.5176469964864" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[OLE DB Command Output]"
+          TopLeft="736.961906140346,772.2993461138">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.0535945148162"
+              Start="0,0"
+              End="0,38.5535945148162">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5535945148162" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup No Match Output]"
+          TopLeft="515.423809519248,193.817647019276">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-226.609523750223,156.800000182319"
+              Start="0,0"
+              End="-226.609523750223,149.300000182319">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.4637154888123" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,59.4637154888123"
+                    Point2="0,63.4637154888123"
+                    Point3="-4,63.4637154888123" />
+                  <mssgle:LineSegment
+                    End="-222.609523750223,63.4637154888123" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-222.609523750223,63.4637154888123"
+                    Point2="-226.609523750223,63.4637154888123"
+                    Point3="-226.609523750223,67.4637154888123" />
+                  <mssgle:LineSegment
+                    End="-226.609523750223,149.300000182319" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-169.111148593861,68.4637154888123,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output1]"
+          TopLeft="699.31428702498,107.364705824708">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-151.757144172399,44.8529411945685"
+              Start="0,0"
+              End="-151.757144172399,37.3529411945685">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.4264705972842" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.4264705972842"
+                    Point2="0,22.4264705972842"
+                    Point3="-4,22.4264705972842" />
+                  <mssgle:LineSegment
+                    End="-147.757144172399,22.4264705972842" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-147.757144172399,22.4264705972842"
+                    Point2="-151.757144172399,22.4264705972842"
+                    Point3="-151.757144172399,26.4264705972842" />
+                  <mssgle:LineSegment
+                    End="-151.757144172399,37.3529411945685" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-124.069958804949,27.4264705972842,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Lookup Match Output]"
+          TopLeft="579.690476185915,193.817647019276">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="130.650650694564,164.641651776639"
+              Start="0,0"
+              End="130.650650694564,157.141651776639">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.6375697309402" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,62.6375697309402"
+                    Point2="0,66.6375697309402"
+                    Point3="4,66.6375697309402" />
+                  <mssgle:LineSegment
+                    End="126.650650694564,66.6375697309402" />
+                  <mssgle:CubicBezierSegment
+                    Point1="126.650650694564,66.6375697309402"
+                    Point2="130.650650694564,66.6375697309402"
+                    Point3="130.650650694564,70.6375697309402" />
+                  <mssgle:LineSegment
+                    End="130.650650694564,157.141651776639" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="17.1339386285322,71.6375697309402,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Derived Column Output1]"
+          TopLeft="718.796826451395,681.783006255391">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="18.450793936484,48.9163398584086"
+              Start="0,0"
+              End="18.450793936484,41.4163398584086">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.4581699292043" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.4581699292043"
+                    Point2="0,24.4581699292043"
+                    Point3="4,24.4581699292043" />
+                  <mssgle:LineSegment
+                    End="14.450793936484,24.4581699292043" />
+                  <mssgle:CubicBezierSegment
+                    Point1="14.450793936484,24.4581699292043"
+                    Point2="18.450793936484,24.4581699292043"
+                    Point3="18.450793936484,28.4581699292043" />
+                  <mssgle:LineSegment
+                    End="18.450793936484,41.4163398584086" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Derived Column Output]"
+          TopLeft="288.814285769025,392.217647201596">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-108.828571399681,168.482352935144"
+              Start="0,0"
+              End="-108.828571399681,160.982352935144">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,80.241176467572" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,80.241176467572"
+                    Point2="0,84.241176467572"
+                    Point3="-4,84.241176467572" />
+                  <mssgle:LineSegment
+                    End="-104.828571399681,84.241176467572" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-104.828571399681,84.241176467572"
+                    Point2="-108.828571399681,84.241176467572"
+                    Point3="-108.828571399681,88.241176467572" />
+                  <mssgle:LineSegment
+                    End="-108.828571399681,160.982352935144" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[scd type 2 for driver province and city]"
+          TopLeft="710.341126880479,400.059298795916">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8.45569957091607,240.123707459476"
+              Start="0,0"
+              End="8.45569957091607,232.623707459476">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,116.061853729738" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,116.061853729738"
+                    Point2="0,120.061853729738"
+                    Point3="4,120.061853729738" />
+                  <mssgle:LineSegment
+                    End="4.45569957091607,120.061853729738" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.45569957091607,120.061853729738"
+                    Point2="8.45569957091607,120.061853729738"
+                    Point3="8.45569957091607,124.061853729738" />
+                  <mssgle:LineSegment
+                    End="8.45569957091607,232.623707459476" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-54.098615058292,125.061853729738,116.6529296875,11.658203125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[scd type 1]"
+          TopLeft="686.074460213812,400.059298795916">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-254.093507061446,178.11226949421"
+              Start="0,0"
+              End="-254.093507061446,170.61226949421">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.3466331759985" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,68.3466331759985"
+                    Point2="0,72.3466331759985"
+                    Point3="-4,72.3466331759985" />
+                  <mssgle:LineSegment
+                    End="-250.093507061446,72.3466331759985" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-250.093507061446,72.3466331759985"
+                    Point2="-254.093507061446,72.3466331759985"
+                    Point3="-254.093507061446,76.3466331759985" />
+                  <mssgle:LineSegment
+                    End="-254.093507061446,170.61226949421" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-150.192398061973,77.3466331759985,46.2912890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Row Count Output 12]"
+          TopLeft="735.341271240576,859.952940628616">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.9882353787241"
+              Start="0,0"
+              End="0,33.4882353787241">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.4882353787241" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Row Count Output 11]"
+          TopLeft="179.985714369344,602.300000136739">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-25.3428571899939,69.9411764618739"
+              Start="0,0"
+              End="-25.3428571899939,62.4411764618739">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.9705882309369" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.9705882309369"
+                    Point2="0,34.9705882309369"
+                    Point3="-4,34.9705882309369" />
+                  <mssgle:LineSegment
+                    End="-21.3428571899939,34.9705882309369" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-21.3428571899939,34.9705882309369"
+                    Point2="-25.3428571899939,34.9705882309369"
+                    Point3="-25.3428571899939,38.9705882309369" />
+                  <mssgle:LineSegment
+                    End="-25.3428571899939,62.4411764618739" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Row Count Output 1]"
+          TopLeft="430.444445198964,619.771568290125">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63.620588216693"
+              Start="0,0"
+              End="0,56.120588216693">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.120588216693" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\Stage To Core.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="225.6,41.6"
+          Id="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
+          TopLeft="347.999994814396,192.333330467343" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\dim employee">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\lookup to insert or update">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[Core].[DimEmployee]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\lookup department">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[Department]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage To Core\Employee stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

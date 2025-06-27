@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{5394D396-476D-43BE-9306-2B96CF97A98E}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{829697B0-982F-40D3-BE79-E9D77A0004FF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -27,6 +27,23 @@
       DTS:ObjectName="Sequence Container">
       <DTS:Variables />
       <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dim department"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{e33bce15-0608-4e53-8152-74ebc87ab8ed}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dim department"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>Incremental_DimDepartment.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
         <DTS:Executable
           DTS:refId="Package\Sequence Container\dim discount"
           DTS:CreationName="Microsoft.ExecutePackageTask"
@@ -58,6 +75,23 @@
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
               <PackageName>Incremental_DimDriver.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dim employee"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{55bfa1de-3516-45ef-9d22-7d3fd370fccc}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dim employee"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>Incremental_DimEmployee.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -143,7 +177,11 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Sequence Container\dim department"
+          TopLeft="221.214286173485,207.829411854525" />
         <NodeLayout
           Size="137.6,41.6"
           Id="Package\Sequence Container\dim discount"
@@ -168,11 +206,15 @@
           Size="166.4,41.6"
           Id="Package\Sequence Container\dim request status"
           TopLeft="316.214286375714,142.252941069223" />
+        <NodeLayout
+          Size="144,41.6"
+          Id="Package\Sequence Container\dim employee"
+          TopLeft="341.214286428933,262.782353071884" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="540.8,236"
-          Size="540.8,279.2"
+          PanelSize="540.8,406.4"
+          Size="540.8,449.6"
           Id="Package\Sequence Container"
           TopLeft="145.000000180943,40.8823529579338" />
       </GraphLayout>
