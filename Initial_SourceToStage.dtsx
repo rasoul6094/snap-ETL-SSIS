@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="27"
-  DTS:VersionGUID="{7BD392DA-0F69-4A39-B80F-1257E7A01E70}">
+  DTS:VersionBuild="32"
+  DTS:VersionGUID="{B4651B7E-F56B-4A36-AAF2-CC8DDAA81A45}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -49,6 +49,15 @@
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="rowDiscountInserted">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6821F2CC-3C75-409F-AC2B-C21BB028B17E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="rowDriverCallsInserted">
       <DTS:VariableValue
         DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
@@ -167,7 +176,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{1550C253-1655-4893-BF18-A9720D11D564}"
-          SQLTask:SqlStatementSource="TRUNCATE TABLE Driver;&#xA;TRUNCATE TABLE Passenger;&#xA;TRUNCATE TABLE City;&#xA;TRUNCATE TABLE Car;&#xA;TRUNCATE TABLE Province;&#xA;TRUNCATE TABLE Discount;&#xA;TRUNCATE TABLE Request;&#xA;TRUNCATE TABLE PaymentMethod;&#xA;TRUNCATE TABLE Status;&#xA;TRUNCATE TABLE Trip;&#xA;TRUNCATE TABLE Zone;&#xA;TRUNCATE TABLE ZoneType;&#xA;TRUNCATE TABLE Department;&#xA;TRUNCATE TABLE Employee;&#xA;TRUNCATE TABLE PassengerCall;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="TRUNCATE TABLE Driver;&#xA;TRUNCATE TABLE Passenger;&#xA;TRUNCATE TABLE City;&#xA;TRUNCATE TABLE Car;&#xA;TRUNCATE TABLE Province;&#xA;TRUNCATE TABLE Discount;&#xA;TRUNCATE TABLE Request;&#xA;TRUNCATE TABLE PaymentMethod;&#xA;TRUNCATE TABLE Status;&#xA;TRUNCATE TABLE Trip;&#xA;TRUNCATE TABLE Zone;&#xA;TRUNCATE TABLE ZoneType;&#xA;TRUNCATE TABLE Department;&#xA;TRUNCATE TABLE Employee;&#xA;TRUNCATE TABLE PassengerCall;&#xA;TRUNCATE TABLE DriverCall;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -1853,6 +1862,436 @@
                       refId="Package\Source To Stage\Discount Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Source To Stage\Discount Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Source To Stage\driver calls source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="driver calls source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DriverCall]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Source To Stage\driver calls source.Connections[OleDbConnection]"
+                  connectionManagerID="{BD36AF48-15A6-4F24-BBF4-2836F0F15B77}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-source.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[CallID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[CallID]"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[CallID]"
+                      name="CallID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[StartCallDatetime]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[StartCallDatetime]"
+                      length="27"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[StartCallDatetime]"
+                      name="StartCallDatetime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[BeginTalkDatetime]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[BeginTalkDatetime]"
+                      length="27"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[BeginTalkDatetime]"
+                      name="BeginTalkDatetime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[EndCallDatetime]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[EndCallDatetime]"
+                      length="27"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[EndCallDatetime]"
+                      name="EndCallDatetime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[EmployeeID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[EmployeeID]"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[EmployeeID]"
+                      name="EmployeeID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[DepartmentID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[DepartmentID]"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[DepartmentID]"
+                      name="DepartmentID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[Rate]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[Rate]"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[Rate]"
+                      name="Rate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[DriverID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[DriverID]"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[DriverID]"
+                      name="DriverID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[CallID]"
+                      dataType="i4"
+                      name="CallID" />
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[StartCallDatetime]"
+                      dataType="wstr"
+                      length="27"
+                      name="StartCallDatetime" />
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[BeginTalkDatetime]"
+                      dataType="wstr"
+                      length="27"
+                      name="BeginTalkDatetime" />
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[EndCallDatetime]"
+                      dataType="wstr"
+                      length="27"
+                      name="EndCallDatetime" />
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[EmployeeID]"
+                      dataType="i4"
+                      name="EmployeeID" />
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[DepartmentID]"
+                      dataType="i4"
+                      name="DepartmentID" />
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[Rate]"
+                      dataType="i4"
+                      name="Rate" />
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].ExternalColumns[DriverID]"
+                      dataType="i4"
+                      name="DriverID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[CallID]"
+                      dataType="i4"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[CallID]"
+                      name="CallID" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[StartCallDatetime]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[StartCallDatetime]"
+                      name="StartCallDatetime" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[BeginTalkDatetime]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[BeginTalkDatetime]"
+                      name="BeginTalkDatetime" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[EndCallDatetime]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[EndCallDatetime]"
+                      name="EndCallDatetime" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[EmployeeID]"
+                      dataType="i4"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[EmployeeID]"
+                      name="EmployeeID" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[DepartmentID]"
+                      dataType="i4"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[DepartmentID]"
+                      name="DepartmentID" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[DriverID]"
+                      dataType="i4"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[DriverID]"
+                      name="DriverID" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[Rate]"
+                      dataType="i4"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[Rate]"
+                      name="Rate" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Source To Stage\driver calls stage"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="driver calls stage"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DriverCall]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Source To Stage\driver calls stage.Connections[OleDbConnection]"
+                  connectionManagerID="{1550C253-1655-4893-BF18-A9720D11D564}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.snapdb-stage.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].Columns[CallID]"
+                      cachedDataType="i4"
+                      cachedName="CallID"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[CallID]"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[CallID]" />
+                    <inputColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].Columns[StartCallDatetime]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="StartCallDatetime"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[StartCallDatetime]"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[StartCallDatetime]" />
+                    <inputColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].Columns[BeginTalkDatetime]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="BeginTalkDatetime"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[BeginTalkDatetime]"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[BeginTalkDatetime]" />
+                    <inputColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].Columns[EndCallDatetime]"
+                      cachedDataType="wstr"
+                      cachedLength="27"
+                      cachedName="EndCallDatetime"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[EndCallDatetime]"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[EndCallDatetime]" />
+                    <inputColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].Columns[EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeID"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeID]"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[EmployeeID]" />
+                    <inputColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].Columns[DepartmentID]"
+                      cachedDataType="i4"
+                      cachedName="DepartmentID"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentID]"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[DepartmentID]" />
+                    <inputColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].Columns[Rate]"
+                      cachedDataType="i4"
+                      cachedName="Rate"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[Rate]"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[Rate]" />
+                    <inputColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].Columns[DriverID]"
+                      cachedDataType="i4"
+                      cachedName="DriverID"
+                      externalMetadataColumnId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[DriverID]"
+                      lineageId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output].Columns[DriverID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[CallID]"
+                      dataType="i4"
+                      name="CallID" />
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[StartCallDatetime]"
+                      dataType="wstr"
+                      length="27"
+                      name="StartCallDatetime" />
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[BeginTalkDatetime]"
+                      dataType="wstr"
+                      length="27"
+                      name="BeginTalkDatetime" />
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[EndCallDatetime]"
+                      dataType="wstr"
+                      length="27"
+                      name="EndCallDatetime" />
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeID]"
+                      dataType="i4"
+                      name="EmployeeID" />
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentID]"
+                      dataType="i4"
+                      name="DepartmentID" />
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[Rate]"
+                      dataType="i4"
+                      name="Rate" />
+                    <externalMetadataColumn
+                      refId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input].ExternalColumns[DriverID]"
+                      dataType="i4"
+                      name="DriverID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Source To Stage\driver calls stage.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls stage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Source To Stage\driver calls stage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Source To Stage\driver calls stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Source To Stage\driver calls stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -5631,6 +6070,35 @@
               </outputs>
             </component>
             <component
+              refId="Package\Source To Stage\row count driver calls"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="row count driver calls">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::rowDriverCallsInserted</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Source To Stage\row count driver calls.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Source To Stage\row count driver calls.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Source To Stage\row count driver calls.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\Source To Stage\row count employee"
               componentClassID="Microsoft.RowCount"
               contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -7307,150 +7775,160 @@
               name="OLE DB Source Output"
               startId="Package\Source To Stage\City Source.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output13]"
-              endId="Package\Source To Stage\row count department.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\department source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output12]"
-              endId="Package\Source To Stage\row count employee.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\employee source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output11]"
-              endId="Package\Source To Stage\row count passenger calls.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\passenger calls source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output10]"
-              endId="Package\Source To Stage\Row Count Request.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Request Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output9]"
-              endId="Package\Source To Stage\Row Count Payment Method.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Payment Method Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output8]"
-              endId="Package\Source To Stage\Row Count Zone Type.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Zone Type Source.Outputs[OLE DB Source Output]" />
-            <path
               refId="Package\Source To Stage.Paths[OLE DB Source Output14]"
-              endId="Package\Source To Stage\Row Count Discount.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Discount Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output6]"
-              endId="Package\Source To Stage\Row Count Zone.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Zone Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output5]"
-              endId="Package\Source To Stage\Row Count Passenger.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Passenger Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output4]"
-              endId="Package\Source To Stage\Row Count Driver.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Driver Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output3]"
-              endId="Package\Source To Stage\Row Count Car.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Car Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output2]"
-              endId="Package\Source To Stage\Row Count Trip.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Trip Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output1]"
-              endId="Package\Source To Stage\Row Count Province.Inputs[Row Count Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Source To Stage\Province Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Source To Stage.Paths[OLE DB Source Output7]"
               endId="Package\Source To Stage\Row Count Status.Inputs[Row Count Input 1]"
               name="OLE DB Source Output"
               startId="Package\Source To Stage\Status Source.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Source To Stage.Paths[Row Count Output 112]"
-              endId="Package\Source To Stage\Zone Type Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Zone Type.Outputs[Row Count Output 1]" />
+              refId="Package\Source To Stage.Paths[OLE DB Source Output13]"
+              endId="Package\Source To Stage\Row Count Province.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Province Source.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Source To Stage.Paths[Row Count Output 111]"
-              endId="Package\Source To Stage\Payment Method Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Payment Method.Outputs[Row Count Output 1]" />
+              refId="Package\Source To Stage.Paths[OLE DB Source Output12]"
+              endId="Package\Source To Stage\Row Count Trip.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Trip Source.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Source To Stage.Paths[Row Count Output 110]"
-              endId="Package\Source To Stage\Province Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Province.Outputs[Row Count Output 1]" />
+              refId="Package\Source To Stage.Paths[OLE DB Source Output11]"
+              endId="Package\Source To Stage\Row Count Car.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Car Source.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Source To Stage.Paths[Row Count Output 19]"
-              endId="Package\Source To Stage\passenger calls stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\row count passenger calls.Outputs[Row Count Output 1]" />
+              refId="Package\Source To Stage.Paths[OLE DB Source Output10]"
+              endId="Package\Source To Stage\Row Count Driver.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Driver Source.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Source To Stage.Paths[Row Count Output 18]"
-              endId="Package\Source To Stage\Zone Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Zone.Outputs[Row Count Output 1]" />
+              refId="Package\Source To Stage.Paths[OLE DB Source Output9]"
+              endId="Package\Source To Stage\Row Count Passenger.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Passenger Source.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Source To Stage.Paths[Row Count Output 17]"
-              endId="Package\Source To Stage\Request Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Request.Outputs[Row Count Output 1]" />
+              refId="Package\Source To Stage.Paths[OLE DB Source Output8]"
+              endId="Package\Source To Stage\Row Count Discount.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Discount Source.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Source To Stage.Paths[Row Count Output 13]"
-              endId="Package\Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Passenger.Outputs[Row Count Output 1]" />
+              refId="Package\Source To Stage.Paths[OLE DB Source Output15]"
+              endId="Package\Source To Stage\Row Count Zone.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Zone Source.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Source To Stage.Paths[Row Count Output 15]"
+              refId="Package\Source To Stage.Paths[OLE DB Source Output6]"
+              endId="Package\Source To Stage\Row Count Zone Type.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Zone Type Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output5]"
+              endId="Package\Source To Stage\Row Count Payment Method.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Payment Method Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output4]"
+              endId="Package\Source To Stage\Row Count Request.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\Request Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output3]"
+              endId="Package\Source To Stage\row count passenger calls.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\passenger calls source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output2]"
+              endId="Package\Source To Stage\row count employee.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\employee source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output1]"
+              endId="Package\Source To Stage\row count department.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\department source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[OLE DB Source Output7]"
+              endId="Package\Source To Stage\row count driver calls.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Source To Stage\driver calls source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 113]"
               endId="Package\Source To Stage\Discount Stage.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
               startId="Package\Source To Stage\Row Count Discount.Outputs[Row Count Output 1]" />
             <path
-              refId="Package\Source To Stage.Paths[Row Count Output 14]"
-              endId="Package\Source To Stage\City Stage.Inputs[OLE DB Destination Input]"
+              refId="Package\Source To Stage.Paths[Row Count Output 112]"
+              endId="Package\Source To Stage\employee stage.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count City.Outputs[Row Count Output 1]" />
+              startId="Package\Source To Stage\row count employee.Outputs[Row Count Output 1]" />
             <path
-              refId="Package\Source To Stage.Paths[Row Count Output 12]"
-              endId="Package\Source To Stage\Driver Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Driver.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Source To Stage.Paths[Row Count Output 11]"
-              endId="Package\Source To Stage\Car Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Car.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Source To Stage.Paths[Row Count Output 1]"
-              endId="Package\Source To Stage\Status Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Status.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Source To Stage.Paths[Row Count Output 113]"
-              endId="Package\Source To Stage\Trip Stage.Inputs[OLE DB Destination Input]"
-              name="Row Count Output 1"
-              startId="Package\Source To Stage\Row Count Trip.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Source To Stage.Paths[Row Count Output 16]"
+              refId="Package\Source To Stage.Paths[Row Count Output 111]"
               endId="Package\Source To Stage\department stage.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
               startId="Package\Source To Stage\row count department.Outputs[Row Count Output 1]" />
             <path
-              refId="Package\Source To Stage.Paths[Row Count Output 114]"
-              endId="Package\Source To Stage\employee stage.Inputs[OLE DB Destination Input]"
+              refId="Package\Source To Stage.Paths[Row Count Output 110]"
+              endId="Package\Source To Stage\Trip Stage.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
-              startId="Package\Source To Stage\row count employee.Outputs[Row Count Output 1]" />
+              startId="Package\Source To Stage\Row Count Trip.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 19]"
+              endId="Package\Source To Stage\Status Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Status.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 18]"
+              endId="Package\Source To Stage\Driver Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Driver.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 17]"
+              endId="Package\Source To Stage\Car Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Car.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 14]"
+              endId="Package\Source To Stage\Zone Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Zone.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 15]"
+              endId="Package\Source To Stage\Passenger Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Passenger.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 13]"
+              endId="Package\Source To Stage\passenger calls stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\row count passenger calls.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 12]"
+              endId="Package\Source To Stage\Province Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Province.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 11]"
+              endId="Package\Source To Stage\Payment Method Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Payment Method.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 1]"
+              endId="Package\Source To Stage\driver calls stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\row count driver calls.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 114]"
+              endId="Package\Source To Stage\City Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count City.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 16]"
+              endId="Package\Source To Stage\Request Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Request.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Source To Stage.Paths[Row Count Output 115]"
+              endId="Package\Source To Stage\Zone Type Stage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Source To Stage\Row Count Zone Type.Outputs[Row Count Output 1]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -7469,7 +7947,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
-          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;    LastRunStatus = 'Success',&#xA;    LastRunMessage = 'ETL ran successfully',&#xA;    TotalRowsInserted = CAST(? AS INT) + CAST(? AS INT) +  CAST(? AS INT) + CAST(? AS INT) +  CAST(? AS INT) + CAST(? AS INT) +  CAST(? AS INT) + CAST(? AS INT) +  CAST(? AS INT) + CAST(? AS INT) +  CAST(? AS INT) + CAST(? AS INT) ,&#xA;    TotalRowsUpdated =  0&#xA;WHERE TableName = 'SourceToStage'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;    LastRunStatus = 'Success',&#xA;    LastRunMessage = 'ETL ran successfully',&#xA;    TotalRowsInserted = CAST(? AS INT) + CAST(? AS INT) +  CAST(? AS INT) + CAST(? AS INT) +  CAST(? AS INT) + CAST(? AS INT) +  CAST(? AS INT) + CAST(? AS INT) +  CAST(? AS INT) + CAST(? AS INT) +  CAST(? AS INT) + CAST(? AS INT) + CAST(? AS INT) ,&#xA;    TotalRowsUpdated =  0&#xA;WHERE TableName = 'SourceToStage'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::rowZoneTypeInserted"
@@ -7539,6 +8017,12 @@
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="11"
             SQLTask:DtsVariableName="User::rowCarInserted"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="12"
+            SQLTask:DtsVariableName="User::rowDriverCallsInserted"
             SQLTask:ParameterDirection="Input"
             SQLTask:DataType="131"
             SQLTask:ParameterSize="-1" />
@@ -7675,73 +8159,121 @@
       <GraphLayout
         Capacity="128" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="155.2,41.6"
-          Id="Package\Source To Stage\Row Count Trip"
-          TopLeft="914,391" />
-        <NodeLayout
           Size="131.2,41.6"
           Id="Package\Source To Stage\City Source"
           TopLeft="92.8571430548115,75.7058822865821" />
         <NodeLayout
-          Size="142.4,41.6"
-          Id="Package\Source To Stage\Driver Source"
-          TopLeft="642.000001341105,74.7647058133126" />
+          Size="163.2,41.6"
+          Id="Package\Source To Stage\driver calls source"
+          TopLeft="836.28571548693,545.764706007027" />
         <NodeLayout
           Size="161.6,41.6"
           Id="Package\Source To Stage\department stage"
           TopLeft="99.9047626964505,735.07843076504" />
         <NodeLayout
-          Size="192.8,41.6"
-          Id="Package\Source To Stage\Payment Method Source"
-          TopLeft="480.94285766896,309.235293935998" />
-        <NodeLayout
-          Size="176.8,41.6"
-          Id="Package\Source To Stage\Row Count Request"
-          TopLeft="822.857143054812,155.058823230462" />
-        <NodeLayout
-          Size="136,41.6"
-          Id="Package\Source To Stage\Zone Stage"
-          TopLeft="734.857144214975,476.705882058683" />
-        <NodeLayout
-          Size="158.4,41.6"
-          Id="Package\Source To Stage\Request Source"
-          TopLeft="829.857143054812,72.3529408755101" />
-        <NodeLayout
-          Size="167.2,41.6"
-          Id="Package\Source To Stage\Row Count Status"
-          TopLeft="1025.85714305481,167.058823230462" />
-        <NodeLayout
-          Size="219.2,41.6"
-          Id="Package\Source To Stage\Row Count Payment Method"
-          TopLeft="476,389.058823230462" />
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\Source To Stage\Request Stage"
-          TopLeft="830.000000212874,230.882352524925" />
-        <NodeLayout
-          Size="148,41.6"
-          Id="Package\Source To Stage\Status Source"
-          TopLeft="1038.0000013411,76.4117644022406" />
-        <NodeLayout
-          Size="188.8,41.6"
-          Id="Package\Source To Stage\Row Count Passenger"
-          TopLeft="272,387.058823230462" />
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Source To Stage\employee stage"
-          TopLeft="355.307934957169,726.287580862003" />
-        <NodeLayout
-          Size="174.4,41.6"
-          Id="Package\Source To Stage\row count employee"
-          TopLeft="341.911108952807,633.856208731468" />
+          Size="184,41.6"
+          Id="Package\Source To Stage\passenger calls source"
+          TopLeft="571.790474575169,548.594770523425" />
         <NodeLayout
           Size="160.8,41.6"
           Id="Package\Source To Stage\Row Count Zone"
           TopLeft="724,393.705882058683" />
         <NodeLayout
+          Size="148,41.6"
+          Id="Package\Source To Stage\Status Source"
+          TopLeft="1038.0000013411,76.4117644022406" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Source To Stage\Row Count Trip"
+          TopLeft="914,391" />
+        <NodeLayout
+          Size="136,41.6"
+          Id="Package\Source To Stage\Zone Stage"
+          TopLeft="734.857144214975,476.705882058683" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Source To Stage\Row Count Status"
+          TopLeft="1025.85714305481,167.058823230462" />
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Source To Stage\Province Stage"
+          TopLeft="281.428572027659,221.235293935998" />
+        <NodeLayout
+          Size="163.2,41.6"
+          Id="Package\Source To Stage\Zone Type Stage"
+          TopLeft="1116.42857202766,484.882352524926" />
+        <NodeLayout
+          Size="142.4,41.6"
+          Id="Package\Source To Stage\Driver Source"
+          TopLeft="642.000001341105,74.7647058133126" />
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Source To Stage\Passenger Source"
+          TopLeft="279.28571488024,310.764705699363" />
+        <NodeLayout
+          Size="192.8,41.6"
+          Id="Package\Source To Stage\Payment Method Source"
+          TopLeft="480.94285766896,309.235293935998" />
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\Source To Stage\Row Count Province"
+          TopLeft="267,148" />
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Source To Stage\Trip Stage"
+          TopLeft="924.371429111216,476.058823116512" />
+        <NodeLayout
+          Size="176.8,41.6"
+          Id="Package\Source To Stage\Row Count Request"
+          TopLeft="822.857143054812,155.058823230462" />
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\Source To Stage\Request Source"
+          TopLeft="829.857143054812,72.3529408755101" />
+        <NodeLayout
           Size="153.6,41.6"
           Id="Package\Source To Stage\Discount Stage"
           TopLeft="91.000000212874,465.058823230461" />
+        <NodeLayout
+          Size="200,41.6"
+          Id="Package\Source To Stage\row count passenger calls"
+          TopLeft="579.996823215714,637.254901538946" />
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\Source To Stage\Row Count Discount"
+          TopLeft="73,390" />
+        <NodeLayout
+          Size="142.4,41.6"
+          Id="Package\Source To Stage\Zone Source"
+          TopLeft="734.000001341105,308.588235107777" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Source To Stage\Request Stage"
+          TopLeft="830.000000212874,230.882352524925" />
+        <NodeLayout
+          Size="124,41.6"
+          Id="Package\Source To Stage\Car Stage"
+          TopLeft="478.371429111216,225.411764527584" />
+        <NodeLayout
+          Size="174.4,41.6"
+          Id="Package\Source To Stage\row count employee"
+          TopLeft="341.911108952807,633.856208731468" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Source To Stage\department source"
+          TopLeft="95.7619055490306,560.784313233941" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Source To Stage\employee stage"
+          TopLeft="355.307934957169,726.287580862003" />
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\Source To Stage\row count driver calls"
+          TopLeft="844.492064127475,634.424837022549" />
+        <NodeLayout
+          Size="136,41.6"
+          Id="Package\Source To Stage\Trip Source"
+          TopLeft="919.94285766896,309.058823230462" />
         <NodeLayout
           Size="166.4,41.6"
           Id="Package\Source To Stage\Row Count Driver"
@@ -7751,41 +8283,29 @@
           Id="Package\Source To Stage\Driver Stage"
           TopLeft="642.857144214974,231.882352764219" />
         <NodeLayout
-          Size="136,41.6"
-          Id="Package\Source To Stage\Trip Source"
-          TopLeft="919.94285766896,309.058823230462" />
+          Size="219.2,41.6"
+          Id="Package\Source To Stage\Row Count Payment Method"
+          TopLeft="476,389.058823230462" />
         <NodeLayout
-          Size="179.2,41.6"
-          Id="Package\Source To Stage\Row Count Discount"
-          TopLeft="73,390" />
+          Size="157.6,41.6"
+          Id="Package\Source To Stage\driver calls stage"
+          TopLeft="856.301588541156,709.862745115692" />
         <NodeLayout
           Size="178.4,41.6"
           Id="Package\Source To Stage\passenger calls stage"
           TopLeft="591.806347629395,712.692809632089" />
         <NodeLayout
-          Size="124,41.6"
-          Id="Package\Source To Stage\Car Stage"
-          TopLeft="478.371429111216,225.411764527584" />
-        <NodeLayout
           Size="183.2,41.6"
           Id="Package\Source To Stage\row count department"
           TopLeft="90.4761906687906,645.196078240114" />
         <NodeLayout
-          Size="142.4,41.6"
-          Id="Package\Source To Stage\Zone Source"
-          TopLeft="734.000001341105,308.588235107777" />
+          Size="160,41.6"
+          Id="Package\Source To Stage\Discount Source"
+          TopLeft="82.8571430548115,313.529411581046" />
         <NodeLayout
-          Size="168.8,41.6"
-          Id="Package\Source To Stage\Zone Type Source"
-          TopLeft="1112.28571488024,310.588234993827" />
-        <NodeLayout
-          Size="167.2,41.6"
-          Id="Package\Source To Stage\department source"
-          TopLeft="95.7619055490306,560.784313233941" />
-        <NodeLayout
-          Size="153.6,41.6"
-          Id="Package\Source To Stage\Province Stage"
-          TopLeft="281.428572027659,221.235293935998" />
+          Size="155.2,41.6"
+          Id="Package\Source To Stage\Row Count City"
+          TopLeft="75.8571430548115,146.058823230462" />
         <NodeLayout
           Size="163.2,41.6"
           Id="Package\Source To Stage\Passenger Stage"
@@ -7795,111 +8315,43 @@
           Id="Package\Source To Stage\Row Count Car"
           TopLeft="459.142857339006,155.588234993827" />
         <NodeLayout
-          Size="179.2,41.6"
-          Id="Package\Source To Stage\Row Count Province"
-          TopLeft="267,148" />
-        <NodeLayout
-          Size="153.6,41.6"
-          Id="Package\Source To Stage\Province Source"
-          TopLeft="279.28571488024,74.9411764048994" />
-        <NodeLayout
-          Size="157.6,41.6"
-          Id="Package\Source To Stage\employee source"
-          TopLeft="349.974601616738,547.745097321556" />
-        <NodeLayout
-          Size="142.4,41.6"
-          Id="Package\Source To Stage\Status Stage"
-          TopLeft="1044.85714421497,237.529411353147" />
-        <NodeLayout
-          Size="168.8,41.6"
-          Id="Package\Source To Stage\Passenger Source"
-          TopLeft="279.28571488024,310.764705699363" />
-        <NodeLayout
-          Size="160,41.6"
-          Id="Package\Source To Stage\Discount Source"
-          TopLeft="82.8571430548115,313.529411581046" />
-        <NodeLayout
           Size="126.4,41.6"
           Id="Package\Source To Stage\City Stage"
           TopLeft="96.000000212874,215.235293935997" />
-        <NodeLayout
-          Size="200,41.6"
-          Id="Package\Source To Stage\row count passenger calls"
-          TopLeft="579.996823215714,637.254901538946" />
-        <NodeLayout
-          Size="193.6,41.6"
-          Id="Package\Source To Stage\Payment Method Stage"
-          TopLeft="483.371429111216,475.235293822048" />
-        <NodeLayout
-          Size="184,41.6"
-          Id="Package\Source To Stage\passenger calls source"
-          TopLeft="571.790474575169,548.594770523425" />
-        <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\Source To Stage\Trip Stage"
-          TopLeft="924.371429111216,476.058823116512" />
         <NodeLayout
           Size="188.8,41.6"
           Id="Package\Source To Stage\Row Count Zone Type"
           TopLeft="1107,395" />
         <NodeLayout
+          Size="142.4,41.6"
+          Id="Package\Source To Stage\Status Stage"
+          TopLeft="1044.85714421497,237.529411353147" />
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Source To Stage\Province Source"
+          TopLeft="279.28571488024,74.9411764048994" />
+        <NodeLayout
+          Size="188.8,41.6"
+          Id="Package\Source To Stage\Row Count Passenger"
+          TopLeft="272,387.058823230462" />
+        <NodeLayout
+          Size="193.6,41.6"
+          Id="Package\Source To Stage\Payment Method Stage"
+          TopLeft="483.371429111216,475.235293822048" />
+        <NodeLayout
+          Size="157.6,41.6"
+          Id="Package\Source To Stage\employee source"
+          TopLeft="349.974601616738,547.745097321556" />
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Source To Stage\Zone Type Source"
+          TopLeft="1112.28571488024,310.588234993827" />
+        <NodeLayout
           Size="129.6,41.6"
           Id="Package\Source To Stage\Car Source"
           TopLeft="463.94285766896,73.4117646415341" />
-        <NodeLayout
-          Size="155.2,41.6"
-          Id="Package\Source To Stage\Row Count City"
-          TopLeft="75.8571430548115,146.058823230462" />
-        <NodeLayout
-          Size="163.2,41.6"
-          Id="Package\Source To Stage\Zone Type Stage"
-          TopLeft="1116.42857202766,484.882352524926" />
         <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 114]"
-          TopLeft="430.409521954988,675.456208731468">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,50.8313721305348"
-              Start="0,0"
-              End="0,43.3313721305348">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,43.3313721305348" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 113]"
-          TopLeft="990.435714555608,433">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,43.058823116512"
-              Start="0,0"
-              End="0,35.558823116512">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,35.558823116512" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 112]"
+          Id="Package\Source To Stage.Paths[Row Count Output 115]"
           TopLeft="1199.71428601383,437">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -7921,161 +8373,7 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 111]"
-          TopLeft="582.935714555608,431.058823230462">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,44.1764705915859"
-              Start="0,0"
-              End="0,36.6764705915859">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,36.6764705915859" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 110]"
-          TopLeft="357.46428601383,190">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,31.235293935998"
-              Start="0,0"
-              End="0,23.735293935998">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,23.735293935998" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 19]"
-          TopLeft="680.501585422555,678.854901538946">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,33.8379080931429"
-              Start="0,0"
-              End="0,26.3379080931429">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26.3379080931429" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 18]"
-          TopLeft="803.678572107487,435.705882058683">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,40.9999999999999"
-              Start="0,0"
-              End="0,33.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,33.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 17]"
-          TopLeft="908.678571633843,197.058823230462">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,33.823529294463"
-              Start="0,0"
-              End="0,26.323529294463">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26.323529294463" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 16]"
-          TopLeft="181.390476682621,686.796078240114">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,48.282352524926"
-              Start="0,0"
-              End="0,40.782352524926">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,40.782352524926" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 15]"
-          TopLeft="165.250000106437,432">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,33.058823230461"
-              Start="0,0"
-              End="0,25.558823230461">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.558823230461" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 14]"
+          Id="Package\Source To Stage.Paths[Row Count Output 114]"
           TopLeft="156.178571633843,188.058823230462">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -8097,19 +8395,19 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 13]"
-          TopLeft="363.71428601383,429.058823230462">
+          Id="Package\Source To Stage.Paths[Row Count Output 113]"
+          TopLeft="165.250000106437,432">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,41"
+              EndConnector="0,33.058823230461"
               Start="0,0"
-              End="0,33.5">
+              End="0,25.558823230461">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.5" />
+                    End="0,25.558823230461" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -8119,19 +8417,19 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 12]"
-          TopLeft="714.178572107487,200">
+          Id="Package\Source To Stage.Paths[Row Count Output 112]"
+          TopLeft="430.409521954988,675.456208731468">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,31.882352764219"
+              EndConnector="0,50.8313721305348"
               Start="0,0"
-              End="0,24.382352764219">
+              End="0,43.3313721305348">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24.382352764219" />
+                    End="0,43.3313721305348" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -8141,19 +8439,19 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 11]"
-          TopLeft="536.957143225111,197.188234993827">
+          Id="Package\Source To Stage.Paths[Row Count Output 111]"
+          TopLeft="181.390476682621,686.796078240114">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,28.2235295337568"
+              EndConnector="0,48.282352524926"
               Start="0,0"
-              End="0,20.7235295337568">
+              End="0,40.782352524926">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.7235295337568" />
+                    End="0,40.782352524926" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -8163,7 +8461,29 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Source To Stage.Paths[Row Count Output 1]"
+          Id="Package\Source To Stage.Paths[Row Count Output 110]"
+          TopLeft="990.435714555608,433">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.058823116512"
+              Start="0,0"
+              End="0,35.558823116512">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.558823116512" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 19]"
           TopLeft="1112.60714363489,209.058823230462">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -8185,7 +8505,359 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 18]"
+          TopLeft="714.178572107487,200">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.882352764219"
+              Start="0,0"
+              End="0,24.382352764219">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.382352764219" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 17]"
+          TopLeft="536.957143225111,197.188234993827">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.2235295337568"
+              Start="0,0"
+              End="0,20.7235295337568">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.7235295337568" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 16]"
+          TopLeft="908.678571633843,197.058823230462">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.823529294463"
+              Start="0,0"
+              End="0,26.323529294463">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.323529294463" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 15]"
+          TopLeft="363.71428601383,429.058823230462">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 14]"
+          TopLeft="803.678572107487,435.705882058683">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.9999999999999"
+              Start="0,0"
+              End="0,33.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 13]"
+          TopLeft="680.501585422555,678.854901538946">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.8379080931429"
+              Start="0,0"
+              End="0,26.3379080931429">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.3379080931429" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 12]"
+          TopLeft="357.46428601383,190">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.235293935998"
+              Start="0,0"
+              End="0,23.735293935998">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.735293935998" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 11]"
+          TopLeft="582.935714555608,431.058823230462">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.1764705915859"
+              Start="0,0"
+              End="0,36.6764705915859">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.6764705915859" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[Row Count Output 1]"
+          TopLeft="934.596826334316,676.024837022549">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.837908093143"
+              Start="0,0"
+              End="0,26.337908093143">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.337908093143" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[OLE DB Source Output15]"
+          TopLeft="804.750000670552,350.588235107777">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.1176469509065"
+              Start="0,0"
+              End="0,35.6176469509065">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.6176469509065" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Source To Stage.Paths[OLE DB Source Output14]"
+          TopLeft="1110.67857219796,118.411764402241">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.6470588282215"
+              Start="0,0"
+              End="0,41.1470588282215">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.1470588282215" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[OLE DB Source Output13]"
+          TopLeft="356.39285744012,116.941176404899">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.0588235951006"
+              Start="0,0"
+              End="0,23.5588235951006">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5588235951006" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[OLE DB Source Output12]"
+          TopLeft="989.72142883448,351.058823230462">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.9411767695379"
+              Start="0,0"
+              End="0,32.4411767695379">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.4411767695379" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[OLE DB Source Output11]"
+          TopLeft="531.142857503983,115.011764641534">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.5764703522931"
+              Start="0,0"
+              End="0,33.0764703522931">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.0764703522931" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[OLE DB Source Output10]"
+          TopLeft="715.000000670552,116.764705813313">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.2352941866874"
+              Start="0,0"
+              End="0,33.7352941866874">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.7352941866874" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[OLE DB Source Output9]"
+          TopLeft="365.14285744012,352.764705699363">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.2941175310987"
+              Start="0,0"
+              End="0,26.7941175310987">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.7941175310987" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Source To Stage.Paths[OLE DB Source Output8]"
           TopLeft="162.678571527406,355.529411581046">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -8207,75 +8879,31 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output13]"
-          TopLeft="180.719048108911,602.384313233941">
+          Id="Package\Source To Stage.Paths[OLE DB Source Output7]"
+          TopLeft="917.885715486931,587.364706007028">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,42.811765006173"
+              EndConnector="16.206348640545,47.0601310155213"
               Start="0,0"
-              End="0,35.311765006173">
+              End="16.206348640545,39.5601310155213">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,35.311765006173" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output12]"
-          TopLeft="428.942855284773,589.345097321556">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,44.5111114099119"
-              Start="0,0"
-              End="0,37.0111114099119">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,37.0111114099119" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output11]"
-          TopLeft="663.790474575169,590.194770523425">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="16.2063486405447,47.0601310155208"
-              Start="0,0"
-              End="16.2063486405447,39.5601310155208">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,19.5300655077604" />
+                    End="0,19.5300655077606" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,19.5300655077604"
-                    Point2="0,23.5300655077604"
-                    Point3="4,23.5300655077604" />
+                    Point1="0,19.5300655077606"
+                    Point2="0,23.5300655077606"
+                    Point3="4,23.5300655077606" />
                   <mssgle:LineSegment
-                    End="12.2063486405447,23.5300655077604" />
+                    End="12.206348640545,23.5300655077606" />
                   <mssgle:CubicBezierSegment
-                    Point1="12.2063486405447,23.5300655077604"
-                    Point2="16.2063486405447,23.5300655077604"
-                    Point3="16.2063486405447,27.5300655077604" />
+                    Point1="12.206348640545,23.5300655077606"
+                    Point2="16.206348640545,23.5300655077606"
+                    Point3="16.206348640545,27.5300655077606" />
                   <mssgle:LineSegment
-                    End="16.2063486405447,39.5601310155208" />
+                    End="16.206348640545,39.5601310155213" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -8285,19 +8913,19 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output10]"
-          TopLeft="910.107143054812,114.35294087551">
+          Id="Package\Source To Stage.Paths[OLE DB Source Output6]"
+          TopLeft="1199.14285744012,352.588234993827">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,40.705882354952"
+              EndConnector="0,42.4117650061727"
               Start="0,0"
-              End="0,33.205882354952">
+              End="0,34.9117650061727">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.205882354952" />
+                    End="0,34.9117650061727" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -8307,7 +8935,7 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output9]"
+          Id="Package\Source To Stage.Paths[OLE DB Source Output5]"
           TopLeft="577.34285766896,350.835293935998">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -8341,107 +8969,19 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output8]"
-          TopLeft="1199.14285744012,352.588234993827">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,42.4117650061727"
-              Start="0,0"
-              End="0,34.9117650061727">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.9117650061727" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output7]"
-          TopLeft="1110.67857219796,118.411764402241">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,48.6470588282215"
-              Start="0,0"
-              End="0,41.1470588282215">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,41.1470588282215" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output6]"
-          TopLeft="804.750000670552,350.588235107777">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,43.1176469509065"
-              Start="0,0"
-              End="0,35.6176469509065">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,35.6176469509065" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Source To Stage.Paths[OLE DB Source Output5]"
-          TopLeft="365.14285744012,352.764705699363">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,34.2941175310987"
-              Start="0,0"
-              End="0,26.7941175310987">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26.7941175310987" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package\Source To Stage.Paths[OLE DB Source Output4]"
-          TopLeft="715.000000670552,116.764705813313">
+          TopLeft="910.107143054812,114.35294087551">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,41.2352941866874"
+              EndConnector="0,40.705882354952"
               Start="0,0"
-              End="0,33.7352941866874">
+              End="0,33.205882354952">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.7352941866874" />
+                    End="0,33.205882354952" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -8452,18 +8992,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Source To Stage.Paths[OLE DB Source Output3]"
-          TopLeft="531.142857503983,115.011764641534">
+          TopLeft="663.790474575169,590.194770523425">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,40.5764703522931"
+              EndConnector="16.2063486405447,47.0601310155208"
               Start="0,0"
-              End="0,33.0764703522931">
+              End="16.2063486405447,39.5601310155208">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.0764703522931" />
+                    End="0,19.5300655077604" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5300655077604"
+                    Point2="0,23.5300655077604"
+                    Point3="4,23.5300655077604" />
+                  <mssgle:LineSegment
+                    End="12.2063486405447,23.5300655077604" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.2063486405447,23.5300655077604"
+                    Point2="16.2063486405447,23.5300655077604"
+                    Point3="16.2063486405447,27.5300655077604" />
+                  <mssgle:LineSegment
+                    End="16.2063486405447,39.5601310155208" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -8474,18 +9026,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Source To Stage.Paths[OLE DB Source Output2]"
-          TopLeft="989.72142883448,351.058823230462">
+          TopLeft="428.942855284773,589.345097321556">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,39.9411767695379"
+              EndConnector="0,44.5111114099119"
               Start="0,0"
-              End="0,32.4411767695379">
+              End="0,37.0111114099119">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.4411767695379" />
+                    End="0,37.0111114099119" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -8496,18 +9048,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Source To Stage.Paths[OLE DB Source Output1]"
-          TopLeft="356.39285744012,116.941176404899">
+          TopLeft="180.719048108911,602.384313233941">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,31.0588235951006"
+              EndConnector="0,42.811765006173"
               Start="0,0"
-              End="0,23.5588235951006">
+              End="0,35.311765006173">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.5588235951006" />
+                    End="0,35.311765006173" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -8567,293 +9119,20 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\driver calls source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\Source To Stage\department stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Payment Method Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Zone Stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Request Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Request Stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Status Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\employee stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Discount Stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Driver Stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Trip Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\passenger calls stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Car Stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Zone Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Zone Type Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\department source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Province Stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Passenger Stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\employee source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Status Stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Passenger Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Discount Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\City Stage">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Payment Method Stage">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -8879,7 +9158,33 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Source To Stage\Trip Stage">
+    design-time-name="Package\Source To Stage\Status Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Zone Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Province Stage">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -8893,6 +9198,279 @@
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Source To Stage\Zone Type Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Passenger Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Payment Method Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Trip Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Request Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Discount Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Zone Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Request Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Car Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\department source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\employee stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Trip Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Driver Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\driver calls stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\passenger calls stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Discount Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Passenger Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\City Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Status Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Payment Method Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\employee source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Source To Stage\Zone Type Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
