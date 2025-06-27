@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Initial_FactTransactionDriverCalls"
   DTS:PackageType="5"
-  DTS:VersionBuild="73"
-  DTS:VersionGUID="{29747554-1714-414E-9542-8107E263FE5D}">
+  DTS:VersionBuild="74"
+  DTS:VersionGUID="{02830661-5EA1-49FF-8AF0-65265B597E20}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -41,7 +41,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
-          SQLTask:SqlStatementSource="TRUNCATE TABLE Core.FactTransactionPassengerCalls&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'FactTransactionDriverCalls';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="TRUNCATE TABLE Core.FactTransactionDriverCalls&#xA;&#xA;&#xA;DELETE FROM ETL_Metadata where TableName = 'FactTransactionDriverCalls';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -2003,7 +2003,7 @@ where [refTable].[DepartmentId] = ?</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -2013,7 +2013,7 @@ where [refTable].[DepartmentId] = ?</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
