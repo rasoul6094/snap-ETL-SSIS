@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-GDRMTJV\HP"
   DTS:DTSID="{4A358185-56B7-4136-86F7-2A4A1B6A378E}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5685.2"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Incremental_FactAccRequestPerHour"
   DTS:PackageType="5"
-  DTS:VersionBuild="15"
-  DTS:VersionGUID="{8D7BB178-62B4-4E15-A080-1E1774B94D4D}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{E400781A-8CD9-4394-9C66-4DFF0775DD65}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -97,7 +97,7 @@
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
-                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'FactAccDriver'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'FailedOnStageToCore',&#xA;          LastRunMessage = ?&#xA;WHERE TableName = 'FactAccRequestPerHour'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
                     SQLTask:DtsVariableName="System::ErrorDescription"
@@ -1371,7 +1371,7 @@ WHERE HourKey = ?</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{DECE9F59-266F-4E37-A0BD-354C960BE892}"
-          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = ?&#xA;  WHERE TableName = 'FactAccDriver'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:SqlStatementSource="UPDATE ETL_Metadata &#xA;SET LastRunEnd = GETDATE(),&#xA;          LastRunStatus = 'Success',&#xA;          LastRunMessage = 'ETL ran successfully',&#xA;         TotalRowsInserted = ?,&#xA;        TotalRowsUpdated = ?&#xA;  WHERE TableName = 'FactAccRequestPerHour'&#xA;AND LastRunStatus = 'Running'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::rowCountInserted"
@@ -1493,83 +1493,35 @@ WHERE HourKey = ?</property>
     design-time-name="Package\Stage To Core">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="172.8,41.6"
-          Id="Package\Stage To Core\OLE DB Command"
-          TopLeft="588,600" />
+          Size="129.6,41.6"
+          Id="Package\Stage To Core\Merge Join"
+          TopLeft="369.16664649629,275.333331874874" />
         <NodeLayout
           Size="117.6,41.6"
           Id="Package\Stage To Core\all hours"
           TopLeft="137,84" />
         <NodeLayout
-          Size="184,41.6"
-          Id="Package\Stage To Core\Aggregate request Info"
-          TopLeft="502,81" />
-        <NodeLayout
-          Size="138.4,41.6"
-          Id="Package\Stage To Core\Row Count 1"
-          TopLeft="605,466" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Row Count Output 1]"
-          TopLeft="674.3,507.6">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,92.4"
-              Start="0,0"
-              End="0,84.9">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,84.9" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="152.8,41.6"
+          Id="Package\Stage To Core\Derived Column"
+          TopLeft="356.66664717926,366.933331694073" />
         <NodeLayout
           Size="97.6,41.6"
           Id="Package\Stage To Core\Sort"
           TopLeft="161.66665783359,172.066665575835" />
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
-          TopLeft="195.8,125.6">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="14.6666578335899,46.4666655758354"
-              Start="0,0"
-              End="14.6666578335899,38.9666655758354">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,19.2333327879177" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,19.2333327879177"
-                    Point2="0,23.2333327879177"
-                    Point3="4,23.2333327879177" />
-                  <mssgle:LineSegment
-                    End="10.6666578335899,23.2333327879177" />
-                  <mssgle:CubicBezierSegment
-                    Point1="10.6666578335899,23.2333327879177"
-                    Point2="14.6666578335899,23.2333327879177"
-                    Point3="14.6666578335899,27.2333327879177" />
-                  <mssgle:LineSegment
-                    End="14.6666578335899,38.9666655758354" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\Stage To Core\OLE DB Command"
+          TopLeft="588,600" />
+        <NodeLayout
+          Size="138.4,41.6"
+          Id="Package\Stage To Core\Row Count 1"
+          TopLeft="605,466" />
+        <NodeLayout
+          Size="184,41.6"
+          Id="Package\Stage To Core\Aggregate request Info"
+          TopLeft="502,81" />
         <NodeLayout
           Size="106.4,41.6"
           Id="Package\Stage To Core\Sort 1"
@@ -1605,85 +1557,47 @@ WHERE HourKey = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\Stage To Core\Merge Join"
-          TopLeft="369.16664649629,275.333331874874" />
         <EdgeLayout
-          Id="Package\Stage To Core.Paths[Sort Output]"
-          TopLeft="641.533301188219,235.666666118238">
+          Id="Package\Stage To Core.Paths[OLE DB Source Output]"
+          TopLeft="195.8,125.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-207.566654691929,39.6666657566362"
+              EndConnector="14.6666578335899,46.4666655758354"
               Start="0,0"
-              End="-207.566654691929,32.1666657566362">
+              End="14.6666578335899,38.9666655758354">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15.8333328783181" />
+                    End="0,19.2333327879177" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,15.8333328783181"
-                    Point2="0,19.8333328783181"
-                    Point3="-4,19.8333328783181" />
+                    Point1="0,19.2333327879177"
+                    Point2="0,23.2333327879177"
+                    Point3="4,23.2333327879177" />
                   <mssgle:LineSegment
-                    End="-203.566654691929,19.8333328783181" />
+                    End="10.6666578335899,23.2333327879177" />
                   <mssgle:CubicBezierSegment
-                    Point1="-203.566654691929,19.8333328783181"
-                    Point2="-207.566654691929,19.8333328783181"
-                    Point3="-207.566654691929,23.8333328783181" />
+                    Point1="10.6666578335899,23.2333327879177"
+                    Point2="14.6666578335899,23.2333327879177"
+                    Point3="14.6666578335899,27.2333327879177" />
                   <mssgle:LineSegment
-                    End="-207.566654691929,32.1666657566362" />
+                    End="14.6666578335899,38.9666655758354" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Stage To Core.Paths[Sort Output1]"
-          TopLeft="210.46665783359,213.666665575835">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="203.233321996034,61.6666662990385"
-              Start="0,0"
-              End="203.233321996034,54.1666662990385">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.548780269918" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,32.548780269918"
-                    Point2="0,36.548780269918"
-                    Point3="4,36.548780269918" />
-                  <mssgle:LineSegment
-                    End="199.233321996034,36.548780269918" />
-                  <mssgle:CubicBezierSegment
-                    Point1="199.233321996034,36.548780269918"
-                    Point2="203.233321996034,36.548780269918"
-                    Point3="203.233321996034,40.548780269918" />
-                  <mssgle:LineSegment
-                    End="203.233321996034,54.1666662990385" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Stage To Core\Derived Column"
-          TopLeft="356.66664717926,366.933331694073" />
         <EdgeLayout
           Id="Package\Stage To Core.Paths[Merge Join Output]"
           TopLeft="433.516646837775,316.933331874874">
@@ -1703,7 +1617,9 @@ WHERE HourKey = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1737,7 +1653,105 @@ WHERE HourKey = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Sort Output1]"
+          TopLeft="210.46665783359,213.666665575835">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="203.233321996034,61.6666662990385"
+              Start="0,0"
+              End="203.233321996034,54.1666662990385">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.548780269918" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.548780269918"
+                    Point2="0,36.548780269918"
+                    Point3="4,36.548780269918" />
+                  <mssgle:LineSegment
+                    End="199.233321996034,36.548780269918" />
+                  <mssgle:CubicBezierSegment
+                    Point1="199.233321996034,36.548780269918"
+                    Point2="203.233321996034,36.548780269918"
+                    Point3="203.233321996034,40.548780269918" />
+                  <mssgle:LineSegment
+                    End="203.233321996034,54.1666662990385" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Sort Output]"
+          TopLeft="641.533301188219,235.666666118238">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-207.566654691929,39.6666657566362"
+              Start="0,0"
+              End="-207.566654691929,32.1666657566362">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.8333328783181" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.8333328783181"
+                    Point2="0,19.8333328783181"
+                    Point3="-4,19.8333328783181" />
+                  <mssgle:LineSegment
+                    End="-203.566654691929,19.8333328783181" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-203.566654691929,19.8333328783181"
+                    Point2="-207.566654691929,19.8333328783181"
+                    Point3="-207.566654691929,23.8333328783181" />
+                  <mssgle:LineSegment
+                    End="-207.566654691929,32.1666657566362" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage To Core.Paths[Row Count Output 1]"
+          TopLeft="674.3,507.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,92.4"
+              Start="0,0"
+              End="0,84.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,84.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -1749,7 +1763,7 @@ WHERE HourKey = ?</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="233,42"
+          Size="232.8,41.6"
           Id="Package\Stage To Core.EventHandlers[OnError]\Update ETL_Metadata On error"
           TopLeft="163,158" />
       </GraphLayout>
